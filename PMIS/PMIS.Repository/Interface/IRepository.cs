@@ -34,8 +34,8 @@ namespace PMIS.Repository
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
             string includeProperties = "", bool isTrackingOff = false);
 
-        IList<TEntity> GetDynamic(Expression<Func<TEntity, bool>> filter = null,
-            string orderBy = null,
-            string includeProperties = "", bool isTrackingOff = false);
+        //IList<TEntity> GetDynamic(Expression<Func<TEntity, bool>> filter = null,
+        //    string orderBy = null,
+        //    string includeProperties = "", bool isTrackingOff = false);
     }
 }
