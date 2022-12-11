@@ -1,4 +1,5 @@
 ﻿using PMIS.Domain.Entities;
+using PMIS.Repository.UnitOfWork;
 using PMIS.Service.Interface.Security;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,14 @@ namespace PMIS.Service.Implementation.Security
 {
     public class CompanyService : ICompanyService
     {
+        private readonly IUnitOfWork _UnitOfWork;
+
+
+        //public PatientService(IPatientUnitOfWork patientUnitOfWork)
+        //{
+        //    _patientUnitOfWork = patientUnitOfWork;
+
+        //}
         public Task<string> ActivateUnit(string db, int id)
         {
             throw new NotImplementedException();

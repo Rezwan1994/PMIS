@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PMIS.Repository.UnitOfWork
+namespace PMIS.Repository.Implementation.Security
 {
-    public interface IUnitOfWork : IDisposable
+    public class CompanyRepository
     {
-        int SaveChangesAsync();
     }
 }
