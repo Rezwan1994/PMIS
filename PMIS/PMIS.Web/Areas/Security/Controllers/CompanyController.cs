@@ -1,11 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using SalesAndDistributionSystem.Common;
-using SalesAndDistributionSystem.Domain.Models.TableModels.Company;
-using SalesAndDistributionSystem.Domain.Utility;
-using SalesAndDistributionSystem.Services.Business.Company;
-using SalesAndDistributionSystem.Services.Business.Security;
 using System;
 using System.Data;
 using System.Linq;

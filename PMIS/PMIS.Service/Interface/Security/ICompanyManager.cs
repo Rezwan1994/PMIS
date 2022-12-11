@@ -1,13 +1,13 @@
 ﻿using PMIS.Domain.Entities;
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Data;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PMIS.Service.Interface.Security
+namespace SalesAndDistributionSystem.Services.Business.Company
 {
-    public interface ICompanyService
+    public interface ICompanyManager
     {
         Task<List<CompanyInfo>> GetCompanyList(string db);
         Task<CompanyInfo> GetCompanyById(string db, int id);
@@ -19,5 +19,7 @@ namespace PMIS.Service.Interface.Security
         Task<string> AddOrUpdateUnit(string db, CompanyInfo model);
         Task<string> ActivateUnit(string db, int id);
         Task<string> DeactivateUnit(string db, int id);
+
+
     }
 }

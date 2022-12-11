@@ -5,7 +5,7 @@ namespace PMIS.Domain.Entities
 {
     public partial class CompanyInfo
     {
-        public decimal? CompnayId { get; set; }
+        public decimal? CompanyId { get; set; }
         public string? CompanyCode { get; set; }
         public string? CompanyName { get; set; }
         public string? CompanyShortName { get; set; }

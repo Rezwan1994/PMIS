@@ -29,12 +29,11 @@
     }
     $scope.ClearForm = function () {
         $scope.model.ID = 0;
-        $scope.model.COMPANY_ID = 0;
-        $scope.model.COMPANY_NAME = '';
-        $scope.model.COMPANY_SHORT_NAME = '';
-        $scope.model.COMPANY_ADDRESS1 = '';
-        $scope.model.COMPANY_ADDRESS2 = '';
-
+        $scope.model.CompanyId = 0;
+        $scope.model.CompanyName = '';
+        $scope.model.CompanyShortName = '';
+        $scope.model.CompanyAddress1 = '';
+        $scope.model.CompanyAddress2 = '';
     }
 
    
