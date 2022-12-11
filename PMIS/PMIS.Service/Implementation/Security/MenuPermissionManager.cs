@@ -1,9 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
-using SalesAndDistributionSystem.Domain.Models.TableModels.Security;
-using SalesAndDistributionSystem.Domain.Models.ViewModels.Security;
-using SalesAndDistributionSystem.Domain.Utility;
-using SalesAndDistributionSystem.Services.Business.Security;
-using SalesAndDistributionSystem.Services.Common;
+using PMIS.Domain.ViewModels.Security;
+using PMIS.Repository.Interface;
+using PMIS.Service.Interface.Security.Security;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -189,7 +187,6 @@ INNER JOIN Menu_Configuration MC on MC.MENU_ID = RU.MENU_ID
                     menuMaster.PARENT_MENU_ID = Convert.ToInt32(MenuData.Rows[i]["PARENT_MENU_ID"]);
 
                 }
-
 
                 MenuMasters.Add(menuMaster);
             }

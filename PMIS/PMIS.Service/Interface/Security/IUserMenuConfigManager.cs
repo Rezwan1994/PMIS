@@ -1,6 +1,6 @@
 ﻿using PMIS.Domain.Entities;
 
-namespace SalesAndDistributionSystem.Services.Business.Security
+namespace PMIS.Service.Interface.Security.Security
 {
     public interface IUserMenuConfigManager
     {

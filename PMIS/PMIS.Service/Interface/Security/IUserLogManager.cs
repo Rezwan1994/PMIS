@@ -5,7 +5,7 @@ using System.Data;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SalesAndDistributionSystem.Services.Business.Security
+namespace PMIS.Service.Interface.Security.Security
 {
     public interface IUserLogManager
     {

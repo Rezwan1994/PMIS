@@ -1,8 +1,10 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
+using PMIS.Domain.Common;
 using PMIS.Domain.Entities;
 using PMIS.Repository.Interface;
-using SalesAndDistributionSystem.Services.Business.Company;
+using PMIS.Utility.Static;
+using PMIS.Service.Interface.Security.Company;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -27,15 +29,13 @@ namespace PMIS.Service.Implementation.Security
         string GetCompanyListQuery() => "Select distinct  COMPANY_ADDRESS1,COMPANY_ADDRESS2,COMPANY_ID,COMPANY_NAME,COMPANY_SHORT_NAME from Company_Info";
         string GetCompanyByIdQuery() => "Select distinct  COMPANY_ADDRESS1,COMPANY_ADDRESS2,COMPANY_ID,COMPANY_NAME,COMPANY_SHORT_NAME from Company_Info Where Company_ID = :param1";
         string AddOrUpdateCompanyInsertQuery() => @"INSERT INTO Company_Info (
-                                         ID
-                                        ,COMPANY_ID
+                                         COMPANY_ID
                                         ,COMPANY_NAME
                                         ,COMPANY_SHORT_NAME
                                         ,COMPANY_ADDRESS1
                                         ,COMPANY_ADDRESS2
-                                        ,UNIT_ID
                                        ) 
-                                       VALUES ( :param1, :param2, :param3, :param4, :param5 , :param6, :param7 )";
+                                       VALUES ( :param1, :param2, :param3, :param4, :param5 , :param6 )";
         string AddOrUpdateCompanyUpdateQuery() => @"Update Company_Info Set COMPANY_NAME = :param1,COMPANY_SHORT_NAME  =:param2, COMPANY_ADDRESS1 =  :param3, COMPANY_ADDRESS2 = :param4 Where COMPANY_ID = :param5";
         string GetNewCompanyIdQuery() => "SELECT NVL(MAX(COMPANY_ID),0) + 1 COMPANY_ID  FROM COMPANY_INFO";
         string GetNewIdQuery() => "SELECT NVL(MAX(ID),0) + 1 ID  FROM COMPANY_INFO";
@@ -73,64 +73,52 @@ namespace PMIS.Service.Implementation.Security
             return null;
         }
 
-        public async Task<Company_Info> GetCompanyById(string db, int id)
+        public async Task<CompanyInfo> GetCompanyById(string db, int id)
         {
             DataTable companyData = await GetCompanyByIdDataTable(db, id);
 
             if (companyData != null && companyData.Rows.Count > 0)
             {
 
-                Company_Info company = new Company_Info
+                CompanyInfo company = new CompanyInfo
                 {
-                    COMPANY_ID = Convert.ToInt32(companyData.Rows[0]["COMPANY_ID"]),
-                    COMPANY_NAME = companyData.Rows[0]["COMPANY_NAME"].ToString(),
-                    COMPANY_SHORT_NAME = companyData.Rows[0]["COMPANY_SHORT_NAME"].ToString(),
-                    COMPANY_ADDRESS1 = companyData.Rows[0]["COMPANY_ADDRESS1"].ToString(),
-                    COMPANY_ADDRESS2 = companyData.Rows[0]["COMPANY_ADDRESS2"].ToString()
+                    CompanyId = Convert.ToInt32(companyData.Rows[0]["COMPANY_ID"]),
+                    CompanyName = companyData.Rows[0]["COMPANY_NAME"].ToString(),
+                    CompanyShortName = companyData.Rows[0]["COMPANY_SHORT_NAME"].ToString(),
+                    CompanyAddress1 = companyData.Rows[0]["COMPANY_ADDRESS1"].ToString(),
+                    CompanyAddress2 = companyData.Rows[0]["COMPANY_ADDRESS2"].ToString()
                 };
-
-
-
-
                 return company;
-
             }
             return null;
         }
 
-        public async Task<string> AddOrUpdate(string db, Company_Info model)
+        public async Task<string> AddOrUpdate(string db, CompanyInfo model)
         {
             if (model == null)
             {
                 return "No data provided to insert!!!!";
-
             }
             else
             {
                 List<QueryPattern> listOfQuery = new List<QueryPattern>();
                 try
                 {
-
-                    if (model.COMPANY_ID == 0)
+                    if (model.CompanyId == 0)
                     {
-                        model.STATUS = Status.InActive;
-                        model.ID = _commonService.GetMaximumNumber<int>(_configuration.GetConnectionString(db), GetNewIdQuery(), _commonService.AddParameter(new string[] { }));
-                        model.COMPANY_ID = _commonService.GetMaximumNumber<int>(_configuration.GetConnectionString(db), GetNewCompanyIdQuery(), _commonService.AddParameter(new string[] { }));
-
-                        model.UNIT_ID = 0;
+                        model.Status = Status.InActive;
+                        model.CompanyId = _commonService.GetMaximumNumber<int>(_configuration.GetConnectionString(db), GetNewCompanyIdQuery(), _commonService.AddParameter(new string[] { }));
 
                         listOfQuery.Add(_commonService.AddQuery(AddOrUpdateCompanyInsertQuery(), _commonService.AddParameter(new string[]
-                        {model.ID.ToString(), model.COMPANY_ID.ToString(), model.COMPANY_NAME.ToString(), model.COMPANY_SHORT_NAME,
-                            model.COMPANY_ADDRESS1, model.COMPANY_ADDRESS2, model.UNIT_ID.ToString() })));
-
+                        { model.CompanyId.ToString(), model.CompanyName.ToString(), model.CompanyShortName,
+                            model.CompanyAddress1, model.CompanyAddress2 })));
                     }
                     else
                     {
                         listOfQuery.Add(_commonService.AddQuery(AddOrUpdateCompanyUpdateQuery(),
-                            _commonService.AddParameter(new string[] { model.COMPANY_NAME, model.COMPANY_SHORT_NAME,
-                                model.COMPANY_ADDRESS1.ToString(), model.COMPANY_ADDRESS2, model.COMPANY_ID.ToString()
+                            _commonService.AddParameter(new string[] { model.CompanyName, model.CompanyShortName,
+                                model.CompanyAddress1.ToString(), model.CompanyAddress2, model.CompanyId.ToString()
                             })));
-
                     }
 
                     await _commonService.SaveChangesAsyn(_configuration.GetConnectionString(db), listOfQuery);
@@ -188,7 +176,7 @@ namespace PMIS.Service.Implementation.Security
 
         public async Task<DataTable> GetCompUpdatableDataTable(string db, int companyId) => await _commonService.GetDataTableAsyn(connString.GetConnectionString(db), GetUpdatableCompanyQuery(), _commonService.AddParameter(new string[] { companyId.ToString() }));
 
-        public async Task<string> AddOrUpdateUnit(string db, Company_Info model)
+        public async Task<string> AddOrUpdateUnit(string db, CompanyInfo model)
         {
             if (model == null)
             {
@@ -201,47 +189,47 @@ namespace PMIS.Service.Implementation.Security
                 try
                 {
 
-                    if (model.UNIT_ID == 0)
-                    {
-                        DataTable existingCompany = await GetCompUpdatableDataTable(db, model.COMPANY_ID);
+                   // if (model.UNIT_ID == 0)
+                   // {
+                   //     DataTable existingCompany = await GetCompUpdatableDataTable(db, model.COMPANY_ID);
 
-                        if (existingCompany.Rows.Count > 0)
-                        {
-                            model.UNIT_ID = _commonService.GetMaximumNumber<int>(_configuration.GetConnectionString(db), GetNewUnitIdQuery(), _commonService.AddParameter(new string[] { model.COMPANY_ID.ToString() }));
-                            model.ID = Convert.ToInt32(existingCompany.Rows[0]["ID"]);
-                            listOfQuery.Add(_commonService.AddQuery(AddOrUpdateUnitUpdateLikeQuery(), _commonService.AddParameter(new string[]
-                            {
-                            model.UNIT_NAME.ToString(), model.UNIT_SHORT_NAME.ToString(), model.UNIT_TYPE,
-                            model.UNIT_ADDRESS1, model.UNIT_ADDRESS2, model.UNIT_ID.ToString(), model.COMPANY_ID.ToString(), model.ID.ToString()  })));
-                        }
-                        else
-                        {
-                            Company_Info company = await GetCompanyById(db, model.COMPANY_ID);
-                            model.STATUS = Status.Active;
-                            model.COMPANY_ADDRESS1 = company.COMPANY_ADDRESS1;
-                            model.COMPANY_ADDRESS2 = company.COMPANY_ADDRESS2;
-                            model.COMPANY_NAME = company.COMPANY_NAME;
-                            model.COMPANY_SHORT_NAME = company.COMPANY_SHORT_NAME;
-                            model.UNIT_ID = _commonService.GetMaximumNumber<int>(_configuration.GetConnectionString(db), GetNewUnitIdQuery(), _commonService.AddParameter(new string[] { model.COMPANY_ID.ToString() }));
-                            model.ID = _commonService.GetMaximumNumber<int>(_configuration.GetConnectionString(db), GetNewIdQuery(), _commonService.AddParameter(new string[] { }));
+                   //     if (existingCompany.Rows.Count > 0)
+                   //     {
+                   //         model.UNIT_ID = _commonService.GetMaximumNumber<int>(_configuration.GetConnectionString(db), GetNewUnitIdQuery(), _commonService.AddParameter(new string[] { model.COMPANY_ID.ToString() }));
+                   //         model.ID = Convert.ToInt32(existingCompany.Rows[0]["ID"]);
+                   //         listOfQuery.Add(_commonService.AddQuery(AddOrUpdateUnitUpdateLikeQuery(), _commonService.AddParameter(new string[]
+                   //         {
+                   //         model.UNIT_NAME.ToString(), model.UNIT_SHORT_NAME.ToString(), model.UNIT_TYPE,
+                   //         model.UNIT_ADDRESS1, model.UNIT_ADDRESS2, model.UNIT_ID.ToString(), model.COMPANY_ID.ToString(), model.ID.ToString()  })));
+                   //     }
+                   //     else
+                   //     {
+                   //         Company_Info company = await GetCompanyById(db, model.COMPANY_ID);
+                   //         model.STATUS = Status.Active;
+                   //         model.COMPANY_ADDRESS1 = company.COMPANY_ADDRESS1;
+                   //         model.COMPANY_ADDRESS2 = company.COMPANY_ADDRESS2;
+                   //         model.COMPANY_NAME = company.COMPANY_NAME;
+                   //         model.COMPANY_SHORT_NAME = company.COMPANY_SHORT_NAME;
+                   //         model.UNIT_ID = _commonService.GetMaximumNumber<int>(_configuration.GetConnectionString(db), GetNewUnitIdQuery(), _commonService.AddParameter(new string[] { model.COMPANY_ID.ToString() }));
+                   //         model.ID = _commonService.GetMaximumNumber<int>(_configuration.GetConnectionString(db), GetNewIdQuery(), _commonService.AddParameter(new string[] { }));
 
-                            listOfQuery.Add(_commonService.AddQuery(AddOrUpdateUnitInsertQuery(), _commonService.AddParameter(new string[]
-                   {model.ID.ToString(), model.COMPANY_ID.ToString(),model.COMPANY_NAME, model.COMPANY_SHORT_NAME.ToString(), model.COMPANY_ADDRESS1,
-                            model.COMPANY_ADDRESS2, model.UNIT_ID.ToString(), model.UNIT_NAME, model.UNIT_SHORT_NAME.ToString(), model.UNIT_TYPE.ToString(),model.UNIT_ADDRESS1, model.UNIT_ADDRESS2, model.STATUS  })));
+                   //         listOfQuery.Add(_commonService.AddQuery(AddOrUpdateUnitInsertQuery(), _commonService.AddParameter(new string[]
+                   //{model.ID.ToString(), model.COMPANY_ID.ToString(),model.COMPANY_NAME, model.COMPANY_SHORT_NAME.ToString(), model.COMPANY_ADDRESS1,
+                   //         model.COMPANY_ADDRESS2, model.UNIT_ID.ToString(), model.UNIT_NAME, model.UNIT_SHORT_NAME.ToString(), model.UNIT_TYPE.ToString(),model.UNIT_ADDRESS1, model.UNIT_ADDRESS2, model.STATUS  })));
 
-                        }
+                   //     }
 
-                    }
-                    else
-                    {
-                        listOfQuery.Add(_commonService.AddQuery(AddOrUpdateUnitUpdateQuery(),
-                            _commonService.AddParameter(new string[] { model.UNIT_NAME, model.UNIT_SHORT_NAME,
-                                model.UNIT_TYPE.ToString(), model.UNIT_ADDRESS1, model.UNIT_ADDRESS2, model.ID.ToString()
-                            })));
+                   // }
+                   // else
+                   // {
+                   //     listOfQuery.Add(_commonService.AddQuery(AddOrUpdateUnitUpdateQuery(),
+                   //         _commonService.AddParameter(new string[] { model.UNIT_NAME, model.UNIT_SHORT_NAME,
+                   //             model.UNIT_TYPE.ToString(), model.UNIT_ADDRESS1, model.UNIT_ADDRESS2, model.ID.ToString()
+                   //         })));
 
-                    }
+                   // }
 
-                    await _commonService.SaveChangesAsyn(_configuration.GetConnectionString(db), listOfQuery);
+                   // await _commonService.SaveChangesAsyn(_configuration.GetConnectionString(db), listOfQuery);
                     return "1";
                 }
                 catch (Exception ex)
@@ -255,11 +243,9 @@ namespace PMIS.Service.Implementation.Security
             if (id < 1)
             {
                 return "No data provided !!!!";
-
             }
             else
             {
-
                 List<QueryPattern> listOfQuery = new List<QueryPattern>();
                 try
                 {
@@ -281,15 +267,12 @@ namespace PMIS.Service.Implementation.Security
             if (id < 1)
             {
                 return "No data provided !!!!";
-
             }
             else
             {
                 List<QueryPattern> listOfQuery = new List<QueryPattern>();
                 try
                 {
-
-
                     listOfQuery.Add(_commonService.AddQuery(DeActivateUnitQuery(), _commonService.AddParameter(new string[] { id.ToString() })));
 
                     await _commonService.SaveChangesAsyn(_configuration.GetConnectionString(db), listOfQuery);

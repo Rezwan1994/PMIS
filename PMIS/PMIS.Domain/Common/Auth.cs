@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace PMIS.Domain.Common
+﻿namespace PMIS.Domain.Common
 {
     public class Auth
     {
@@ -22,7 +18,5 @@ namespace PMIS.Domain.Common
 
         public int DistributorId { get; set; }
         public string DefaultPage { get; set; }
-
-
     }
 }

@@ -7,8 +7,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Implementation\Security\NotificationManager.cs" />
+    <Compile Remove="Implementation\Security\ReportConfigurationManager.cs" />
+    <Compile Remove="Implementation\Security\RoleManager.cs" />
+    <Compile Remove="Implementation\Security\UserLogManager.cs" />
+    <Compile Remove="Implementation\Security\UserManager.cs" />
+    <Compile Remove="Implementation\Security\UserMenuConfigManager.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\PMIS.Domain\PMIS.Domain.csproj" />
     <ProjectReference Include="..\PMIS.Repository\PMIS.Repository.csproj" />
+    <ProjectReference Include="..\PMIS.Utility\PMIS.Utility.csproj" />
   </ItemGroup>
 
 </Project>

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SalesAndDistributionSystem.Services.Business.Security
+namespace PMIS.Service.Interface.Security.Security
 {
     public interface IMenuMasterManager
     {

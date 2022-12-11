@@ -7,7 +7,7 @@ using System.Data;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SalesAndDistributionSystem.Services.Business.User
+namespace PMIS.Service.Interface.Security.User
 {
     public interface IUserManager
     {

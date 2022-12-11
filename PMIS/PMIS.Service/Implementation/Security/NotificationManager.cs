@@ -1,12 +1,10 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
-using SalesAndDistributionSystem.Domain.Common;
-using SalesAndDistributionSystem.Domain.Models.ReportModels.Common.ProductReports;
-using SalesAndDistributionSystem.Domain.Models.TableModels.Company;
-using SalesAndDistributionSystem.Domain.Models.TableModels.Security;
-using SalesAndDistributionSystem.Domain.Utility;
+using PMIS.Domain.Common;
+using PMIS.Domain.Entities;
+using PMIS.Repository.Interface;
+using PMIS.Utility.Static;
 using SalesAndDistributionSystem.Services.Business.Company;
-using SalesAndDistributionSystem.Services.Common;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -86,17 +84,17 @@ And V.NOTIFICATION_POLICY_ID = :param1 AND V.UNIT_ID = :param2 AND V.COMPANY_ID=
             foreach (DataRow row in dataTable.Rows)
             {
                 Notification notification = new Notification();
-                notification.USER_ID = Convert.ToInt32(row["USER_ID"]);
+                //notification.USERID = Convert.ToInt32(row["USER_ID"]);
                 User_Ids.Add(notification);
 
             }
-            User_Ids[0].NOTIFICATION_TITLE = dataTable.Rows[0]["NOTIFICATION_TITLE"].ToString();
+            User_Ids[0].NotificationTitle = dataTable.Rows[0]["NOTIFICATION_TITLE"].ToString();
             return User_Ids;
         }
 
 
 
-        public async Task<string> NotificationLoad(string db, Notification model) => _commonService.DataTableToJSON(await NotificationLoad_Datatable(db, model.USER_ID));
+        //public async Task<string> NotificationLoad(string db, Notification model) => _commonService.DataTableToJSON(await NotificationLoad_Datatable(db, model.USER_ID));
         public async Task<string> LoadData(string db, ReportParams model) => _commonService.DataTableToJSON(await DataLoad_Datatable(db, model.USER_NAME, model.DATE_FROM, model.DATE_TO));
 
         public async Task<string> UpdateNotificationViewStatus(string db, Notification model)
@@ -112,12 +110,12 @@ And V.NOTIFICATION_POLICY_ID = :param1 AND V.UNIT_ID = :param2 AND V.COMPANY_ID=
                 try
                 {
 
-                    if (model.ID > 0)
+                    if (model.NotificationId > 0)
                     {
 
 
                         listOfQuery.Add(_commonService.AddQuery(UpdateNotificationViewStatus_Query(), _commonService.AddParameter(new string[]
-                        {  model.ID.ToString() })));
+                        {  model.NotificationId.ToString() })));
 
                     }
 
@@ -175,14 +173,14 @@ And V.NOTIFICATION_POLICY_ID = :param1 AND V.UNIT_ID = :param2 AND V.COMPANY_ID=
                 try
                 {
 
-                    if (model.NOTIFICATION_ID == 0)
+                    if (model.NotificationId == 0)
                     {
-                        model.STATUS = Status.Active;
-                        model.NOTIFICATION_ID = _commonService.GetMaximumNumber<int>(_configuration.GetConnectionString(db), GetNewNotificationIdQuery(), _commonService.AddParameter(new string[] { }));
-                        model.ID = _commonService.GetMaximumNumber<int>(_configuration.GetConnectionString(db), GetNewNotificationViewIdQuery(), _commonService.AddParameter(new string[] { }));
+                        model.Status = Status.Active;
+                        model.NotificationId = _commonService.GetMaximumNumber<int>(_configuration.GetConnectionString(db), GetNewNotificationIdQuery(), _commonService.AddParameter(new string[] { }));
+                        //model.ID = _commonService.GetMaximumNumber<int>(_configuration.GetConnectionString(db), GetNewNotificationViewIdQuery(), _commonService.AddParameter(new string[] { }));
                         List<Notification> permitted_Users = new List<Notification>();
-                        permitted_Users = await Notification_Permitted_User(db, model.NOTIFICATION_POLICY_ID, model.UNIT_ID, model.COMPANY_ID);
-                        model.NOTIFICATION_TITLE = permitted_Users[0].NOTIFICATION_TITLE;
+                        permitted_Users = await Notification_Permitted_User(db, model.NotificationPolicyId, model.UnitId, model.CompanyId);
+                        model.NotificationTitle = permitted_Users[0].NotificationTitle;
 
 
 
