@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace PMIS.Repository
 {
     public interface IRepository<TEntity, TKey>
-      where TEntity : class, IEntity<TKey>
+      where TEntity : class
     {
         void Add(TEntity entity);
         void Remove(TKey id);

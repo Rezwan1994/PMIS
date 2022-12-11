@@ -8,7 +8,7 @@ namespace PMIS.Repository.UnitOfWork
 {
     //internal class UnitOfWork : IUnitOfWork
     //{
-    //    protected readonly DbContext _dbContext;
+    //    protected readonly PMISDbContext _dbContext;
 
     //    public UnitOfWork(DbContext dbContext) => _dbContext = dbContext;
 
