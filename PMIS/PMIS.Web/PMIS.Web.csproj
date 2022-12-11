@@ -1,17 +1,10 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Remove="Areas\**" />
-    <Content Remove="Areas\**" />
-    <EmbeddedResource Remove="Areas\**" />
-    <None Remove="Areas\**" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.11">
@@ -22,9 +15,66 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PMIS.Domain\PMIS.Domain.csproj" />
-    <ProjectReference Include="..\PMIS.Repository\PMIS.Repository.csproj" />
     <ProjectReference Include="..\PMIS.Service\PMIS.Service.csproj" />
     <ProjectReference Include="..\PMIS.Utility\PMIS.Utility.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Areas\Security\Views\Company\Index.cshtml" />
+    <None Include="Areas\Security\Views\Company\Unit.cshtml" />
+    <None Include="Areas\Security\Views\Login\ChangePassword.cshtml" />
+    <None Include="Areas\Security\Views\Login\ForgetPassword.cshtml" />
+    <None Include="Areas\Security\Views\Login\Index.cshtml" />
+    <None Include="Areas\Security\Views\MenuCategory\Index.cshtml" />
+    <None Include="Areas\Security\Views\MenuMaster\Index.cshtml" />
+    <None Include="Areas\Security\Views\MenuPermission\Index.cshtml" />
+    <None Include="Areas\Security\Views\Notification\List.cshtml" />
+    <None Include="Areas\Security\Views\ReportConfiguration\Index.cshtml" />
+    <None Include="Areas\Security\Views\ReportConfiguration\RoleReportConfig.cshtml" />
+    <None Include="Areas\Security\Views\ReportConfiguration\UserReportConfig.cshtml" />
+    <None Include="Areas\Security\Views\Role\CentralRoleUserConfig.cshtml" />
+    <None Include="Areas\Security\Views\Role\Index.cshtml" />
+    <None Include="Areas\Security\Views\Role\RoleMenuConfig.cshtml" />
+    <None Include="Areas\Security\Views\Role\RoleUserConfig.cshtml" />
+    <None Include="Areas\Security\Views\Shared\_Layout.cshtml" />
+    <None Include="Areas\Security\Views\UserLog\ActivityLog.cshtml" />
+    <None Include="Areas\Security\Views\UserLog\ViewLogs.cshtml" />
+    <None Include="Areas\Security\Views\User\AccountVerification.cshtml" />
+    <None Include="Areas\Security\Views\User\DefaultPage.cshtml" />
+    <None Include="Areas\Security\Views\User\Index.cshtml" />
+    <None Include="Areas\Security\Views\User\PagePermissionNotice.cshtml" />
+    <None Include="Areas\Security\Views\_ViewImports.cshtml" />
+    <None Include="Areas\Security\Views\_ViewStart.cshtml" />
+    <None Include="wwwroot\ScriptsNg\Security\Company\Controller\CompanyCtr.js" />
+    <None Include="wwwroot\ScriptsNg\Security\Company\Controller\UnitCtr.js" />
+    <None Include="wwwroot\ScriptsNg\Security\Company\Service\CompanyService.js" />
+    <None Include="wwwroot\ScriptsNg\Security\MenuCategory\Controller\MenuCategoryCtr.js" />
+    <None Include="wwwroot\ScriptsNg\Security\MenuCategory\Service\MenuCategoryServices.js" />
+    <None Include="wwwroot\ScriptsNg\Security\MenuMaster\Controller\MenuMasterCtr.js" />
+    <None Include="wwwroot\ScriptsNg\Security\MenuMaster\Service\MenuMasterServices.js" />
+    <None Include="wwwroot\ScriptsNg\Security\MenuPermission\Controller\UserMenuConfigCtr.js" />
+    <None Include="wwwroot\ScriptsNg\Security\MenuPermission\Service\UserMenuConfigService.js" />
+    <None Include="wwwroot\ScriptsNg\Security\Notification\Controller\NotificationCtr.js" />
+    <None Include="wwwroot\ScriptsNg\Security\Notification\Controller\NotificationListCtr.js" />
+    <None Include="wwwroot\ScriptsNg\Security\Notification\Service\LiveNotificationServices.js" />
+    <None Include="wwwroot\ScriptsNg\Security\Notification\Service\NotificationListServices.js" />
+    <None Include="wwwroot\ScriptsNg\Security\ReportConfiguration\Controller\ReportConfigurationCtr.js" />
+    <None Include="wwwroot\ScriptsNg\Security\ReportConfiguration\Controller\RoleReportConfigurationCtr.js" />
+    <None Include="wwwroot\ScriptsNg\Security\ReportConfiguration\Controller\UserReportConfigurationCtr.js" />
+    <None Include="wwwroot\ScriptsNg\Security\ReportConfiguration\Service\ReportConfigurationServices.js" />
+    <None Include="wwwroot\ScriptsNg\Security\Role\Controller\RoleMenuConfigCtr.js" />
+    <None Include="wwwroot\ScriptsNg\Security\Role\Controller\RolesCtr.js" />
+    <None Include="wwwroot\ScriptsNg\Security\Role\Controller\UserRoleConfigCtr.js" />
+    <None Include="wwwroot\ScriptsNg\Security\Role\Service\RolesServices.js" />
+    <None Include="wwwroot\ScriptsNg\Security\Shared\TopMenuBar\Controller\TopMenuCtr.js" />
+    <None Include="wwwroot\ScriptsNg\Security\Shared\TopMenuBar\Service\TopMenuServices.js" />
+    <None Include="wwwroot\ScriptsNg\Security\UserLog\Controller\ActivityLogCtr.js" />
+    <None Include="wwwroot\ScriptsNg\Security\UserLog\Controller\UserLogCtr.js" />
+    <None Include="wwwroot\ScriptsNg\Security\UserLog\Service\ActivityLogService.js" />
+    <None Include="wwwroot\ScriptsNg\Security\UserLog\Service\UserLogService.js" />
+    <None Include="wwwroot\ScriptsNg\Security\User\Controller\DefaultPageCtr.js" />
+    <None Include="wwwroot\ScriptsNg\Security\User\Controller\UserCtr.js" />
+    <None Include="wwwroot\ScriptsNg\Security\User\Service\UserServices.js" />
   </ItemGroup>
 
 </Project>
