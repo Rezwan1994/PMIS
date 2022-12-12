@@ -25,9 +25,9 @@ namespace PMIS.Web.Areas.Security.Controllers
 
         public string GetCompanyName() => User.Claims.FirstOrDefault(x => x.Type == ClaimsType.CompanyName).Value.ToString();
 
-        public string GetUnit() => User.Claims.FirstOrDefault(x => x.Type == ClaimsType.UnitId).Value.ToString();
+        public string GetUnit() => User.Claims.FirstOrDefault(x => x.Type == ClaimsType.DepotId).Value.ToString();
 
-        public string GetUnitName() => User.Claims.FirstOrDefault(x => x.Type == ClaimsType.UnitName).Value.ToString();
+        public string GetUnitName() => User.Claims.FirstOrDefault(x => x.Type == ClaimsType.DepotName).Value.ToString();
 
         //[AuthorizeCheck]
         public IActionResult Index()

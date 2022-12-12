@@ -1,11 +1,11 @@
 ﻿using Microsoft.Extensions.Configuration;
-using SalesAndDistributionSystem.Domain.Common;
-using SalesAndDistributionSystem.Domain.Models.TableModels.Security;
-using SalesAndDistributionSystem.Domain.Models.TableModels.User;
-using SalesAndDistributionSystem.Domain.Models.ViewModels.Security;
-using SalesAndDistributionSystem.Domain.Utility;
-using SalesAndDistributionSystem.Services.Business.User;
-using SalesAndDistributionSystem.Services.Common;
+
+using PMIS.Domain.Common;
+using PMIS.Domain.Entities;
+using PMIS.Domain.ViewModels.Security;
+using PMIS.Repository.Interface;
+using PMIS.Service.Interface.Security.User;
+using PMIS.Utility;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -28,23 +28,28 @@ namespace PMIS.Service.Implementation.Security
         }
 
         string UserQuery() => "Select  u.User_Id Id, u.User_Name Name, u.Unit_ID UnitId, c.Unit_Type UnitType, u.User_Type  UserType, c.Company_Id CompanyId, u.Email, c.Company_Name from User_Info u left outer join Company_Info c on c.Company_Id = u.Company_id Where u.Email = :param1";
-        string UserQuery4() => "Select  u.User_Id Id, u.User_Name Name, u.USER_PASSWORD, u.Unit_ID UnitId, c.Unit_Type UnitType, u.User_Type  UserType, c.Company_Id CompanyId, u.Email, c.Company_Name , c.UNIT_NAME from User_Info u left outer join Company_Info c on c.Company_Id = u.Company_id AND c.UNIT_ID = u.UNIT_ID Where u.Email = :param1 and u.Company_id = :param2 AND u.STATUS = 'Active'";
+        string UserQuery4() => @"Select  u.User_Id Id, u.User_Name Name, u.USER_PASSWORD, u.Depot_ID DepotId,
+                                 u.User_Type  UserType, u.Company_Id CompanyId,
+                                 u.Email, c.Company_Name , d.Depot_NAME from User_Info u 
+                                 left outer join Depot_Info d on d.Depot_Id = u.Depot_Id 
+                                  left outer join Company_Info c on c.Company_Id = u.Company_Id 
+                                 Where u.Email = :param1 and u.Company_id = :param2 AND u.STATUS = 'Active'";
 
         string UserQuery2() => "Select  User_Id from User_Info Where Email = :param1 AND  USER_PASSWORD = :param2";
         string UserQuery3() => "Select  COMPANY_ID FROM USER_INFO Where USER_ID= :param1";
 
 
 
-        public DataTable GetUserByEmailDataTable(string db, string Email) => _commonService.GetDataTable(connString.GetConnectionString(db), UserQuery(), _commonService.AddParameter(new string[] { Email }));
-        public DataTable GetUserByEmailAndCompanyDataTable(string db, string Email, int CompanyId) => _commonService.GetDataTable(connString.GetConnectionString(db), UserQuery4(), _commonService.AddParameter(new string[] { Email, CompanyId.ToString() }));
+        public DataTable GetUserByEmailDataTable(string Email) => _commonService.GetDataTable(UserQuery(), _commonService.AddParameter(new string[] { Email }));
+        public DataTable GetUserByEmailAndCompanyDataTable(string Email, int CompanyId) => _commonService.GetDataTable(UserQuery4(), _commonService.AddParameter(new string[] { Email, CompanyId.ToString() }));
 
-        public DataTable CheckValidUserDataTable(string db, string Email, string Password) => _commonService.GetDataTable(connString.GetConnectionString(db), UserQuery2(), _commonService.AddParameter(new string[] { Email, Password }));
-        public DataTable GetUserByUseridDataTable(string db, int UserId) => _commonService.GetDataTable(connString.GetConnectionString(db), UserQuery3(), _commonService.AddParameter(new string[] { UserId.ToString() }));
+        public DataTable CheckValidUserDataTable(string Email, string Password) => _commonService.GetDataTable(UserQuery2(), _commonService.AddParameter(new string[] { Email, Password }));
+        public DataTable GetUserByUseridDataTable(int UserId) => _commonService.GetDataTable(UserQuery3(), _commonService.AddParameter(new string[] { UserId.ToString() }));
 
-        public Auth GetUserByEmail(string db, string Email)
+        public Auth GetUserByEmail(string Email)
         {
             Auth auth = new Auth();
-            DataTable userData = GetUserByEmailDataTable(db, Email);
+            DataTable userData = GetUserByEmailDataTable(Email);
 
             if (userData != null && userData.Rows.Count > 0)
             {
@@ -55,7 +60,7 @@ namespace PMIS.Service.Implementation.Security
                 auth.CompanyId = Convert.ToInt32(userData.Rows[0]["CompanyId"]);
                 auth.CompanyName = userData.Rows[0]["Company_Name"].ToString();
 
-                auth.UnitId = Convert.ToInt32(userData.Rows[0]["UnitId"]);
+                auth.DepotId = Convert.ToInt32(userData.Rows[0]["Depot_Id"]);
                 auth.UnitType = userData.Rows[0]["UnitType"].ToString();
                 auth.UserType = userData.Rows[0]["UserType"].ToString();
                 auth.DistributorId = 1;
@@ -67,11 +72,11 @@ namespace PMIS.Service.Implementation.Security
 
 
         }
-        public Auth GetUserByEmailAndCompany(string db, string Email, int companyId)
+        public Auth GetUserByEmailAndCompany(string Email, int companyId)
         {
 
             Auth auth = new Auth();
-            DataTable userData = GetUserByEmailAndCompanyDataTable(db, Email, companyId);
+            DataTable userData = GetUserByEmailAndCompanyDataTable(Email, companyId);
 
             if (userData != null && userData.Rows.Count > 0)
             {
@@ -81,12 +86,12 @@ namespace PMIS.Service.Implementation.Security
                 auth.UserId = Convert.ToInt32(userData.Rows[0]["Id"]);
                 auth.CompanyId = Convert.ToInt32(userData.Rows[0]["CompanyId"]);
                 auth.CompanyName = userData.Rows[0]["Company_Name"].ToString();
-                auth.UnitName = userData.Rows[0]["UNIT_NAME"].ToString();
+                auth.DepotName = userData.Rows[0]["Depot_Name"].ToString();
 
                 auth.Password = userData.Rows[0]["USER_PASSWORD"].ToString();
 
-                auth.UnitId = Convert.ToInt32(userData.Rows[0]["UnitId"]);
-                auth.UnitType = userData.Rows[0]["UnitType"].ToString();
+                auth.DepotId = Convert.ToInt32(userData.Rows[0]["Depot_Id"]);
+    
                 auth.UserType = userData.Rows[0]["UserType"].ToString();
                 auth.DistributorId = 1;
                 return auth;
@@ -98,10 +103,10 @@ namespace PMIS.Service.Implementation.Security
 
         }
 
-        public bool IsValidUser(string db, string Email, string Password, int CompanyId, string HashPass)
+        public bool IsValidUser(string Email, string Password, int CompanyId, string HashPass)
         {
             //DataTable IsValidUser = CheckValidUserDataTable( db, Email, _commonService.Decrypt(Password));
-            DataTable IsValidUser = CheckValidUserDataTable(db, Email, _commonService.Encrypt(Password));
+            DataTable IsValidUser = CheckValidUserDataTable(Email, _commonService.Encrypt(Password));
             string decryptValue = _commonService.Decrypt(HashPass);
             if (Password == decryptValue)
             {
@@ -180,17 +185,17 @@ namespace PMIS.Service.Implementation.Security
         string UpdatePassWordAndKeyByUser() => @"UPDATE USER_INFO SET UNIQUEACCESSKEY = :param1, USER_PASSWORD = :param3 WHERE USER_ID = :param2";
 
 
-        public DataTable GetUserByCompanyDataTable(string db, string Company) => _commonService.GetDataTable(connString.GetConnectionString(db), UserAccordingToCompany(), _commonService.AddParameter(new string[] { Company }));
-        public string GetUsers(string db) => _commonService.DataTableToJSON(_commonService.GetDataTable(connString.GetConnectionString(db), GetUsers(), _commonService.AddParameter(new string[] { })));
-        public string GetEmployeesWithoutAccount(string db, int CompanyId) => _commonService.DataTableToJSON(_commonService.GetDataTable(connString.GetConnectionString(db), GetEmployeesWithoutAccount(), _commonService.AddParameter(new string[] { CompanyId.ToString() })));
-        public DataTable GetEmployeeByEmployeeId(string db, string EmployeeId) => _commonService.GetDataTable(connString.GetConnectionString(db), GetEmployeeByEmployeeId(), _commonService.AddParameter(new string[] { EmployeeId }));
-        public DataTable GetUsersByCompanyDataTable(string db, int CompanyId) => _commonService.GetDataTable(connString.GetConnectionString(db), GetUsersByCompany(), _commonService.AddParameter(new string[] { CompanyId.ToString() }));
+        public DataTable GetUserByCompanyDataTable(string Company) => _commonService.GetDataTable(UserAccordingToCompany(), _commonService.AddParameter(new string[] { Company }));
+        public string GetUsers(string db) => _commonService.DataTableToJSON(_commonService.GetDataTable(GetUsers(), _commonService.AddParameter(new string[] { })));
+        public string GetEmployeesWithoutAccount(int CompanyId) => _commonService.DataTableToJSON(_commonService.GetDataTable(GetEmployeesWithoutAccount(), _commonService.AddParameter(new string[] { CompanyId.ToString() })));
+        public DataTable GetEmployeeByEmployeeId(int EmployeeId) => _commonService.GetDataTable(GetEmployeeByEmployeeId(), _commonService.AddParameter(new string[] { EmployeeId.ToString() }));
+        public DataTable GetUsersByCompanyDataTable(int CompanyId) => _commonService.GetDataTable(GetUsersByCompany(), _commonService.AddParameter(new string[] { CompanyId.ToString() }));
 
-        public string GetUsersByCompany(string db, int CompanyId) => _commonService.DataTableToJSON(_commonService.GetDataTable(connString.GetConnectionString(db), GetUsersByCompany(), _commonService.AddParameter(new string[] { CompanyId.ToString() })));
+        public string GetUsersByCompany(int CompanyId) => _commonService.DataTableToJSON(_commonService.GetDataTable(GetUsersByCompany(), _commonService.AddParameter(new string[] { CompanyId.ToString() })));
 
-        public string GetUserByCompanyJsonList(string db, string Company) => _commonService.DataTableToJSON(GetUserByCompanyDataTable(db, Company));
+        public string GetUserByCompanyJsonList(string Company) => _commonService.DataTableToJSON(GetUserByCompanyDataTable(Company));
 
-        public async Task<string> AddOrUpdate(string db, User_Info model, string Path)
+        public async Task<string> AddOrUpdate(USER_INFO model, string Path)
         {
             if (model == null)
             {
@@ -202,7 +207,7 @@ namespace PMIS.Service.Implementation.Security
                 List<QueryPattern> listOfQuery = new List<QueryPattern>();
                 try
                 {
-                    DataTable dataTable = GetEmployeeByEmployeeId(db, model.EMPLOYEE_ID);
+                    DataTable dataTable = GetEmployeeByEmployeeId(Convert.ToInt32(model.EMPLOYEE_ID));
 
                     if (dataTable.Rows.Count > 0)
                     {
@@ -221,17 +226,17 @@ namespace PMIS.Service.Implementation.Security
 
 
                             RandomStringGenerator generator = new RandomStringGenerator();
-                            model.USER_ID = _commonService.GetMaximumNumber<int>(connString.GetConnectionString(db), GetNewUSER_IDQuery(), _commonService.AddParameter(new string[] { }));
+                            model.USER_ID = _commonService.GetMaximumNumber<int>(GetNewUSER_IDQuery(), _commonService.AddParameter(new string[] { }));
 
                             model.USER_NAME = dataTable.Rows[0]["EMPLOYEE_NAME"].ToString();
                             model.COMPANY_ID = model.COMPANY_ID == 0 ? Convert.ToInt32(dataTable.Rows[0]["COMPANY_ID"].ToString()) : model.COMPANY_ID;
-                            model.UNIT_ID = model.UNIT_ID == 0 ? Convert.ToInt32(dataTable.Rows[0]["COMPANY_ID"].ToString()) : model.UNIT_ID;
+                            model.DEPOT_ID = model.DEPOT_ID == 0 ? Convert.ToInt32(dataTable.Rows[0]["COMPANY_ID"].ToString()) : model.DEPOT_ID;
                             emailConfiguration.EmailBody_Password = generator.RandomPassword(8);
 
                             model.USER_PASSWORD = _commonService.Encrypt(emailConfiguration.EmailBody_Password);
 
                             listOfQuery.Add(_commonService.AddQuery(AddOrUpdatyeInsertQuery(), _commonService.AddParameter(new string[]
-                         {model.USER_ID.ToString(), model.USER_TYPE, model.USER_PASSWORD.ToString(), model.USER_NAME, model.UNIT_ID.ToString(), model.ENTERED_TERMINAL, model.ENTERED_DATE.ToString(), model.ENTERED_BY.ToString(), model.EMPLOYEE_ID.ToString(), model.EMAIL,model.COMPANY_ID.ToString() })));
+                         {model.USER_ID.ToString(), model.USER_TYPE, model.USER_PASSWORD.ToString(), model.USER_NAME, model.DEPOT_ID.ToString(), model.ENTERED_TERMINAL, model.ENTERED_DATE.ToString(), model.ENTERED_BY.ToString(), model.EMPLOYEE_ID.ToString(), model.EMAIL,model.COMPANY_ID.ToString() })));
                             model.UNIQUEACCESSKEY = generator.RandomPassword(12);
                             listOfQuery.Add(_commonService.AddQuery(UpdateUniqueKeyByUser(), _commonService.AddParameter(new string[]
                         {model.UNIQUEACCESSKEY, model.USER_ID.ToString()})));
@@ -250,11 +255,11 @@ namespace PMIS.Service.Implementation.Security
                         else
                         {
                             listOfQuery.Add(_commonService.AddQuery(AddOrUpdateUpdateQuery(),
-                                _commonService.AddParameter(new string[] { model.USER_ID.ToString(), model.USER_TYPE.ToString(), model.UPDATED_BY,model.UPDATED_DATE, model.UPDATED_TERMINAL, model.USER_NAME, model.EMAIL
+                                _commonService.AddParameter(new string[] { model.USER_ID.ToString(), model.USER_TYPE.ToString(), model.UPDATED_BY,model.UPDATED_DATE.ToString(), model.UPDATED_TERMINAL, model.USER_NAME, model.EMAIL
                                 })));
 
                         }
-                        await _commonService.SaveChangesAsyn(connString.GetConnectionString(db), listOfQuery);
+                        await _commonService.SaveChangesAsyn(listOfQuery);
 
 
 
@@ -275,10 +280,10 @@ namespace PMIS.Service.Implementation.Security
 
         }
 
-        public int GetCompanyIdByUserId(string db, int userId)
+        public int GetCompanyIdByUserId(int userId)
         {
             int result = 0;
-            DataTable userData = GetUserByUseridDataTable(db, userId);
+            DataTable userData = GetUserByUseridDataTable( userId);
 
             if (userData != null && userData.Rows.Count > 0)
             {
@@ -320,9 +325,9 @@ namespace PMIS.Service.Implementation.Security
                            Where USER_ID = :param1";
         string DeletePreviousDefaultQuery() => @"DELETE from USER_DEFAULT_PAGE Where User_ID = :param1";
         string GetNewUSER_DEFAULT_PAGEIDQuery() => "SELECT NVL(MAX(ID),0) + 1 USER_ID  FROM USER_DEFAULT_PAGE";
-        public async Task<string> LoadSearchableDefaultPages(string db, int companyId, string defaultpage) => _commonService.DataTableToJSON(await _commonService.GetDataTableAsyn(connString.GetConnectionString(db), LoadSearchableDefaultPagesQuery(), _commonService.AddParameter(new string[] { companyId.ToString(), defaultpage })));
-        public async Task<string> LoadDefaultPages(string db, int companyId) => _commonService.DataTableToJSON(await _commonService.GetDataTableAsyn(connString.GetConnectionString(db), LoadDefaultPagesQuery(), _commonService.AddParameter(new string[] { companyId.ToString() })));
-        public async Task<string> AddOrUpdateDefaultPage(string db, Default_Page model)
+        public async Task<string> LoadSearchableDefaultPages(int companyId, string defaultpage) => _commonService.DataTableToJSON(await _commonService.GetDataTableAsyn(LoadSearchableDefaultPagesQuery(), _commonService.AddParameter(new string[] { companyId.ToString(), defaultpage })));
+        public async Task<string> LoadDefaultPages(int companyId) => _commonService.DataTableToJSON(await _commonService.GetDataTableAsyn(LoadDefaultPagesQuery(), _commonService.AddParameter(new string[] { companyId.ToString() })));
+        public async Task<string> AddOrUpdateDefaultPage(USER_DEFAULT_PAGE model)
         {
             if (model == null)
             {
@@ -338,7 +343,7 @@ namespace PMIS.Service.Implementation.Security
                     if (model.ID == 0)
                     {
 
-                        model.ID = _commonService.GetMaximumNumber<int>(connString.GetConnectionString(db), GetNewUSER_DEFAULT_PAGEIDQuery(), _commonService.AddParameter(new string[] { }));
+                        model.ID = _commonService.GetMaximumNumber<int>(GetNewUSER_DEFAULT_PAGEIDQuery(), _commonService.AddParameter(new string[] { }));
                         listOfQuery.Add(_commonService.AddQuery(DeletePreviousDefaultQuery(), _commonService.AddParameter(new string[]
                         {
                            model.USER_ID.ToString(),
@@ -358,7 +363,7 @@ namespace PMIS.Service.Implementation.Security
 
                     }
 
-                    await _commonService.SaveChangesAsyn(connString.GetConnectionString(db), listOfQuery);
+                    await _commonService.SaveChangesAsyn(listOfQuery);
                     return "1";
                 }
                 catch (Exception ex)
@@ -369,29 +374,29 @@ namespace PMIS.Service.Implementation.Security
 
         }
 
-        public User_Info IsVerified(string db, string UniquKey)
+        public USER_INFO IsVerified(string UniquKey)
         {
-            User_Info auth = new User_Info();
-            DataTable dataTable = _commonService.GetDataTable(connString.GetConnectionString(db), "SELECT USER_ID, USER_NAME, EMPLOYEE_ID FROM USER_INFO Where UNIQUEACCESSKEY = :param1", _commonService.AddParameter(new string[] { UniquKey }));
+            USER_INFO auth = new USER_INFO();
+            DataTable dataTable = _commonService.GetDataTable("SELECT USER_ID, USER_NAME, EMPLOYEE_ID FROM USER_INFO Where UNIQUEACCESSKEY = :param1", _commonService.AddParameter(new string[] { UniquKey }));
             if (dataTable.Rows.Count > 0)
             {
                 auth.USER_ID = Convert.ToInt32(dataTable.Rows[0]["USER_ID"]);
                 auth.USER_NAME = dataTable.Rows[0]["USER_NAME"].ToString();
 
 
-                auth.EMPLOYEE_ID = dataTable.Rows[0]["EMPLOYEE_ID"].ToString();
+                auth.EMPLOYEE_ID = Convert.ToInt32(dataTable.Rows[0]["EMPLOYEE_ID"]);
                 List<QueryPattern> listOfQuery = new List<QueryPattern>();
 
                 listOfQuery.Add(_commonService.AddQuery(UpdateUserStatusQuery(),
                             _commonService.AddParameter(new string[] { auth.USER_ID.ToString()
                             })));
-                _commonService.SaveChanges(connString.GetConnectionString(db), listOfQuery);
+                _commonService.SaveChanges(listOfQuery);
                 return auth;
 
 
             }
 
-            return new User_Info();
+            return new USER_INFO();
 
 
         }
@@ -400,7 +405,7 @@ namespace PMIS.Service.Implementation.Security
 
         string UpdatePassword() => @"UPDATE USER_INFO SET USER_PASSWORD =:param1  WHERE USER_ID = :param2";
 
-        public async Task<string> UpdateUserPassword(string db, PasswordChangeModel changeModel)
+        public async Task<string> UpdateUserPassword(PasswordChangeModel changeModel)
         {
 
             if (changeModel.Password == changeModel.PasswordCopy && changeModel.USER_ID != 0)
@@ -427,7 +432,7 @@ namespace PMIS.Service.Implementation.Security
                     await _EmailService.SendEmailAsync(emailConfiguration);
 
                 }
-                await _commonService.SaveChangesAsyn(connString.GetConnectionString(db), listOfQuery);
+                await _commonService.SaveChangesAsyn(listOfQuery);
 
                 return "Password Changed successfully!!";
             }
@@ -438,18 +443,13 @@ namespace PMIS.Service.Implementation.Security
 
         }
 
-        public async Task<string> ForgetPasswordVerify(string db, PasswordChangeModel model)
+        public async Task<string> ForgetPasswordVerify(PasswordChangeModel model)
         {
             if (model.USER_ID > 0)
             {
                 List<QueryPattern> listOfQuery = new List<QueryPattern>();
 
                 EmailConfiguration emailConfiguration = new EmailConfiguration();
-
-
-
-
-
                 RandomStringGenerator generator = new RandomStringGenerator();
 
                 emailConfiguration.EmailBody_Password = generator.RandomPassword(8);
@@ -471,7 +471,7 @@ namespace PMIS.Service.Implementation.Security
 
                 await _EmailService.SendEmailAsync(emailConfiguration);
 
-                await _commonService.SaveChangesAsyn(connString.GetConnectionString(db), listOfQuery);
+                await _commonService.SaveChangesAsyn(listOfQuery);
 
 
                 return "Please check your email and follow the steps as instructed. Thank you.";

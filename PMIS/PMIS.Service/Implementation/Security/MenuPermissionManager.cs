@@ -64,22 +64,22 @@ from  MENU_USER_CONFIGURATION RU
 INNER JOIN Menu_Configuration MC on MC.MENU_ID = RU.MENU_ID 
  Where MC.STATUS ='Active' AND RU.LIST_VIEW = 'Active' AND RU.COMPANY_ID = :param1 AND  upper(MC.MENU_NAME) Like '%' || upper(:param2) || '%' AND MC.MENU_ID NOT IN (Select T.PARENT_MENU_ID From MENU_CONFIGURATION T) AND RU.USER_ID = :param3 ) x";
 
-        public string SearchableMenuLoad(string db, string comp_id, string User_Id, string menu_name)
+        public string SearchableMenuLoad(string comp_id, string User_Id, string menu_name)
         {
-            DataTable table = _commonServices.GetDataTable(_configuration.GetConnectionString(db), SearchableMenuLoadQuery(), _commonServices.AddParameter(new string[] { comp_id, menu_name, User_Id }));
+            DataTable table = _commonServices.GetDataTable(SearchableMenuLoadQuery(), _commonServices.AddParameter(new string[] { comp_id, menu_name, User_Id }));
 
             return _commonServices.DataTableToJSON(table);
         }
 
-        public async Task<MenuDistribution> LoadPermittedMenuByUserId(string db, int id, int companyId)
+        public async Task<MenuDistribution> LoadPermittedMenuByUserId(int id, int companyId)
         {
             try
             {
                 List<int> ParentIDs = new List<int>();
-                DataTable MenuCategoryData = await _commonServices.GetDataTableAsyn(_configuration.GetConnectionString(db), MenuCategoryQuery(), new Dictionary<string, string>());
+                DataTable MenuCategoryData = await _commonServices.GetDataTableAsyn(MenuCategoryQuery(), new Dictionary<string, string>());
 
-                DataTable MenuData = await _commonServices.GetDataTableAsyn(_configuration.GetConnectionString(db), MenuQuery(), _commonServices.AddParameter(new string[] { id.ToString(), companyId.ToString() }));
-                List<PermittedMenu> Menues = await LoadLoadPermittedMenus(db, companyId);
+                DataTable MenuData = await _commonServices.GetDataTableAsyn(MenuQuery(), _commonServices.AddParameter(new string[] { id.ToString(), companyId.ToString() }));
+                List<PermittedMenu> Menues = await LoadLoadPermittedMenus(companyId);
 
                 List<PermittedModule> MenuCategories = new List<PermittedModule>();
                 List<PermittedMenu> MenuMasters = new List<PermittedMenu>();
@@ -160,9 +160,9 @@ INNER JOIN Menu_Configuration MC on MC.MENU_ID = RU.MENU_ID
             }
 
         }
-        public async Task<List<PermittedMenu>> LoadLoadPermittedMenus(string db, int CompanyId)
+        public async Task<List<PermittedMenu>> LoadLoadPermittedMenus(int CompanyId)
         {
-            DataTable MenuData = await _commonServices.GetDataTableAsyn(_configuration.GetConnectionString(db), LoadPermittedMenuQuery(), _commonServices.AddParameter(new string[] { CompanyId.ToString() }));
+            DataTable MenuData = await _commonServices.GetDataTableAsyn(LoadPermittedMenuQuery(), _commonServices.AddParameter(new string[] { CompanyId.ToString() }));
 
             List<PermittedMenu> MenuMasters = new List<PermittedMenu>();
 
@@ -193,9 +193,9 @@ INNER JOIN Menu_Configuration MC on MC.MENU_ID = RU.MENU_ID
             return MenuMasters;
 
         }
-        public string LoadUserDefaultPageById(string db, int User_Id)
+        public string LoadUserDefaultPageById(int User_Id)
         {
-            DataTable MenuCategoryData = _commonServices.GetDataTable(_configuration.GetConnectionString(db), defaultPageQuery(), _commonServices.AddParameter(new string[] { User_Id.ToString() }));
+            DataTable MenuCategoryData = _commonServices.GetDataTable(defaultPageQuery(), _commonServices.AddParameter(new string[] { User_Id.ToString() }));
             if (MenuCategoryData != null && MenuCategoryData.Rows.Count > 0)
             {
                 return MenuCategoryData.Rows[0]["HREF"].ToString();

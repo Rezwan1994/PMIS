@@ -4,7 +4,7 @@ using SalesAndDistributionSystem.Domain.Models.Entities.Security;
 using SalesAndDistributionSystem.Domain.Models.ReportModels.Common.ProductReports;
 using SalesAndDistributionSystem.Domain.Models.TableModels.Security;
 using SalesAndDistributionSystem.Domain.Models.ViewModels.Security;
-using SalesAndDistributionSystem.Domain.Utility;
+using PMIS.Domain.Common;
 using SalesAndDistributionSystem.Services.Business.Security;
 using SalesAndDistributionSystem.Services.Common;
 using System;
