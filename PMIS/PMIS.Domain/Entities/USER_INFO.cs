@@ -19,7 +19,7 @@ namespace PMIS.Domain.Entities
         public string? EMAIL { get; set; }
         public decimal EMPLOYEE_ID { get; set; }
         public decimal? COMPANY_ID { get; set; }
-        public decimal? UNIT_ID { get; set; }
+        public decimal? DEPOT_ID { get; set; }
         public string? ENTERED_BY { get; set; }
         public DateTime? ENTERED_DATE { get; set; }
         public string? ENTERED_TERMINAL { get; set; }

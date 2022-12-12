@@ -1,5 +1,4 @@
 ﻿ngApp.controller('ngGridCtrl', ['$scope', 'CompanyService', 'permissionProvider', 'notificationservice', 'gridregistrationservice', '$http', '$log', '$filter', '$timeout', '$interval', '$q', function ($scope, CompanyService, permissionProvider, notificationservice, gridregistrationservice, $http, $log, $filter, $timeout, $interval, $q) {
-
     $scope.model = { ID: 0, COMPANY_ID: 0, COMPANY_NAME: '', COMPANY_SHORT_NAME: '', COMPANY_ADDRESS1: '', COMPANY_ADDRESS1: '' }
     $scope.gridOptionsList = (gridregistrationservice.GridRegistration("Company List"));
     $scope.gridOptionsList.onRegisterApi = function (gridApi) {
@@ -9,16 +8,14 @@
     $scope.DataLoad = function () {
         $scope.showLoader = true;
         CompanyService.GetCompanyList().then(function (data) {
-
             $scope.gridOptionsList.data = data.data;
             for (var i = 0; i < $scope.gridOptionsList.data.length; i++) {
                 $scope.gridOptionsList.data[i].ROW_NO = i + 1;
             }
             $scope.showLoader = false;
-            
         }, function (error) {
             alert(error);
-            
+
             $scope.showLoader = false;
         });
     }
@@ -31,10 +28,9 @@
         $scope.model.CompanyAddress2 = '';
     }
 
-   
     $scope.GetPermissionData = function () {
         $scope.showLoader = true;
-        
+
         $scope.permissionReqModel = {
             Controller_Name: 'Company',
             Action_Name: 'Index'
@@ -51,9 +47,8 @@
             $scope.showLoader = false;
         }, function (error) {
             alert(error);
-            
-            $scope.showLoader = false;
 
+            $scope.showLoader = false;
         });
     }
 
@@ -87,13 +82,12 @@
             name: 'Actions', displayName: 'Actions', enableFiltering: false, enableColumnMenu: false, width: '10%', cellTemplate:
                 '<div style="margin:1px;">' +
                 '<button style="margin-bottom: 5px;" ng-show="grid.appScope.model.EDIT_PERMISSION == \'Active\'" ng-click="grid.appScope.EditData(row.entity)" type="button" class="btn btn-outline-primary mb-1">Update</button>' +
-             '</div>'
+                '</div>'
         },
 
     ];
 
     $scope.EditData = function (entity) {
-        
         $scope.model.ID = entity.ID;
         $scope.model.COMPANY_ID = entity.COMPANY_ID;
         $scope.model.COMPANY_NAME = entity.COMPANY_NAME;
@@ -102,17 +96,12 @@
         $scope.model.COMPANY_ADDRESS2 = entity.COMPANY_ADDRESS2;
 
         $scope.SaveData($scope.model);
-
     }
 
-
     $scope.SaveData = function (model) {
-        
-
         $scope.showLoader = true;
-        
-        CompanyService.AddOrUpdate(model).then(function (data) {
 
+        CompanyService.AddOrUpdate(model).then(function (data) {
             notificationservice.Notification(data.data, 1, 'Data Save Successfully !!');
             if (data.data == 1) {
                 $scope.showLoader = false;
@@ -127,4 +116,3 @@
         });
     }
 }]);
-

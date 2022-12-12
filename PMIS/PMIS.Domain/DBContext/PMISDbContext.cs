@@ -824,10 +824,6 @@ namespace PMIS.Domain.DBContext
                 entity.Property(e => e.EMPLOYEE_STATUS)
                     .HasMaxLength(10)
                     .IsUnicode(false);
-
-                entity.Property(e => e.ID).HasColumnType("NUMBER");
-
-                entity.Property(e => e.UNIT_ID).HasColumnType("NUMBER");
             });
 
             modelBuilder.Entity<MENU_CONFIGURATION>(entity =>
@@ -2070,7 +2066,7 @@ namespace PMIS.Domain.DBContext
 
                 entity.ToTable("USER_INFO");
 
-                entity.HasIndex(e => new { e.USER_NAME, e.UNIT_ID, e.COMPANY_ID }, "UK_USER_INFO")
+                entity.HasIndex(e => new { e.USER_NAME, e.DEPOT_ID, e.COMPANY_ID }, "UK_USER_INFO")
                     .IsUnique();
 
                 entity.Property(e => e.USER_ID).HasColumnType("NUMBER");
@@ -2101,7 +2097,7 @@ namespace PMIS.Domain.DBContext
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
-                entity.Property(e => e.UNIT_ID).HasColumnType("NUMBER");
+                entity.Property(e => e.DEPOT_ID).HasColumnType("NUMBER");
 
                 entity.Property(e => e.UPDATED_BY)
                     .HasMaxLength(20)
