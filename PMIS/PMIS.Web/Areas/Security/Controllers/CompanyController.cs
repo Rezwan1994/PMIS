@@ -2,6 +2,7 @@
 using PMIS.Domain.Entities;
 using PMIS.Service.Interface.Security.Company;
 using PMIS.Utility.Static;
+using PMIS.Web.Common;
 
 namespace PMIS.Web.Areas.Security.Controllers
 {
@@ -37,7 +38,7 @@ namespace PMIS.Web.Areas.Security.Controllers
             return View();
         }
 
-        //[AuthorizeCheck]
+        [AuthorizeCheck]
         public IActionResult Unit()
         {
             _logger.LogInformation("Company Unit (Company/Unit) Page Has been accessed By " + User.Claims.FirstOrDefault(x => x.Type == ClaimsType.UserName).Value != null ? User.Claims.FirstOrDefault(x => x.Type == ClaimsType.UserName).Value.ToString() : "Unknown User" + " ( ID= " + User.Claims.FirstOrDefault(x => x.Type == ClaimsType.UserId).Value != null ? User.Claims.FirstOrDefault(x => x.Type == ClaimsType.UserId).Value.ToString() : "");
