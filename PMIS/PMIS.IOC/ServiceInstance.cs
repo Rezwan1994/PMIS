@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using PMIS.Domain.DBContext;
@@ -6,6 +7,9 @@ using PMIS.Repository.Implementation;
 using PMIS.Repository.Interface;
 using PMIS.Service.Implementation.Security;
 using PMIS.Service.Interface.Security.Company;
+using PMIS.Service.Interface.Security.Security;
+using PMIS.Service.Interface.Security.User;
+using PMIS.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +30,10 @@ namespace PMIS.IOC
 
             services.AddTransient<ICompanyManager, CompanyManager>();
             services.AddTransient<ICommonServices, CommonServices>();
+            services.AddTransient<IUserManager, UserManager>();
+            services.AddTransient<IMenuPermissionManager, MenuPermissionManager>();
+            services.AddTransient<IEmailService, EmailService>();
+            services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
         }
     }
 }

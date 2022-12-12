@@ -1,10 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
+
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
+
 using PMIS.Domain.Common;
 using PMIS.Domain.Entities;
 using PMIS.Domain.ViewModels.Security;
@@ -13,12 +11,10 @@ using PMIS.Service.Interface.Security.Company;
 using PMIS.Service.Interface.Security.Security;
 using PMIS.Service.Interface.Security.User;
 using PMIS.Utility.Static;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+
 using System.Security.Claims;
 using System.Text.Json;
-using System.Threading.Tasks;
+
 
 namespace SalesAndDistributionSystem.Areas.Security.User.Controllers
 {
@@ -32,11 +28,11 @@ namespace SalesAndDistributionSystem.Areas.Security.User.Controllers
         private readonly ICompanyManager _companyService;
         private readonly IWebHostEnvironment _hostingEnvironment;
         private readonly IHttpContextAccessor _Accessor;
-        private readonly IReportConfigurationManager _reportManager;
+        //private readonly IReportConfigurationManager _reportManager;
         private readonly ICommonServices _commonServices;
 
 
-        public LoginController(ILogger<LoginController> logger, IUserManager accountService, IConfiguration configuration, IMenuPermissionManager menuPermission, ICompanyManager companyManager, IWebHostEnvironment hostingEnvironment, IHttpContextAccessor Accessor, IReportConfigurationManager reportManager, ICommonServices commonServices)
+        public LoginController(ILogger<LoginController> logger, IUserManager accountService, IConfiguration configuration, IMenuPermissionManager menuPermission, ICompanyManager companyManager, IWebHostEnvironment hostingEnvironment, IHttpContextAccessor Accessor/*, IReportConfigurationManager reportManager*/, ICommonServices commonServices)
         {
             _logger = logger;
             this._accountService = accountService;
@@ -45,7 +41,7 @@ namespace SalesAndDistributionSystem.Areas.Security.User.Controllers
             _companyService = companyManager;
             _hostingEnvironment = hostingEnvironment;
             _Accessor = Accessor;
-            _reportManager = reportManager;
+            //_reportManager = reportManager;
             _commonServices = commonServices;
         }
         private string GetEmailOfCurrentUser() => User.Claims.FirstOrDefault(x => x.Type == ClaimsType.Email).Value.ToString();
@@ -53,7 +49,7 @@ namespace SalesAndDistributionSystem.Areas.Security.User.Controllers
 
         public async Task<IActionResult> Index()
         {
-            List<CompanyInfo> company_Infos = await _companyService.GetCompanyList(GetDbConnectionString());
+            List<COMPANY_INFO> company_Infos = await _companyService.GetCompanyList();
           
 
             if (_Accessor.HttpContext.Request.Cookies["LoginMailHolder"] != null)
@@ -86,83 +82,83 @@ namespace SalesAndDistributionSystem.Areas.Security.User.Controllers
                     Auth _user = null;
                     if (model.CompanyId >0)
                     {
-                         _user = _accountService.GetUserByEmailAndCompany(GetDbConnectionString(model.CompanyId), model.Email, model.CompanyId);
+                         _user = _accountService.GetUserByEmailAndCompany(model.Email, model.CompanyId);
 
                     }
 
                     if (_user != null)
                     {
+
+                        if (_accountService.IsValidUser(model.Email, model.Password, _user.CompanyId, _user.Password))
+                        {
+                            MenuDistribution menuDistribution = await _menuService.LoadPermittedMenuByUserId( _user.UserId, _user.CompanyId);
+                            string menuDis = JsonSerializer.Serialize(menuDistribution);
+                            string defaultPage = _menuService.LoadUserDefaultPageById(_user.UserId);
+                            defaultPage = defaultPage == null ? "Security/User/PagePermissionNotice" : defaultPage;
                      
-                        //if (_accountService.IsValidUser(GetDbConnectionString(model.CompanyId), model.Email, model.Password, _user.CompanyId, _user.Password))
-                        //{
-                        //    MenuDistribution menuDistribution = await _menuService.LoadPermittedMenuByUserId(GetDbConnectionString(model.CompanyId), _user.UserId, _user.CompanyId);
-                        //    string menuDis = JsonSerializer.Serialize(menuDistribution);
-                        //    string defaultPage = _menuService.LoadUserDefaultPageById(GetDbConnectionString(model.CompanyId), _user.UserId);
-                        //    defaultPage = defaultPage == null? "Security/User/PagePermissionNotice" : defaultPage;
-                        //     ServiceProvider provider = new ServiceProvider();
-                        //    List<ReportPermission> reportPermissions = await _reportManager.LoadReportPermissionData(GetDbConnectionString(model.CompanyId), _user.CompanyId,_user.UserId );
-                        //    string reportDis = JsonSerializer.Serialize(reportPermissions);
+                            //List<ReportPermission> reportPermissions = await _reportManager.LoadReportPermissionData(GetDbConnectionString(model.CompanyId), _user.CompanyId, _user.UserId);
+                            //string reportDis = JsonSerializer.Serialize(reportPermissions);
 
-                        //    var claims = new List<Claim>()
-                        //    {
-                        //       new Claim(ClaimTypes.Name, _user.UserName),
-                        //       new Claim(ClaimTypes.Role, "Administrator"),
-                        //      new Claim(ClaimTypes.NameIdentifier, _user.UserId.ToString()),
-                        //       new Claim(ClaimsType.UserName, _user.UserName),
-                        //       new Claim(ClaimsType.UserId, _user.UserId.ToString()),
-                        //       new Claim(ClaimsType.Email, _user.Email),
-                        //       new Claim(ClaimsType.UserType, _user.UserType.ToString()),
-                        //       new Claim(ClaimsType.CompanyId, _user.CompanyId.ToString()),
-                        //       new Claim(ClaimsType.UnitId, _user.UnitId.ToString()),
-                        //       new Claim(ClaimsType.UnitName, _user.UnitName.ToString()),
+                            var claims = new List<Claim>()
+                            {
+                               new Claim(ClaimTypes.Name, _user.UserName),
+                               new Claim(ClaimTypes.Role, "Administrator"),
+                              new Claim(ClaimTypes.NameIdentifier, _user.UserId.ToString()),
+                               new Claim(ClaimsType.UserName, _user.UserName),
+                               new Claim(ClaimsType.UserId, _user.UserId.ToString()),
+                               new Claim(ClaimsType.Email, _user.Email),
+                               new Claim(ClaimsType.UserType, _user.UserType.ToString()),
+                               new Claim(ClaimsType.CompanyId, _user.CompanyId.ToString()),
+                               new Claim(ClaimsType.DepotId, _user.DepotId.ToString()),
+                               new Claim(ClaimsType.DepotName, _user.DepotName.ToString()),
 
-                        //       new Claim(ClaimsType.CompanyName, _user.CompanyName.ToString()),
-                        //       new Claim(ClaimsType.DistributorId, _user.DistributorId.ToString()),
-                        //       new Claim(ClaimsType.DefaultPage,defaultPage),
-                        //       new Claim(ClaimsType.DbSpecifier, provider.GetConnectionString(_user.CompanyName))
+                               new Claim(ClaimsType.CompanyName, _user.CompanyName.ToString()),
+                               new Claim(ClaimsType.DistributorId, _user.DistributorId.ToString()),
+                               new Claim(ClaimsType.DefaultPage,defaultPage),
+                               //new Claim(ClaimsType.DbSpecifier, provider.GetConnectionString(_user.CompanyName))
 
-                        //    };
-                        //    HttpContext.Session.SetString(ClaimsType.RolePermission, menuDis);
-                        //    HttpContext.Session.SetString(ClaimsType.ReportPermission, reportDis);
+                            };
+                            HttpContext.Session.SetString(ClaimsType.RolePermission, menuDis);
+                            //HttpContext.Session.SetString(ClaimsType.ReportPermission, reportDis);
 
-                        //    HttpContext.Session.SetString("DefaultPage", defaultPage);
+                            HttpContext.Session.SetString("DefaultPage", defaultPage);
 
-                        //    var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                            var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
-                        //    var authProperties = new AuthenticationProperties
-                        //    {
-                        //        AllowRefresh = true,
+                            var authProperties = new AuthenticationProperties
+                            {
+                                AllowRefresh = true,
 
-                        //        ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(1440),
-                                
-                        //        IssuedUtc = DateTime.Now,
-                               
-                        //    };
-                            
-                        //    await HttpContext.SignInAsync(
-                        //        CookieAuthenticationDefaults.AuthenticationScheme,
-                        //        new ClaimsPrincipal(claimsIdentity),
-                        //        authProperties);
+                                ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(1440),
 
-                        //    _logger.LogInformation("User {Email} logged in at {Time}.", _user.Email, DateTime.UtcNow);
-                        //    if(model.RememberMe == true)
-                        //    {
-                        //        CookieOptions option = new CookieOptions();
-                        //        option.Expires = DateTime.Now.AddDays(29);
-                        //        _Accessor.HttpContext.Response.Cookies.Append("LoginMailHolder", _user.Email, option);
-                        //        _Accessor.HttpContext.Response.Cookies.Append("LoginPassHolder", _commonServices.Decrypt(_user.Password), option);
-                        //        _Accessor.HttpContext.Response.Cookies.Append("LoginCompanyHolder", _user.CompanyId.ToString(), option);
+                                IssuedUtc = DateTime.Now,
 
-                        //    }
+                            };
 
-                        //    string URL = "~/" + defaultPage;
+                            await HttpContext.SignInAsync(
+                                CookieAuthenticationDefaults.AuthenticationScheme,
+                                new ClaimsPrincipal(claimsIdentity),
+                                authProperties);
 
-                        //    return Redirect(URL);
-                        //}
-                        //else
-                        //{
-                        //    ViewBag.errorMessage = "Wrong Password Entered!!!";
-                        //}
+                            _logger.LogInformation("User {Email} logged in at {Time}.", _user.Email, DateTime.UtcNow);
+                            if (model.RememberMe == true)
+                            {
+                                CookieOptions option = new CookieOptions();
+                                option.Expires = DateTime.Now.AddDays(29);
+                                _Accessor.HttpContext.Response.Cookies.Append("LoginMailHolder", _user.Email, option);
+                                _Accessor.HttpContext.Response.Cookies.Append("LoginPassHolder", _commonServices.Decrypt(_user.Password), option);
+                                _Accessor.HttpContext.Response.Cookies.Append("LoginCompanyHolder", _user.CompanyId.ToString(), option);
+
+                            }
+
+                            string URL = "~/" + defaultPage;
+
+                            return Redirect(URL);
+                        }
+                        else
+                        {
+                            ViewBag.errorMessage = "Wrong Password Entered!!!";
+                        }
                     }
                     else
                     {
@@ -183,7 +179,7 @@ namespace SalesAndDistributionSystem.Areas.Security.User.Controllers
             }
 
 
-            List<CompanyInfo> company_Infos = await _companyService.GetCompanyList(GetDbConnectionString(model.CompanyId));
+            List<COMPANY_INFO> company_Infos = await _companyService.GetCompanyList();
 
             return View(company_Infos);
         }

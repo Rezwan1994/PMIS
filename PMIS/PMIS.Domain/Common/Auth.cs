@@ -10,9 +10,9 @@
         public string CompanyName { get; set; }
         public string Password { get; set; }
         public string UniqueId { get; set; }
-        public string UnitName { get; set; }
+        public string DepotName { get; set; }
 
-        public int UnitId { get; set; }
+        public int DepotId { get; set; }
         public string UnitType { get; set; }
         public string UserType { get; set; }
 

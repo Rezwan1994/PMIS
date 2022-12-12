@@ -9,8 +9,8 @@ namespace PMIS.Utility.Static
         public const string UserName = "UserName";
         public const string UserId = "UserId";
         public const string CompanyId = "CompanyId";
-        public const string UnitId = "UnitId";
-        public const string UnitName = "UnitName";
+        public const string DepotId = "DepotId";
+        public const string DepotName = "DepotName";
 
         public const string CompanyName = "CompanyName";
 
