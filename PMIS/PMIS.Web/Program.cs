@@ -1,8 +1,13 @@
+using Microsoft.Extensions.Logging;
 using PMIS.IOC;
 using PMIS.Repository.Implementation;
 using PMIS.Repository.Interface;
 using PMIS.Service.Implementation.Security;
 using PMIS.Service.Interface.Security.Company;
+using Serilog.Events;
+using Serilog.Formatting.Json;
+using Serilog;
+using System.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,8 +15,12 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.RegisterServiceInstance(builder.Configuration);
 
+builder.Logging.AddSeq(builder.Configuration.GetSection("Seq"));
+//builder.Logging.AddConfiguration()
+
 
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -37,3 +46,4 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
+
