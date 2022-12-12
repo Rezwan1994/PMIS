@@ -8,8 +8,6 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddTransient<ICompanyManager, CompanyManager>();
-builder.Services.AddTransient<ICommonServices, CommonServices>();
 
 
 var app = builder.Build();

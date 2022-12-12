@@ -61,13 +61,13 @@ namespace PMIS.Domain.DBContext
         public virtual DbSet<UserInfo> UserInfos { get; set; } = null!;
         public virtual DbSet<UserLog> UserLogs { get; set; } = null!;
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-                optionsBuilder.UseOracle("Data Source=(DESCRIPTION =(ADDRESS_LIST =(ADDRESS = (PROTOCOL = TCP)(HOST = 172.16.243.234)(PORT = 1521)))(CONNECT_DATA =(SERVICE_NAME=silsqadb1.squaregroup.com)(SERVER = DEDICATED)));User Id=SPL_PPM;Password=SPLPPM");
-            }
-        }
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    if (!optionsBuilder.IsConfigured)
+        //    {
+        //        optionsBuilder.UseOracle("Data Source=(DESCRIPTION =(ADDRESS_LIST =(ADDRESS = (PROTOCOL = TCP)(HOST = 172.16.243.234)(PORT = 1521)))(CONNECT_DATA =(SERVICE_NAME=silsqadb1.squaregroup.com)(SERVER = DEDICATED)));User Id=SPL_PPM;Password=SPLPPM");
+        //    }
+        //}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

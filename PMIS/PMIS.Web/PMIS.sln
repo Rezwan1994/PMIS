@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PMIS.Utility", "..\PMIS.Uti
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PMIS.Repository", "..\PMIS.Repository\PMIS.Repository.csproj", "{E5FA9ADF-96E3-49D8-A808-5CFC45047D28}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PMIS.Service", "..\PMIS.Service\PMIS.Service.csproj", "{B473C032-3BBA-4588-AB0A-62F39E664E4F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PMIS.Service", "..\PMIS.Service\PMIS.Service.csproj", "{B473C032-3BBA-4588-AB0A-62F39E664E4F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PMIS.IOC", "..\PMIS.IOC\PMIS.IOC.csproj", "{197AAC08-119B-4404-94CA-B7DE3AC0DA30}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{B473C032-3BBA-4588-AB0A-62F39E664E4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B473C032-3BBA-4588-AB0A-62F39E664E4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B473C032-3BBA-4588-AB0A-62F39E664E4F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{197AAC08-119B-4404-94CA-B7DE3AC0DA30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{197AAC08-119B-4404-94CA-B7DE3AC0DA30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{197AAC08-119B-4404-94CA-B7DE3AC0DA30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{197AAC08-119B-4404-94CA-B7DE3AC0DA30}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,23 +1,21 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Data;
+﻿using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 using Oracle.ManagedDataAccess.Client;
+using PMIS.Domain.Common;
+using PMIS.Repository.Interface;
+using System.Collections;
+using System.Data;
+using System.Reflection;
+
 //using System.Data.SqlClient;
-using System.IO;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
-using System.Linq;
-using System.Reflection;
-using PMIS.Repository.Interface;
-using PMIS.Domain.Common;
+
 //using System.Text.Json;
 
 namespace PMIS.Repository.Implementation
 {
-    public class CommonServices : ICommonServices
+    public partial class CommonServices : ICommonServices
     {
         public QueryPattern AddQuery(string query, Dictionary<string, string> parametes)
         {
@@ -28,9 +26,9 @@ namespace PMIS.Repository.Implementation
             queryPattern.Parametes.Add(parametes);
             return queryPattern;
         }
+
         public string DataTableToJSON(DataTable table)
         {
-
             List<Dictionary<string, object>> parentRow = new List<Dictionary<string, object>>();
             Dictionary<string, object> childRow;
             foreach (DataRow row in table.Rows)
@@ -44,6 +42,7 @@ namespace PMIS.Repository.Implementation
             }
             return JsonConvert.SerializeObject(parentRow);
         }
+
         public string DataSetToJSON(DataSet ds)
         {
             ArrayList root = new ArrayList();
@@ -67,7 +66,6 @@ namespace PMIS.Repository.Implementation
 
             return JsonConvert.SerializeObject(root);
         }
-
 
         public DataRow GetDataRow(string conString, string query, Dictionary<string, string> param = null)
         {
@@ -94,9 +92,7 @@ namespace PMIS.Repository.Implementation
             {
                 throw ex;
             }
-
         }
-
 
         public DataSet GetDataSet(string connString, string query, Dictionary<string, string> param)
         {
@@ -121,9 +117,7 @@ namespace PMIS.Repository.Implementation
             {
                 throw ex;
             }
-
         }
-
 
         public DataTable GetDataTable(string conString, string query, Dictionary<string, string> param = null)
         {
@@ -133,7 +127,6 @@ namespace PMIS.Repository.Implementation
                 obcon.UseHourOffsetForUnsupportedTimezone = true;
 
                 using OracleDataAdapter dataAdapter = new OracleDataAdapter(query, obcon);
-
 
                 if (param != null && param.Count > 0)
                 {
@@ -168,7 +161,6 @@ namespace PMIS.Repository.Implementation
                     while (reader.Read())
                     {
                         data = Convert.ToString(reader[0]);
-
                     }
                     reader.Close();
                     obcon.Close();
@@ -180,6 +172,7 @@ namespace PMIS.Repository.Implementation
                 throw ex;
             }
         }
+
         public T GetMaximumNumber<T>(string conneString, string query, Dictionary<string, string> param)
         {
             try
@@ -208,7 +201,6 @@ namespace PMIS.Repository.Implementation
                     while (reader.Read())
                     {
                         data = Convert.ToString(reader[0]);
-
                     }
                     reader.Close();
                     conn.Close();
@@ -285,8 +277,9 @@ namespace PMIS.Repository.Implementation
                 throw ex;
             }
         }
+
         /// <summary>
-        /// this method return dictionary of parameter, default parameter is KeyValuePair<"@param1","com_code">, others parameter start name @param2 and end parameter name defendend you. how many parameter pass in array parameter 
+        /// this method return dictionary of parameter, default parameter is KeyValuePair<"@param1","com_code">, others parameter start name @param2 and end parameter name defendend you. how many parameter pass in array parameter
         /// </summary>
         /// <param name="values">array of parameter values</param>
         /// <returns></returns>
@@ -304,6 +297,7 @@ namespace PMIS.Repository.Implementation
             }
             return parameter;
         }
+
         public async Task<T> ProcedureCallAsyn<T>(string connString, string query, Dictionary<string, string> param = null)
         {
             try
@@ -332,7 +326,6 @@ namespace PMIS.Repository.Implementation
                             if (item.Value == "RefCursor")
                             {
                                 cmd.Parameters.Add(item.Key, OracleDbType.RefCursor).Direction = ParameterDirection.ReturnValue; ;
-
                             }
                             else if (item.Value == "Int32")
                             {
@@ -344,12 +337,10 @@ namespace PMIS.Repository.Implementation
                             {
                                 cmd.Parameters.Add(item.Key, OracleDbType.Varchar2, 32767).Direction = ParameterDirection.ReturnValue;
                                 outputParam.Add(i);
-
                             }
                             else
                             {
                                 cmd.Parameters.Add(item.Key, item.Value);
-
                             }
                             i++;
                         }
@@ -374,7 +365,6 @@ namespace PMIS.Repository.Implementation
                 {
                     transaction.Rollback();
                     throw ex;
-
                 }
                 return (T)Convert.ChangeType(System.Text.Json.JsonSerializer.Serialize(result), typeof(T));
             }
@@ -382,9 +372,8 @@ namespace PMIS.Repository.Implementation
             {
                 return (T)Convert.ChangeType(ex.Message, typeof(T));
             }
-
-
         }
+
         public async Task<T> PreExecuteProcedureCallAsyn<T>(string connString, string query, Dictionary<string, string> param = null)
         {
             try
@@ -413,7 +402,6 @@ namespace PMIS.Repository.Implementation
                             if (item.Value == "RefCursor")
                             {
                                 cmd.Parameters.Add(item.Key, OracleDbType.RefCursor).Direction = ParameterDirection.ReturnValue; ;
-
                             }
                             else if (item.Value == "Int32")
                             {
@@ -425,19 +413,16 @@ namespace PMIS.Repository.Implementation
                             {
                                 cmd.Parameters.Add(item.Key, OracleDbType.Varchar2, 32767).Direction = ParameterDirection.ReturnValue;
                                 outputParam.Add(i);
-
                             }
                             else
                             {
                                 cmd.Parameters.Add(item.Key, item.Value);
-
                             }
                             i++;
                         }
                     }
 
                     await Task.Run(() => cmd.ExecuteNonQuery());
-
 
                     foreach (var item in outputParam)
                     {
@@ -457,7 +442,6 @@ namespace PMIS.Repository.Implementation
                 {
                     transaction.Rollback();
                     throw ex;
-
                 }
 
                 return (T)Convert.ChangeType(System.Text.Json.JsonSerializer.Serialize(result), typeof(T));
@@ -466,9 +450,8 @@ namespace PMIS.Repository.Implementation
             {
                 return (T)Convert.ChangeType(ex.Message, typeof(T));
             }
-
-
         }
+
         public async Task<DataTable> GetDataTableAsyn(string connString, string query, Dictionary<string, string> param = null)
         {
             try
@@ -487,13 +470,10 @@ namespace PMIS.Repository.Implementation
                         {
                             dataAdapter.SelectCommand.Parameters.Add(":param1", OracleDbType.RefCursor);
                             dataAdapter.SelectCommand.Parameters[0].Direction = ParameterDirection.ReturnValue;
-
-
                         }
                         else
                         {
                             dataAdapter.SelectCommand.Parameters.Add(item.Key, item.Value);
-
                         }
                     }
                 }
@@ -531,6 +511,7 @@ namespace PMIS.Repository.Implementation
                 throw ex;
             }
         }
+
         public async Task<DataRow> GetDataRowAsyn(string connString, string query, Dictionary<string, string> param = null)
         {
             try
@@ -556,8 +537,8 @@ namespace PMIS.Repository.Implementation
             {
                 throw ex;
             }
-
         }
+
         public async Task<bool> SaveChangesAsyn(string connString, List<QueryPattern> queryPatterns)
         {
             try
@@ -620,7 +601,6 @@ namespace PMIS.Repository.Implementation
             }
         }
 
-
         public async Task<T> GetMaxNumNonParaQueryAsyn<T>(string connString, string query)
         {
             try
@@ -637,7 +617,6 @@ namespace PMIS.Repository.Implementation
                     while (reader.Read())
                     {
                         data = Convert.ToString(reader[0]);
-
                     }
                     reader.Close();
                     obcon.Close();
@@ -649,10 +628,9 @@ namespace PMIS.Repository.Implementation
                 throw ex;
             }
         }
+
         public async Task<T> GetMaximumNumberAsyn<T>(string connString, string query, Dictionary<string, string> param)
         {
-
-
             try
             {
                 var data = "";
@@ -678,7 +656,6 @@ namespace PMIS.Repository.Implementation
                     while (reader.Read())
                     {
                         data = Convert.ToString(reader[0]);
-
                     }
                     reader.Close();
                     conn.Close();
@@ -690,33 +667,45 @@ namespace PMIS.Repository.Implementation
                 return (T)Convert.ChangeType(ex.Message, typeof(T));
             }
         }
+
         public string ReturnExtension(string fileExtension)
         {
             switch (fileExtension)
             {
                 case ".txt":
                     return "text/plain";
+
                 case ".doc":
                     return "application/msword";
+
                 case ".pdf":
                     return "application/pdf";
+
                 case ".xls":
                     return "application/vnd.ms-excel";
+
                 case ".gif":
                     return "image/gif";
+
                 case ".png":
                     return "image/png";
+
                 case ".jpg":
                 case "jpeg":
                     return "image/jpeg";
+
                 case ".bmp":
                     return "image/bmp";
+
                 case ".wav":
                     return "audio/wav";
+
                 case ".ppt":
                     return "application/vnd.ms-powerpoint";
+
                 case ".dwg":
                     return "image/vnd.dwg";
+
                 default:
                     return "application/octet-stream";
             }
@@ -749,19 +738,14 @@ namespace PMIS.Repository.Implementation
             {
                 throw ex;
             }
-
-
         }
-
 
         public string Encrypt(string pstrText)
         {
-
             string pstrEncrKey = "SquareIformatixLtd";
 
             return Encrypt(pstrText, pstrEncrKey);
         }
-
 
         public string Decrypt(string pstrText)
         {
@@ -769,16 +753,14 @@ namespace PMIS.Repository.Implementation
             string pstrDecrKey = "SquareIformatixLtd";
 
             return Decrypt(pstrText, pstrDecrKey);
-
         }
-
 
         public string Encrypt(string plainText, string passPhrase)
         {
             int DerivationIterations = 1000;
             int Keysize = 128;
             // Salt and IV is randomly generated each time, but is preprended to encrypted cipher text
-            // so that the same Salt and IV values can be used when decrypting.  
+            // so that the same Salt and IV values can be used when decrypting.
             var saltStringBytes = Generate256BitsOfRandomEntropy();
             var ivStringBytes = Generate256BitsOfRandomEntropy();
             var plainTextBytes = Encoding.UTF8.GetBytes(plainText);
@@ -862,6 +844,7 @@ namespace PMIS.Repository.Implementation
             }
             return randomBytes;
         }
+
         public List<T> ConvertDataTableToList<T>(DataTable dt)
         {
             List<T> data = new List<T>();
@@ -893,11 +876,11 @@ namespace PMIS.Repository.Implementation
         public DataTable ListToDataTable<T>(List<T> items)
         {
             DataTable dataTable = new DataTable(typeof(T).Name);
-            //Get all the properties by using reflection   
+            //Get all the properties by using reflection
             PropertyInfo[] Props = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);
             foreach (PropertyInfo prop in Props)
             {
-                //Setting column names as Property names  
+                //Setting column names as Property names
                 dataTable.Columns.Add(prop.Name);
             }
             foreach (T item in items)
@@ -905,7 +888,6 @@ namespace PMIS.Repository.Implementation
                 var values = new object[Props.Length];
                 for (int i = 0; i < Props.Length; i++)
                 {
-
                     values[i] = Props[i].GetValue(item, null);
                 }
                 dataTable.Rows.Add(values);
