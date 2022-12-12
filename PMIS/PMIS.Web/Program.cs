@@ -1,3 +1,4 @@
+using PMIS.IOC;
 using PMIS.Repository.Implementation;
 using PMIS.Repository.Interface;
 using PMIS.Service.Implementation.Security;
@@ -7,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
+builder.Services.RegisterServiceInstance(builder.Configuration);
 
 
 var app = builder.Build();
@@ -26,6 +27,10 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+
+app.MapControllerRoute(
+    name: "MyArea",
+    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
 app.MapControllerRoute(
     name: "default",

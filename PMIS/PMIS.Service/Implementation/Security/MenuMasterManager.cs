@@ -48,7 +48,7 @@ namespace PMIS.Service.Implementation.Security
 
         public string LoadData(string db, int companyId) => _commonServices.DataTableToJSON(_commonServices.GetDataTable(_configuration.GetConnectionString(db), loadDataQuery(), _commonServices.AddParameter(new string[] { companyId.ToString() })));
 
-        public async Task<string> AddOrUpdate(string db, MenuConfiguration model)
+        public async Task<string> AddOrUpdate(string db, MENU_CONFIGURATION model)
         {
             if (model == null)
             {

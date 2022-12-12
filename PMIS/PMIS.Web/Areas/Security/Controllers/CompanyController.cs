@@ -3,7 +3,7 @@ using PMIS.Domain.Entities;
 using PMIS.Service.Interface.Security.Company;
 using PMIS.Utility.Static;
 
-namespace SalesAndDistributionSystem.Areas.Security.Company.Controllers
+namespace PMIS.Web.Areas.Security.Controllers
 {
     [Area("Security")]
     public class CompanyController : Controller
@@ -32,7 +32,7 @@ namespace SalesAndDistributionSystem.Areas.Security.Company.Controllers
         //[AuthorizeCheck]
         public IActionResult Index()
         {
-            _logger.LogInformation("Company Index (Company/Index) Page Has been accessed By " + User.Claims.FirstOrDefault(x => x.Type == ClaimsType.UserName).Value != null ? User.Claims.FirstOrDefault(x => x.Type == ClaimsType.UserName).Value.ToString() : "Unknown User" + " ( ID= " + User.Claims.FirstOrDefault(x => x.Type == ClaimsType.UserId).Value != null ? User.Claims.FirstOrDefault(x => x.Type == ClaimsType.UserId).Value.ToString() : "");
+            //_logger.LogInformation("Company Index (Company/Index) Page Has been accessed By " + User.Claims.FirstOrDefault(x => x.Type == ClaimsType.UserName).Value != null ? User.Claims.FirstOrDefault(x => x.Type == ClaimsType.UserName).Value.ToString() : "Unknown User" + " ( ID= " + User.Claims.FirstOrDefault(x => x.Type == ClaimsType.UserId).Value != null ? User.Claims.FirstOrDefault(x => x.Type == ClaimsType.UserId).Value.ToString() : "");
 
             return View();
         }
@@ -48,7 +48,7 @@ namespace SalesAndDistributionSystem.Areas.Security.Company.Controllers
         [HttpGet]
         public async Task<string> LoadData()
         {
-            return await _service.GetCompanyJsonList(GetDbConnectionString());
+            return await _service.GetCompanyJsonList();
         }
 
         //[HttpGet]
@@ -68,7 +68,7 @@ namespace SalesAndDistributionSystem.Areas.Security.Company.Controllers
         //}
 
         [HttpPost]
-        public async Task<JsonResult> AddOrUpdate([FromBody] CompanyInfo model)
+        public async Task<JsonResult> AddOrUpdate([FromBody] COMPANY_INFO model)
         {
             string result;
 
@@ -80,7 +80,7 @@ namespace SalesAndDistributionSystem.Areas.Security.Company.Controllers
             {
                 try
                 {
-                    result = await _service.AddOrUpdate(GetDbConnectionString(), model);
+                    result = await _service.AddOrUpdate(model);
                 }
                 catch (Exception ex)
                 {
@@ -94,11 +94,11 @@ namespace SalesAndDistributionSystem.Areas.Security.Company.Controllers
         [HttpGet]
         public async Task<string> LoadUnitData()
         {
-            return await _service.GetUnitJsonList(GetDbConnectionString());
+            return await _service.GetUnitJsonList();
         }
 
         [HttpPost]
-        public async Task<JsonResult> AddOrUpdateUnit([FromBody] CompanyInfo model)
+        public async Task<JsonResult> AddOrUpdateUnit([FromBody] COMPANY_INFO model)
 
         {
             string result;
@@ -111,7 +111,7 @@ namespace SalesAndDistributionSystem.Areas.Security.Company.Controllers
             {
                 try
                 {
-                    result = await _service.AddOrUpdateUnit(GetDbConnectionString(), model);
+                    result = await _service.AddOrUpdateUnit(model);
                 }
                 catch (Exception ex)
                 {

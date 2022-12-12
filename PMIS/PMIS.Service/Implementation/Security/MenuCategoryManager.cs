@@ -43,38 +43,38 @@ namespace PMIS.Service.Implementation.Security
 
         public string LoadData(string db, int companyId) => _commonServices.DataTableToJSON(_commonServices.GetDataTable(_configuration.GetConnectionString(db), loadDataQuery(), _commonServices.AddParameter(new string[] { companyId.ToString() })));
 
-        public async Task<string> AddOrUpdate(string db, ModuleInfo model)
-        {
-            if (model == null)
-            {
-                return "No data provided to insert!!!!";
-            }
-            else
-            {
-                List<QueryPattern> listOfQuery = new List<QueryPattern>();
-                try
-                {
-                    if (model.ModuleId == 0)
-                    {
-                        model.ModuleId = _commonServices.GetMaximumNumber<int>(_configuration.GetConnectionString(db), GetNewModule_InfoIdQuery(), _commonServices.AddParameter(new string[] { }));
-                        model.Status = Status.Active;
+        //public async Task<string> AddOrUpdate(string db, ModuleInfo model)
+        //{
+        //    if (model == null)
+        //    {
+        //        return "No data provided to insert!!!!";
+        //    }
+        //    else
+        //    {
+        //        List<QueryPattern> listOfQuery = new List<QueryPattern>();
+        //        try
+        //        {
+        //            if (model.ModuleId == 0)
+        //            {
+        //                model.ModuleId = _commonServices.GetMaximumNumber<int>(_configuration.GetConnectionString(db), GetNewModule_InfoIdQuery(), _commonServices.AddParameter(new string[] { }));
+        //                model.Status = Status.Active;
 
-                        listOfQuery.Add(_commonServices.AddQuery(AddOrUpdate_AddQuery(), _commonServices.AddParameter(new string[] { model.ModuleId.ToString(), model.ModuleName, model.Status, model.EnteredBy.ToString(), model.EnteredDate?.ToString("dd/MM/yyyy"), model.EnteredTerminal, model.OrderByNo.ToString(), model.CompanyId.ToString() })));
-                    }
-                    else
-                    {
-                        listOfQuery.Add(_commonServices.AddQuery(AddOrUpdate_UpdateQuery(), _commonServices.AddParameter(new string[] { model.ModuleId.ToString(), model.ModuleName, model.UpdatedBy.ToString(), model.UpdatedDate?.ToString("dd/MM/yyyy"), model.UpdatedTerminal, model.OrderByNo.ToString() })));
-                    }
+        //                listOfQuery.Add(_commonServices.AddQuery(AddOrUpdate_AddQuery(), _commonServices.AddParameter(new string[] { model.ModuleId.ToString(), model.ModuleName, model.Status, model.EnteredBy.ToString(), model.EnteredDate?.ToString("dd/MM/yyyy"), model.EnteredTerminal, model.OrderByNo.ToString(), model.CompanyId.ToString() })));
+        //            }
+        //            else
+        //            {
+        //                listOfQuery.Add(_commonServices.AddQuery(AddOrUpdate_UpdateQuery(), _commonServices.AddParameter(new string[] { model.ModuleId.ToString(), model.ModuleName, model.UpdatedBy.ToString(), model.UpdatedDate?.ToString("dd/MM/yyyy"), model.UpdatedTerminal, model.OrderByNo.ToString() })));
+        //            }
 
-                    await _commonServices.SaveChangesAsyn(_configuration.GetConnectionString(db), listOfQuery);
-                    return "1";
-                }
-                catch (Exception ex)
-                {
-                    return ex.Message;
-                }
-            }
-        }
+        //            await _commonServices.SaveChangesAsyn(_configuration.GetConnectionString(db), listOfQuery);
+        //            return "1";
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            return ex.Message;
+        //        }
+        //    }
+        //}
 
         public async Task<string> ActivateMenuCategory(string db, int id)
         {

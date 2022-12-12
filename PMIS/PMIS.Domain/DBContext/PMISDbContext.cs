@@ -17,2968 +17,2185 @@ namespace PMIS.Domain.DBContext
         {
         }
 
-        public virtual DbSet<AllocationDtl> AllocationDtls { get; set; } = null!;
-        public virtual DbSet<AllocationMst> AllocationMsts { get; set; } = null!;
-        public virtual DbSet<BatchDateWiseStock> BatchDateWiseStocks { get; set; } = null!;
-        public virtual DbSet<BatchWiseStock> BatchWiseStocks { get; set; } = null!;
-        public virtual DbSet<BudgetDoctorCategoryDtl> BudgetDoctorCategoryDtls { get; set; } = null!;
-        public virtual DbSet<BudgetDtl> BudgetDtls { get; set; } = null!;
-        public virtual DbSet<BudgetMst> BudgetMsts { get; set; } = null!;
-        public virtual DbSet<ChallanDtl> ChallanDtls { get; set; } = null!;
-        public virtual DbSet<ChallanMst> ChallanMsts { get; set; } = null!;
-        public virtual DbSet<ChallanReturnDtl> ChallanReturnDtls { get; set; } = null!;
-        public virtual DbSet<ChallanReturnMst> ChallanReturnMsts { get; set; } = null!;
-        public virtual DbSet<CompanyInfo> CompanyInfos { get; set; } = null!;
-        public virtual DbSet<DateWiseStock> DateWiseStocks { get; set; } = null!;
-        public virtual DbSet<DepotInfo> DepotInfos { get; set; } = null!;
-        public virtual DbSet<DoctorCategoryInfo> DoctorCategoryInfos { get; set; } = null!;
-        public virtual DbSet<EmployeeInfo> EmployeeInfos { get; set; } = null!;
-        public virtual DbSet<MenuConfiguration> MenuConfigurations { get; set; } = null!;
-        public virtual DbSet<MenuUserConfiguration> MenuUserConfigurations { get; set; } = null!;
-        public virtual DbSet<ModuleInfo> ModuleInfos { get; set; } = null!;
-        public virtual DbSet<Notification> Notifications { get; set; } = null!;
-        public virtual DbSet<NotificationPolicy> NotificationPolicies { get; set; } = null!;
-        public virtual DbSet<NotificationView> NotificationViews { get; set; } = null!;
-        public virtual DbSet<NotificationViewPolicy> NotificationViewPolicies { get; set; } = null!;
-        public virtual DbSet<PmCategoryInfo> PmCategoryInfos { get; set; } = null!;
-        public virtual DbSet<ProductionUnitInfo> ProductionUnitInfos { get; set; } = null!;
-        public virtual DbSet<PromotionalMaterialInfo> PromotionalMaterialInfos { get; set; } = null!;
-        public virtual DbSet<ReceiveDtl> ReceiveDtls { get; set; } = null!;
-        public virtual DbSet<ReceiveMst> ReceiveMsts { get; set; } = null!;
-        public virtual DbSet<ReportConfiguration> ReportConfigurations { get; set; } = null!;
-        public virtual DbSet<ReportUserConfiguration> ReportUserConfigurations { get; set; } = null!;
-        public virtual DbSet<ReturnCauseInfo> ReturnCauseInfos { get; set; } = null!;
-        public virtual DbSet<RoleInfo> RoleInfos { get; set; } = null!;
-        public virtual DbSet<RoleMenuConfiguration> RoleMenuConfigurations { get; set; } = null!;
-        public virtual DbSet<RoleReportConfiguration> RoleReportConfigurations { get; set; } = null!;
-        public virtual DbSet<RoleUserConfiguration> RoleUserConfigurations { get; set; } = null!;
-        public virtual DbSet<TransferDtl> TransferDtls { get; set; } = null!;
-        public virtual DbSet<TransferMst> TransferMsts { get; set; } = null!;
-        public virtual DbSet<TransferReceiveDtl> TransferReceiveDtls { get; set; } = null!;
-        public virtual DbSet<TransferReceiveMst> TransferReceiveMsts { get; set; } = null!;
-        public virtual DbSet<UnitInfo> UnitInfos { get; set; } = null!;
-        public virtual DbSet<UserDefaultPage> UserDefaultPages { get; set; } = null!;
-        public virtual DbSet<UserInfo> UserInfos { get; set; } = null!;
-        public virtual DbSet<UserLog> UserLogs { get; set; } = null!;
+        public virtual DbSet<ALLOCATION_DTL> ALLOCATION_DTLs { get; set; } = null!;
+        public virtual DbSet<ALLOCATION_MST> ALLOCATION_MSTs { get; set; } = null!;
+        public virtual DbSet<BATCH_DATE_WISE_STOCK> BATCH_DATE_WISE_STOCKs { get; set; } = null!;
+        public virtual DbSet<BATCH_WISE_STOCK> BATCH_WISE_STOCKs { get; set; } = null!;
+        public virtual DbSet<BUDGET_DOCTOR_CATEGORY_DTL> BUDGET_DOCTOR_CATEGORY_DTLs { get; set; } = null!;
+        public virtual DbSet<BUDGET_DTL> BUDGET_DTLs { get; set; } = null!;
+        public virtual DbSet<BUDGET_MST> BUDGET_MSTs { get; set; } = null!;
+        public virtual DbSet<CHALLAN_DTL> CHALLAN_DTLs { get; set; } = null!;
+        public virtual DbSet<CHALLAN_MST> CHALLAN_MSTs { get; set; } = null!;
+        public virtual DbSet<CHALLAN_RETURN_DTL> CHALLAN_RETURN_DTLs { get; set; } = null!;
+        public virtual DbSet<CHALLAN_RETURN_MST> CHALLAN_RETURN_MSTs { get; set; } = null!;
+        public virtual DbSet<COMPANY_INFO> COMPANY_INFOs { get; set; } = null!;
+        public virtual DbSet<DATE_WISE_STOCK> DATE_WISE_STOCKs { get; set; } = null!;
+        public virtual DbSet<DEPOT_INFO> DEPOT_INFOs { get; set; } = null!;
+        public virtual DbSet<DOCTOR_CATEGORY_INFO> DOCTOR_CATEGORY_INFOs { get; set; } = null!;
+        public virtual DbSet<EMPLOYEE_INFO> EMPLOYEE_INFOs { get; set; } = null!;
+        public virtual DbSet<MENU_CONFIGURATION> MENU_CONFIGURATIONs { get; set; } = null!;
+        public virtual DbSet<MENU_USER_CONFIGURATION> MENU_USER_CONFIGURATIONs { get; set; } = null!;
+        public virtual DbSet<MODULE_INFO> MODULE_INFOs { get; set; } = null!;
+        public virtual DbSet<NOTIFICATION> NOTIFICATIONs { get; set; } = null!;
+        public virtual DbSet<NOTIFICATION_POLICY> NOTIFICATION_POLICies { get; set; } = null!;
+        public virtual DbSet<NOTIFICATION_VIEW> NOTIFICATION_VIEWs { get; set; } = null!;
+        public virtual DbSet<NOTIFICATION_VIEW_POLICY> NOTIFICATION_VIEW_POLICies { get; set; } = null!;
+        public virtual DbSet<PM_CATEGORY_INFO> PM_CATEGORY_INFOs { get; set; } = null!;
+        public virtual DbSet<PRODUCTION_UNIT_INFO> PRODUCTION_UNIT_INFOs { get; set; } = null!;
+        public virtual DbSet<PROMOTIONAL_MATERIAL_INFO> PROMOTIONAL_MATERIAL_INFOs { get; set; } = null!;
+        public virtual DbSet<RECEIVE_DTL> RECEIVE_DTLs { get; set; } = null!;
+        public virtual DbSet<RECEIVE_MST> RECEIVE_MSTs { get; set; } = null!;
+        public virtual DbSet<REPORT_CONFIGURATION> REPORT_CONFIGURATIONs { get; set; } = null!;
+        public virtual DbSet<REPORT_USER_CONFIGURATION> REPORT_USER_CONFIGURATIONs { get; set; } = null!;
+        public virtual DbSet<RETURN_CAUSE_INFO> RETURN_CAUSE_INFOs { get; set; } = null!;
+        public virtual DbSet<ROLE_INFO> ROLE_INFOs { get; set; } = null!;
+        public virtual DbSet<ROLE_MENU_CONFIGURATION> ROLE_MENU_CONFIGURATIONs { get; set; } = null!;
+        public virtual DbSet<ROLE_REPORT_CONFIGURATION> ROLE_REPORT_CONFIGURATIONs { get; set; } = null!;
+        public virtual DbSet<ROLE_USER_CONFIGURATION> ROLE_USER_CONFIGURATIONs { get; set; } = null!;
+        public virtual DbSet<TRANSFER_DTL> TRANSFER_DTLs { get; set; } = null!;
+        public virtual DbSet<TRANSFER_MST> TRANSFER_MSTs { get; set; } = null!;
+        public virtual DbSet<TRANSFER_RECEIVE_DTL> TRANSFER_RECEIVE_DTLs { get; set; } = null!;
+        public virtual DbSet<TRANSFER_RECEIVE_MST> TRANSFER_RECEIVE_MSTs { get; set; } = null!;
+        public virtual DbSet<UNIT_INFO> UNIT_INFOs { get; set; } = null!;
+        public virtual DbSet<USER_DEFAULT_PAGE> USER_DEFAULT_PAGEs { get; set; } = null!;
+        public virtual DbSet<USER_INFO> USER_INFOs { get; set; } = null!;
+        public virtual DbSet<USER_LOG> USER_LOGs { get; set; } = null!;
 
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-        //    if (!optionsBuilder.IsConfigured)
-        //    {
-        //        optionsBuilder.UseOracle("Data Source=(DESCRIPTION =(ADDRESS_LIST =(ADDRESS = (PROTOCOL = TCP)(HOST = 172.16.243.234)(PORT = 1521)))(CONNECT_DATA =(SERVICE_NAME=silsqadb1.squaregroup.com)(SERVER = DEDICATED)));User Id=SPL_PPM;Password=SPLPPM");
-        //    }
-        //}
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                optionsBuilder.UseOracle("Data Source=(DESCRIPTION =(ADDRESS_LIST =(ADDRESS = (PROTOCOL = TCP)(HOST = 172.16.243.234)(PORT = 1521)))(CONNECT_DATA =(SERVICE_NAME=silsqadb1.squaregroup.com)(SERVER = DEDICATED)));User Id=SPL_PPM;Password=SPLPPM");
+            }
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasDefaultSchema("SPL_PPM");
 
-            modelBuilder.Entity<AllocationDtl>(entity =>
+            modelBuilder.Entity<ALLOCATION_DTL>(entity =>
             {
                 entity.HasNoKey();
 
                 entity.ToTable("ALLOCATION_DTL");
 
-                entity.Property(e => e.AllocationQty)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("ALLOCATION_QTY");
+                entity.Property(e => e.ALLOCATION_QTY).HasColumnType("NUMBER");
 
-                entity.Property(e => e.DtlId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("DTL_ID");
+                entity.Property(e => e.DTL_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.EnteredBy)
+                entity.Property(e => e.ENTERED_BY)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("ENTERED_BY");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.EnteredDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("ENTERED_DATE");
+                entity.Property(e => e.ENTERED_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.EnteredTerminal)
+                entity.Property(e => e.ENTERED_TERMINAL)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("ENTERED_TERMINAL");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.MstId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("MST_ID");
+                entity.Property(e => e.MST_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.PmCategoryCode)
+                entity.Property(e => e.PM_CATEGORY_CODE)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("PM_CATEGORY_CODE");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.PmCode)
+                entity.Property(e => e.PM_CODE)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("PM_CODE");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.Status)
+                entity.Property(e => e.STATUS)
                     .HasMaxLength(10)
-                    .IsUnicode(false)
-                    .HasColumnName("STATUS");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.UpdatedBy)
+                entity.Property(e => e.UPDATED_BY)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("UPDATED_BY");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.UpdatedDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("UPDATED_DATE");
+                entity.Property(e => e.UPDATED_DATE).HasColumnType("DATE");
             });
 
-            modelBuilder.Entity<AllocationMst>(entity =>
+            modelBuilder.Entity<ALLOCATION_MST>(entity =>
             {
                 entity.HasNoKey();
 
                 entity.ToTable("ALLOCATION_MST");
 
-                entity.Property(e => e.DepotCode)
+                entity.Property(e => e.DEPOT_CODE)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("DEPOT_CODE");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.DivisionCode)
+                entity.Property(e => e.DIVISION_CODE)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("DIVISION_CODE");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.EnteredBy)
+                entity.Property(e => e.ENTERED_BY)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("ENTERED_BY");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.EnteredDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("ENTERED_DATE");
+                entity.Property(e => e.ENTERED_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.EnteredTerminal)
+                entity.Property(e => e.ENTERED_TERMINAL)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("ENTERED_TERMINAL");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.MarketCode)
+                entity.Property(e => e.MARKET_CODE)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("MARKET_CODE");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.MarketGroup)
+                entity.Property(e => e.MARKET_GROUP)
                     .HasMaxLength(10)
-                    .IsUnicode(false)
-                    .HasColumnName("MARKET_GROUP");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.MonthCode)
+                entity.Property(e => e.MONTH_CODE)
                     .HasMaxLength(2)
-                    .IsUnicode(false)
-                    .HasColumnName("MONTH_CODE");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.MstId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("MST_ID");
+                entity.Property(e => e.MST_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.ProductGroup)
+                entity.Property(e => e.PRODUCT_GROUP)
                     .HasMaxLength(10)
-                    .IsUnicode(false)
-                    .HasColumnName("PRODUCT_GROUP");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.RegionCode)
+                entity.Property(e => e.REGION_CODE)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("REGION_CODE");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.TerritoryCode)
+                entity.Property(e => e.TERRITORY_CODE)
                     .HasMaxLength(3)
-                    .IsUnicode(false)
-                    .HasColumnName("TERRITORY_CODE");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.UpdatedBy)
+                entity.Property(e => e.UPDATED_BY)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("UPDATED_BY");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.UpdatedDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("UPDATED_DATE");
+                entity.Property(e => e.UPDATED_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.YearCode)
+                entity.Property(e => e.YEAR_CODE)
                     .HasMaxLength(4)
-                    .IsUnicode(false)
-                    .HasColumnName("YEAR_CODE");
+                    .IsUnicode(false);
             });
 
-            modelBuilder.Entity<BatchDateWiseStock>(entity =>
+            modelBuilder.Entity<BATCH_DATE_WISE_STOCK>(entity =>
             {
-                entity.HasKey(e => new { e.StockDate, e.DepotCode, e.PmCode, e.BatchNo })
+                entity.HasKey(e => new { e.STOCK_DATE, e.DEPOT_CODE, e.PM_CODE, e.BATCH_NO })
                     .HasName("UK1_BATCH_DATE_WISE_STOCK");
 
                 entity.ToTable("BATCH_DATE_WISE_STOCK");
 
-                entity.Property(e => e.StockDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("STOCK_DATE");
+                entity.Property(e => e.STOCK_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.DepotCode)
+                entity.Property(e => e.DEPOT_CODE)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("DEPOT_CODE");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.PmCode)
+                entity.Property(e => e.PM_CODE)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("PM_CODE");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.BatchNo)
+                entity.Property(e => e.BATCH_NO)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("BATCH_NO");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.BatchId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("BATCH_ID");
+                entity.Property(e => e.BATCH_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.ClosingStockQty)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("CLOSING_STOCK_QTY");
+                entity.Property(e => e.CLOSING_STOCK_QTY).HasColumnType("NUMBER");
 
-                entity.Property(e => e.OpeningStockQty)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("OPENING_STOCK_QTY");
+                entity.Property(e => e.OPENING_STOCK_QTY).HasColumnType("NUMBER");
             });
 
-            modelBuilder.Entity<BatchWiseStock>(entity =>
+            modelBuilder.Entity<BATCH_WISE_STOCK>(entity =>
             {
                 entity.HasNoKey();
 
                 entity.ToTable("BATCH_WISE_STOCK");
 
-                entity.HasIndex(e => new { e.DepotCode, e.PmCode, e.BatchNo }, "UK1_BATCH_WISE_STOCK")
+                entity.HasIndex(e => new { e.DEPOT_CODE, e.PM_CODE, e.BATCH_NO }, "UK1_BATCH_WISE_STOCK")
                     .IsUnique();
 
-                entity.Property(e => e.BatchId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("BATCH_ID");
+                entity.Property(e => e.BATCH_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.BatchNo)
+                entity.Property(e => e.BATCH_NO)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("BATCH_NO");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.DepotCode)
+                entity.Property(e => e.DEPOT_CODE)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("DEPOT_CODE");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.ExpiryDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("EXPIRY_DATE");
+                entity.Property(e => e.EXPIRY_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.PmCode)
+                entity.Property(e => e.PM_CODE)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("PM_CODE");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.StockQty)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("STOCK_QTY");
+                entity.Property(e => e.STOCK_QTY).HasColumnType("NUMBER");
 
-                entity.Property(e => e.UnitPrice)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("UNIT_PRICE");
+                entity.Property(e => e.UNIT_PRICE).HasColumnType("NUMBER");
             });
 
-            modelBuilder.Entity<BudgetDoctorCategoryDtl>(entity =>
+            modelBuilder.Entity<BUDGET_DOCTOR_CATEGORY_DTL>(entity =>
             {
                 entity.HasNoKey();
 
                 entity.ToTable("BUDGET_DOCTOR_CATEGORY_DTL");
 
-                entity.Property(e => e.BudgetQuantity)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("BUDGET_QUANTITY");
+                entity.Property(e => e.BUDGET_QUANTITY).HasColumnType("NUMBER");
 
-                entity.Property(e => e.DoctoryCategoryCode)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("DOCTORY_CATEGORY_CODE");
+                entity.Property(e => e.DOCTORY_CATEGORY_CODE).HasColumnType("NUMBER");
 
-                entity.Property(e => e.DtlId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("DTL_ID");
+                entity.Property(e => e.DTL_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.EnteredBy)
+                entity.Property(e => e.ENTERED_BY)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("ENTERED_BY");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.EnteredDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("ENTERED_DATE");
+                entity.Property(e => e.ENTERED_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.EnteredTerminal)
+                entity.Property(e => e.ENTERED_TERMINAL)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("ENTERED_TERMINAL");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.Id)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("ID");
+                entity.Property(e => e.ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.MstId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("MST_ID");
+                entity.Property(e => e.MST_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.UpdatedBy)
+                entity.Property(e => e.UPDATED_BY)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("UPDATED_BY");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.UpdatedDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("UPDATED_DATE");
+                entity.Property(e => e.UPDATED_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.UpdatedTerminal)
+                entity.Property(e => e.UPDATED_TERMINAL)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("UPDATED_TERMINAL");
+                    .IsUnicode(false);
             });
 
-            modelBuilder.Entity<BudgetDtl>(entity =>
+            modelBuilder.Entity<BUDGET_DTL>(entity =>
             {
                 entity.HasNoKey();
 
                 entity.ToTable("BUDGET_DTL");
 
-                entity.Property(e => e.BudgetQuantity)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("BUDGET_QUANTITY");
+                entity.Property(e => e.BUDGET_QUANTITY).HasColumnType("NUMBER");
 
-                entity.Property(e => e.DepotCode)
+                entity.Property(e => e.DEPOT_CODE)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("DEPOT_CODE");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.DtlId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("DTL_ID");
+                entity.Property(e => e.DTL_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.EnteredBy)
+                entity.Property(e => e.ENTERED_BY)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("ENTERED_BY");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.EnteredDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("ENTERED_DATE");
+                entity.Property(e => e.ENTERED_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.EnteredTerminal)
+                entity.Property(e => e.ENTERED_TERMINAL)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("ENTERED_TERMINAL");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.MstId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("MST_ID");
+                entity.Property(e => e.MST_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.PmCategoryCode)
+                entity.Property(e => e.PM_CATEGORY_CODE)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("PM_CATEGORY_CODE");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.PmCode)
+                entity.Property(e => e.PM_CODE)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("PM_CODE");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.ProductionUnitCode)
+                entity.Property(e => e.PRODUCTION_UNIT_CODE)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("PRODUCTION_UNIT_CODE");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.Sbu)
+                entity.Property(e => e.SBU)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("SBU");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.UnitCode)
+                entity.Property(e => e.UNIT_CODE)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("UNIT_CODE");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.UpdatedBy)
+                entity.Property(e => e.UPDATED_BY)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("UPDATED_BY");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.UpdatedDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("UPDATED_DATE");
+                entity.Property(e => e.UPDATED_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.UpdatedTerminal)
+                entity.Property(e => e.UPDATED_TERMINAL)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("UPDATED_TERMINAL");
+                    .IsUnicode(false);
             });
 
-            modelBuilder.Entity<BudgetMst>(entity =>
+            modelBuilder.Entity<BUDGET_MST>(entity =>
             {
                 entity.HasNoKey();
 
                 entity.ToTable("BUDGET_MST");
 
-                entity.Property(e => e.BudgetDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("BUDGET_DATE");
+                entity.Property(e => e.BUDGET_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.BudgetNo)
+                entity.Property(e => e.BUDGET_NO)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("BUDGET_NO");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.EnteredBy)
+                entity.Property(e => e.ENTERED_BY)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("ENTERED_BY");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.EnteredDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("ENTERED_DATE");
+                entity.Property(e => e.ENTERED_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.EnteredTerminal)
+                entity.Property(e => e.ENTERED_TERMINAL)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("ENTERED_TERMINAL");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.MonthCode)
+                entity.Property(e => e.MONTH_CODE)
                     .HasMaxLength(2)
-                    .IsUnicode(false)
-                    .HasColumnName("MONTH_CODE");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.MstId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("MST_ID");
+                entity.Property(e => e.MST_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.UpdatedBy)
+                entity.Property(e => e.UPDATED_BY)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("UPDATED_BY");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.UpdatedDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("UPDATED_DATE");
+                entity.Property(e => e.UPDATED_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.UpdatedTerminal)
+                entity.Property(e => e.UPDATED_TERMINAL)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("UPDATED_TERMINAL");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.YearCode)
+                entity.Property(e => e.YEAR_CODE)
                     .HasMaxLength(4)
-                    .IsUnicode(false)
-                    .HasColumnName("YEAR_CODE");
+                    .IsUnicode(false);
             });
 
-            modelBuilder.Entity<ChallanDtl>(entity =>
+            modelBuilder.Entity<CHALLAN_DTL>(entity =>
             {
                 entity.HasNoKey();
 
                 entity.ToTable("CHALLAN_DTL");
 
-                entity.Property(e => e.AllocationQty)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("ALLOCATION_QTY");
+                entity.Property(e => e.ALLOCATION_QTY).HasColumnType("NUMBER");
 
-                entity.Property(e => e.BatchId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("BATCH_ID");
+                entity.Property(e => e.BATCH_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.BatchNo)
+                entity.Property(e => e.BATCH_NO)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("BATCH_NO");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.ChallanAmount)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("CHALLAN_AMOUNT");
+                entity.Property(e => e.CHALLAN_AMOUNT).HasColumnType("NUMBER");
 
-                entity.Property(e => e.ChallanDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("CHALLAN_DATE");
+                entity.Property(e => e.CHALLAN_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.ChallanQty)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("CHALLAN_QTY");
+                entity.Property(e => e.CHALLAN_QTY).HasColumnType("NUMBER");
 
-                entity.Property(e => e.DepotCode)
+                entity.Property(e => e.DEPOT_CODE)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("DEPOT_CODE");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.DtlId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("DTL_ID");
+                entity.Property(e => e.DTL_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.EnteredBy)
+                entity.Property(e => e.ENTERED_BY)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("ENTERED_BY");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.EnteredDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("ENTERED_DATE");
+                entity.Property(e => e.ENTERED_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.EnteredTerminal)
+                entity.Property(e => e.ENTERED_TERMINAL)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("ENTERED_TERMINAL");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.MstId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("MST_ID");
+                entity.Property(e => e.MST_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.PmCategoryCode)
+                entity.Property(e => e.PM_CATEGORY_CODE)
                     .HasMaxLength(10)
-                    .IsUnicode(false)
-                    .HasColumnName("PM_CATEGORY_CODE");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.PmCode)
+                entity.Property(e => e.PM_CODE)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("PM_CODE");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.UnitPrice)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("UNIT_PRICE");
+                entity.Property(e => e.UNIT_PRICE).HasColumnType("NUMBER");
 
-                entity.Property(e => e.UnitVat)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("UNIT_VAT");
+                entity.Property(e => e.UNIT_VAT).HasColumnType("NUMBER");
 
-                entity.Property(e => e.UpdatedBy)
+                entity.Property(e => e.UPDATED_BY)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("UPDATED_BY");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.UpdatedDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("UPDATED_DATE");
+                entity.Property(e => e.UPDATED_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.UpdatedTerminal)
+                entity.Property(e => e.UPDATED_TERMINAL)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("UPDATED_TERMINAL");
+                    .IsUnicode(false);
             });
 
-            modelBuilder.Entity<ChallanMst>(entity =>
+            modelBuilder.Entity<CHALLAN_MST>(entity =>
             {
                 entity.HasNoKey();
 
                 entity.ToTable("CHALLAN_MST");
 
-                entity.Property(e => e.AllocationNo)
+                entity.Property(e => e.ALLOCATION_NO)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("ALLOCATION_NO");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.AllocationType)
+                entity.Property(e => e.ALLOCATION_TYPE)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("ALLOCATION_TYPE");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.ChallanDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("CHALLAN_DATE");
+                entity.Property(e => e.CHALLAN_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.ChallanNo)
+                entity.Property(e => e.CHALLAN_NO)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("CHALLAN_NO");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.DepotCode)
+                entity.Property(e => e.DEPOT_CODE)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("DEPOT_CODE");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.EnteredBy)
+                entity.Property(e => e.ENTERED_BY)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("ENTERED_BY");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.EnteredDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("ENTERED_DATE");
+                entity.Property(e => e.ENTERED_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.EnteredTerminal)
+                entity.Property(e => e.ENTERED_TERMINAL)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("ENTERED_TERMINAL");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.LocationCode)
+                entity.Property(e => e.LOCATION_CODE)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("LOCATION_CODE");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.LocationEcode)
+                entity.Property(e => e.LOCATION_ECODE)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("LOCATION_ECODE");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.LocationType)
+                entity.Property(e => e.LOCATION_TYPE)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("LOCATION_TYPE");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.MonthCode)
+                entity.Property(e => e.MONTH_CODE)
                     .HasMaxLength(2)
-                    .IsUnicode(false)
-                    .HasColumnName("MONTH_CODE");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.MstId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("MST_ID");
+                entity.Property(e => e.MST_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.Remarks)
+                entity.Property(e => e.REMARKS)
                     .HasMaxLength(500)
-                    .IsUnicode(false)
-                    .HasColumnName("REMARKS");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.UpdatedBy)
+                entity.Property(e => e.UPDATED_BY)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("UPDATED_BY");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.UpdatedDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("UPDATED_DATE");
+                entity.Property(e => e.UPDATED_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.UpdatedTerminal)
+                entity.Property(e => e.UPDATED_TERMINAL)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("UPDATED_TERMINAL");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.YearCode)
+                entity.Property(e => e.YEAR_CODE)
                     .HasMaxLength(4)
-                    .IsUnicode(false)
-                    .HasColumnName("YEAR_CODE");
+                    .IsUnicode(false);
             });
 
-            modelBuilder.Entity<ChallanReturnDtl>(entity =>
+            modelBuilder.Entity<CHALLAN_RETURN_DTL>(entity =>
             {
                 entity.HasNoKey();
 
                 entity.ToTable("CHALLAN_RETURN_DTL");
 
-                entity.Property(e => e.BatchId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("BATCH_ID");
+                entity.Property(e => e.BATCH_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.BatchNo)
+                entity.Property(e => e.BATCH_NO)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("BATCH_NO");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.ChallanQty)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("CHALLAN_QTY");
+                entity.Property(e => e.CHALLAN_QTY).HasColumnType("NUMBER");
 
-                entity.Property(e => e.DtlId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("DTL_ID");
+                entity.Property(e => e.DTL_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.EnteredBy)
+                entity.Property(e => e.ENTERED_BY)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("ENTERED_BY");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.EnteredDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("ENTERED_DATE");
+                entity.Property(e => e.ENTERED_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.EnteredTerminal)
+                entity.Property(e => e.ENTERED_TERMINAL)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("ENTERED_TERMINAL");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.MstId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("MST_ID");
+                entity.Property(e => e.MST_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.PmCategoryCode)
+                entity.Property(e => e.PM_CATEGORY_CODE)
                     .HasMaxLength(10)
-                    .IsUnicode(false)
-                    .HasColumnName("PM_CATEGORY_CODE");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.PmCode)
+                entity.Property(e => e.PM_CODE)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("PM_CODE");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.ReturnAmount)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("RETURN_AMOUNT");
+                entity.Property(e => e.RETURN_AMOUNT).HasColumnType("NUMBER");
 
-                entity.Property(e => e.ReturnQty)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("RETURN_QTY");
+                entity.Property(e => e.RETURN_QTY).HasColumnType("NUMBER");
 
-                entity.Property(e => e.UnitPrice)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("UNIT_PRICE");
+                entity.Property(e => e.UNIT_PRICE).HasColumnType("NUMBER");
 
-                entity.Property(e => e.UnitVat)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("UNIT_VAT");
+                entity.Property(e => e.UNIT_VAT).HasColumnType("NUMBER");
 
-                entity.Property(e => e.UpdatedBy)
+                entity.Property(e => e.UPDATED_BY)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("UPDATED_BY");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.UpdatedDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("UPDATED_DATE");
+                entity.Property(e => e.UPDATED_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.UpdatedTerminal)
+                entity.Property(e => e.UPDATED_TERMINAL)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("UPDATED_TERMINAL");
+                    .IsUnicode(false);
             });
 
-            modelBuilder.Entity<ChallanReturnMst>(entity =>
+            modelBuilder.Entity<CHALLAN_RETURN_MST>(entity =>
             {
                 entity.HasNoKey();
 
                 entity.ToTable("CHALLAN_RETURN_MST");
 
-                entity.Property(e => e.AllocationType)
+                entity.Property(e => e.ALLOCATION_TYPE)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("ALLOCATION_TYPE");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.ChallanNo)
+                entity.Property(e => e.CHALLAN_NO)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("CHALLAN_NO");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.DepotCode)
+                entity.Property(e => e.DEPOT_CODE)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("DEPOT_CODE");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.EnteredBy)
+                entity.Property(e => e.ENTERED_BY)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("ENTERED_BY");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.EnteredDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("ENTERED_DATE");
+                entity.Property(e => e.ENTERED_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.EnteredTerminal)
+                entity.Property(e => e.ENTERED_TERMINAL)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("ENTERED_TERMINAL");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.LocationCode)
+                entity.Property(e => e.LOCATION_CODE)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("LOCATION_CODE");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.LocationEcode)
+                entity.Property(e => e.LOCATION_ECODE)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("LOCATION_ECODE");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.LocationType)
+                entity.Property(e => e.LOCATION_TYPE)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("LOCATION_TYPE");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.MstId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("MST_ID");
+                entity.Property(e => e.MST_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.Remarks)
+                entity.Property(e => e.REMARKS)
                     .HasMaxLength(500)
-                    .IsUnicode(false)
-                    .HasColumnName("REMARKS");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.ReturnCauseCode)
+                entity.Property(e => e.RETURN_CAUSE_CODE)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("RETURN_CAUSE_CODE");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.ReturnDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("RETURN_DATE");
+                entity.Property(e => e.RETURN_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.ReturnType)
+                entity.Property(e => e.RETURN_TYPE)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("RETURN_TYPE");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.UpdatedBy)
+                entity.Property(e => e.UPDATED_BY)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("UPDATED_BY");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.UpdatedDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("UPDATED_DATE");
+                entity.Property(e => e.UPDATED_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.UpdatedTerminal)
+                entity.Property(e => e.UPDATED_TERMINAL)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("UPDATED_TERMINAL");
+                    .IsUnicode(false);
             });
 
-            modelBuilder.Entity<CompanyInfo>(entity =>
+            modelBuilder.Entity<COMPANY_INFO>(entity =>
             {
                 entity.HasNoKey();
 
                 entity.ToTable("COMPANY_INFO");
 
-                entity.Property(e => e.CompanyAddress1)
+                entity.Property(e => e.COMPANY_ADDRESS1)
                     .HasMaxLength(200)
-                    .IsUnicode(false)
-                    .HasColumnName("COMPANY_ADDRESS1");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.CompanyAddress2)
+                entity.Property(e => e.COMPANY_ADDRESS2)
                     .HasMaxLength(200)
-                    .IsUnicode(false)
-                    .HasColumnName("COMPANY_ADDRESS2");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.CompanyCode)
+                entity.Property(e => e.COMPANY_CODE)
                     .HasMaxLength(100)
-                    .IsUnicode(false)
-                    .HasColumnName("COMPANY_CODE");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.CompanyName)
+                entity.Property(e => e.COMPANY_NAME)
                     .HasMaxLength(100)
-                    .IsUnicode(false)
-                    .HasColumnName("COMPANY_NAME");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.CompanyShortName)
+                entity.Property(e => e.COMPANY_SHORT_NAME)
                     .HasMaxLength(150)
-                    .IsUnicode(false)
-                    .HasColumnName("COMPANY_SHORT_NAME");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.CompanyId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("COMPNAY_ID");
+                entity.Property(e => e.COMPANY_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.EnteredBy)
+                entity.Property(e => e.ENTERED_BY)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("ENTERED_BY");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.EnteredDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("ENTERED_DATE");
+                entity.Property(e => e.ENTERED_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.EnteredTerminal)
+                entity.Property(e => e.ENTERED_TERMINAL)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("ENTERED_TERMINAL");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.Status)
+                entity.Property(e => e.STATUS)
                     .HasMaxLength(10)
-                    .IsUnicode(false)
-                    .HasColumnName("STATUS");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.UpdatedBy)
+                entity.Property(e => e.UPDATED_BY)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("UPDATED_BY");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.UpdatedDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("UPDATED_DATE");
+                entity.Property(e => e.UPDATED_DATE).HasColumnType("DATE");
             });
 
-            modelBuilder.Entity<DateWiseStock>(entity =>
+            modelBuilder.Entity<DATE_WISE_STOCK>(entity =>
             {
                 entity.HasNoKey();
 
                 entity.ToTable("DATE_WISE_STOCK");
 
-                entity.HasIndex(e => new { e.StockDate, e.DepotCode, e.PmCode }, "UK1_DATE_WISE_STOCK")
+                entity.HasIndex(e => new { e.STOCK_DATE, e.DEPOT_CODE, e.PM_CODE }, "UK1_DATE_WISE_STOCK")
                     .IsUnique();
 
-                entity.Property(e => e.ClosingStockQty)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("CLOSING_STOCK_QTY");
+                entity.Property(e => e.CLOSING_STOCK_QTY).HasColumnType("NUMBER");
 
-                entity.Property(e => e.DepotCode)
+                entity.Property(e => e.DEPOT_CODE)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("DEPOT_CODE");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.OpeningStockQty)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("OPENING_STOCK_QTY");
+                entity.Property(e => e.OPENING_STOCK_QTY).HasColumnType("NUMBER");
 
-                entity.Property(e => e.PmCode)
+                entity.Property(e => e.PM_CODE)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("PM_CODE");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.StockDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("STOCK_DATE");
+                entity.Property(e => e.STOCK_DATE).HasColumnType("DATE");
             });
 
-            modelBuilder.Entity<DepotInfo>(entity =>
+            modelBuilder.Entity<DEPOT_INFO>(entity =>
             {
                 entity.HasNoKey();
 
                 entity.ToTable("DEPOT_INFO");
 
-                entity.HasIndex(e => e.DepotCode, "UK1_DEPOT_INFO")
+                entity.HasIndex(e => e.DEPOT_CODE, "UK1_DEPOT_INFO")
                     .IsUnique();
 
-                entity.HasIndex(e => e.DepotName, "UK2_DEPOT_INFO")
+                entity.HasIndex(e => e.DEPOT_NAME, "UK2_DEPOT_INFO")
                     .IsUnique();
 
-                entity.Property(e => e.DepotAddress)
+                entity.Property(e => e.DEPOT_ADDRESS)
                     .HasMaxLength(200)
-                    .IsUnicode(false)
-                    .HasColumnName("DEPOT_ADDRESS");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.DepotCode)
+                entity.Property(e => e.DEPOT_CODE)
                     .HasMaxLength(10)
-                    .IsUnicode(false)
-                    .HasColumnName("DEPOT_CODE");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.DepotId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("DEPOT_ID");
+                entity.Property(e => e.DEPOT_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.DepotName)
+                entity.Property(e => e.DEPOT_NAME)
                     .HasMaxLength(500)
-                    .IsUnicode(false)
-                    .HasColumnName("DEPOT_NAME");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.DepotShortName)
+                entity.Property(e => e.DEPOT_SHORT_NAME)
                     .HasMaxLength(150)
-                    .IsUnicode(false)
-                    .HasColumnName("DEPOT_SHORT_NAME");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.EnteredBy)
+                entity.Property(e => e.ENTERED_BY)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("ENTERED_BY");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.EnteredDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("ENTERED_DATE");
+                entity.Property(e => e.ENTERED_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.EnteredTerminal)
+                entity.Property(e => e.ENTERED_TERMINAL)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("ENTERED_TERMINAL");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.Status)
+                entity.Property(e => e.STATUS)
                     .HasMaxLength(10)
-                    .IsUnicode(false)
-                    .HasColumnName("STATUS");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.UpdatedBy)
+                entity.Property(e => e.UPDATED_BY)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("UPDATED_BY");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.UpdatedDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("UPDATED_DATE");
+                entity.Property(e => e.UPDATED_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.UpdatedTerminal)
+                entity.Property(e => e.UPDATED_TERMINAL)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("UPDATED_TERMINAL");
+                    .IsUnicode(false);
             });
 
-            modelBuilder.Entity<DoctorCategoryInfo>(entity =>
+            modelBuilder.Entity<DOCTOR_CATEGORY_INFO>(entity =>
             {
                 entity.HasNoKey();
 
                 entity.ToTable("DOCTOR_CATEGORY_INFO");
 
-                entity.HasIndex(e => e.DoctorCategoryCode, "UK1_DOCTOR_CATEGORY_INFO")
+                entity.HasIndex(e => e.DOCTOR_CATEGORY_CODE, "UK1_DOCTOR_CATEGORY_INFO")
                     .IsUnique();
 
-                entity.HasIndex(e => e.DoctorCategoryName, "UK2_DOCTOR_CATEGORY_INFO")
+                entity.HasIndex(e => e.DOCTOR_CATEGORY_NAME, "UK2_DOCTOR_CATEGORY_INFO")
                     .IsUnique();
 
-                entity.Property(e => e.DoctorCategoryCode)
+                entity.Property(e => e.DOCTOR_CATEGORY_CODE)
                     .HasMaxLength(10)
-                    .IsUnicode(false)
-                    .HasColumnName("DOCTOR_CATEGORY_CODE");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.DoctorCategoryId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("DOCTOR_CATEGORY_ID");
+                entity.Property(e => e.DOCTOR_CATEGORY_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.DoctorCategoryName)
+                entity.Property(e => e.DOCTOR_CATEGORY_NAME)
                     .HasMaxLength(100)
-                    .IsUnicode(false)
-                    .HasColumnName("DOCTOR_CATEGORY_NAME");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.EnteredBy)
+                entity.Property(e => e.ENTERED_BY)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("ENTERED_BY");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.EnteredDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("ENTERED_DATE");
+                entity.Property(e => e.ENTERED_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.EnteredTerminal)
+                entity.Property(e => e.ENTERED_TERMINAL)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("ENTERED_TERMINAL");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.Status)
+                entity.Property(e => e.STATUS)
                     .HasMaxLength(10)
-                    .IsUnicode(false)
-                    .HasColumnName("STATUS");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.UpdatedBy)
+                entity.Property(e => e.UPDATED_BY)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("UPDATED_BY");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.UpdatedDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("UPDATED_DATE");
+                entity.Property(e => e.UPDATED_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.UpdatedTerminal)
+                entity.Property(e => e.UPDATED_TERMINAL)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("UPDATED_TERMINAL");
+                    .IsUnicode(false);
             });
 
-            modelBuilder.Entity<EmployeeInfo>(entity =>
+            modelBuilder.Entity<EMPLOYEE_INFO>(entity =>
             {
-                entity.HasKey(e => e.EmployeeId);
+                entity.HasKey(e => e.EMPLOYEE_ID);
 
                 entity.ToTable("EMPLOYEE_INFO");
 
-                entity.HasIndex(e => e.EmployeeCode, "UK1_EMPLOYEE_INFO")
+                entity.HasIndex(e => e.EMPLOYEE_CODE, "UK1_EMPLOYEE_INFO")
                     .IsUnique();
 
-                entity.Property(e => e.EmployeeId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("EMPLOYEE_ID");
+                entity.Property(e => e.EMPLOYEE_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.CompanyId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("COMPANY_ID");
+                entity.Property(e => e.COMPANY_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.EmployeeCode)
+                entity.Property(e => e.EMPLOYEE_CODE)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("EMPLOYEE_CODE");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.EmployeeName)
+                entity.Property(e => e.EMPLOYEE_NAME)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("EMPLOYEE_NAME");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.EmployeeStatus)
+                entity.Property(e => e.EMPLOYEE_STATUS)
                     .HasMaxLength(10)
-                    .IsUnicode(false)
-                    .HasColumnName("EMPLOYEE_STATUS");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.Id)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("ID");
+                entity.Property(e => e.ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.UnitId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("UNIT_ID");
+                entity.Property(e => e.UNIT_ID).HasColumnType("NUMBER");
             });
 
-            modelBuilder.Entity<MenuConfiguration>(entity =>
+            modelBuilder.Entity<MENU_CONFIGURATION>(entity =>
             {
-                entity.HasKey(e => e.MenuId)
+                entity.HasKey(e => e.MENU_ID)
                     .HasName("PK_MENU_CONFIGARATION_MENU_ID");
 
                 entity.ToTable("MENU_CONFIGURATION");
 
-                entity.Property(e => e.MenuId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("MENU_ID");
+                entity.Property(e => e.MENU_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.Action)
+                entity.Property(e => e.ACTION)
                     .HasMaxLength(250)
-                    .IsUnicode(false)
-                    .HasColumnName("ACTION");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.Area)
+                entity.Property(e => e.AREA)
                     .HasMaxLength(250)
-                    .IsUnicode(false)
-                    .HasColumnName("AREA");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.CompanyId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("COMPANY_ID");
+                entity.Property(e => e.COMPANY_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.Controller)
+                entity.Property(e => e.CONTROLLER)
                     .HasMaxLength(250)
-                    .IsUnicode(false)
-                    .HasColumnName("CONTROLLER");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.EnteredBy)
+                entity.Property(e => e.ENTERED_BY)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("ENTERED_BY");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.EnteredDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("ENTERED_DATE");
+                entity.Property(e => e.ENTERED_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.EnteredTerminal)
+                entity.Property(e => e.ENTERED_TERMINAL)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("ENTERED_TERMINAL");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.Href)
+                entity.Property(e => e.HREF)
                     .HasMaxLength(250)
-                    .IsUnicode(false)
-                    .HasColumnName("HREF");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.MenuName)
+                entity.Property(e => e.MENU_NAME)
                     .HasMaxLength(100)
-                    .IsUnicode(false)
-                    .HasColumnName("MENU_NAME");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.MenuShow)
+                entity.Property(e => e.MENU_SHOW)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("MENU_SHOW");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.ModuleId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("MODULE_ID");
+                entity.Property(e => e.MODULE_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.OrderBySlno)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("ORDER_BY_SLNO");
+                entity.Property(e => e.ORDER_BY_SLNO).HasColumnType("NUMBER");
 
-                entity.Property(e => e.ParentMenuId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("PARENT_MENU_ID");
+                entity.Property(e => e.PARENT_MENU_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.Status)
+                entity.Property(e => e.STATUS)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("STATUS");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.UpdatedBy)
+                entity.Property(e => e.UPDATED_BY)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("UPDATED_BY");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.UpdatedDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("UPDATED_DATE");
+                entity.Property(e => e.UPDATED_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.UpdatedTerminal)
+                entity.Property(e => e.UPDATED_TERMINAL)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("UPDATED_TERMINAL");
+                    .IsUnicode(false);
 
-                entity.HasOne(d => d.Module)
-                    .WithMany(p => p.MenuConfigurations)
-                    .HasForeignKey(d => d.ModuleId)
+                entity.HasOne(d => d.MODULE)
+                    .WithMany(p => p.MENU_CONFIGURATIONs)
+                    .HasForeignKey(d => d.MODULE_ID)
                     .HasConstraintName("FK_CONFIGARATION");
             });
 
-            modelBuilder.Entity<MenuUserConfiguration>(entity =>
+            modelBuilder.Entity<MENU_USER_CONFIGURATION>(entity =>
             {
                 entity.ToTable("MENU_USER_CONFIGURATION");
 
-                entity.Property(e => e.Id)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("ID");
+                entity.Property(e => e.ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.AddPermission)
+                entity.Property(e => e.ADD_PERMISSION)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("ADD_PERMISSION");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.CompanyId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("COMPANY_ID");
+                entity.Property(e => e.COMPANY_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.ConfirmPermission)
+                entity.Property(e => e.CONFIRM_PERMISSION)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("CONFIRM_PERMISSION");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.DeletePermission)
+                entity.Property(e => e.DELETE_PERMISSION)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("DELETE_PERMISSION");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.DetailView)
+                entity.Property(e => e.DETAIL_VIEW)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("DETAIL_VIEW");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.DownloadPermission)
+                entity.Property(e => e.DOWNLOAD_PERMISSION)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("DOWNLOAD_PERMISSION");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.EditPermission)
+                entity.Property(e => e.EDIT_PERMISSION)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("EDIT_PERMISSION");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.EnteredBy)
+                entity.Property(e => e.ENTERED_BY)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("ENTERED_BY");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.EnteredDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("ENTERED_DATE");
+                entity.Property(e => e.ENTERED_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.EnteredTerminal)
+                entity.Property(e => e.ENTERED_TERMINAL)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("ENTERED_TERMINAL");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.ListView)
+                entity.Property(e => e.LIST_VIEW)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("LIST_VIEW");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.MenuId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("MENU_ID");
+                entity.Property(e => e.MENU_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.UpdatedBy)
+                entity.Property(e => e.UPDATED_BY)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("UPDATED_BY");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.UpdatedDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("UPDATED_DATE");
+                entity.Property(e => e.UPDATED_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.UpdatedTerminal)
+                entity.Property(e => e.UPDATED_TERMINAL)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("UPDATED_TERMINAL");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.UserId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("USER_ID");
+                entity.Property(e => e.USER_ID).HasColumnType("NUMBER");
 
-                entity.HasOne(d => d.Menu)
-                    .WithMany(p => p.MenuUserConfigurations)
-                    .HasForeignKey(d => d.MenuId)
+                entity.HasOne(d => d.MENU)
+                    .WithMany(p => p.MENU_USER_CONFIGURATIONs)
+                    .HasForeignKey(d => d.MENU_ID)
                     .HasConstraintName("FK1_MENU_USER_CONFIGURATION");
 
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.MenuUserConfigurations)
-                    .HasForeignKey(d => d.UserId)
+                entity.HasOne(d => d.USER)
+                    .WithMany(p => p.MENU_USER_CONFIGURATIONs)
+                    .HasForeignKey(d => d.USER_ID)
                     .HasConstraintName("FK2_MENU_USER_CONFIGURATION");
             });
 
-            modelBuilder.Entity<ModuleInfo>(entity =>
+            modelBuilder.Entity<MODULE_INFO>(entity =>
             {
-                entity.HasKey(e => e.ModuleId)
+                entity.HasKey(e => e.MODULE_ID)
                     .HasName("PK_MODULE_INFO_MODULE_ID");
 
                 entity.ToTable("MODULE_INFO");
 
-                entity.Property(e => e.ModuleId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("MODULE_ID");
+                entity.Property(e => e.MODULE_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.CompanyId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("COMPANY_ID");
+                entity.Property(e => e.COMPANY_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.EnteredBy)
+                entity.Property(e => e.ENTERED_BY)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("ENTERED_BY");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.EnteredDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("ENTERED_DATE");
+                entity.Property(e => e.ENTERED_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.EnteredTerminal)
+                entity.Property(e => e.ENTERED_TERMINAL)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("ENTERED_TERMINAL");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.ModuleName)
+                entity.Property(e => e.MODULE_NAME)
                     .HasMaxLength(100)
-                    .IsUnicode(false)
-                    .HasColumnName("MODULE_NAME");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.OrderByNo)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("ORDER_BY_NO");
+                entity.Property(e => e.ORDER_BY_NO).HasColumnType("NUMBER");
 
-                entity.Property(e => e.Status)
+                entity.Property(e => e.STATUS)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("STATUS");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.UpdatedBy)
+                entity.Property(e => e.UPDATED_BY)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("UPDATED_BY");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.UpdatedDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("UPDATED_DATE");
+                entity.Property(e => e.UPDATED_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.UpdatedTerminal)
+                entity.Property(e => e.UPDATED_TERMINAL)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("UPDATED_TERMINAL");
+                    .IsUnicode(false);
             });
 
-            modelBuilder.Entity<Notification>(entity =>
+            modelBuilder.Entity<NOTIFICATION>(entity =>
             {
+                entity.HasKey(e => e.NOTIFICATION_ID)
+                    .HasName("SYS_C0079618");
+
                 entity.ToTable("NOTIFICATION");
 
-                entity.Property(e => e.NotificationId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("NOTIFICATION_ID");
+                entity.Property(e => e.NOTIFICATION_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.CompanyId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("COMPANY_ID");
+                entity.Property(e => e.COMPANY_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.NotificationBody)
-                    .HasMaxLength(350)
-                    .HasColumnName("NOTIFICATION_BODY");
+                entity.Property(e => e.NOTIFICATION_BODY).HasMaxLength(350);
 
-                entity.Property(e => e.NotificationDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("NOTIFICATION_DATE");
+                entity.Property(e => e.NOTIFICATION_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.NotificationPolicyId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("NOTIFICATION_POLICY_ID");
+                entity.Property(e => e.NOTIFICATION_POLICY_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.NotificationTitle)
+                entity.Property(e => e.NOTIFICATION_TITLE)
                     .HasMaxLength(250)
-                    .IsUnicode(false)
-                    .HasColumnName("NOTIFICATION_TITLE");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.Status)
+                entity.Property(e => e.STATUS)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("STATUS");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.UnitId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("UNIT_ID");
+                entity.Property(e => e.UNIT_ID).HasColumnType("NUMBER");
             });
 
-            modelBuilder.Entity<NotificationPolicy>(entity =>
+            modelBuilder.Entity<NOTIFICATION_POLICY>(entity =>
             {
+                entity.HasKey(e => e.NOTIFICATION_POLICY_ID)
+                    .HasName("SYS_C0079619");
+
                 entity.ToTable("NOTIFICATION_POLICY");
 
-                entity.Property(e => e.NotificationPolicyId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("NOTIFICATION_POLICY_ID");
+                entity.Property(e => e.NOTIFICATION_POLICY_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.CompanyId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("COMPANY_ID");
+                entity.Property(e => e.COMPANY_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.NotificationTitle)
+                entity.Property(e => e.NOTIFICATION_TITLE)
                     .HasMaxLength(250)
-                    .IsUnicode(false)
-                    .HasColumnName("NOTIFICATION_TITLE");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.Status)
+                entity.Property(e => e.STATUS)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("STATUS");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.UnitId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("UNIT_ID");
+                entity.Property(e => e.UNIT_ID).HasColumnType("NUMBER");
             });
 
-            modelBuilder.Entity<NotificationView>(entity =>
+            modelBuilder.Entity<NOTIFICATION_VIEW>(entity =>
             {
                 entity.ToTable("NOTIFICATION_VIEW");
 
-                entity.Property(e => e.Id)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("ID");
+                entity.Property(e => e.ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.CompanyId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("COMPANY_ID");
+                entity.Property(e => e.COMPANY_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.NotificationId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("NOTIFICATION_ID");
+                entity.Property(e => e.NOTIFICATION_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.Status)
+                entity.Property(e => e.STATUS)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("STATUS");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.UnitId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("UNIT_ID");
+                entity.Property(e => e.UNIT_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.UserId)
+                entity.Property(e => e.USER_ID)
                     .HasMaxLength(250)
-                    .IsUnicode(false)
-                    .HasColumnName("USER_ID");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.ViewDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("VIEW_DATE");
+                entity.Property(e => e.VIEW_DATE).HasColumnType("DATE");
             });
 
-            modelBuilder.Entity<NotificationViewPolicy>(entity =>
+            modelBuilder.Entity<NOTIFICATION_VIEW_POLICY>(entity =>
             {
                 entity.ToTable("NOTIFICATION_VIEW_POLICY");
 
-                entity.Property(e => e.Id)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("ID");
+                entity.Property(e => e.ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.CompanyId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("COMPANY_ID");
+                entity.Property(e => e.COMPANY_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.NotificationPolicyId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("NOTIFICATION_POLICY_ID");
+                entity.Property(e => e.NOTIFICATION_POLICY_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.Status)
+                entity.Property(e => e.STATUS)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("STATUS");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.UnitId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("UNIT_ID");
+                entity.Property(e => e.UNIT_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.UserId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("USER_ID");
+                entity.Property(e => e.USER_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.ViewPermission)
+                entity.Property(e => e.VIEW_PERMISSION)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("VIEW_PERMISSION");
+                    .IsUnicode(false);
             });
 
-            modelBuilder.Entity<PmCategoryInfo>(entity =>
+            modelBuilder.Entity<PM_CATEGORY_INFO>(entity =>
             {
                 entity.HasNoKey();
 
                 entity.ToTable("PM_CATEGORY_INFO");
 
-                entity.HasIndex(e => e.PmCategoryCode, "UK1_PM_CATEGORY_INFO")
+                entity.HasIndex(e => e.PM_CATEGORY_CODE, "UK1_PM_CATEGORY_INFO")
                     .IsUnique();
 
-                entity.HasIndex(e => e.PmCategoryName, "UK2_PM_CATEGORY_INFO")
+                entity.HasIndex(e => e.PM_CATEGORY_NAME, "UK2_PM_CATEGORY_INFO")
                     .IsUnique();
 
-                entity.Property(e => e.EnteredBy)
+                entity.Property(e => e.ENTERED_BY)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("ENTERED_BY");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.EnteredDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("ENTERED_DATE");
+                entity.Property(e => e.ENTERED_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.EnteredTerminal)
+                entity.Property(e => e.ENTERED_TERMINAL)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("ENTERED_TERMINAL");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.PmCategoryCode)
+                entity.Property(e => e.PM_CATEGORY_CODE)
                     .HasMaxLength(10)
-                    .IsUnicode(false)
-                    .HasColumnName("PM_CATEGORY_CODE");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.PmCategoryId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("PM_CATEGORY_ID");
+                entity.Property(e => e.PM_CATEGORY_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.PmCategoryName)
+                entity.Property(e => e.PM_CATEGORY_NAME)
                     .HasMaxLength(100)
-                    .IsUnicode(false)
-                    .HasColumnName("PM_CATEGORY_NAME");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.Status)
+                entity.Property(e => e.REMARKS)
+                    .HasMaxLength(500)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.STATUS)
                     .HasMaxLength(10)
-                    .IsUnicode(false)
-                    .HasColumnName("STATUS");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.UpdatedBy)
+                entity.Property(e => e.UPDATED_BY)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("UPDATED_BY");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.UpdatedDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("UPDATED_DATE");
+                entity.Property(e => e.UPDATED_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.UpdatedTerminal)
+                entity.Property(e => e.UPDATED_TERMINAL)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("UPDATED_TERMINAL");
+                    .IsUnicode(false);
             });
 
-            modelBuilder.Entity<ProductionUnitInfo>(entity =>
+            modelBuilder.Entity<PRODUCTION_UNIT_INFO>(entity =>
             {
                 entity.HasNoKey();
 
                 entity.ToTable("PRODUCTION_UNIT_INFO");
 
-                entity.Property(e => e.EnteredBy)
+                entity.Property(e => e.ENTERED_BY)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("ENTERED_BY");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.EnteredDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("ENTERED_DATE");
+                entity.Property(e => e.ENTERED_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.EnteredTerminal)
+                entity.Property(e => e.ENTERED_TERMINAL)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("ENTERED_TERMINAL");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.ProductionUnitCode)
+                entity.Property(e => e.PRODUCTION_UNIT_CODE)
                     .HasMaxLength(30)
-                    .IsUnicode(false)
-                    .HasColumnName("PRODUCTION_UNIT_CODE");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.ProductionUnitId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("PRODUCTION_UNIT_ID");
+                entity.Property(e => e.PRODUCTION_UNIT_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.ProductionUnitName)
+                entity.Property(e => e.PRODUCTION_UNIT_NAME)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("PRODUCTION_UNIT_NAME");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.Status)
+                entity.Property(e => e.STATUS)
                     .HasMaxLength(10)
-                    .IsUnicode(false)
-                    .HasColumnName("STATUS");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.UnitCode)
+                entity.Property(e => e.UNIT_CODE)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("UNIT_CODE");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.UpdatedBy)
+                entity.Property(e => e.UPDATED_BY)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("UPDATED_BY");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.UpdatedDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("UPDATED_DATE");
+                entity.Property(e => e.UPDATED_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.UpdatedTerminal)
+                entity.Property(e => e.UPDATED_TERMINAL)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("UPDATED_TERMINAL");
+                    .IsUnicode(false);
             });
 
-            modelBuilder.Entity<PromotionalMaterialInfo>(entity =>
+            modelBuilder.Entity<PROMOTIONAL_MATERIAL_INFO>(entity =>
             {
-                entity.HasKey(e => e.PmCode)
+                entity.HasKey(e => e.PM_CODE)
                     .HasName("PK1_PM_INFO");
 
                 entity.ToTable("PROMOTIONAL_MATERIAL_INFO");
 
-                entity.HasIndex(e => e.PmName, "UK1_PM_INFO")
+                entity.HasIndex(e => e.PM_NAME, "UK1_PM_INFO")
                     .IsUnique();
 
-                entity.Property(e => e.PmCode)
+                entity.Property(e => e.PM_CODE)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("PM_CODE");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.EnteredBy)
+                entity.Property(e => e.ENTERED_BY)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("ENTERED_BY");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.EnteredDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("ENTERED_DATE");
+                entity.Property(e => e.ENTERED_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.EnteredTerminal)
+                entity.Property(e => e.ENTERED_TERMINAL)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("ENTERED_TERMINAL");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.PackSize)
+                entity.Property(e => e.PACK_SIZE)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("PACK_SIZE");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.PmCategoryCode)
+                entity.Property(e => e.PM_CATEGORY_CODE)
                     .HasMaxLength(10)
-                    .IsUnicode(false)
-                    .HasColumnName("PM_CATEGORY_CODE");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.PmId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("PM_ID");
+                entity.Property(e => e.PM_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.PmName)
+                entity.Property(e => e.PM_NAME)
                     .HasMaxLength(150)
-                    .IsUnicode(false)
-                    .HasColumnName("PM_NAME");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.Status)
+                entity.Property(e => e.STATUS)
                     .HasMaxLength(10)
-                    .IsUnicode(false)
-                    .HasColumnName("STATUS");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.UpdatedBy)
+                entity.Property(e => e.UPDATED_BY)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("UPDATED_BY");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.UpdatedDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("UPDATED_DATE");
+                entity.Property(e => e.UPDATED_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.UpdatedTerminal)
+                entity.Property(e => e.UPDATED_TERMINAL)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("UPDATED_TERMINAL");
+                    .IsUnicode(false);
             });
 
-            modelBuilder.Entity<ReceiveDtl>(entity =>
+            modelBuilder.Entity<RECEIVE_DTL>(entity =>
             {
                 entity.HasNoKey();
 
                 entity.ToTable("RECEIVE_DTL");
 
-                entity.Property(e => e.BatchId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("BATCH_ID");
+                entity.Property(e => e.BATCH_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.BatchNo)
+                entity.Property(e => e.BATCH_NO)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("BATCH_NO");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.BudgetQuantity)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("BUDGET_QUANTITY");
+                entity.Property(e => e.BUDGET_QUANTITY).HasColumnType("NUMBER");
 
-                entity.Property(e => e.DepotCode)
+                entity.Property(e => e.DEPOT_CODE)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("DEPOT_CODE");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.DtlId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("DTL_ID");
+                entity.Property(e => e.DTL_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.DuePartDueExcessQuantity)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("DUE_PART_DUE_EXCESS_QUANTITY");
+                entity.Property(e => e.DUE_PART_DUE_EXCESS_QUANTITY).HasColumnType("NUMBER");
 
-                entity.Property(e => e.EnteredBy)
+                entity.Property(e => e.ENTERED_BY)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("ENTERED_BY");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.EnteredDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("ENTERED_DATE");
+                entity.Property(e => e.ENTERED_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.EnteredTerminal)
+                entity.Property(e => e.ENTERED_TERMINAL)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("ENTERED_TERMINAL");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.ExpiryDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("EXPIRY_DATE");
+                entity.Property(e => e.EXPIRY_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.FromSurplusQuantity)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("FROM_SURPLUS_QUANTITY");
+                entity.Property(e => e.FROM_SURPLUS_QUANTITY).HasColumnType("NUMBER");
 
-                entity.Property(e => e.MstId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("MST_ID");
+                entity.Property(e => e.MST_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.NoOfSlot)
+                entity.Property(e => e.NO_OF_SLOT)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("NO_OF_SLOT");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.PmCategoryCode)
+                entity.Property(e => e.PM_CATEGORY_CODE)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("PM_CATEGORY_CODE");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.PmCode)
+                entity.Property(e => e.PM_CODE)
                     .HasMaxLength(30)
-                    .IsUnicode(false)
-                    .HasColumnName("PM_CODE");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.ProductionUnitCode)
+                entity.Property(e => e.PRODUCTION_UNIT_CODE)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("PRODUCTION_UNIT_CODE");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.ReceiveAmount)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("RECEIVE_AMOUNT");
+                entity.Property(e => e.RECEIVED_QUANTITY).HasColumnType("NUMBER");
 
-                entity.Property(e => e.ReceiveDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("RECEIVE_DATE");
+                entity.Property(e => e.RECEIVE_AMOUNT).HasColumnType("NUMBER");
 
-                entity.Property(e => e.ReceivedQuantity)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("RECEIVED_QUANTITY");
+                entity.Property(e => e.RECEIVE_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.Sbu)
+                entity.Property(e => e.SBU)
                     .HasMaxLength(4)
-                    .IsUnicode(false)
-                    .HasColumnName("SBU");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.StockTransferOrderQuantity)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("STOCK_TRANSFER_ORDER_QUANTITY");
+                entity.Property(e => e.STOCK_TRANSFER_ORDER_QUANTITY).HasColumnType("NUMBER");
 
-                entity.Property(e => e.UnitPrice)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("UNIT_PRICE");
+                entity.Property(e => e.UNIT_PRICE).HasColumnType("NUMBER");
 
-                entity.Property(e => e.UpdatedBy)
+                entity.Property(e => e.UPDATED_BY)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("UPDATED_BY");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.UpdatedDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("UPDATED_DATE");
+                entity.Property(e => e.UPDATED_DATE).HasColumnType("DATE");
             });
 
-            modelBuilder.Entity<ReceiveMst>(entity =>
+            modelBuilder.Entity<RECEIVE_MST>(entity =>
             {
                 entity.HasNoKey();
 
                 entity.ToTable("RECEIVE_MST");
 
-                entity.Property(e => e.BudgetNo)
+                entity.Property(e => e.BUDGET_NO)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("BUDGET_NO");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.ChallanDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("CHALLAN_DATE");
+                entity.Property(e => e.CHALLAN_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.ChallanNo)
+                entity.Property(e => e.CHALLAN_NO)
                     .HasMaxLength(13)
-                    .IsUnicode(false)
-                    .HasColumnName("CHALLAN_NO");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.DepotCode)
+                entity.Property(e => e.DEPOT_CODE)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("DEPOT_CODE");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.EnteredBy)
+                entity.Property(e => e.ENTERED_BY)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("ENTERED_BY");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.EnteredDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("ENTERED_DATE");
+                entity.Property(e => e.ENTERED_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.EnteredTerminal)
+                entity.Property(e => e.ENTERED_TERMINAL)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("ENTERED_TERMINAL");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.MonthCode)
+                entity.Property(e => e.MONTH_CODE)
                     .HasMaxLength(2)
-                    .IsUnicode(false)
-                    .HasColumnName("MONTH_CODE");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.MstId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("MST_ID");
+                entity.Property(e => e.MST_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.PoDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("PO_DATE");
+                entity.Property(e => e.PO_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.PoNo)
+                entity.Property(e => e.PO_NO)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("PO_NO");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.ReceiveDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("RECEIVE_DATE");
+                entity.Property(e => e.RECEIVE_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.ReceiveNo)
+                entity.Property(e => e.RECEIVE_NO)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("RECEIVE_NO");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.ReceiveType)
+                entity.Property(e => e.RECEIVE_TYPE)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("RECEIVE_TYPE");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.SupplierCode)
+                entity.Property(e => e.SUPPLIER_CODE)
                     .HasMaxLength(30)
-                    .IsUnicode(false)
-                    .HasColumnName("SUPPLIER_CODE");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.UpdatedBy)
+                entity.Property(e => e.UPDATED_BY)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("UPDATED_BY");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.UpdatedDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("UPDATED_DATE");
+                entity.Property(e => e.UPDATED_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.YearCode)
+                entity.Property(e => e.YEAR_CODE)
                     .HasMaxLength(4)
-                    .IsUnicode(false)
-                    .HasColumnName("YEAR_CODE");
+                    .IsUnicode(false);
             });
 
-            modelBuilder.Entity<ReportConfiguration>(entity =>
+            modelBuilder.Entity<REPORT_CONFIGURATION>(entity =>
             {
                 entity.HasNoKey();
 
                 entity.ToTable("REPORT_CONFIGURATION");
 
-                entity.Property(e => e.CompanyId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("COMPANY_ID");
+                entity.Property(e => e.COMPANY_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.EnteredBy)
+                entity.Property(e => e.ENTERED_BY)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("ENTERED_BY");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.EnteredDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("ENTERED_DATE");
+                entity.Property(e => e.ENTERED_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.EnteredTerminal)
+                entity.Property(e => e.ENTERED_TERMINAL)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("ENTERED_TERMINAL");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.HasCsv)
+                entity.Property(e => e.HAS_CSV)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("HAS_CSV");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.HasPdf)
+                entity.Property(e => e.HAS_PDF)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("HAS_PDF");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.HasPreview)
+                entity.Property(e => e.HAS_PREVIEW)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("HAS_PREVIEW");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.MenuId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("MENU_ID");
+                entity.Property(e => e.MENU_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.OrderBySlno)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("ORDER_BY_SLNO");
+                entity.Property(e => e.ORDER_BY_SLNO).HasColumnType("NUMBER");
 
-                entity.Property(e => e.ReportId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("REPORT_ID");
+                entity.Property(e => e.REPORT_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.ReportName)
+                entity.Property(e => e.REPORT_NAME)
                     .HasMaxLength(100)
-                    .IsUnicode(false)
-                    .HasColumnName("REPORT_NAME");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.ReportTitle)
+                entity.Property(e => e.REPORT_TITLE)
                     .HasMaxLength(250)
-                    .IsUnicode(false)
-                    .HasColumnName("REPORT_TITLE");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.Status)
+                entity.Property(e => e.STATUS)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("STATUS");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.UpdatedBy)
+                entity.Property(e => e.UPDATED_BY)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("UPDATED_BY");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.UpdatedDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("UPDATED_DATE");
+                entity.Property(e => e.UPDATED_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.UpdatedTerminal)
+                entity.Property(e => e.UPDATED_TERMINAL)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("UPDATED_TERMINAL");
+                    .IsUnicode(false);
             });
 
-            modelBuilder.Entity<ReportUserConfiguration>(entity =>
+            modelBuilder.Entity<REPORT_USER_CONFIGURATION>(entity =>
             {
                 entity.HasNoKey();
 
                 entity.ToTable("REPORT_USER_CONFIGURATION");
 
-                entity.Property(e => e.CompanyId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("COMPANY_ID");
+                entity.Property(e => e.COMPANY_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.CsvPermission)
+                entity.Property(e => e.CSV_PERMISSION)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("CSV_PERMISSION");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.EnteredBy)
+                entity.Property(e => e.ENTERED_BY)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("ENTERED_BY");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.EnteredDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("ENTERED_DATE");
+                entity.Property(e => e.ENTERED_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.EnteredTerminal)
+                entity.Property(e => e.ENTERED_TERMINAL)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("ENTERED_TERMINAL");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.Id)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("ID");
+                entity.Property(e => e.ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.PdfPermission)
+                entity.Property(e => e.PDF_PERMISSION)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("PDF_PERMISSION");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.PreviewPermission)
+                entity.Property(e => e.PREVIEW_PERMISSION)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("PREVIEW_PERMISSION");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.ReportId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("REPORT_ID");
+                entity.Property(e => e.REPORT_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.UpdatedBy)
+                entity.Property(e => e.UPDATED_BY)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("UPDATED_BY");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.UpdatedDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("UPDATED_DATE");
+                entity.Property(e => e.UPDATED_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.UpdatedTerminal)
+                entity.Property(e => e.UPDATED_TERMINAL)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("UPDATED_TERMINAL");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.UserId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("USER_ID");
+                entity.Property(e => e.USER_ID).HasColumnType("NUMBER");
             });
 
-            modelBuilder.Entity<ReturnCauseInfo>(entity =>
+            modelBuilder.Entity<RETURN_CAUSE_INFO>(entity =>
             {
-                entity.HasKey(e => e.ReturnCauseId)
+                entity.HasKey(e => e.RETURN_CAUSE_ID)
                     .HasName("PK1_RETURN_CAUSE_INFO");
 
                 entity.ToTable("RETURN_CAUSE_INFO");
 
-                entity.HasIndex(e => e.ReturnCauseCode, "UK1_RETURN_CAUSE_INFO")
+                entity.HasIndex(e => e.RETURN_CAUSE_CODE, "UK1_RETURN_CAUSE_INFO")
                     .IsUnique();
 
-                entity.HasIndex(e => e.ReturnCauseName, "UK2_RETURN_CAUSE_INFO")
+                entity.HasIndex(e => e.RETURN_CAUSE_NAME, "UK2_RETURN_CAUSE_INFO")
                     .IsUnique();
 
-                entity.Property(e => e.ReturnCauseId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("RETURN_CAUSE_ID");
+                entity.Property(e => e.RETURN_CAUSE_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.EnteredBy)
+                entity.Property(e => e.ENTERED_BY)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("ENTERED_BY");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.EnteredDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("ENTERED_DATE");
+                entity.Property(e => e.ENTERED_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.EnteredTerminal)
+                entity.Property(e => e.ENTERED_TERMINAL)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("ENTERED_TERMINAL");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.ReturnCauseCode)
+                entity.Property(e => e.RETURN_CAUSE_CODE)
                     .HasMaxLength(10)
-                    .IsUnicode(false)
-                    .HasColumnName("RETURN_CAUSE_CODE");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.ReturnCauseName)
+                entity.Property(e => e.RETURN_CAUSE_NAME)
                     .HasMaxLength(500)
-                    .IsUnicode(false)
-                    .HasColumnName("RETURN_CAUSE_NAME");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.Status)
+                entity.Property(e => e.STATUS)
                     .HasMaxLength(10)
-                    .IsUnicode(false)
-                    .HasColumnName("STATUS");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.UpdatedBy)
+                entity.Property(e => e.UPDATED_BY)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("UPDATED_BY");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.UpdatedDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("UPDATED_DATE");
+                entity.Property(e => e.UPDATED_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.UpdatedTerminal)
+                entity.Property(e => e.UPDATED_TERMINAL)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("UPDATED_TERMINAL");
+                    .IsUnicode(false);
             });
 
-            modelBuilder.Entity<RoleInfo>(entity =>
+            modelBuilder.Entity<ROLE_INFO>(entity =>
             {
-                entity.HasKey(e => e.RoleId)
+                entity.HasKey(e => e.ROLE_ID)
                     .HasName("PK_ROLE_INFO_ROLE_ID");
 
                 entity.ToTable("ROLE_INFO");
 
-                entity.Property(e => e.RoleId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("ROLE_ID");
+                entity.Property(e => e.ROLE_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.CompanyId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("COMPANY_ID");
+                entity.Property(e => e.COMPANY_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.EnteredBy)
+                entity.Property(e => e.ENTERED_BY)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("ENTERED_BY");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.EnteredDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("ENTERED_DATE");
+                entity.Property(e => e.ENTERED_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.EnteredTerminal)
+                entity.Property(e => e.ENTERED_TERMINAL)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("ENTERED_TERMINAL");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.RoleName)
+                entity.Property(e => e.ROLE_NAME)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("ROLE_NAME");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.Status)
+                entity.Property(e => e.STATUS)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("STATUS");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.UnitId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("UNIT_ID");
+                entity.Property(e => e.UNIT_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.UpdatedBy)
+                entity.Property(e => e.UPDATED_BY)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("UPDATED_BY");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.UpdatedDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("UPDATED_DATE");
+                entity.Property(e => e.UPDATED_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.UpdatedTerminal)
+                entity.Property(e => e.UPDATED_TERMINAL)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("UPDATED_TERMINAL");
+                    .IsUnicode(false);
             });
 
-            modelBuilder.Entity<RoleMenuConfiguration>(entity =>
+            modelBuilder.Entity<ROLE_MENU_CONFIGURATION>(entity =>
             {
                 entity.ToTable("ROLE_MENU_CONFIGURATION");
 
-                entity.Property(e => e.Id)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("ID");
+                entity.Property(e => e.ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.AddPermission)
+                entity.Property(e => e.ADD_PERMISSION)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("ADD_PERMISSION");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.CompanyId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("COMPANY_ID");
+                entity.Property(e => e.COMPANY_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.ConfirmPermission)
+                entity.Property(e => e.CONFIRM_PERMISSION)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("CONFIRM_PERMISSION");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.DeletePermission)
+                entity.Property(e => e.DELETE_PERMISSION)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("DELETE_PERMISSION");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.DetailView)
+                entity.Property(e => e.DETAIL_VIEW)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("DETAIL_VIEW");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.DownloadPermission)
+                entity.Property(e => e.DOWNLOAD_PERMISSION)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("DOWNLOAD_PERMISSION");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.EditPermission)
+                entity.Property(e => e.EDIT_PERMISSION)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("EDIT_PERMISSION");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.EnteredBy)
+                entity.Property(e => e.ENTERED_BY)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("ENTERED_BY");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.EnteredDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("ENTERED_DATE");
+                entity.Property(e => e.ENTERED_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.EnteredTerminal)
+                entity.Property(e => e.ENTERED_TERMINAL)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("ENTERED_TERMINAL");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.ListView)
+                entity.Property(e => e.LIST_VIEW)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("LIST_VIEW");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.MenuId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("MENU_ID");
+                entity.Property(e => e.MENU_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.RoleId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("ROLE_ID");
+                entity.Property(e => e.ROLE_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.UpdatedBy)
+                entity.Property(e => e.UPDATED_BY)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("UPDATED_BY");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.UpdatedDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("UPDATED_DATE");
+                entity.Property(e => e.UPDATED_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.UpdatedTerminal)
+                entity.Property(e => e.UPDATED_TERMINAL)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("UPDATED_TERMINAL");
+                    .IsUnicode(false);
 
-                entity.HasOne(d => d.Menu)
-                    .WithMany(p => p.RoleMenuConfigurations)
-                    .HasForeignKey(d => d.MenuId)
+                entity.HasOne(d => d.MENU)
+                    .WithMany(p => p.ROLE_MENU_CONFIGURATIONs)
+                    .HasForeignKey(d => d.MENU_ID)
                     .HasConstraintName("FK2_ROLE_MENU_CONFIGURATION");
 
-                entity.HasOne(d => d.Role)
-                    .WithMany(p => p.RoleMenuConfigurations)
-                    .HasForeignKey(d => d.RoleId)
+                entity.HasOne(d => d.ROLE)
+                    .WithMany(p => p.ROLE_MENU_CONFIGURATIONs)
+                    .HasForeignKey(d => d.ROLE_ID)
                     .HasConstraintName("FK1_ROLE_MENU_CONFIGURATION");
             });
 
-            modelBuilder.Entity<RoleReportConfiguration>(entity =>
+            modelBuilder.Entity<ROLE_REPORT_CONFIGURATION>(entity =>
             {
                 entity.HasNoKey();
 
                 entity.ToTable("ROLE_REPORT_CONFIGURATION");
 
-                entity.Property(e => e.CompanyId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("COMPANY_ID");
+                entity.Property(e => e.COMPANY_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.CsvPermission)
+                entity.Property(e => e.CSV_PERMISSION)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("CSV_PERMISSION");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.EnteredBy)
+                entity.Property(e => e.ENTERED_BY)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("ENTERED_BY");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.EnteredDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("ENTERED_DATE");
+                entity.Property(e => e.ENTERED_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.EnteredTerminal)
+                entity.Property(e => e.ENTERED_TERMINAL)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("ENTERED_TERMINAL");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.Id)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("ID");
+                entity.Property(e => e.ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.PdfPermission)
+                entity.Property(e => e.PDF_PERMISSION)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("PDF_PERMISSION");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.PreviewPermission)
+                entity.Property(e => e.PREVIEW_PERMISSION)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("PREVIEW_PERMISSION");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.ReportId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("REPORT_ID");
+                entity.Property(e => e.REPORT_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.RoleId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("ROLE_ID");
+                entity.Property(e => e.ROLE_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.UpdatedBy)
+                entity.Property(e => e.UPDATED_BY)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("UPDATED_BY");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.UpdatedDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("UPDATED_DATE");
+                entity.Property(e => e.UPDATED_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.UpdatedTerminal)
+                entity.Property(e => e.UPDATED_TERMINAL)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("UPDATED_TERMINAL");
+                    .IsUnicode(false);
             });
 
-            modelBuilder.Entity<RoleUserConfiguration>(entity =>
+            modelBuilder.Entity<ROLE_USER_CONFIGURATION>(entity =>
             {
                 entity.ToTable("ROLE_USER_CONFIGURATION");
 
-                entity.Property(e => e.Id)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("ID");
+                entity.Property(e => e.ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.CompanyId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("COMPANY_ID");
+                entity.Property(e => e.COMPANY_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.EnteredBy)
+                entity.Property(e => e.ENTERED_BY)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("ENTERED_BY");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.EnteredDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("ENTERED_DATE");
+                entity.Property(e => e.ENTERED_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.EnteredTerminal)
+                entity.Property(e => e.ENTERED_TERMINAL)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("ENTERED_TERMINAL");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.PermiteDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("PERMITE_DATE");
+                entity.Property(e => e.PERMITE_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.PermittedBy)
+                entity.Property(e => e.PERMITTED_BY)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("PERMITTED_BY");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.RoleId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("ROLE_ID");
+                entity.Property(e => e.ROLE_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.UpdatedBy)
+                entity.Property(e => e.UPDATED_BY)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("UPDATED_BY");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.UpdatedDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("UPDATED_DATE");
+                entity.Property(e => e.UPDATED_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.UpdatedTerminal)
+                entity.Property(e => e.UPDATED_TERMINAL)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("UPDATED_TERMINAL");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.UserId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("USER_ID");
+                entity.Property(e => e.USER_ID).HasColumnType("NUMBER");
 
-                entity.HasOne(d => d.Role)
-                    .WithMany(p => p.RoleUserConfigurations)
-                    .HasForeignKey(d => d.RoleId)
+                entity.HasOne(d => d.ROLE)
+                    .WithMany(p => p.ROLE_USER_CONFIGURATIONs)
+                    .HasForeignKey(d => d.ROLE_ID)
                     .HasConstraintName("FK1_ROLE_USER_CONFIGURATION");
 
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.RoleUserConfigurations)
-                    .HasForeignKey(d => d.UserId)
+                entity.HasOne(d => d.USER)
+                    .WithMany(p => p.ROLE_USER_CONFIGURATIONs)
+                    .HasForeignKey(d => d.USER_ID)
                     .HasConstraintName("FK2_ROLE_USER_CONFIGURATION");
             });
 
-            modelBuilder.Entity<TransferDtl>(entity =>
+            modelBuilder.Entity<TRANSFER_DTL>(entity =>
             {
                 entity.HasNoKey();
 
                 entity.ToTable("TRANSFER_DTL");
 
-                entity.Property(e => e.BatchId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("BATCH_ID");
+                entity.Property(e => e.BATCH_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.BatchNo)
+                entity.Property(e => e.BATCH_NO)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("BATCH_NO");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.DtlId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("DTL_ID");
+                entity.Property(e => e.DTL_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.EnteredBy)
+                entity.Property(e => e.ENTERED_BY)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("ENTERED_BY");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.EnteredDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("ENTERED_DATE");
+                entity.Property(e => e.ENTERED_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.EnteredTerminal)
+                entity.Property(e => e.ENTERED_TERMINAL)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("ENTERED_TERMINAL");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.MstId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("MST_ID");
+                entity.Property(e => e.MST_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.PmCategoryCode)
+                entity.Property(e => e.PM_CATEGORY_CODE)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("PM_CATEGORY_CODE");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.PmCode)
+                entity.Property(e => e.PM_CODE)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("PM_CODE");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.TransferAmount)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("TRANSFER_AMOUNT");
+                entity.Property(e => e.TRANSFER_AMOUNT).HasColumnType("NUMBER");
 
-                entity.Property(e => e.TransferDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("TRANSFER_DATE");
+                entity.Property(e => e.TRANSFER_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.TransferDepotCode)
+                entity.Property(e => e.TRANSFER_DEPOT_CODE)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("TRANSFER_DEPOT_CODE");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.TransferQty)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("TRANSFER_QTY");
+                entity.Property(e => e.TRANSFER_QTY).HasColumnType("NUMBER");
 
-                entity.Property(e => e.UnitPrice)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("UNIT_PRICE");
+                entity.Property(e => e.UNIT_PRICE).HasColumnType("NUMBER");
 
-                entity.Property(e => e.UpdatedBy)
+                entity.Property(e => e.UPDATED_BY)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("UPDATED_BY");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.UpdatedDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("UPDATED_DATE");
+                entity.Property(e => e.UPDATED_DATE).HasColumnType("DATE");
             });
 
-            modelBuilder.Entity<TransferMst>(entity =>
+            modelBuilder.Entity<TRANSFER_MST>(entity =>
             {
                 entity.HasNoKey();
 
                 entity.ToTable("TRANSFER_MST");
 
-                entity.Property(e => e.EnteredBy)
+                entity.Property(e => e.ENTERED_BY)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("ENTERED_BY");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.EnteredDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("ENTERED_DATE");
+                entity.Property(e => e.ENTERED_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.EnteredTerminal)
+                entity.Property(e => e.ENTERED_TERMINAL)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("ENTERED_TERMINAL");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.MstId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("MST_ID");
+                entity.Property(e => e.MST_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.PmCategoryCode)
+                entity.Property(e => e.PM_CATEGORY_CODE)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("PM_CATEGORY_CODE");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.ReceiveDepotCode)
+                entity.Property(e => e.RECEIVE_DEPOT_CODE)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("RECEIVE_DEPOT_CODE");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.RefDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("REF_DATE");
+                entity.Property(e => e.REF_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.RefNo)
+                entity.Property(e => e.REF_NO)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("REF_NO");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.Remarks)
+                entity.Property(e => e.REMARKS)
                     .HasMaxLength(200)
-                    .IsUnicode(false)
-                    .HasColumnName("REMARKS");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.TransferDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("TRANSFER_DATE");
+                entity.Property(e => e.TRANSFER_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.TransferDepotCode)
+                entity.Property(e => e.TRANSFER_DEPOT_CODE)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("TRANSFER_DEPOT_CODE");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.TransferNo)
+                entity.Property(e => e.TRANSFER_NO)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("TRANSFER_NO");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.UpdatedBy)
+                entity.Property(e => e.UPDATED_BY)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("UPDATED_BY");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.UpdatedDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("UPDATED_DATE");
+                entity.Property(e => e.UPDATED_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.UpdatedTerminal)
+                entity.Property(e => e.UPDATED_TERMINAL)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("UPDATED_TERMINAL");
+                    .IsUnicode(false);
             });
 
-            modelBuilder.Entity<TransferReceiveDtl>(entity =>
+            modelBuilder.Entity<TRANSFER_RECEIVE_DTL>(entity =>
             {
                 entity.HasNoKey();
 
                 entity.ToTable("TRANSFER_RECEIVE_DTL");
 
-                entity.Property(e => e.BatchId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("BATCH_ID");
+                entity.Property(e => e.BATCH_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.BatchNo)
+                entity.Property(e => e.BATCH_NO)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("BATCH_NO");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.DtlId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("DTL_ID");
+                entity.Property(e => e.DTL_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.EnteredBy)
+                entity.Property(e => e.ENTERED_BY)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("ENTERED_BY");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.EnteredDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("ENTERED_DATE");
+                entity.Property(e => e.ENTERED_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.EnteredTerminal)
+                entity.Property(e => e.ENTERED_TERMINAL)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("ENTERED_TERMINAL");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.MstId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("MST_ID");
+                entity.Property(e => e.MST_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.PmCategoryCode)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("PM_CATEGORY_CODE");
+                entity.Property(e => e.PM_CATEGORY_CODE).HasColumnType("NUMBER");
 
-                entity.Property(e => e.PmCode)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("PM_CODE");
+                entity.Property(e => e.PM_CODE).HasColumnType("NUMBER");
 
-                entity.Property(e => e.ReceiveAmount)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("RECEIVE_AMOUNT");
+                entity.Property(e => e.RECEIVE_AMOUNT).HasColumnType("NUMBER");
 
-                entity.Property(e => e.ReceiveDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("RECEIVE_DATE");
+                entity.Property(e => e.RECEIVE_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.ReceiveDepotCode)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("RECEIVE_DEPOT_CODE");
+                entity.Property(e => e.RECEIVE_DEPOT_CODE).HasColumnType("NUMBER");
 
-                entity.Property(e => e.ReceiveQty)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("RECEIVE_QTY");
+                entity.Property(e => e.RECEIVE_QTY).HasColumnType("NUMBER");
 
-                entity.Property(e => e.TransferAmount)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("TRANSFER_AMOUNT");
+                entity.Property(e => e.TRANSFER_AMOUNT).HasColumnType("NUMBER");
 
-                entity.Property(e => e.TransferQty)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("TRANSFER_QTY");
+                entity.Property(e => e.TRANSFER_QTY).HasColumnType("NUMBER");
 
-                entity.Property(e => e.UnitPrice)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("UNIT_PRICE");
+                entity.Property(e => e.UNIT_PRICE).HasColumnType("NUMBER");
 
-                entity.Property(e => e.UpdatedBy)
+                entity.Property(e => e.UPDATED_BY)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("UPDATED_BY");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.UpdatedDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("UPDATED_DATE");
+                entity.Property(e => e.UPDATED_DATE).HasColumnType("DATE");
             });
 
-            modelBuilder.Entity<TransferReceiveMst>(entity =>
+            modelBuilder.Entity<TRANSFER_RECEIVE_MST>(entity =>
             {
                 entity.HasNoKey();
 
                 entity.ToTable("TRANSFER_RECEIVE_MST");
 
-                entity.Property(e => e.EnteredBy)
+                entity.Property(e => e.ENTERED_BY)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("ENTERED_BY");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.EnteredDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("ENTERED_DATE");
+                entity.Property(e => e.ENTERED_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.EnteredTerminal)
+                entity.Property(e => e.ENTERED_TERMINAL)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("ENTERED_TERMINAL");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.MstId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("MST_ID");
+                entity.Property(e => e.MST_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.ReceiveDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("RECEIVE_DATE");
+                entity.Property(e => e.RECEIVE_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.ReceiveDepotCode)
+                entity.Property(e => e.RECEIVE_DEPOT_CODE)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("RECEIVE_DEPOT_CODE");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.ReceiveNo)
+                entity.Property(e => e.RECEIVE_NO)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("RECEIVE_NO");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.RefDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("REF_DATE");
+                entity.Property(e => e.REF_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.RefNo)
+                entity.Property(e => e.REF_NO)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("REF_NO");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.TransferDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("TRANSFER_DATE");
+                entity.Property(e => e.TRANSFER_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.TransferDepotCode)
+                entity.Property(e => e.TRANSFER_DEPOT_CODE)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("TRANSFER_DEPOT_CODE");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.TransferNo)
+                entity.Property(e => e.TRANSFER_NO)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("TRANSFER_NO");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.UpdatedBy)
+                entity.Property(e => e.UPDATED_BY)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("UPDATED_BY");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.UpdatedDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("UPDATED_DATE");
+                entity.Property(e => e.UPDATED_DATE).HasColumnType("DATE");
             });
 
-            modelBuilder.Entity<UnitInfo>(entity =>
+            modelBuilder.Entity<UNIT_INFO>(entity =>
             {
-                entity.HasKey(e => e.UnitId)
+                entity.HasKey(e => e.UNIT_ID)
                     .HasName("PK1_UNIT_INFO");
 
                 entity.ToTable("UNIT_INFO");
 
-                entity.HasIndex(e => e.UnitCode, "UK1_UNIT_INFO")
+                entity.HasIndex(e => e.UNIT_CODE, "UK1_UNIT_INFO")
                     .IsUnique();
 
-                entity.HasIndex(e => e.UnitName, "UK2_UNIT_INFO")
+                entity.HasIndex(e => e.UNIT_NAME, "UK2_UNIT_INFO")
                     .IsUnique();
 
-                entity.Property(e => e.UnitId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("UNIT_ID");
+                entity.Property(e => e.UNIT_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.CompanyId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("COMPANY_ID");
+                entity.Property(e => e.COMPANY_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.EnteredBy)
+                entity.Property(e => e.ENTERED_BY)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("ENTERED_BY");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.EnteredDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("ENTERED_DATE");
+                entity.Property(e => e.ENTERED_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.EnteredTerminal)
+                entity.Property(e => e.ENTERED_TERMINAL)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("ENTERED_TERMINAL");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.Status)
+                entity.Property(e => e.STATUS)
                     .HasMaxLength(10)
-                    .IsUnicode(false)
-                    .HasColumnName("STATUS");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.UnitCode)
+                entity.Property(e => e.UNIT_CODE)
                     .HasMaxLength(10)
-                    .IsUnicode(false)
-                    .HasColumnName("UNIT_CODE");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.UnitName)
+                entity.Property(e => e.UNIT_NAME)
                     .HasMaxLength(100)
-                    .IsUnicode(false)
-                    .HasColumnName("UNIT_NAME");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.UnitShortName)
+                entity.Property(e => e.UNIT_SHORT_NAME)
                     .HasMaxLength(100)
-                    .IsUnicode(false)
-                    .HasColumnName("UNIT_SHORT_NAME");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.UpdatedBy)
+                entity.Property(e => e.UPDATED_BY)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("UPDATED_BY");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.UpdatedDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("UPDATED_DATE");
+                entity.Property(e => e.UPDATED_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.UpdatedTerminal)
+                entity.Property(e => e.UPDATED_TERMINAL)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("UPDATED_TERMINAL");
+                    .IsUnicode(false);
             });
 
-            modelBuilder.Entity<UserDefaultPage>(entity =>
+            modelBuilder.Entity<USER_DEFAULT_PAGE>(entity =>
             {
                 entity.ToTable("USER_DEFAULT_PAGE");
 
-                entity.Property(e => e.Id)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("ID");
+                entity.Property(e => e.ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.CompanyId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("COMPANY_ID");
+                entity.Property(e => e.COMPANY_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.EnteredBy)
+                entity.Property(e => e.ENTERED_BY)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("ENTERED_BY");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.EnteredDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("ENTERED_DATE");
+                entity.Property(e => e.ENTERED_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.EnteredTerminal)
+                entity.Property(e => e.ENTERED_TERMINAL)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("ENTERED_TERMINAL");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.MenuId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("MENU_ID");
+                entity.Property(e => e.MENU_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.UpdatedBy)
+                entity.Property(e => e.UPDATED_BY)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("UPDATED_BY");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.UpdatedDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("UPDATED_DATE");
+                entity.Property(e => e.UPDATED_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.UpdatedTerminal)
+                entity.Property(e => e.UPDATED_TERMINAL)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("UPDATED_TERMINAL");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.UserId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("USER_ID");
+                entity.Property(e => e.USER_ID).HasColumnType("NUMBER");
             });
 
-            modelBuilder.Entity<UserInfo>(entity =>
+            modelBuilder.Entity<USER_INFO>(entity =>
             {
-                entity.HasKey(e => e.UserId)
+                entity.HasKey(e => e.USER_ID)
                     .HasName("PK_USER_INFO_USER_ID");
 
                 entity.ToTable("USER_INFO");
 
-                entity.HasIndex(e => new { e.UserName, e.UnitId, e.CompanyId }, "UK_USER_INFO")
+                entity.HasIndex(e => new { e.USER_NAME, e.UNIT_ID, e.COMPANY_ID }, "UK_USER_INFO")
                     .IsUnique();
 
-                entity.Property(e => e.UserId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("USER_ID");
+                entity.Property(e => e.USER_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.CompanyId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("COMPANY_ID");
+                entity.Property(e => e.COMPANY_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.Email)
+                entity.Property(e => e.EMAIL)
                     .HasMaxLength(100)
-                    .IsUnicode(false)
-                    .HasColumnName("EMAIL");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.EmployeeId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("EMPLOYEE_ID");
+                entity.Property(e => e.EMPLOYEE_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.EnteredBy)
+                entity.Property(e => e.ENTERED_BY)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("ENTERED_BY");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.EnteredDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("ENTERED_DATE");
+                entity.Property(e => e.ENTERED_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.EnteredTerminal)
+                entity.Property(e => e.ENTERED_TERMINAL)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("ENTERED_TERMINAL");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.Status)
+                entity.Property(e => e.STATUS)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("STATUS");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.Uniqueaccesskey)
+                entity.Property(e => e.UNIQUEACCESSKEY)
                     .HasMaxLength(100)
-                    .IsUnicode(false)
-                    .HasColumnName("UNIQUEACCESSKEY");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.UnitId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("UNIT_ID");
+                entity.Property(e => e.UNIT_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.UpdatedBy)
+                entity.Property(e => e.UPDATED_BY)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("UPDATED_BY");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.UpdatedDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("UPDATED_DATE");
+                entity.Property(e => e.UPDATED_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.UpdatedTerminal)
+                entity.Property(e => e.UPDATED_TERMINAL)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("UPDATED_TERMINAL");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.UserName)
+                entity.Property(e => e.USER_NAME)
                     .HasMaxLength(100)
-                    .IsUnicode(false)
-                    .HasColumnName("USER_NAME");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.UserPassword)
+                entity.Property(e => e.USER_PASSWORD)
                     .HasMaxLength(100)
-                    .IsUnicode(false)
-                    .HasColumnName("USER_PASSWORD");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.UserType)
+                entity.Property(e => e.USER_TYPE)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("USER_TYPE");
+                    .IsUnicode(false);
 
-                entity.HasOne(d => d.Employee)
-                    .WithMany(p => p.UserInfos)
-                    .HasForeignKey(d => d.EmployeeId)
+                entity.HasOne(d => d.EMPLOYEE)
+                    .WithMany(p => p.USER_INFOs)
+                    .HasForeignKey(d => d.EMPLOYEE_ID)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK1_USER_INFO");
             });
 
-            modelBuilder.Entity<UserLog>(entity =>
+            modelBuilder.Entity<USER_LOG>(entity =>
             {
-                entity.HasKey(e => e.LogId)
+                entity.HasKey(e => e.LOG_ID)
                     .HasName("PK_USER_LOG_LOG_ID");
 
                 entity.ToTable("USER_LOG");
 
-                entity.Property(e => e.LogId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("LOG_ID");
+                entity.Property(e => e.LOG_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.ActivityTable)
+                entity.Property(e => e.ACTIVITY_TABLE)
                     .HasMaxLength(250)
-                    .IsUnicode(false)
-                    .HasColumnName("ACTIVITY_TABLE");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.ActivityType)
+                entity.Property(e => e.ACTIVITY_TYPE)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("ACTIVITY_TYPE");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.CompanyId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("COMPANY_ID");
+                entity.Property(e => e.COMPANY_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.Dtl)
-                    .IsUnicode(false)
-                    .HasColumnName("DTL");
+                entity.Property(e => e.DTL).IsUnicode(false);
 
-                entity.Property(e => e.EnteredBy)
+                entity.Property(e => e.ENTERED_BY)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("ENTERED_BY");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.EnteredDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("ENTERED_DATE");
+                entity.Property(e => e.ENTERED_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.EnteredTerminal)
+                entity.Property(e => e.ENTERED_TERMINAL)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("ENTERED_TERMINAL");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.Location)
+                entity.Property(e => e.LOCATION)
                     .HasMaxLength(100)
-                    .IsUnicode(false)
-                    .HasColumnName("LOCATION");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.LogDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("LOG_DATE");
+                entity.Property(e => e.LOG_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.PageRef)
+                entity.Property(e => e.PAGE_REF)
                     .HasMaxLength(250)
-                    .IsUnicode(false)
-                    .HasColumnName("PAGE_REF");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.TransactionId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("TRANSACTION_ID");
+                entity.Property(e => e.TRANSACTION_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.UnitId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("UNIT_ID");
+                entity.Property(e => e.UNIT_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.UpdatedBy)
+                entity.Property(e => e.UPDATED_BY)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("UPDATED_BY");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.UpdatedDate)
-                    .HasColumnType("DATE")
-                    .HasColumnName("UPDATED_DATE");
+                entity.Property(e => e.UPDATED_DATE).HasColumnType("DATE");
 
-                entity.Property(e => e.UpdatedTerminal)
+                entity.Property(e => e.UPDATED_TERMINAL)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("UPDATED_TERMINAL");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.UserId)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("USER_ID");
+                entity.Property(e => e.USER_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.UserTerminal)
+                entity.Property(e => e.USER_TERMINAL)
                     .HasMaxLength(100)
-                    .IsUnicode(false)
-                    .HasColumnName("USER_TERMINAL");
+                    .IsUnicode(false);
 
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.UserLogs)
-                    .HasForeignKey(d => d.UserId)
+                entity.HasOne(d => d.USER)
+                    .WithMany(p => p.USER_LOGs)
+                    .HasForeignKey(d => d.USER_ID)
                     .HasConstraintName("FK1_USER_LOG_USER_ID");
             });
 

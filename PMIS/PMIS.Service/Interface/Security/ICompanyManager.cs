@@ -9,17 +9,15 @@ namespace PMIS.Service.Interface.Security.Company
 {
     public interface ICompanyManager
     {
-        Task<List<CompanyInfo>> GetCompanyList(string db);
-        Task<CompanyInfo> GetCompanyById(string db, int id);
-        Task<string> GetUnitInfo(string db, int companyId, int unitId);
-        Task<string> AddOrUpdate(string db, CompanyInfo model);
-        Task<string> GetCompanyJsonList(string db);
-        Task<string> GetUnitJsonList(string db);
-        Task<string> GetUnitByCompanyId(string db, int Company_Id);
-        Task<string> AddOrUpdateUnit(string db, CompanyInfo model);
-        Task<string> ActivateUnit(string db, int id);
-        Task<string> DeactivateUnit(string db, int id);
-
-
+        Task<List<COMPANY_INFO>> GetCompanyList();
+        Task<COMPANY_INFO> GetCompanyById(int id);
+        Task<string> GetUnitInfo(int companyId, int unitId);
+        Task<string> AddOrUpdate(COMPANY_INFO model);
+        Task<string> GetCompanyJsonList();
+        Task<string> GetUnitJsonList();
+        Task<string> GetUnitByCompanyId(int Company_Id);
+        Task<string> AddOrUpdateUnit(COMPANY_INFO model);
+        Task<string> ActivateUnit(int id);
+        Task<string> DeactivateUnit(int id);
     }
 }

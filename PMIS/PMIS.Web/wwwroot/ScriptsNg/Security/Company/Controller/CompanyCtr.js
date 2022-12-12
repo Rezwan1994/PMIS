@@ -6,10 +6,6 @@
         $scope.gridApi = gridApi;
     }
 
-
-
-    
-
     $scope.DataLoad = function () {
         $scope.showLoader = true;
         CompanyService.GetCompanyList().then(function (data) {
@@ -24,7 +20,6 @@
             alert(error);
             
             $scope.showLoader = false;
-
         });
     }
     $scope.ClearForm = function () {
@@ -45,8 +40,6 @@
             Action_Name: 'Index'
         }
         permissionProvider.GetPermission($scope.permissionReqModel).then(function (data) {
-            
-            
             $scope.getPermissions = data.data;
             $scope.model.ADD_PERMISSION = $scope.getPermissions.adD_PERMISSION;
             $scope.model.EDIT_PERMISSION = $scope.getPermissions.ediT_PERMISSION;
@@ -63,6 +56,7 @@
 
         });
     }
+
     $scope.DataLoad();
     $scope.GetPermissionData();
 
@@ -132,11 +126,5 @@
             }
         });
     }
-
-
-
-
-   
-
 }]);
 
