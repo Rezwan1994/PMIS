@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PMIS.Service.Interface.Security
 {
-    public interface IMenuPermissionManager
+    public interface IMenuPermissionService
     {
         Task<MenuDistribution> LoadPermittedMenuByUserId(int id, int companyId);
         Task<List<PermittedMenu>> LoadLoadPermittedMenus(int companyId);

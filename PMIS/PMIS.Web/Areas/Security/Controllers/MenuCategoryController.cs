@@ -19,10 +19,10 @@ namespace PMIS.Web.Areas.Security.Controllers
     [Authorize]
     public class MenuCategoryController : Controller
     {
-        private readonly IMenuCategoryManager _service;
+        private readonly IMenuCategoryService _service;
         private readonly ILogger<MenuCategoryController> _logger;
         private readonly IConfiguration _configuration;
-        public MenuCategoryController(IMenuCategoryManager service, ILogger<MenuCategoryController> logger, IConfiguration configuration)
+        public MenuCategoryController(IMenuCategoryService service, ILogger<MenuCategoryController> logger, IConfiguration configuration)
         {
             _service = service;
             _logger = logger;

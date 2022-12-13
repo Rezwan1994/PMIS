@@ -15,10 +15,10 @@ namespace SalesAndDistributionSystem.Areas.Security.Company.Controllers
     [Area("Security")]
     public class NotificationController : Controller
     {
-        private readonly INotificationManager _service;
+        private readonly INotificationService _service;
         private readonly ILogger<NotificationController> _logger;
         private readonly IConfiguration _configuration;
-        public NotificationController(INotificationManager service, ILogger<NotificationController> logger, IConfiguration configuration)
+        public NotificationController(INotificationService service, ILogger<NotificationController> logger, IConfiguration configuration)
         {
             _service = service;
             _logger = logger;

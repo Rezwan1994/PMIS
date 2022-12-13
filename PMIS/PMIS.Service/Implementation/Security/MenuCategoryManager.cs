@@ -8,7 +8,7 @@ using System.Data;
 
 namespace PMIS.Service.Implementation.Security
 {
-    public class MenuCategoryManager : IMenuCategoryManager
+    public class MenuCategoryManager : IMenuCategoryService
     {
         private readonly ICommonServices _commonServices;
         private readonly IConfiguration _configuration;

@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace PMIS.Service.Implementation.Security
 {
-    public class MenuPermissionManager : IMenuPermissionManager
+    public class MenuPermissionManager : IMenuPermissionService
     {
         private readonly ICommonServices _commonServices;
         private readonly IConfiguration _configuration;

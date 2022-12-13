@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PMIS.Service.Interface.Security
 {
-    public interface ICompanyManager
+    public interface ICompanyService
     {
         Task<List<COMPANY_INFO>> GetCompanyList();
         Task<COMPANY_INFO> GetCompanyById(int id);

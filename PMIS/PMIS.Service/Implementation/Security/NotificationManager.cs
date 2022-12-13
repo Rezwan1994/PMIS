@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace PMIS.Service.Implementation.Security
 {
-    public class NotificationManager : INotificationManager
+    public class NotificationManager : INotificationService
     {
         private readonly IConfiguration connString;
         private readonly ICommonServices _commonService;

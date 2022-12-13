@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace PMIS.Service.Implementation.Security
 {
-    public class RoleManager : IRoleManager
+    public class RoleManager : IRoleService
     {
         private readonly ICommonServices _commonServices;
         private readonly IConfiguration _configuration;

@@ -10,7 +10,7 @@ using System.Data;
 
 namespace PMIS.Service.Implementation.Security
 {
-    public class CompanyManager : ICompanyManager
+    public class CompanyManager : ICompanyService
     {
         private readonly IConfiguration connString;
         private readonly ICommonServices _commonService;

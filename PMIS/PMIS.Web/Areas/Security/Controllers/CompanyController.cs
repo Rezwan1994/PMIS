@@ -9,11 +9,11 @@ namespace PMIS.Web.Areas.Security.Controllers
     [Area("Security")]
     public class CompanyController : Controller
     {
-        private readonly ICompanyManager _service;
+        private readonly ICompanyService _service;
         private readonly ILogger<CompanyController> _logger;
         private readonly IConfiguration _configuration;
 
-        public CompanyController(ICompanyManager service, ILogger<CompanyController> logger, IConfiguration configuration)
+        public CompanyController(ICompanyService service, ILogger<CompanyController> logger, IConfiguration configuration)
         {
             _service = service;
             _logger = logger;

@@ -21,15 +21,15 @@ namespace PMIS.Web.Areas.Security.Controllers
         private readonly ILogger<LoginController> _logger;
         private readonly IUserManager _accountService;
         private readonly IConfiguration _configuration;
-        private readonly IMenuPermissionManager _menuService;
-        private readonly ICompanyManager _companyService;
+        private readonly IMenuPermissionService _menuService;
+        private readonly ICompanyService _companyService;
         private readonly IWebHostEnvironment _hostingEnvironment;
         private readonly IHttpContextAccessor _Accessor;
 
         //private readonly IReportConfigurationManager _reportManager;
         private readonly ICommonServices _commonServices;
 
-        public LoginController(ILogger<LoginController> logger, IUserManager accountService, IConfiguration configuration, IMenuPermissionManager menuPermission, ICompanyManager companyManager, IWebHostEnvironment hostingEnvironment, IHttpContextAccessor Accessor/*, IReportConfigurationManager reportManager*/, ICommonServices commonServices)
+        public LoginController(ILogger<LoginController> logger, IUserManager accountService, IConfiguration configuration, IMenuPermissionService menuPermission, ICompanyService companyManager, IWebHostEnvironment hostingEnvironment, IHttpContextAccessor Accessor/*, IReportConfigurationManager reportManager*/, ICommonServices commonServices)
         {
             _logger = logger;
             this._accountService = accountService;

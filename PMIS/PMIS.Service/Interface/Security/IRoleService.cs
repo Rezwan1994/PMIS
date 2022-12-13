@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PMIS.Service.Interface.Security
 {
-    public interface IRoleManager
+    public interface IRoleService
     {
         string LoadData(int companyId);
         Task<string> AddOrUpdate(ROLE_INFO model);
