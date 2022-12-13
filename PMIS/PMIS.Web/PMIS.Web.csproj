@@ -15,7 +15,6 @@
     <Compile Remove="Areas\Security\Views\Role\**" />
     <Compile Remove="Areas\Security\Views\Shared\**" />
     <Compile Remove="Areas\Security\Views\UserLog\**" />
-    <Compile Remove="Areas\Security\Views\User\**" />
     <Content Remove="Areas\Security\Views\MenuCategory\**" />
     <Content Remove="Areas\Security\Views\MenuMaster\**" />
     <Content Remove="Areas\Security\Views\MenuPermission\**" />
@@ -24,7 +23,6 @@
     <Content Remove="Areas\Security\Views\Role\**" />
     <Content Remove="Areas\Security\Views\Shared\**" />
     <Content Remove="Areas\Security\Views\UserLog\**" />
-    <Content Remove="Areas\Security\Views\User\**" />
     <EmbeddedResource Remove="Areas\Security\Views\MenuCategory\**" />
     <EmbeddedResource Remove="Areas\Security\Views\MenuMaster\**" />
     <EmbeddedResource Remove="Areas\Security\Views\MenuPermission\**" />
@@ -33,7 +31,6 @@
     <EmbeddedResource Remove="Areas\Security\Views\Role\**" />
     <EmbeddedResource Remove="Areas\Security\Views\Shared\**" />
     <EmbeddedResource Remove="Areas\Security\Views\UserLog\**" />
-    <EmbeddedResource Remove="Areas\Security\Views\User\**" />
     <None Remove="Areas\Security\Views\MenuCategory\**" />
     <None Remove="Areas\Security\Views\MenuMaster\**" />
     <None Remove="Areas\Security\Views\MenuPermission\**" />
@@ -42,7 +39,6 @@
     <None Remove="Areas\Security\Views\Role\**" />
     <None Remove="Areas\Security\Views\Shared\**" />
     <None Remove="Areas\Security\Views\UserLog\**" />
-    <None Remove="Areas\Security\Views\User\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -52,7 +48,6 @@
     <Compile Remove="Areas\Security\Controllers\NotificationController.cs" />
     <Compile Remove="Areas\Security\Controllers\ReportConfigurationController.cs" />
     <Compile Remove="Areas\Security\Controllers\RoleController.cs" />
-    <Compile Remove="Areas\Security\Controllers\UserController.cs" />
     <Compile Remove="Areas\Security\Controllers\UserLogController.cs" />
   </ItemGroup>
 
@@ -80,6 +75,10 @@
     <None Include="Areas\Security\Views\Login\ChangePassword.cshtml" />
     <None Include="Areas\Security\Views\Login\ForgetPassword.cshtml" />
     <None Include="Areas\Security\Views\Login\Index.cshtml" />
+    <None Include="Areas\Security\Views\User\AccountVerification.cshtml" />
+    <None Include="Areas\Security\Views\User\DefaultPage.cshtml" />
+    <None Include="Areas\Security\Views\User\Index.cshtml" />
+    <None Include="Areas\Security\Views\User\PagePermissionNotice.cshtml" />
     <None Include="Areas\Security\Views\_ViewImports.cshtml" />
     <None Include="Areas\Security\Views\_ViewStart.cshtml" />
     <None Include="wwwroot\ContentNg\bootstrap-4\css\bootstrap-grid.css.map" />

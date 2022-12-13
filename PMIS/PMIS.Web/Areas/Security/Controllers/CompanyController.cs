@@ -97,7 +97,7 @@ namespace PMIS.Web.Areas.Security.Controllers
         [HttpGet]
         public async Task<string> LoadUnitData()
         {
-            return await _service.GetUnitJsonList();
+            return await _service.GetUnitJsonList(User.GetComapanyId());
         }
 
         [HttpPost]

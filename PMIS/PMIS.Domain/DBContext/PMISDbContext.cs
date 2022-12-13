@@ -2032,7 +2032,7 @@ namespace PMIS.Domain.DBContext
 
                 entity.Property(e => e.ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.COMPANY_ID).HasColumnType("NUMBER");
+                entity.Property(e => e.COMPANY_ID).IsRequired().HasColumnType("NUMBER");
 
                 entity.Property(e => e.ENTERED_BY)
                     .HasMaxLength(20)
@@ -2071,7 +2071,9 @@ namespace PMIS.Domain.DBContext
 
                 entity.Property(e => e.USER_ID).HasColumnType("NUMBER");
 
-                entity.Property(e => e.COMPANY_ID).HasColumnType("NUMBER");
+                entity.Property(e => e.COMPANY_ID)
+                    .IsRequired()
+                    .HasColumnType("NUMBER");
 
                 entity.Property(e => e.EMAIL)
                     .HasMaxLength(100)

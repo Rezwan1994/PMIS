@@ -52,6 +52,8 @@ app.UseCookiePolicy(new CookiePolicyOptions()
 app.UseRouting();
 
 app.UseAuthorization();
+app.UseAuthentication();
+
 
 app.MapControllerRoute(
     name: "MyArea",
