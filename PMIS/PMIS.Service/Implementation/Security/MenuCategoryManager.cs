@@ -41,42 +41,42 @@ namespace PMIS.Service.Implementation.Security
 
         private string GetNewModule_InfoIdQuery() => "SELECT NVL(MAX(MODULE_ID),0) + 1 MODULE_ID  FROM MODULE_INFO";
 
-        public string LoadData(string db, int companyId) => _commonServices.DataTableToJSON(_commonServices.GetDataTable(_configuration.GetConnectionString(db), loadDataQuery(), _commonServices.AddParameter(new string[] { companyId.ToString() })));
+        public string LoadData(int companyId) => _commonServices.DataTableToJSON(_commonServices.GetDataTable(loadDataQuery(), _commonServices.AddParameter(new string[] { companyId.ToString() })));
 
-        //public async Task<string> AddOrUpdate(string db, ModuleInfo model)
-        //{
-        //    if (model == null)
-        //    {
-        //        return "No data provided to insert!!!!";
-        //    }
-        //    else
-        //    {
-        //        List<QueryPattern> listOfQuery = new List<QueryPattern>();
-        //        try
-        //        {
-        //            if (model.ModuleId == 0)
-        //            {
-        //                model.ModuleId = _commonServices.GetMaximumNumber<int>(_configuration.GetConnectionString(db), GetNewModule_InfoIdQuery(), _commonServices.AddParameter(new string[] { }));
-        //                model.Status = Status.Active;
+        public async Task<string> AddOrUpdate(MODULE_INFO model)
+        {
+            if (model == null)
+            {
+                return "No data provided to insert!!!!";
+            }
+            else
+            {
+                List<QueryPattern> listOfQuery = new List<QueryPattern>();
+                try
+                {
+                    if (model.MODULE_ID == 0)
+                    {
+                        model.MODULE_ID = _commonServices.GetMaximumNumber<int>(GetNewModule_InfoIdQuery(), _commonServices.AddParameter(new string[] { }));
+                        model.STATUS = Status.Active;
 
-        //                listOfQuery.Add(_commonServices.AddQuery(AddOrUpdate_AddQuery(), _commonServices.AddParameter(new string[] { model.ModuleId.ToString(), model.ModuleName, model.Status, model.EnteredBy.ToString(), model.EnteredDate?.ToString("dd/MM/yyyy"), model.EnteredTerminal, model.OrderByNo.ToString(), model.CompanyId.ToString() })));
-        //            }
-        //            else
-        //            {
-        //                listOfQuery.Add(_commonServices.AddQuery(AddOrUpdate_UpdateQuery(), _commonServices.AddParameter(new string[] { model.ModuleId.ToString(), model.ModuleName, model.UpdatedBy.ToString(), model.UpdatedDate?.ToString("dd/MM/yyyy"), model.UpdatedTerminal, model.OrderByNo.ToString() })));
-        //            }
+                        listOfQuery.Add(_commonServices.AddQuery(AddOrUpdate_AddQuery(), _commonServices.AddParameter(new string[] { model.MODULE_ID.ToString(), model.MODULE_NAME, model.STATUS, model.ENTERED_BY.ToString(), model.ENTERED_DATE?.ToString("dd/MM/yyyy"), model.ENTERED_TERMINAL, model.ORDER_BY_NO.ToString(), model.COMPANY_ID.ToString() })));
+                    }
+                    else
+                    {
+                        listOfQuery.Add(_commonServices.AddQuery(AddOrUpdate_UpdateQuery(), _commonServices.AddParameter(new string[] { model.MODULE_ID.ToString(), model.MODULE_NAME, model.UPDATED_BY.ToString(), model.UPDATED_DATE?.ToString("dd/MM/yyyy"), model.UPDATED_TERMINAL, model.ORDER_BY_NO.ToString() })));
+                    }
 
-        //            await _commonServices.SaveChangesAsyn(_configuration.GetConnectionString(db), listOfQuery);
-        //            return "1";
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            return ex.Message;
-        //        }
-        //    }
-        //}
+                    await _commonServices.SaveChangesAsyn(listOfQuery);
+                    return "1";
+                }
+                catch (Exception ex)
+                {
+                    return ex.Message;
+                }
+            }
+        }
 
-        public async Task<string> ActivateMenuCategory(string db, int id)
+        public async Task<string> ActivateMenuCategory(int id)
         {
             if (id < 1)
             {
@@ -89,7 +89,7 @@ namespace PMIS.Service.Implementation.Security
                 {
                     listOfQuery.Add(_commonServices.AddQuery(ActivateModuleQuery(), _commonServices.AddParameter(new string[] { id.ToString() })));
 
-                    await _commonServices.SaveChangesAsyn(_configuration.GetConnectionString(db), listOfQuery);
+                    await _commonServices.SaveChangesAsyn(listOfQuery);
                     return "1";
                 }
                 catch (Exception ex)
@@ -99,7 +99,7 @@ namespace PMIS.Service.Implementation.Security
             }
         }
 
-        public async Task<string> DeactivateMenuCategory(string db, int id)
+        public async Task<string> DeactivateMenuCategory(int id)
         {
             if (id < 1)
             {
@@ -112,7 +112,7 @@ namespace PMIS.Service.Implementation.Security
                 {
                     listOfQuery.Add(_commonServices.AddQuery(DeactivateeModuleQuery(), _commonServices.AddParameter(new string[] { id.ToString() })));
 
-                    await _commonServices.SaveChangesAsyn(_configuration.GetConnectionString(db), listOfQuery);
+                    await _commonServices.SaveChangesAsyn(listOfQuery);
                     return "1";
                 }
                 catch (Exception ex)
@@ -122,9 +122,9 @@ namespace PMIS.Service.Implementation.Security
             }
         }
 
-        public async Task<string> DeleteMenuCategory(string db, int id)
+        public async Task<string> DeleteMenuCategory(int id)
         {
-            DataTable data = _commonServices.GetDataTable(_configuration.GetConnectionString(db), HasMenuUndereModule(), _commonServices.AddParameter(new string[] { id.ToString() }));
+            DataTable data = _commonServices.GetDataTable(HasMenuUndereModule(), _commonServices.AddParameter(new string[] { id.ToString() }));
             if (data != null && data.Rows.Count > 0)
             {
                 return " Sorry!! You can't Delete this menu category. Already Some Menu's are assigned under this Menu Category.";
@@ -136,7 +136,7 @@ namespace PMIS.Service.Implementation.Security
                 {
                     listOfQuery.Add(_commonServices.AddQuery(DeleteeModuleQuery(), _commonServices.AddParameter(new string[] { id.ToString() })));
 
-                    await _commonServices.SaveChangesAsyn(_configuration.GetConnectionString(db), listOfQuery);
+                    await _commonServices.SaveChangesAsyn(listOfQuery);
                     return "1";
                 }
                 catch (Exception ex)

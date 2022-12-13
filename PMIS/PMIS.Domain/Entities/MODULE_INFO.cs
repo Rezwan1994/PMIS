@@ -10,7 +10,7 @@ namespace PMIS.Domain.Entities
             MENU_CONFIGURATIONs = new HashSet<MENU_CONFIGURATION>();
         }
 
-        public decimal MODULE_ID { get; set; }
+        public int MODULE_ID { get; set; }
         public string? MODULE_NAME { get; set; }
         public string? STATUS { get; set; }
         public decimal? ORDER_BY_NO { get; set; }

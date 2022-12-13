@@ -46,7 +46,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="Areas\Security\Controllers\MenuCategoryController.cs" />
     <Compile Remove="Areas\Security\Controllers\MenuMasterController.cs" />
     <Compile Remove="Areas\Security\Controllers\MenuPermissionController.cs" />
     <Compile Remove="Areas\Security\Controllers\NotificationController.cs" />

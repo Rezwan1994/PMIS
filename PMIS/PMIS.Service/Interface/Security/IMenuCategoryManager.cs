@@ -8,11 +8,11 @@ namespace PMIS.Service.Interface.Security.Security
 {
     public interface IMenuCategoryManager
     {
-        string LoadData(string db,int companyId);
-        //Task<string> AddOrUpdate(string db, ModuleInfo model);
-        Task<string> ActivateMenuCategory(string db, int id);
-        Task<string> DeactivateMenuCategory(string db, int id);
-        Task<string> DeleteMenuCategory(string db, int id);
+        string LoadData(int companyId);
+        Task<string> AddOrUpdate(MODULE_INFO model);
+        Task<string> ActivateMenuCategory(int id);
+        Task<string> DeactivateMenuCategory(int id);
+        Task<string> DeleteMenuCategory(int id);
 
     }
 }

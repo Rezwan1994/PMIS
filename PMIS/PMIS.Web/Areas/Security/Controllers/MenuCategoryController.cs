@@ -3,12 +3,10 @@ using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using SalesAndDistributionSystem.Common;
-using SalesAndDistributionSystem.Domain.Models.TableModels.Company;
-using SalesAndDistributionSystem.Domain.Models.TableModels.Security;
-using SalesAndDistributionSystem.Domain.Models.ViewModels.Security;
-using SalesAndDistributionSystem.Domain.Utility;
-using SalesAndDistributionSystem.Services.Business.Security;
+using PMIS.Domain.Entities;
+using PMIS.Service.Interface.Security.Security;
+using PMIS.Utility.Static;
+using PMIS.Web.Common;
 using System;
 using System.Linq;
 using System.Security.Claims;
@@ -41,17 +39,17 @@ namespace SalesAndDistributionSystem.Areas.Security.Menu.Controllers
         }
 
         [HttpPost]
-        public string LoadData([FromBody] Company_Info company_Info)
+        public string LoadData([FromBody] COMPANY_INFO company_Info)
         {
             
             int comp_id = company_Info ==null || company_Info.COMPANY_ID == 0?  Convert.ToInt32(User.Claims.FirstOrDefault(x => x.Type == ClaimsType.CompanyId).Value) : company_Info.COMPANY_ID;
-            return _service.LoadData(GetDbConnectionString(), comp_id);
+            return _service.LoadData(comp_id);
 
         } 
         
         [AllowAnonymous]
         [HttpPost]
-        public async Task<JsonResult> AddOrUpdate([FromBody]Module_Info model)
+        public async Task<JsonResult> AddOrUpdate([FromBody]MODULE_INFO model)
         {
             string result = "";
 
@@ -66,7 +64,7 @@ namespace SalesAndDistributionSystem.Areas.Security.Menu.Controllers
                     if(model.MODULE_ID==0)
                     {
                         model.ENTERED_BY = User.Claims.FirstOrDefault(c => c.Type == ClaimsType.UserId)?.Value;
-                        model.ENTERED_DATE = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss tt");
+                        model.ENTERED_DATE = DateTime.Now;
                         model.ENTERED_TERMINAL = HttpContext.Connection.RemoteIpAddress.ToString();
                        
                         model.COMPANY_ID = model.COMPANY_ID ==0 ? Convert.ToInt32(User.Claims.FirstOrDefault(x => x.Type == ClaimsType.CompanyId).Value) : model.COMPANY_ID;
@@ -75,11 +73,11 @@ namespace SalesAndDistributionSystem.Areas.Security.Menu.Controllers
                     else
                     {
                         model.UPDATED_BY = User.Claims.FirstOrDefault(c => c.Type == ClaimsType.UserId)?.Value;
-                        model.UPDATED_DATE = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss tt");
+                        model.UPDATED_DATE = DateTime.Now;
                         model.UPDATED_TERMINAL = HttpContext.Connection.RemoteIpAddress.ToString();
                     }
 
-                    result = await _service.AddOrUpdate(GetDbConnectionString(),model);
+                    result = await _service.AddOrUpdate(model);
 
                 }
                 catch (Exception ex)
@@ -96,25 +94,25 @@ namespace SalesAndDistributionSystem.Areas.Security.Menu.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> ActivateMenuCategory([FromBody] Module_Info menuCategory)
+        public async Task<IActionResult> ActivateMenuCategory([FromBody] MODULE_INFO menuCategory)
         {
-           string  result = await _service.ActivateMenuCategory(GetDbConnectionString(),menuCategory.MODULE_ID);
+           string  result = await _service.ActivateMenuCategory(menuCategory.MODULE_ID);
 
             return Json(result);
         }
 
         [HttpPost]
-        public async Task<IActionResult> DectivateMenuCategory([FromBody] Module_Info menuCategory)
+        public async Task<IActionResult> DectivateMenuCategory([FromBody] MODULE_INFO menuCategory)
         {
-            string result = await _service.DeactivateMenuCategory(GetDbConnectionString(),menuCategory.MODULE_ID);
+            string result = await _service.DeactivateMenuCategory(menuCategory.MODULE_ID);
 
             return Json(result);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Delete([FromBody] Module_Info menuCategory)
+        public async Task<IActionResult> Delete([FromBody] MODULE_INFO menuCategory)
         {
-            string result = await _service.DeleteMenuCategory(GetDbConnectionString(),menuCategory.MODULE_ID);
+            string result = await _service.DeleteMenuCategory(menuCategory.MODULE_ID);
 
             return Json(result);
         }
