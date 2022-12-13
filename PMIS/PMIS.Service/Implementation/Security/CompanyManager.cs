@@ -5,6 +5,7 @@ using PMIS.Domain.Entities;
 using PMIS.Repository.Interface;
 using PMIS.Service.Interface.Security.Company;
 using PMIS.Utility.Static;
+using System.ComponentModel.Design;
 using System.Data;
 
 namespace PMIS.Service.Implementation.Security
@@ -135,7 +136,9 @@ namespace PMIS.Service.Implementation.Security
 
         //-------------------------- Unit ---------------------------------------
 
-        private string GetUnitListQuery() => "Select distinct ID, UNIT_ID, UNIT_ADDRESS1, UNIT_ADDRESS2, COMPANY_ID,COMPANY_NAME,UNIT_TYPE, UNIT_SHORT_NAME, UNIT_NAME,STATUS from COMPANY_INFO Where UNIT_ID!=0";
+        private string GetUnitListQuery() => @"SELECT DISTINCT UNIT_ID, COMPANY_ID, UNIT_SHORT_NAME, UNIT_NAME,STATUS 
+            FROM UNIT_INFO
+            WHERE COMPANY_ID = :param1";
 
         private string GetUnitListByCompanyIdQuery() => "Select distinct ID, UNIT_ID, UNIT_ADDRESS1, UNIT_ADDRESS2, COMPANY_ID,COMPANY_NAME,UNIT_TYPE, UNIT_SHORT_NAME, UNIT_NAME,STATUS from COMPANY_INFO Where UNIT_ID!=0 AND COMPANY_ID = :param1";
 
@@ -170,9 +173,9 @@ namespace PMIS.Service.Implementation.Security
 
         private string DeActivateUnitQuery() => "Update COMPANY_INFO Set STATUS = 'InActive' WHERE ID =  :param1";
 
-        public async Task<DataTable> GetUnitListDataTable() => await _commonService.GetDataTableAsyn(GetUnitListQuery(), _commonService.AddParameter(new string[] { }));
+        public async Task<DataTable> GetUnitListDataTable(int companyId) => await _commonService.GetDataTableAsyn(GetUnitListQuery(), _commonService.AddParameter(new string[] { companyId.ToString() }));
 
-        public async Task<string> GetUnitJsonList() => _commonService.DataTableToJSON(await GetUnitListDataTable());
+        public async Task<string> GetUnitJsonList(int companyId) => _commonService.DataTableToJSON(await GetUnitListDataTable(companyId));
 
         public async Task<string> GetUnitByCompanyId(int Company_Id)
         {

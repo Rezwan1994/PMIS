@@ -14,22 +14,22 @@ namespace PMIS.Web.Common
     {
         public static string GetUserId(this ClaimsPrincipal user)
         {
-            return user.Claims.FirstOrDefault(x => x.Type == ClaimsType.UserId).Value != null ? user.Claims.FirstOrDefault(x => x.Type == ClaimsType.UserId).Value.ToString() : "";
+            return user.Claims.FirstOrDefault(x => x.Type == ClaimsType.UserId)?.Value != null ? user.Claims.FirstOrDefault(x => x.Type == ClaimsType.UserId).Value.ToString() : "";
         }
 
         public static string GetUserName(this ClaimsPrincipal user)
         {
-            return user.Claims.FirstOrDefault(x => x.Type == ClaimsType.UserName).Value != null ? user.Claims.FirstOrDefault(x => x.Type == ClaimsType.UserName).Value.ToString() : "Unknown User";
+            return (user.Claims.FirstOrDefault(x => x.Type == ClaimsType.UserName)?.Value) == null ? "Unknown User" : user.Claims.FirstOrDefault(x => x.Type == ClaimsType.UserName).Value.ToString();
         }
 
         public static int GetComapanyId(this ClaimsPrincipal user)
         {
-            return Convert.ToInt32(user.Claims.FirstOrDefault(x => x.Type == ClaimsType.CompanyId).Value);
+            return Convert.ToInt32(user.Claims.FirstOrDefault(x => x.Type == ClaimsType.CompanyId)?.Value);
         }
 
         public static int GetUnitId(this ClaimsPrincipal user)
         {
-            return Convert.ToInt32(user.Claims.FirstOrDefault(x => x.Type == ClaimsType.DepotId).Value.ToString());
+            return Convert.ToInt32(user.Claims.FirstOrDefault(x => x.Type == ClaimsType.DepotId)?.Value.ToString());
         }
 
         public static List<T> ConvertDataTable<T>(DataTable dt)

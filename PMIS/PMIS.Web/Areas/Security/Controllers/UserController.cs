@@ -1,15 +1,9 @@
-﻿using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
-using SalesAndDistributionSystem.Domain.Common;
-using SalesAndDistributionSystem.Domain.Models.TableModels.Security;
-using SalesAndDistributionSystem.Domain.Models.TableModels.User;
-using SalesAndDistributionSystem.Domain.Utility;
-using SalesAndDistributionSystem.Services.Business.User;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Mvc;
+using PMIS.Domain.Common;
+using PMIS.Domain.Entities;
+using PMIS.Service.Interface.Security.User;
+using PMIS.Utility.Static;
+using PMIS.Web.Common;
 
 namespace SalesAndDistributionSystem.Areas.Security.User.Controllers
 {
@@ -18,18 +12,14 @@ namespace SalesAndDistributionSystem.Areas.Security.User.Controllers
     {
         private readonly IUserManager _service;
         private readonly ILogger<UserController> _logger;
-        private readonly IConfiguration _configuration;
         private readonly IWebHostEnvironment _hostingEnvironment;
 
-        public UserController(IUserManager service, ILogger<UserController> logger, IConfiguration configuration, IWebHostEnvironment hostingEnvironment)
+        public UserController(IUserManager service, ILogger<UserController> logger, IWebHostEnvironment hostingEnvironment)
         {
             _service = service;
             _logger = logger;
-            _configuration = configuration;
             _hostingEnvironment = hostingEnvironment;
         }
-
-        private string GetDbConnectionString() => User.Claims.FirstOrDefault(x => x.Type == ClaimsType.DbSpecifier).Value.ToString();
 
         private string GetPermissionString() => User.Claims.FirstOrDefault(x => x.Type == ClaimsType.RolePermission).Value.ToString();
 
@@ -37,32 +27,32 @@ namespace SalesAndDistributionSystem.Areas.Security.User.Controllers
 
         public IActionResult Index()
         {
-            _logger.LogInformation("User Config(User/Index)  Page Has been accessed By " + User.Claims.FirstOrDefault(x => x.Type == ClaimsType.UserName).Value != null ? User.Claims.FirstOrDefault(x => x.Type == ClaimsType.UserName).Value.ToString() : "Unknown User" + " ( ID= " + User.Claims.FirstOrDefault(x => x.Type == ClaimsType.UserId).Value != null ? User.Claims.FirstOrDefault(x => x.Type == ClaimsType.UserId).Value.ToString() : "");
+            _logger.LogInformation("User Config(User/Index)  Page Has been accessed By " + User.GetUserName() + " (ID= " + User.GetUserId() + ")");
             return View();
         }
 
         public IActionResult DefaultPage()
         {
-            _logger.LogInformation("User DefaultPage(User/DefaultPage)  Page Has been accessed By " + User.Claims.FirstOrDefault(x => x.Type == ClaimsType.UserName).Value != null ? User.Claims.FirstOrDefault(x => x.Type == ClaimsType.UserName).Value.ToString() : "Unknown User" + " ( ID= " + User.Claims.FirstOrDefault(x => x.Type == ClaimsType.UserId).Value != null ? User.Claims.FirstOrDefault(x => x.Type == ClaimsType.UserId).Value.ToString() : "");
+            _logger.LogInformation("User Config(User/DefaultPage)  Page Has been accessed By " + User.GetUserName() + " (ID= " + User.GetUserId() + ")");
 
             return View();
         }
 
         public string LoadData()
         {
-            int comp_id = Convert.ToInt32(User.Claims.FirstOrDefault(x => x.Type == ClaimsType.CompanyId).Value);
+            int comp_id = Convert.ToInt32(User.Claims.FirstOrDefault(x => x.Type == ClaimsType.CompanyId)?.Value);
             if (GetUserTypeString() == UserType.SuperAdmin)
             {
-                return _service.GetUsers(GetDbConnectionString());
+                return _service.GetUsers();
             }
             else
             {
-                return _service.GetUsersByCompany(GetDbConnectionString(), comp_id);
+                return _service.GetUsersByCompany(comp_id);
             }
         }
 
         [HttpPost]
-        public async Task<JsonResult> AddOrUpdate([FromBody] User_Info model)
+        public async Task<JsonResult> AddOrUpdate([FromBody] USER_INFO model)
         {
             string result = "";
 
@@ -77,7 +67,7 @@ namespace SalesAndDistributionSystem.Areas.Security.User.Controllers
                     if (model.USER_ID == 0)
                     {
                         model.ENTERED_BY = User.Claims.FirstOrDefault(c => c.Type == ClaimsType.UserId)?.Value;
-                        model.ENTERED_DATE = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss tt");
+                        model.ENTERED_DATE = DateTime.Now;
                         model.ENTERED_TERMINAL = HttpContext.Connection.RemoteIpAddress.ToString();
                         if (model.COMPANY_ID == 0)
                         {
@@ -87,11 +77,10 @@ namespace SalesAndDistributionSystem.Areas.Security.User.Controllers
                     else
                     {
                         model.UPDATED_BY = User.Claims.FirstOrDefault(c => c.Type == ClaimsType.UserId)?.Value;
-                        model.UPDATED_DATE = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss tt");
+                        model.UPDATED_DATE = DateTime.Now;
                         model.UPDATED_TERMINAL = HttpContext.Connection.RemoteIpAddress.ToString();
                     }
-                    ;
-                    result = await _service.AddOrUpdate(GetDbConnectionString(), model, _hostingEnvironment.WebRootPath + "/Templates/EmailTemplate/AccountVerification_EmailTemplate.cshtml");
+                    result = await _service.AddOrUpdate(model, _hostingEnvironment.WebRootPath + "/Templates/EmailTemplate/AccountVerification_EmailTemplate.cshtml");
                 }
                 catch (Exception ex)
                 {
@@ -103,29 +92,29 @@ namespace SalesAndDistributionSystem.Areas.Security.User.Controllers
         }
 
         [HttpPost]
-        public string GetEmployeeWithoutAccount(User_Info model)
+        public string GetEmployeeWithoutAccount(USER_INFO model)
         {
-            int comp_id = model == null || model.COMPANY_ID < 1 ? Convert.ToInt32(User.Claims.FirstOrDefault(x => x.Type == ClaimsType.CompanyId).Value) : model.COMPANY_ID;
-            return _service.GetEmployeesWithoutAccount(GetDbConnectionString(), comp_id);
+            int comp_id = User.GetComapanyId();
+            return _service.GetEmployeesWithoutAccount(comp_id);
         }
 
         //-------------------------Default Pages ------------------------------------------------------------------
         [HttpPost]
-        public async Task<string> GetSearchableDefaultPages([FromBody] Default_Page model)
+        public async Task<string> GetSearchableDefaultPages([FromBody] USER_DEFAULT_PAGE model)
         {
             int comp_id = model == null || model.COMPANY_ID == 0 ? Convert.ToInt32(User.Claims.FirstOrDefault(x => x.Type == ClaimsType.CompanyId).Value) : model.COMPANY_ID;
-            return await _service.LoadSearchableDefaultPages(GetDbConnectionString(), comp_id, model.MENU_NAME);
+            return await _service.LoadSearchableDefaultPages(comp_id, model.MENU_ID.ToString());
         }
 
         [HttpPost]
-        public async Task<string> LoadDefaultPages([FromBody] Default_Page model)
+        public async Task<string> LoadDefaultPages([FromBody] USER_DEFAULT_PAGE model)
         {
             int comp_id = model == null || model.COMPANY_ID == 0 ? Convert.ToInt32(User.Claims.FirstOrDefault(x => x.Type == ClaimsType.CompanyId).Value) : model.COMPANY_ID;
-            return await _service.LoadDefaultPages(GetDbConnectionString(), comp_id);
+            return await _service.LoadDefaultPages(comp_id);
         }
 
         [HttpPost]
-        public async Task<JsonResult> AddOrUpdateDefaultPage([FromBody] Default_Page model)
+        public async Task<JsonResult> AddOrUpdateDefaultPage([FromBody] USER_DEFAULT_PAGE model)
         {
             string result = "";
 
@@ -140,7 +129,7 @@ namespace SalesAndDistributionSystem.Areas.Security.User.Controllers
                     if (model.ID == 0)
                     {
                         model.ENTERED_BY = User.Claims.FirstOrDefault(c => c.Type == ClaimsType.UserId)?.Value;
-                        model.ENTERED_DATE = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss tt");
+                        model.ENTERED_DATE = DateTime.Now;
                         model.ENTERED_TERMINAL = HttpContext.Connection.RemoteIpAddress.ToString();
                         if (model.COMPANY_ID == 0)
                         {
@@ -150,11 +139,11 @@ namespace SalesAndDistributionSystem.Areas.Security.User.Controllers
                     else
                     {
                         model.UPDATED_BY = User.Claims.FirstOrDefault(c => c.Type == ClaimsType.UserId)?.Value;
-                        model.UPDATED_DATE = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss tt");
+                        model.UPDATED_DATE = DateTime.Now;
                         model.UPDATED_TERMINAL = HttpContext.Connection.RemoteIpAddress.ToString();
                     }
 
-                    result = await _service.AddOrUpdateDefaultPage(GetDbConnectionString(), model);
+                    result = await _service.AddOrUpdateDefaultPage(model);
                 }
                 catch (Exception ex)
                 {
@@ -169,7 +158,7 @@ namespace SalesAndDistributionSystem.Areas.Security.User.Controllers
         [HttpGet]
         public IActionResult AccountVerification(Auth auth)
         {
-            return View(_service.IsVerified("myconn", auth.UniqueId));
+            return View(_service.IsVerified(auth.UniqueId));
         }
 
         [HttpGet]
@@ -179,10 +168,10 @@ namespace SalesAndDistributionSystem.Areas.Security.User.Controllers
         }
 
         [HttpPost]
-        public string LoadUsersByCompanyId([FromBody] User_Info model)
+        public string LoadUsersByCompanyId([FromBody] USER_INFO model)
         {
             int comp_id = model == null || model.COMPANY_ID == 0 ? Convert.ToInt32(User.Claims.FirstOrDefault(x => x.Type == ClaimsType.CompanyId).Value) : model.COMPANY_ID;
-            return _service.GetUsersByCompany(GetDbConnectionString(), comp_id);
+            return _service.GetUsersByCompany(comp_id);
         }
     }
 }

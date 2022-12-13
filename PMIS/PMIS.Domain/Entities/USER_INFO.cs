@@ -18,8 +18,8 @@ namespace PMIS.Domain.Entities
         public string? USER_PASSWORD { get; set; }
         public string? EMAIL { get; set; }
         public decimal EMPLOYEE_ID { get; set; }
-        public decimal? COMPANY_ID { get; set; }
-        public decimal? DEPOT_ID { get; set; }
+        public int COMPANY_ID { get; set; }
+        public int? DEPOT_ID { get; set; }
         public string? ENTERED_BY { get; set; }
         public DateTime? ENTERED_DATE { get; set; }
         public string? ENTERED_TERMINAL { get; set; }
