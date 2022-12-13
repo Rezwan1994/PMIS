@@ -7,15 +7,13 @@ using PMIS.Domain.Common;
 using PMIS.Domain.Entities;
 using PMIS.Domain.ViewModels.Security;
 using PMIS.Repository.Interface;
-using PMIS.Service.Interface.Security.Company;
-using PMIS.Service.Interface.Security.Security;
-using PMIS.Service.Interface.Security.User;
+using PMIS.Service.Interface.Security;
 using PMIS.Utility.Static;
 
 using System.Security.Claims;
 using System.Text.Json;
 
-namespace SalesAndDistributionSystem.Areas.Security.User.Controllers
+namespace PMIS.Web.Areas.Security.Controllers
 {
     [Area("Security")]
     public class LoginController : Controller

@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 using PMIS.Domain.Common;
 using PMIS.Domain.Entities;
 using PMIS.Repository.Interface;
-using PMIS.Service.Interface.Security.Company;
+using PMIS.Service.Interface.Security;
 using PMIS.Utility.Static;
 using System.ComponentModel.Design;
 using System.Data;

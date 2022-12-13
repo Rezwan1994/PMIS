@@ -1,23 +1,24 @@
 ﻿using PMIS.Domain.Entities;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PMIS.Service.Interface.Security.Security
+namespace PMIS.Service.Interface.Security
 {
     public interface IRoleManager
     {
-        string LoadData(string db, int companyId);
-        Task<string> AddOrUpdate(string db, RoleInfo model);
-        Task<string> ActivateRole(string db, int id);
-        Task<string> DeactivateRole(string db, int id);
-        Task<string> GetSearchableRoles(string db, int companyId, string roleName);
+        string LoadData(int companyId);
+        Task<string> AddOrUpdate(ROLE_INFO model);
+        Task<string> ActivateRole(int id);
+        Task<string> DeactivateRole(int id);
+        Task<string> GetSearchableRoles(int companyId, string roleName);
 
-        Task<string> RoleMenuConfigSelectionList(string db, int companyId, int roleId);
-        Task<string> AddRoleMenuConfiguration(string db, List<RoleMenuConfiguration> model);
-        Task<string> RoleUserConfigSelectionList(string db, int companyId, int userId);
-        Task<string> RoleCentralUserConfigSelectionList(string db, int userId);
-        Task<string> AddRoleUserConfiguration(string db, List<RoleUserConfiguration> model);
+        Task<string> RoleMenuConfigSelectionList(int companyId, int roleId);
+        Task<string> AddRoleMenuConfiguration(List<ROLE_MENU_CONFIGURATION> model);
+        Task<string> RoleUserConfigSelectionList(int companyId, int userId);
+        Task<string> RoleCentralUserConfigSelectionList(int userId);
+        Task<string> AddRoleUserConfiguration(List<ROLE_USER_CONFIGURATION> model);
     }
 }

@@ -3,10 +3,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using SalesAndDistributionSystem.Common;
-using SalesAndDistributionSystem.Domain.Utility;
-using SalesAndDistributionSystem.Services.Business.Security;
-using SalesAndDistributionSystem.Services.Common;
+using PMIS.Domain.Common;
+using PMIS.Repository.Interface;
+using PMIS.Service.Interface.Security;
+using PMIS.Web.Common;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -23,7 +23,7 @@ namespace SalesAndDistributionSystem.Areas.Security.Controllers
         private readonly ILogger<UserLogController> _logger;
 
         private readonly IConfiguration _configuration;
-        private readonly ServiceProvider Provider = new ServiceProvider();
+        //private readonly ServiceProvider Provider = new ServiceProvider();
 
         public UserLogController(IUserLogManager _service,
             ILogger<UserLogController> _logger,
@@ -36,12 +36,11 @@ namespace SalesAndDistributionSystem.Areas.Security.Controllers
             this._configuration = _configuration;
         }
 
-        private string GetDbConnectionString() => Provider.GetConnectionString(User.Claims.FirstOrDefault(x => x.Type == ClaimsType.CompanyId).Value.ToString(), "Security");
 
         [HttpGet]
         public Task<string> LoadData()
         {
-            return _service.LoadData(GetDbConnectionString(), User.GetComapanyId().ToString());
+            return _service.LoadData(User.GetComapanyId().ToString());
         }
 
         [HttpPost]
@@ -54,7 +53,7 @@ namespace SalesAndDistributionSystem.Areas.Security.Controllers
                            .ToList();
                 return JsonConvert.SerializeObject(arr);
             }
-            return await _service.Search(GetDbConnectionString(), User.GetComapanyId(), model);
+            return await _service.Search(User.GetComapanyId(), model);
         }
 
         [HttpPost]
@@ -63,7 +62,7 @@ namespace SalesAndDistributionSystem.Areas.Security.Controllers
             model.USER_ID = User.GetUserId();
             model.FROM_DATE ??= DateTime.Now.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
             model.TO_DATE ??= DateTime.Now.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
-            return await _service.Search(GetDbConnectionString(), User.GetComapanyId(), model);
+            return await _service.Search(User.GetComapanyId(), model);
         }
 
         public IActionResult ViewLogs()

@@ -7,7 +7,7 @@ using System.Data;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PMIS.Service.Interface.Security.User
+namespace PMIS.Service.Interface.Security
 {
     public interface IUserManager
     {

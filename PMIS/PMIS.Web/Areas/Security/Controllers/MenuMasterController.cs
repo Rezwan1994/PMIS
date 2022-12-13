@@ -3,14 +3,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using PMIS.Domain.Entities;
-using PMIS.Service.Interface.Security.Security;
+using PMIS.Service.Interface.Security;
 using PMIS.Utility.Static;
 using System;
 using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace SalesAndDistributionSystem.Areas.Security.Menu.Controllers
+namespace PMIS.Web.Areas.Security.Controllers
 {
     [Area("Security")]
 

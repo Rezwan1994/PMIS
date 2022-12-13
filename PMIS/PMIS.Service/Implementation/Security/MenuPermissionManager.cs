@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using PMIS.Domain.ViewModels.Security;
 using PMIS.Repository.Interface;
-using PMIS.Service.Interface.Security.Security;
+using PMIS.Service.Interface.Security;
 using System;
 using System.Collections.Generic;
 using System.Data;

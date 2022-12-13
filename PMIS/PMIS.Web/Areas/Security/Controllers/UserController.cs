@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PMIS.Domain.Common;
 using PMIS.Domain.Entities;
-using PMIS.Service.Interface.Security.User;
+using PMIS.Service.Interface.Security;
 using PMIS.Utility.Static;
 using PMIS.Web.Common;
 

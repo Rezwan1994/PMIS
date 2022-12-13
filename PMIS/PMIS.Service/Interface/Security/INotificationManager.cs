@@ -6,7 +6,7 @@ using System.Data;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PMIS.Service.Interface.Security.Company
+namespace PMIS.Service.Interface.Security
 {
     public interface INotificationManager
     {
