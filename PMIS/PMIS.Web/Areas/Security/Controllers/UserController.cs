@@ -10,11 +10,11 @@ namespace SalesAndDistributionSystem.Areas.Security.User.Controllers
     [Area("Security")]
     public class UserController : Controller
     {
-        private readonly IUserManager _service;
+        private readonly IUserService _service;
         private readonly ILogger<UserController> _logger;
         private readonly IWebHostEnvironment _hostingEnvironment;
 
-        public UserController(IUserManager service, ILogger<UserController> logger, IWebHostEnvironment hostingEnvironment)
+        public UserController(IUserService service, ILogger<UserController> logger, IWebHostEnvironment hostingEnvironment)
         {
             _service = service;
             _logger = logger;

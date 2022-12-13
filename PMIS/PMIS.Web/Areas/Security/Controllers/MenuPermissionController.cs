@@ -22,12 +22,12 @@ namespace PMIS.Web.Areas.Security.Controllers
     public class MenuPermissionController : Controller
     {
         private readonly IMenuPermissionService _service;
-        private readonly IUserMenuConfigManager _UserMenuConfigservice;
+        private readonly IUserMenuConfigService _UserMenuConfigservice;
         private readonly IHttpContextAccessor _Accessor;
 
         private readonly ILogger<MenuPermissionController> _logger;
         private readonly IConfiguration _configuration;
-        public MenuPermissionController(IMenuPermissionService service, ILogger<MenuPermissionController> logger, IConfiguration configuration, IUserMenuConfigManager UserMenuConfigservice, IHttpContextAccessor Accessor)
+        public MenuPermissionController(IMenuPermissionService service, ILogger<MenuPermissionController> logger, IConfiguration configuration, IUserMenuConfigService UserMenuConfigservice, IHttpContextAccessor Accessor)
         {
             _service = service;
             _logger = logger;

@@ -17,10 +17,10 @@ namespace PMIS.Web.Areas.Security.Controllers
     [Authorize]
     public class MenuMasterController : Controller
     {
-        private readonly IMenuMasterManager _service;
+        private readonly IMenuMasterService _service;
         private readonly ILogger<MenuMasterController> _logger;
         private readonly IConfiguration _configuration;
-        public MenuMasterController(IMenuMasterManager service, ILogger<MenuMasterController> logger, IConfiguration configuration)
+        public MenuMasterController(IMenuMasterService service, ILogger<MenuMasterController> logger, IConfiguration configuration)
         {
             _service = service;
             _logger = logger;

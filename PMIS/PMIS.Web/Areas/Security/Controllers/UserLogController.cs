@@ -18,14 +18,14 @@ namespace SalesAndDistributionSystem.Areas.Security.Controllers
     [Area("Security")]
     public class UserLogController : Controller
     {
-        private readonly IUserLogManager _service;
+        private readonly IUserLogService _service;
         private readonly ICommonServices _comservice;
         private readonly ILogger<UserLogController> _logger;
 
         private readonly IConfiguration _configuration;
         //private readonly ServiceProvider Provider = new ServiceProvider();
 
-        public UserLogController(IUserLogManager _service,
+        public UserLogController(IUserLogService _service,
             ILogger<UserLogController> _logger,
             ICommonServices _comservice,
             IConfiguration _configuration)
