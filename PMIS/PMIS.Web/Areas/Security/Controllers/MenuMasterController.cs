@@ -2,12 +2,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using SalesAndDistributionSystem.Common;
-using SalesAndDistributionSystem.Domain.Models.TableModels.Company;
-using SalesAndDistributionSystem.Domain.Models.TableModels.Security;
-using SalesAndDistributionSystem.Domain.Models.ViewModels.Security;
-using SalesAndDistributionSystem.Domain.Utility;
-using SalesAndDistributionSystem.Services.Business.Security;
+using PMIS.Domain.Entities;
+using PMIS.Service.Interface.Security.Security;
+using PMIS.Utility.Static;
 using System;
 using System.Linq;
 using System.Text.Json;
@@ -31,7 +28,7 @@ namespace SalesAndDistributionSystem.Areas.Security.Menu.Controllers
         }
         private string GetDbConnectionString() => User.Claims.FirstOrDefault(x => x.Type == ClaimsType.DbSpecifier).Value.ToString();
         
-        [AuthorizeCheck]
+        //[AuthorizeCheck]
         public IActionResult Index()
         {
             _logger.LogInformation("Menu Module (MenuMaster/Index) Page Has been accessed By " + User.Claims.FirstOrDefault(x => x.Type == ClaimsType.UserName).Value.ToString() + " ( ID= " + User.Claims.FirstOrDefault(x => x.Type == ClaimsType.UserId).Value.ToString());
@@ -40,15 +37,15 @@ namespace SalesAndDistributionSystem.Areas.Security.Menu.Controllers
         }
 
         [HttpPost]
-        public string LoadData([FromBody] Company_Info company_Info) 
+        public string LoadData([FromBody] COMPANY_INFO company_Info) 
         {
             int comp_id = company_Info==null || company_Info.COMPANY_ID ==0? Convert.ToInt32(User.Claims.FirstOrDefault(x => x.Type == ClaimsType.CompanyId).Value): company_Info.COMPANY_ID;
-            return _service.LoadData(GetDbConnectionString(), comp_id);
+            return _service.LoadData( comp_id);
         }
 
         [AllowAnonymous]
         [HttpPost]
-        public async Task<JsonResult> AddOrUpdate([FromBody] Menu_Configuration model)
+        public async Task<JsonResult> AddOrUpdate([FromBody] MENU_CONFIGURATION model)
         {
             string result = "";
 
@@ -63,7 +60,7 @@ namespace SalesAndDistributionSystem.Areas.Security.Menu.Controllers
                     if (model.MENU_ID == 0)
                     {
                         model.ENTERED_BY = User.Claims.FirstOrDefault(c => c.Type == ClaimsType.UserId)?.Value;
-                        model.ENTERED_DATE = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss tt");
+                        model.ENTERED_DATE = DateTime.Now;
                         model.ENTERED_TERMINAL = HttpContext.Connection.RemoteIpAddress.ToString();
                         model.COMPANY_ID = model.COMPANY_ID ==0? Convert.ToInt32(User.Claims.FirstOrDefault(x => x.Type == ClaimsType.CompanyId).Value): model.COMPANY_ID;
 
@@ -71,11 +68,11 @@ namespace SalesAndDistributionSystem.Areas.Security.Menu.Controllers
                     else
                     {
                         model.UPDATED_BY = User.Claims.FirstOrDefault(c => c.Type == ClaimsType.UserId)?.Value;
-                        model.UPDATED_DATE = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss tt");
+                        model.UPDATED_DATE = DateTime.Now;
                         model.UPDATED_TERMINAL = HttpContext.Connection.RemoteIpAddress.ToString();
                     }
 
-                    result = await _service.AddOrUpdate(GetDbConnectionString(),model);
+                    result = await _service.AddOrUpdate(model);
 
                 }
                 catch (Exception ex)
@@ -92,25 +89,25 @@ namespace SalesAndDistributionSystem.Areas.Security.Menu.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> ActivateMenu([FromBody] Menu_Configuration menuCategory)
+        public async Task<IActionResult> ActivateMenu([FromBody] MENU_CONFIGURATION menuCategory)
         {
-            string result = await _service.ActivateMenu(GetDbConnectionString(), menuCategory.MENU_ID);
+            string result = await _service.ActivateMenu(menuCategory.MENU_ID);
 
             return Json(result);
         }
 
         [HttpPost]
-        public async Task<IActionResult> DeactivateMenu([FromBody] Menu_Configuration menuCategory)
+        public async Task<IActionResult> DeactivateMenu([FromBody] MENU_CONFIGURATION menuCategory)
         {
-            string result = await _service.DeactivateMenu(GetDbConnectionString(), menuCategory.MENU_ID);
+            string result = await _service.DeactivateMenu( menuCategory.MENU_ID);
 
             return Json(result);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Delete([FromBody] Menu_Configuration menuCategory)
+        public async Task<IActionResult> Delete([FromBody] MENU_CONFIGURATION menuCategory)
         {
-            string result = await _service.DeleteMenu(GetDbConnectionString(), menuCategory.MENU_ID);
+            string result = await _service.DeleteMenu( menuCategory.MENU_ID);
 
             return Json(result);
         }

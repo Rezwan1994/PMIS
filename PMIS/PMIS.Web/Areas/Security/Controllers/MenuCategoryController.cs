@@ -30,7 +30,7 @@ namespace SalesAndDistributionSystem.Areas.Security.Menu.Controllers
         }
         private string GetDbConnectionString() => User.Claims.FirstOrDefault(x => x.Type == ClaimsType.DbSpecifier).Value.ToString();
 
-        [AuthorizeCheck]
+        //[AuthorizeCheck]
         public IActionResult Index()
         {
             _logger.LogInformation("Menu Module (MenuCategory/Index) Page Has been accessed By " + User.Claims.FirstOrDefault(x => x.Type == ClaimsType.UserName).Value != null ? User.Claims.FirstOrDefault(x => x.Type == ClaimsType.UserName).Value.ToString() : "Unknown User" + " ( ID= " + User.Claims.FirstOrDefault(x => x.Type == ClaimsType.UserId).Value != null ? User.Claims.FirstOrDefault(x => x.Type == ClaimsType.UserId).Value.ToString() : "");

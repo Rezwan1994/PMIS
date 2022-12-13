@@ -1,16 +1,16 @@
 ﻿using Microsoft.Extensions.Configuration;
-using SalesAndDistributionSystem.Domain.Common;
-using SalesAndDistributionSystem.Domain.Models.TableModels.Security;
-using SalesAndDistributionSystem.Domain.Models.ViewModels.Security;
 using PMIS.Domain.Common;
-using SalesAndDistributionSystem.Services.Business.Security;
-using SalesAndDistributionSystem.Services.Common;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
+using PMIS.Service.Interface.Security.Security;
+using PMIS.Repository.Interface;
+using PMIS.Domain.ViewModels.Security;
+using PMIS.Domain.Entities;
+using PMIS.Utility.Static;
 
 namespace PMIS.Service.Implementation.Security
 {
@@ -47,14 +47,14 @@ namespace PMIS.Service.Implementation.Security
 
         private string GetNewUserMenuConfigIdQuery() => "SELECT NVL(MAX(ID),0) + 1 ID  FROM MENU_USER_CONFIGURATION";
 
-        public async Task<string> GetSearchableUsers(string db, int companyId, string user_Name) => _commonServices.DataTableToJSON(await _commonServices.GetDataTableAsyn(_configuration.GetConnectionString(db), GetSearchableUserQuery(), _commonServices.AddParameter(new string[] { companyId.ToString(), user_Name })));
+        public async Task<string> GetSearchableUsers(int companyId, string user_Name) => _commonServices.DataTableToJSON(await _commonServices.GetDataTableAsyn(GetSearchableUserQuery(), _commonServices.AddParameter(new string[] { companyId.ToString(), user_Name })));
 
-        public async Task<string> GetSearchableCentralUsers(string db, string user_Name) => _commonServices.DataTableToJSON(await _commonServices.GetDataTableAsyn(_configuration.GetConnectionString(db), GetSearchableCentralUserQuery(), _commonServices.AddParameter(new string[] { user_Name })));
+        public async Task<string> GetSearchableCentralUsers(string user_Name) => _commonServices.DataTableToJSON(await _commonServices.GetDataTableAsyn(GetSearchableCentralUserQuery(), _commonServices.AddParameter(new string[] { user_Name })));
 
-        public async Task<string> UserMenuConfigSelectionList(string db, int companyId, int userId)
+        public async Task<string> UserMenuConfigSelectionList(int companyId, int userId)
         {
-            DataTable MenuLoad = await _commonServices.GetDataTableAsyn(_configuration.GetConnectionString(db), UserMenuQuery(), _commonServices.AddParameter(new string[] { companyId.ToString() }));
-            DataTable ConfigDataLoad = await _commonServices.GetDataTableAsyn(_configuration.GetConnectionString(db), UserMenuConfigQuery(), _commonServices.AddParameter(new string[] { companyId.ToString(), userId.ToString() }));
+            DataTable MenuLoad = await _commonServices.GetDataTableAsyn(UserMenuQuery(), _commonServices.AddParameter(new string[] { companyId.ToString() }));
+            DataTable ConfigDataLoad = await _commonServices.GetDataTableAsyn(UserMenuConfigQuery(), _commonServices.AddParameter(new string[] { companyId.ToString(), userId.ToString() }));
             List<UserMenuConfigView> roleMenuConfigView = new List<UserMenuConfigView>();
 
             for (int i = 0; i < MenuLoad.Rows.Count; i++)
@@ -103,23 +103,23 @@ namespace PMIS.Service.Implementation.Security
             return JsonSerializer.Serialize(roleMenuConfigView);
         }
 
-        public async Task<string> AddUserMenuConfiguration(string db, List<Menu_User_Configuration> roleMenuConfig)
+        public async Task<string> AddUserMenuConfiguration(List<MENU_USER_CONFIGURATION> roleMenuConfig)
         {
             List<QueryPattern> listOfQuery = new List<QueryPattern>();
             try
             {
                 BindRoleMenuConfig(roleMenuConfig);
-                int new_ID = _commonServices.GetMaximumNumber<int>(_configuration.GetConnectionString(db), GetNewUserMenuConfigIdQuery(), _commonServices.AddParameter(new string[] { }));
+                int new_ID = _commonServices.GetMaximumNumber<int>(GetNewUserMenuConfigIdQuery(), _commonServices.AddParameter(new string[] { }));
                 foreach (var model in roleMenuConfig)
                 {
-                    if (model.USER_CONFIG_ID == 0)
+                    if (model.ID == 0)
                     {
                         model.ID = new_ID;
 
                         listOfQuery.Add(_commonServices.AddQuery(AddRoleMenuConfigQuery(),
                         _commonServices.AddParameter(new string[] { model.ID.ToString(),  model.COMPANY_ID.ToString(), model.USER_ID.ToString(), model.MENU_ID.ToString()
                         , model.LIST_VIEW, model.ADD_PERMISSION,model.EDIT_PERMISSION, model.DETAIL_VIEW, model.DELETE_PERMISSION, model.DOWNLOAD_PERMISSION
-                        , model.ENTERED_BY.ToString(), model.ENTERED_DATE, model.ENTERED_TERMINAL, model.CONFIRM_PERMISSION
+                        , model.ENTERED_BY.ToString(), model.ENTERED_DATE?.ToString("MM/dd/yyyy"), model.ENTERED_TERMINAL, model.CONFIRM_PERMISSION
                          })));
                     }
                     else
@@ -127,14 +127,14 @@ namespace PMIS.Service.Implementation.Security
                         listOfQuery.Add(_commonServices.AddQuery(AccRoleMenuConfigUpdateQuery(),
                          _commonServices.AddParameter(new string[] {  model.LIST_VIEW, model.ADD_PERMISSION,
                              model.EDIT_PERMISSION, model.DETAIL_VIEW, model.DELETE_PERMISSION, model.DOWNLOAD_PERMISSION
-                        , model.UPDATED_BY.ToString(), model.UPDATED_DATE, model.UPDATED_TERMINAL, model.USER_CONFIG_ID.ToString(),
+                        , model.UPDATED_BY.ToString(), model.UPDATED_DATE?.ToString("MM/dd/yyyy"), model.UPDATED_TERMINAL, model.ID.ToString(),
                              model.CONFIRM_PERMISSION
                           })));
                     }
 
                     new_ID++;
                 }
-                await _commonServices.SaveChangesAsyn(_configuration.GetConnectionString(db), listOfQuery);
+                await _commonServices.SaveChangesAsyn(listOfQuery);
 
                 return "1";
             }
@@ -144,7 +144,7 @@ namespace PMIS.Service.Implementation.Security
             }
         }
 
-        public List<Menu_User_Configuration> BindRoleMenuConfig(List<Menu_User_Configuration> model)
+        public List<MENU_USER_CONFIGURATION> BindRoleMenuConfig(List<MENU_USER_CONFIGURATION> model)
         {
             foreach (var item in model)
             {

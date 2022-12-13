@@ -4,18 +4,17 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using SalesAndDistributionSystem.Common;
-using SalesAndDistributionSystem.Domain.Models.TableModels.Security;
-using SalesAndDistributionSystem.Domain.Models.TableModels.User;
-using SalesAndDistributionSystem.Domain.Models.ViewModels.Security;
-using SalesAndDistributionSystem.Domain.Utility;
-using SalesAndDistributionSystem.Services.Business.Security;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Text.Json;
 using System.Threading.Tasks;
+using PMIS.Service.Interface.Security.Security;
+using PMIS.Utility.Static;
+using PMIS.Domain.ViewModels.Security;
+using PMIS.Domain.Entities;
 
 namespace SalesAndDistributionSystem.Areas.Security.Menu.Controllers
 {
@@ -41,7 +40,7 @@ namespace SalesAndDistributionSystem.Areas.Security.Menu.Controllers
         private string GetDbConnectionString() => User.Claims.FirstOrDefault(x => x.Type == ClaimsType.DbSpecifier).Value.ToString();
         private string GetPermissionString() => HttpContext.Session.GetString(ClaimsType.RolePermission) != null ? HttpContext.Session.GetString(ClaimsType.RolePermission).ToString() : null;
 
-        [AuthorizeCheck]
+        //[AuthorizeCheck]
         public IActionResult Index()
         {
             _logger.LogInformation("Menu Permission(MenuPermission / Index) Page Has been accessed By " + User.Claims.FirstOrDefault(x => x.Type == ClaimsType.UserName).Value != null ? User.Claims.FirstOrDefault(x => x.Type == ClaimsType.UserName).Value.ToString() : "Unknown User" + " ( ID= " + User.Claims.FirstOrDefault(x => x.Type == ClaimsType.UserId).Value != null ? User.Claims.FirstOrDefault(x => x.Type == ClaimsType.UserId).Value.ToString() : "");
@@ -67,26 +66,26 @@ namespace SalesAndDistributionSystem.Areas.Security.Menu.Controllers
         public async Task<string> UserMenuConfigSelectionList([FromBody] UserMenuConfigView UserMenuConfigView)
         {
             int comp_id = Convert.ToInt32(User.Claims.FirstOrDefault(x => x.Type == ClaimsType.CompanyId).Value);
-            string result = await _UserMenuConfigservice.UserMenuConfigSelectionList(GetDbConnectionString(), comp_id, UserMenuConfigView.USER_ID);
+            string result = await _UserMenuConfigservice.UserMenuConfigSelectionList( comp_id, UserMenuConfigView.USER_ID);
             return result;
 
         }
 
 
-        public async Task<string> GetSearchableUsers([FromBody] User_Info model)
+        public async Task<string> GetSearchableUsers([FromBody] USER_INFO model)
         {
             int comp_id = model==null || model.COMPANY_ID == 0? Convert.ToInt32(User.Claims.FirstOrDefault(x => x.Type == ClaimsType.CompanyId).Value): model.COMPANY_ID;
-            return await _UserMenuConfigservice.GetSearchableUsers(GetDbConnectionString(), comp_id, model.USER_NAME);
+            return await _UserMenuConfigservice.GetSearchableUsers( comp_id, model.USER_NAME);
 
         }
-        public async Task<string> GetSearchableCentralUsers([FromBody] User_Info model)
+        public async Task<string> GetSearchableCentralUsers([FromBody] USER_INFO model)
         {
-            return await _UserMenuConfigservice.GetSearchableCentralUsers(GetDbConnectionString(), model.USER_NAME);
+            return await _UserMenuConfigservice.GetSearchableCentralUsers( model.USER_NAME);
 
         }
 
         [HttpPost]
-        public async Task<IActionResult> SaveRoleMenuConfiguration([FromBody] List<Menu_User_Configuration> model)
+        public async Task<IActionResult> SaveRoleMenuConfiguration([FromBody] List<MENU_USER_CONFIGURATION> model)
         {
             string result = "";
             if (model == null)
@@ -98,10 +97,10 @@ namespace SalesAndDistributionSystem.Areas.Security.Menu.Controllers
                 int comp_id = Convert.ToInt32(User.Claims.FirstOrDefault(x => x.Type == ClaimsType.CompanyId).Value);
                 foreach (var item in model)
                 {
-                    if (item.USER_CONFIG_ID == 0)
+                    if (item.ID == 0)
                     {
                         item.ENTERED_BY = User.Claims.FirstOrDefault(c => c.Type == ClaimsType.UserId)?.Value;
-                        item.ENTERED_DATE = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss tt");
+                        item.ENTERED_DATE = DateTime.Now;
                         item.ENTERED_TERMINAL = HttpContext.Connection.RemoteIpAddress.ToString();
                         item.COMPANY_ID = Convert.ToInt32(User.Claims.FirstOrDefault(x => x.Type == ClaimsType.CompanyId).Value);
 
@@ -109,11 +108,11 @@ namespace SalesAndDistributionSystem.Areas.Security.Menu.Controllers
                     else
                     {
                         item.UPDATED_BY = User.Claims.FirstOrDefault(c => c.Type == ClaimsType.UserId)?.Value;
-                        item.UPDATED_DATE = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss tt");
+                        item.UPDATED_DATE = DateTime.Now;
                         item.UPDATED_TERMINAL = HttpContext.Connection.RemoteIpAddress.ToString();
                     }
                 }
-                result = await _UserMenuConfigservice.AddUserMenuConfiguration(GetDbConnectionString(), model);
+                result = await _UserMenuConfigservice.AddUserMenuConfiguration( model);
 
             }
 
@@ -157,7 +156,7 @@ namespace SalesAndDistributionSystem.Areas.Security.Menu.Controllers
 
             string user_id = User.Claims.FirstOrDefault(x => x.Type == ClaimsType.UserId).Value;
             string comp_id = User.Claims.FirstOrDefault(x => x.Type == ClaimsType.CompanyId).Value;
-           return  _service.SearchableMenuLoad(GetDbConnectionString(), comp_id, user_id, MENU_NAME);
+           return  _service.SearchableMenuLoad(comp_id, user_id, MENU_NAME);
         }
 
 

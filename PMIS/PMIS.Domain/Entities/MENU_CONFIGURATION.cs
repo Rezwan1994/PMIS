@@ -11,7 +11,7 @@ namespace PMIS.Domain.Entities
             ROLE_MENU_CONFIGURATIONs = new HashSet<ROLE_MENU_CONFIGURATION>();
         }
 
-        public decimal MENU_ID { get; set; }
+        public int MENU_ID { get; set; }
         public string? MENU_NAME { get; set; }
         public decimal? PARENT_MENU_ID { get; set; }
         public decimal? MODULE_ID { get; set; }

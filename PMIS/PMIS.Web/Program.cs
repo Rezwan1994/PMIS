@@ -50,9 +50,9 @@ app.UseCookiePolicy(new CookiePolicyOptions()
     MinimumSameSitePolicy = SameSiteMode.Strict
 });
 app.UseRouting();
-
-app.UseAuthorization();
 app.UseAuthentication();
+app.UseAuthorization();
+
 
 
 app.MapControllerRoute(

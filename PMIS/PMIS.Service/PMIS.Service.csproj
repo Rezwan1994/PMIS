@@ -7,18 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Implementation\Security\MenuMasterManager.cs" />
     <Compile Remove="Implementation\Security\NotificationManager.cs" />
     <Compile Remove="Implementation\Security\ReportConfigurationManager.cs" />
     <Compile Remove="Implementation\Security\RoleManager.cs" />
     <Compile Remove="Implementation\Security\UserLogManager.cs" />
-    <Compile Remove="Implementation\Security\UserMenuConfigManager.cs" />
-    <Compile Remove="Interface\Security\IMenuMasterManager.cs" />
     <Compile Remove="Interface\Security\INotificationManager.cs" />
     <Compile Remove="Interface\Security\IReportConfigurationManager.cs" />
     <Compile Remove="Interface\Security\IRoleManager.cs" />
     <Compile Remove="Interface\Security\IUserLogManager.cs" />
-    <Compile Remove="Interface\Security\IUserMenuConfigManager.cs" />
   </ItemGroup>
 
   <ItemGroup>
