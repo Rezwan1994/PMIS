@@ -34,6 +34,8 @@ namespace PMIS.IOC
             services.AddTransient<IMenuPermissionManager, MenuPermissionManager>();
             services.AddTransient<IUserMenuConfigManager, UserMenuConfigManager>();
             services.AddTransient<IMenuMasterManager, MenuMasterManager>();
+            services.AddTransient<INotificationManager, NotificationManager>();
+            services.AddTransient<IUserLogManager, UserLogManager>();
             services.AddTransient<IEmailService, EmailService>();
             services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
         }

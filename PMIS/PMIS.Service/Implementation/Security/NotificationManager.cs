@@ -3,8 +3,9 @@ using Newtonsoft.Json;
 using PMIS.Domain.Common;
 using PMIS.Domain.Entities;
 using PMIS.Repository.Interface;
+using PMIS.Service.Interface.Security.Company;
 using PMIS.Utility.Static;
-using SalesAndDistributionSystem.Services.Business.Company;
+
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -39,7 +40,7 @@ WHERE V.USER_ID = :param1 ";
    N.COMPANY_ID, N.UNIT_ID , V.ID
 FROM NOTIFICATION N
 INNER JOIN NOTIFICATION_VIEW V on V.NOTIFICATION_ID = N.NOTIFICATION_ID
-WHERE V.USER_ID = :param1 AND  trunc(N.NOTIFICATION_DATE ) BETWEEN TO_DATE(:param2, 'DD/MM/YYYY') AND TO_DATE(:param3, 'DD/MM/YYYY') Order By N.NOTIFICATION_ID DESC";
+WHERE V.USER_ID = :param1 Order By N.NOTIFICATION_ID DESC";
         string Notification_Policy_Permitted_User() => @"Select V.ID,  V.NOTIFICATION_POLICY_ID,  V.STATUS,  V.COMPANY_ID,  V.UNIT_ID,  V.USER_ID,  V.VIEW_PERMISSION , P.NOTIFICATION_TITLE
 from NOTIFICATION_VIEW_POLICY V
 LEFT OUTER JOIN NOTIFICATION_POLICY P on P.NOTIFICATION_POLICY_ID = V.NOTIFICATION_POLICY_ID Where V.STATUS = 'Active' and P.STATUS = 'Active'
@@ -72,32 +73,32 @@ And V.NOTIFICATION_POLICY_ID = :param1 AND V.UNIT_ID = :param2 AND V.COMPANY_ID=
         string GetNewNotificationIdQuery() => "SELECT NVL(MAX(NOTIFICATION_ID),0) + 1 NOTIFICATION_ID  FROM NOTIFICATION";
         string GetNewNotificationViewIdQuery() => "SELECT NVL(MAX(ID),0) + 1 ID  FROM NOTIFICATION_VIEW";
 
-        public async Task<DataTable> NotificationLoad_Datatable(string db, int User_Id) => await _commonService.GetDataTableAsyn(connString.GetConnectionString(db), NotificationLoad_Query(), _commonService.AddParameter(new string[] { User_Id.ToString() }));
-        public async Task<DataTable> DataLoad_Datatable(string db, string User_Id, string date_from, string date_to) => await _commonService.GetDataTableAsyn(connString.GetConnectionString(db), DataLoad_Query(), _commonService.AddParameter(new string[] { User_Id, date_from, date_to }));
-        public async Task<DataTable> NotificationPermitted_Datatable(string db, int Policy_Id, int Unit_Id, int Company_Id) => await _commonService.GetDataTableAsyn(connString.GetConnectionString(db), Notification_Policy_Permitted_User(), _commonService.AddParameter(new string[] { Policy_Id.ToString(), Unit_Id.ToString(), Company_Id.ToString() }));
-        public async Task<string> Notification_Permitted_Users(string db, int Policy_Id, int Unit_Id, int Company_Id) => _commonService.DataTableToJSON(await NotificationPermitted_Datatable(db, Policy_Id, Unit_Id, Company_Id));
+        public async Task<DataTable> NotificationLoad_Datatable(int User_Id) => await _commonService.GetDataTableAsyn( NotificationLoad_Query(), _commonService.AddParameter(new string[] { User_Id.ToString() }));
+        public async Task<DataTable> DataLoad_Datatable( int User_Id) => await _commonService.GetDataTableAsyn( DataLoad_Query(), _commonService.AddParameter(new string[] { User_Id.ToString() }));
+        public async Task<DataTable> NotificationPermitted_Datatable(int Policy_Id, int Unit_Id, int Company_Id) => await _commonService.GetDataTableAsyn( Notification_Policy_Permitted_User(), _commonService.AddParameter(new string[] { Policy_Id.ToString(), Unit_Id.ToString(), Company_Id.ToString() }));
+        public async Task<string> Notification_Permitted_Users(int Policy_Id, int Unit_Id, int Company_Id) => _commonService.DataTableToJSON(await NotificationPermitted_Datatable( Policy_Id, Unit_Id, Company_Id));
 
-        public async Task<List<Notification>> Notification_Permitted_User(string db, int Policy_Id, int Unit_Id, int Company_Id)
+        public async Task<List<NOTIFICATION>> Notification_Permitted_User(int Policy_Id, int Unit_Id, int Company_Id)
         {
-            DataTable dataTable = await NotificationPermitted_Datatable(db, Policy_Id, Unit_Id, Company_Id);
-            List<Notification> User_Ids = new List<Notification>();
+            DataTable dataTable = await NotificationPermitted_Datatable( Policy_Id, Unit_Id, Company_Id);
+            List<NOTIFICATION> User_Ids = new List<NOTIFICATION>();
             foreach (DataRow row in dataTable.Rows)
             {
-                Notification notification = new Notification();
+                NOTIFICATION notification = new NOTIFICATION();
                 //notification.USERID = Convert.ToInt32(row["USER_ID"]);
                 User_Ids.Add(notification);
 
             }
-            User_Ids[0].NotificationTitle = dataTable.Rows[0]["NOTIFICATION_TITLE"].ToString();
+            User_Ids[0].NOTIFICATION_TITLE = dataTable.Rows[0]["NOTIFICATION_TITLE"].ToString();
             return User_Ids;
         }
 
 
 
-        //public async Task<string> NotificationLoad(string db, Notification model) => _commonService.DataTableToJSON(await NotificationLoad_Datatable(db, model.USER_ID));
-        public async Task<string> LoadData(string db, ReportParams model) => _commonService.DataTableToJSON(await DataLoad_Datatable(db, model.USER_NAME, model.DATE_FROM, model.DATE_TO));
+        public async Task<string> NotificationLoad(NOTIFICATION model) => _commonService.DataTableToJSON(await NotificationLoad_Datatable( model.USER_ID));
+        public async Task<string> LoadData(NOTIFICATION model) => _commonService.DataTableToJSON(await DataLoad_Datatable( model.USER_ID));
 
-        public async Task<string> UpdateNotificationViewStatus(string db, Notification model)
+        public async Task<string> UpdateNotificationViewStatus(NOTIFICATION model)
         {
             if (model == null)
             {
@@ -110,16 +111,16 @@ And V.NOTIFICATION_POLICY_ID = :param1 AND V.UNIT_ID = :param2 AND V.COMPANY_ID=
                 try
                 {
 
-                    if (model.NotificationId > 0)
+                    if (model.NOTIFICATION_ID > 0)
                     {
 
 
                         listOfQuery.Add(_commonService.AddQuery(UpdateNotificationViewStatus_Query(), _commonService.AddParameter(new string[]
-                        {  model.NotificationId.ToString() })));
+                        {  model.NOTIFICATION_ID.ToString() })));
 
                     }
 
-                    await _commonService.SaveChangesAsyn(_configuration.GetConnectionString(db), listOfQuery);
+                    await _commonService.SaveChangesAsyn(listOfQuery);
                     return "1";
                 }
                 catch (Exception ex)
@@ -128,7 +129,7 @@ And V.NOTIFICATION_POLICY_ID = :param1 AND V.UNIT_ID = :param2 AND V.COMPANY_ID=
                 }
             }
         }
-        public async Task<string> UpdateNotificationViewStatusByUser(string db, Notification model)
+        public async Task<string> UpdateNotificationViewStatusByUser(NOTIFICATION model)
         {
             if (model == null)
             {
@@ -150,7 +151,7 @@ And V.NOTIFICATION_POLICY_ID = :param1 AND V.UNIT_ID = :param2 AND V.COMPANY_ID=
 
                     }
 
-                    await _commonService.SaveChangesAsyn(_configuration.GetConnectionString(db), listOfQuery);
+                    await _commonService.SaveChangesAsyn(listOfQuery);
                     return "1";
                 }
                 catch (Exception ex)
@@ -160,7 +161,7 @@ And V.NOTIFICATION_POLICY_ID = :param1 AND V.UNIT_ID = :param2 AND V.COMPANY_ID=
             }
         }
 
-        public async Task<string> AddOrUpdateNotification(string db, Notification model)
+        public async Task<string> AddOrUpdateNotification(NOTIFICATION model)
         {
             if (model == null)
             {
@@ -173,20 +174,20 @@ And V.NOTIFICATION_POLICY_ID = :param1 AND V.UNIT_ID = :param2 AND V.COMPANY_ID=
                 try
                 {
 
-                    if (model.NotificationId == 0)
+                    if (model.NOTIFICATION_ID == 0)
                     {
-                        model.Status = Status.Active;
-                        model.NotificationId = _commonService.GetMaximumNumber<int>(_configuration.GetConnectionString(db), GetNewNotificationIdQuery(), _commonService.AddParameter(new string[] { }));
-                        //model.ID = _commonService.GetMaximumNumber<int>(_configuration.GetConnectionString(db), GetNewNotificationViewIdQuery(), _commonService.AddParameter(new string[] { }));
-                        List<Notification> permitted_Users = new List<Notification>();
-                        permitted_Users = await Notification_Permitted_User(db, model.NotificationPolicyId, model.UnitId, model.CompanyId);
-                        model.NotificationTitle = permitted_Users[0].NotificationTitle;
+                        model.STATUS = Status.Active;
+                        model.NOTIFICATION_ID = _commonService.GetMaximumNumber<int>(GetNewNotificationIdQuery(), _commonService.AddParameter(new string[] { }));
+                        //model.ID = _commonService.GetMaximumNumber<int>(GetNewNotificationViewIdQuery(), _commonService.AddParameter(new string[] { }));
+                        List<NOTIFICATION> permitted_Users = new List<NOTIFICATION>();
+                        permitted_Users = await Notification_Permitted_User( model.NOTIFICATION_POLICY_ID, model.UNIT_ID, model.COMPANY_ID);
+                        model.NOTIFICATION_TITLE = permitted_Users[0].NOTIFICATION_TITLE;
 
 
 
                         listOfQuery.Add(_commonService.AddQuery(AddOrUpdateNotificationInsertQuery(), _commonService.AddParameter(new string[]
                                             {model.NOTIFICATION_ID.ToString(), model.NOTIFICATION_POLICY_ID.ToString(), model.NOTIFICATION_TITLE.ToString(), model.NOTIFICATION_BODY,
-                            model.NOTIFICATION_DATE, model.COMPANY_ID.ToString(), model.UNIT_ID.ToString(), model.STATUS.ToString() })));
+                            model.NOTIFICATION_DATE?.ToString("dd/MM/yyyy"), model.COMPANY_ID.ToString(), model.UNIT_ID.ToString(), model.STATUS.ToString() })));
 
                         foreach (var item in permitted_Users)
                         {
@@ -194,12 +195,12 @@ And V.NOTIFICATION_POLICY_ID = :param1 AND V.UNIT_ID = :param2 AND V.COMPANY_ID=
                                 _commonService.AddParameter(new string[]
                                 {
                                              model.ID.ToString(), model.NOTIFICATION_ID.ToString(), item.USER_ID.ToString(), Status.InActive, model.COMPANY_ID.ToString(),
-                                            model.UNIT_ID.ToString(), model.NOTIFICATION_DATE
+                                            model.UNIT_ID.ToString(), model.NOTIFICATION_DATE?.ToString("dd/MM/yyyy")
                                  })));
                             model.ID++;
                         }
 
-                        await _commonService.SaveChangesAsyn(_configuration.GetConnectionString(db), listOfQuery);
+                        await _commonService.SaveChangesAsyn(listOfQuery);
 
 
                     }
@@ -215,19 +216,19 @@ And V.NOTIFICATION_POLICY_ID = :param1 AND V.UNIT_ID = :param2 AND V.COMPANY_ID=
 
         //-- Notification Part-------------
 
-        public async Task<string> AddOrderNotification(string db, string db_sales, int NotificationPolicyId, string NotificationBody, int CompanyId, int UnitId)
+        public async Task<string> AddOrderNotification(string db_sales, int NotificationPolicyId, string NotificationBody, int CompanyId, int UnitId)
         {
-            Notification notification = new Notification();
+            NOTIFICATION notification = new NOTIFICATION();
             notification.COMPANY_ID = CompanyId;
             notification.UNIT_ID = UnitId;
-            notification.NOTIFICATION_DATE = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss tt");
+            notification.NOTIFICATION_DATE = DateTime.Now;
 
             notification.NOTIFICATION_POLICY_ID = NotificationPolicyId;
             notification.NOTIFICATION_BODY = NotificationBody;
-            return await AddOrUpdateNotification(db, notification);
+            return await AddOrUpdateNotification( notification);
 
         }
 
-
+     
     }
 }

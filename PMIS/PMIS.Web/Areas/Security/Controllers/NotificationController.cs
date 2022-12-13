@@ -1,11 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using SalesAndDistributionSystem.Common;
-using SalesAndDistributionSystem.Domain.Models.TableModels.Company;
-using SalesAndDistributionSystem.Domain.Utility;
-using SalesAndDistributionSystem.Services.Business.Company;
-using SalesAndDistributionSystem.Services.Business.Security;
+using PMIS.Domain.Entities;
+using PMIS.Service.Interface.Security.Company;
+using PMIS.Utility.Static;
+using PMIS.Web.Common;
 using System;
 using System.Data;
 using System.Linq;
@@ -40,18 +39,18 @@ namespace SalesAndDistributionSystem.Areas.Security.Company.Controllers
         [HttpGet]
         public async Task<string> NotificationLoad()
         {
-            Notification model = new Notification();
+            NOTIFICATION model = new NOTIFICATION();
             model.USER_ID = Convert.ToInt32(GetUser());
-            var data = await _service.NotificationLoad(GetDbConnectionString(), model);
+            var data = await _service.NotificationLoad(model);
             return data;
         }
 
         [HttpGet]
         public async Task<string> LoadData()
         {
-            Notification model = new Notification();
+            NOTIFICATION model = new NOTIFICATION();
             model.USER_ID = Convert.ToInt32(GetUser());
-            var data = await _service.LoadData(GetDbConnectionString(), model);
+            var data = await _service.LoadData( model);
             return data;
         }
 
@@ -60,30 +59,30 @@ namespace SalesAndDistributionSystem.Areas.Security.Company.Controllers
 
 
         [HttpPost]
-        public async Task<string> Notification_Permitted_Users([FromBody] Notification model)
+        public async Task<string> Notification_Permitted_Users([FromBody] NOTIFICATION model)
         {
             model.COMPANY_ID = model.COMPANY_ID == 0? Convert.ToInt32(GetCompany()):model.COMPANY_ID;
             model.UNIT_ID = model.UNIT_ID == 0 ? Convert.ToInt32(GetUnit()) : model.UNIT_ID;
 
-            return await _service.Notification_Permitted_Users(GetDbConnectionString(), model.NOTIFICATION_POLICY_ID,model.UNIT_ID,model.COMPANY_ID);
+            return await _service.Notification_Permitted_Users( model.NOTIFICATION_POLICY_ID,model.UNIT_ID,model.COMPANY_ID);
         }
         [HttpGet]
         public async Task<string> UpdateNotificationViewStatus(int ID)
         {
-            Notification model = new Notification();
+            NOTIFICATION model = new NOTIFICATION();
             model.ID = ID;
-            return await _service.UpdateNotificationViewStatus(GetDbConnectionString(), model);
+            return await _service.UpdateNotificationViewStatus(model);
         }
         [HttpPost]
-        public async Task<string> UpdateNotificationViewStatusByUser([FromBody] Notification model)
+        public async Task<string> UpdateNotificationViewStatusByUser([FromBody] NOTIFICATION model)
         {
-            model = new Notification();
+            model = new NOTIFICATION();
             model.USER_ID =Convert.ToInt32(GetUser());
-            return await _service.UpdateNotificationViewStatusByUser(GetDbConnectionString(), model);
+            return await _service.UpdateNotificationViewStatusByUser( model);
         }
 
         [HttpPost]
-        public async Task<JsonResult> AddOrUpdate([FromBody] Notification model)
+        public async Task<JsonResult> AddOrUpdate([FromBody] NOTIFICATION model)
         {
             string result;
 
@@ -97,7 +96,7 @@ namespace SalesAndDistributionSystem.Areas.Security.Company.Controllers
                 {
                     model.COMPANY_ID = Convert.ToInt32(GetCompany());
                     model.UNIT_ID = Convert.ToInt32(GetUnit());
-                    result = await _service.AddOrUpdateNotification(GetDbConnectionString(), model);
+                    result = await _service.AddOrUpdateNotification( model);
 
                 }
                 catch (Exception ex)
