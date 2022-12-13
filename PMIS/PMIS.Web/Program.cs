@@ -8,6 +8,8 @@ using Serilog.Events;
 using Serilog.Formatting.Json;
 using Serilog;
 using System.Configuration;
+using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +19,16 @@ builder.Services.RegisterServiceInstance(builder.Configuration);
 
 builder.Logging.AddSeq(builder.Configuration.GetSection("Seq"));
 //builder.Logging.AddConfiguration()
+
+
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(x => x.LoginPath = "/Security/Login/Index");
+
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(1440);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
 
 
 var app = builder.Build();
@@ -32,7 +44,11 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
+app.UseSession();
+app.UseCookiePolicy(new CookiePolicyOptions()
+{
+    MinimumSameSitePolicy = SameSiteMode.Strict
+});
 app.UseRouting();
 
 app.UseAuthorization();

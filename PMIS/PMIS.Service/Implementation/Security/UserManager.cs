@@ -28,8 +28,8 @@ namespace PMIS.Service.Implementation.Security
         }
 
         string UserQuery() => "Select  u.User_Id Id, u.User_Name Name, u.Unit_ID UnitId, c.Unit_Type UnitType, u.User_Type  UserType, c.Company_Id CompanyId, u.Email, c.Company_Name from User_Info u left outer join Company_Info c on c.Company_Id = u.Company_id Where u.Email = :param1";
-        string UserQuery4() => @"Select  u.User_Id Id, u.User_Name Name, u.USER_PASSWORD, u.Depot_ID DepotId,
-                                 u.User_Type  UserType, u.Company_Id CompanyId,
+        string UserQuery4() => @"Select  u.User_Id Id, u.User_Name Name, u.USER_PASSWORD, u.Depot_ID,
+                                 u.User_Type, u.Company_Id,
                                  u.Email, c.Company_Name , d.Depot_NAME from User_Info u 
                                  left outer join Depot_Info d on d.Depot_Id = u.Depot_Id 
                                   left outer join Company_Info c on c.Company_Id = u.Company_Id 
@@ -84,7 +84,7 @@ namespace PMIS.Service.Implementation.Security
                 auth.Email = userData.Rows[0]["Email"].ToString();
                 auth.UserName = userData.Rows[0]["Name"].ToString();
                 auth.UserId = Convert.ToInt32(userData.Rows[0]["Id"]);
-                auth.CompanyId = Convert.ToInt32(userData.Rows[0]["CompanyId"]);
+                auth.CompanyId = Convert.ToInt32(userData.Rows[0]["Company_Id"]);
                 auth.CompanyName = userData.Rows[0]["Company_Name"].ToString();
                 auth.DepotName = userData.Rows[0]["Depot_Name"].ToString();
 
@@ -92,7 +92,7 @@ namespace PMIS.Service.Implementation.Security
 
                 auth.DepotId = Convert.ToInt32(userData.Rows[0]["Depot_Id"]);
     
-                auth.UserType = userData.Rows[0]["UserType"].ToString();
+                auth.UserType = userData.Rows[0]["User_Type"].ToString();
                 auth.DistributorId = 1;
                 return auth;
 

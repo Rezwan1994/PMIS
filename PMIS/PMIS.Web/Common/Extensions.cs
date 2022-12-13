@@ -29,7 +29,7 @@ namespace PMIS.Web.Common
 
         public static int GetUnitId(this ClaimsPrincipal user)
         {
-            return Convert.ToInt32(user.Claims.FirstOrDefault(x => x.Type == ClaimsType.UnitId).Value.ToString());
+            return Convert.ToInt32(user.Claims.FirstOrDefault(x => x.Type == ClaimsType.DepotId).Value.ToString());
         }
 
         public static List<T> ConvertDataTable<T>(DataTable dt)

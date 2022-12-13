@@ -15,7 +15,6 @@ using PMIS.Utility.Static;
 using System.Security.Claims;
 using System.Text.Json;
 
-
 namespace SalesAndDistributionSystem.Areas.Security.User.Controllers
 {
     [Area("Security")]
@@ -28,9 +27,9 @@ namespace SalesAndDistributionSystem.Areas.Security.User.Controllers
         private readonly ICompanyManager _companyService;
         private readonly IWebHostEnvironment _hostingEnvironment;
         private readonly IHttpContextAccessor _Accessor;
+
         //private readonly IReportConfigurationManager _reportManager;
         private readonly ICommonServices _commonServices;
-
 
         public LoginController(ILogger<LoginController> logger, IUserManager accountService, IConfiguration configuration, IMenuPermissionManager menuPermission, ICompanyManager companyManager, IWebHostEnvironment hostingEnvironment, IHttpContextAccessor Accessor/*, IReportConfigurationManager reportManager*/, ICommonServices commonServices)
         {
@@ -44,58 +43,52 @@ namespace SalesAndDistributionSystem.Areas.Security.User.Controllers
             //_reportManager = reportManager;
             _commonServices = commonServices;
         }
+
         private string GetEmailOfCurrentUser() => User.Claims.FirstOrDefault(x => x.Type == ClaimsType.Email).Value.ToString();
+
         private string GetUserNameOfCurrentUser() => User.Claims.FirstOrDefault(x => x.Type == ClaimsType.UserName).Value.ToString();
 
         public async Task<IActionResult> Index()
         {
             List<COMPANY_INFO> company_Infos = await _companyService.GetCompanyList();
-          
 
             if (_Accessor.HttpContext.Request.Cookies["LoginMailHolder"] != null)
             {
                 ViewBag.UserName = _Accessor.HttpContext.Request.Cookies["LoginMailHolder"];
-
             }
             if (_Accessor.HttpContext.Request.Cookies["LoginPassHolder"] != null)
             {
                 ViewBag.UserPass = _Accessor.HttpContext.Request.Cookies["LoginPassHolder"];
-
             }
             if (_Accessor.HttpContext.Request.Cookies["LoginCompanyHolder"] != null)
             {
                 ViewBag.UserCompany = _Accessor.HttpContext.Request.Cookies["LoginCompanyHolder"];
-
             }
             return View(company_Infos);
         }
 
-
         [HttpPost]
         public async Task<IActionResult> Index([FromForm] Login model)
         {
-
             try
             {
                 if (model.Email != null && model.Password != null && model.Email != "" && model.Password != "")
                 {
                     Auth _user = null;
-                    if (model.CompanyId >0)
+                    if (model.CompanyId > 0)
                     {
-                         _user = _accountService.GetUserByEmailAndCompany(model.Email, model.CompanyId);
-
+                        _user = _accountService.GetUserByEmailAndCompany(model.Email, model.CompanyId);
                     }
 
                     if (_user != null)
                     {
-
                         if (_accountService.IsValidUser(model.Email, model.Password, _user.CompanyId, _user.Password))
                         {
-                            MenuDistribution menuDistribution = await _menuService.LoadPermittedMenuByUserId( _user.UserId, _user.CompanyId);
+                            MenuDistribution menuDistribution = await _menuService.LoadPermittedMenuByUserId(_user.UserId, _user.CompanyId);
                             string menuDis = JsonSerializer.Serialize(menuDistribution);
                             string defaultPage = _menuService.LoadUserDefaultPageById(_user.UserId);
                             defaultPage = defaultPage == null ? "Security/User/PagePermissionNotice" : defaultPage;
-                     
+
                             //List<ReportPermission> reportPermissions = await _reportManager.LoadReportPermissionData(GetDbConnectionString(model.CompanyId), _user.CompanyId, _user.UserId);
                             //string reportDis = JsonSerializer.Serialize(reportPermissions);
 
@@ -116,7 +109,6 @@ namespace SalesAndDistributionSystem.Areas.Security.User.Controllers
                                new Claim(ClaimsType.DistributorId, _user.DistributorId.ToString()),
                                new Claim(ClaimsType.DefaultPage,defaultPage),
                                //new Claim(ClaimsType.DbSpecifier, provider.GetConnectionString(_user.CompanyName))
-
                             };
                             HttpContext.Session.SetString(ClaimsType.RolePermission, menuDis);
                             //HttpContext.Session.SetString(ClaimsType.ReportPermission, reportDis);
@@ -132,7 +124,6 @@ namespace SalesAndDistributionSystem.Areas.Security.User.Controllers
                                 ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(1440),
 
                                 IssuedUtc = DateTime.Now,
-
                             };
 
                             await HttpContext.SignInAsync(
@@ -148,7 +139,6 @@ namespace SalesAndDistributionSystem.Areas.Security.User.Controllers
                                 _Accessor.HttpContext.Response.Cookies.Append("LoginMailHolder", _user.Email, option);
                                 _Accessor.HttpContext.Response.Cookies.Append("LoginPassHolder", _commonServices.Decrypt(_user.Password), option);
                                 _Accessor.HttpContext.Response.Cookies.Append("LoginCompanyHolder", _user.CompanyId.ToString(), option);
-
                             }
 
                             string URL = "~/" + defaultPage;
@@ -162,11 +152,9 @@ namespace SalesAndDistributionSystem.Areas.Security.User.Controllers
                     }
                     else
                     {
-                        ViewBag.errorMessage = model.CompanyId==0? "Please select a company first!!!": "Wrong Email Entered!!!";
+                        ViewBag.errorMessage = model.CompanyId == 0 ? "Please select a company first!!!" : "Wrong Email Entered!!!";
                     }
-
                 }
-
                 else
                 {
                     ViewBag.errorMessage = "Please Enter Correct Email and Password!";
@@ -174,10 +162,8 @@ namespace SalesAndDistributionSystem.Areas.Security.User.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex,ex.Message);
-                
+                _logger.LogError(ex, ex.Message);
             }
-
 
             List<COMPANY_INFO> company_Infos = await _companyService.GetCompanyList();
 
@@ -187,7 +173,6 @@ namespace SalesAndDistributionSystem.Areas.Security.User.Controllers
         //[AuthorizeCheck]
         //public IActionResult ChangePassword()
         //{
-        
         //    _logger.LogInformation("Change Password(Login/ChangePassword) Page Has been accessed By " + User.Claims.FirstOrDefault(x => x.Type == ClaimsType.UserName).Value.ToString() + " ( ID= " + User.Claims.FirstOrDefault(x => x.Type == ClaimsType.UserId).Value.ToString());
         //    return View();
         //}
@@ -206,10 +191,8 @@ namespace SalesAndDistributionSystem.Areas.Security.User.Controllers
         //    return View();
         //}
 
-        
         //public async Task<IActionResult> ForgetPassword()
         //{
-
         //    _logger.LogInformation("Forget Password(Login/ForgetPassword) Page Has been accessed");
         //    List<Company_Info> company_Infos = await _companyService.GetCompanyList(GetDbConnectionString());
 
@@ -234,7 +217,6 @@ namespace SalesAndDistributionSystem.Areas.Security.User.Controllers
         //        else
         //        {
         //            ViewData["Notify"] = "Please enter valid Email and Select Your Company";
-
 
         //        }
         //    }
@@ -261,7 +243,5 @@ namespace SalesAndDistributionSystem.Areas.Security.User.Controllers
         //    }
 
         //}
-
-
     }
 }
