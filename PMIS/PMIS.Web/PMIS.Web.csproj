@@ -34,10 +34,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="Areas\Security\Controllers\NotificationController.cs" />
     <Compile Remove="Areas\Security\Controllers\ReportConfigurationController.cs" />
     <Compile Remove="Areas\Security\Controllers\RoleController.cs" />
-    <Compile Remove="Areas\Security\Controllers\UserLogController.cs" />
   </ItemGroup>
 
   <ItemGroup>
