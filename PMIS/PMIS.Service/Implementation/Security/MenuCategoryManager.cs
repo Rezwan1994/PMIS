@@ -3,12 +3,12 @@ using PMIS.Domain.Common;
 using PMIS.Domain.Entities;
 using PMIS.Repository.Interface;
 using PMIS.Utility.Static;
-using PMIS.Service.Interface.Security.Security;
+using PMIS.Service.Interface.Security;
 using System.Data;
 
 namespace PMIS.Service.Implementation.Security
 {
-    public class MenuCategoryManager : IMenuCategoryManager
+    public class MenuCategoryManager : IMenuCategoryService
     {
         private readonly ICommonServices _commonServices;
         private readonly IConfiguration _configuration;

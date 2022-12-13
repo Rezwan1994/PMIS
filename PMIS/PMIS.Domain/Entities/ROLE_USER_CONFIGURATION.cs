@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PMIS.Domain.Entities
 {
@@ -7,7 +8,7 @@ namespace PMIS.Domain.Entities
     {
         public decimal ID { get; set; }
         public decimal? ROLE_ID { get; set; }
-        public decimal? USER_ID { get; set; }
+        public int USER_ID { get; set; }
         public string? PERMITTED_BY { get; set; }
         public DateTime? PERMITE_DATE { get; set; }
         public decimal? COMPANY_ID { get; set; }
@@ -20,5 +21,12 @@ namespace PMIS.Domain.Entities
 
         public virtual ROLE_INFO? ROLE { get; set; }
         public virtual USER_INFO? USER { get; set; }
+
+        [NotMapped]
+        public string? ROLE_NAME { get; set; }
+        [NotMapped]
+        public string? IS_PERMITTED { get; set; }
+        [NotMapped]
+        public int USER_CONFIG_ID { get; set; }
     }
 }

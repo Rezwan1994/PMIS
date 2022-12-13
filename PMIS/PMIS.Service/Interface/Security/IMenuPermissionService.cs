@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PMIS.Service.Interface.Security.Security
+namespace PMIS.Service.Interface.Security
 {
-    public interface IMenuPermissionManager
+    public interface IMenuPermissionService
     {
         Task<MenuDistribution> LoadPermittedMenuByUserId(int id, int companyId);
         Task<List<PermittedMenu>> LoadLoadPermittedMenus(int companyId);

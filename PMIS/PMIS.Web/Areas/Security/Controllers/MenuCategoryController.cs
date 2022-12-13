@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using PMIS.Domain.Entities;
-using PMIS.Service.Interface.Security.Security;
+using PMIS.Service.Interface.Security;
 using PMIS.Utility.Static;
 using PMIS.Web.Common;
 using System;
@@ -13,16 +13,16 @@ using System.Security.Claims;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace SalesAndDistributionSystem.Areas.Security.Menu.Controllers
+namespace PMIS.Web.Areas.Security.Controllers
 {
     [Area("Security")]
     //[Authorize]
     public class MenuCategoryController : Controller
     {
-        private readonly IMenuCategoryManager _service;
+        private readonly IMenuCategoryService _service;
         private readonly ILogger<MenuCategoryController> _logger;
         private readonly IConfiguration _configuration;
-        public MenuCategoryController(IMenuCategoryManager service, ILogger<MenuCategoryController> logger, IConfiguration configuration)
+        public MenuCategoryController(IMenuCategoryService service, ILogger<MenuCategoryController> logger, IConfiguration configuration)
         {
             _service = service;
             _logger = logger;

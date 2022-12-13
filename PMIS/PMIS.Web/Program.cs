@@ -3,7 +3,7 @@ using PMIS.IOC;
 using PMIS.Repository.Implementation;
 using PMIS.Repository.Interface;
 using PMIS.Service.Implementation.Security;
-using PMIS.Service.Interface.Security.Company;
+using PMIS.Service.Interface.Security;
 using Serilog.Events;
 using Serilog.Formatting.Json;
 using Serilog;

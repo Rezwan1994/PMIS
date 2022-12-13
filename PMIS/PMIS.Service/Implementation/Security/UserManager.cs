@@ -4,7 +4,7 @@ using PMIS.Domain.Common;
 using PMIS.Domain.Entities;
 using PMIS.Domain.ViewModels.Security;
 using PMIS.Repository.Interface;
-using PMIS.Service.Interface.Security.User;
+using PMIS.Service.Interface.Security;
 using PMIS.Utility;
 using System.Data;
 

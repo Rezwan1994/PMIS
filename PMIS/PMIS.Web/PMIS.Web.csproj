@@ -35,6 +35,10 @@
 
   <ItemGroup>
     <Compile Remove="Areas\Security\Controllers\ReportConfigurationController.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Views\Home\NotFound404.cshtml" />
     <Compile Remove="Areas\Security\Controllers\RoleController.cs" />
   </ItemGroup>
 

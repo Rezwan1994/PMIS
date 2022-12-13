@@ -6,7 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
-using PMIS.Service.Interface.Security.Security;
+using PMIS.Service.Interface.Security;
 using PMIS.Repository.Interface;
 using PMIS.Domain.ViewModels.Security;
 using PMIS.Domain.Entities;

@@ -5,12 +5,12 @@ using System.Data;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PMIS.Service.Interface.Security.Security
+namespace PMIS.Service.Interface.Security
 {
     public interface IUserLogManager
     {
-        Task<string> LoadData( string companyId);
-        Task<string> Search( int companyId, SearchModel model);
-        Task<string> AddOrUpdate( string activity_type, string activity_table, int CompanyId, int UnitId, int UserId, string terminal, string page_link, int tran_id, string dtl);
+        Task<string> LoadData(string companyId);
+        Task<string> Search(int companyId, SearchModel model);
+        Task<string> AddOrUpdate(string activity_type, string activity_table, int CompanyId, int UnitId, int UserId, string terminal, string page_link, int tran_id, string dtl);
     }
 }

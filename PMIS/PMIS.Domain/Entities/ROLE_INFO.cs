@@ -11,7 +11,7 @@ namespace PMIS.Domain.Entities
             ROLE_USER_CONFIGURATIONs = new HashSet<ROLE_USER_CONFIGURATION>();
         }
 
-        public decimal ROLE_ID { get; set; }
+        public int ROLE_ID { get; set; }
         public string? ROLE_NAME { get; set; }
         public string? STATUS { get; set; }
         public decimal? COMPANY_ID { get; set; }

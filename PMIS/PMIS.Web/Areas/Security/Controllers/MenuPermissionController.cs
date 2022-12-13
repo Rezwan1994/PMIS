@@ -11,23 +11,23 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text.Json;
 using System.Threading.Tasks;
-using PMIS.Service.Interface.Security.Security;
+using PMIS.Service.Interface.Security;
 using PMIS.Utility.Static;
 using PMIS.Domain.ViewModels.Security;
 using PMIS.Domain.Entities;
 
-namespace SalesAndDistributionSystem.Areas.Security.Menu.Controllers
+namespace PMIS.Web.Areas.Security.Controllers
 {
     [Area("Security")]
     public class MenuPermissionController : Controller
     {
-        private readonly IMenuPermissionManager _service;
+        private readonly IMenuPermissionService _service;
         private readonly IUserMenuConfigManager _UserMenuConfigservice;
         private readonly IHttpContextAccessor _Accessor;
 
         private readonly ILogger<MenuPermissionController> _logger;
         private readonly IConfiguration _configuration;
-        public MenuPermissionController(IMenuPermissionManager service, ILogger<MenuPermissionController> logger, IConfiguration configuration, IUserMenuConfigManager UserMenuConfigservice, IHttpContextAccessor Accessor)
+        public MenuPermissionController(IMenuPermissionService service, ILogger<MenuPermissionController> logger, IConfiguration configuration, IUserMenuConfigManager UserMenuConfigservice, IHttpContextAccessor Accessor)
         {
             _service = service;
             _logger = logger;

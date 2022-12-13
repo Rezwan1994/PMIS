@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using PMIS.Domain.Entities;
-using PMIS.Service.Interface.Security.Company;
+using PMIS.Service.Interface.Security;
 using PMIS.Utility.Static;
 using PMIS.Web.Common;
 using System;
@@ -15,18 +15,16 @@ namespace SalesAndDistributionSystem.Areas.Security.Company.Controllers
     [Area("Security")]
     public class NotificationController : Controller
     {
-        private readonly INotificationManager _service;
+        private readonly INotificationService _service;
         private readonly ILogger<NotificationController> _logger;
         private readonly IConfiguration _configuration;
-        public NotificationController(INotificationManager service, ILogger<NotificationController> logger, IConfiguration configuration)
+        public NotificationController(INotificationService service, ILogger<NotificationController> logger, IConfiguration configuration)
         {
             _service = service;
             _logger = logger;
             _configuration = configuration;
         }
  
-        private string GetDbConnectionString() => User.Claims.FirstOrDefault(x => x.Type == ClaimsType.DbSpecifier).Value.ToString();
-
         public string GetCompany() => User.Claims.FirstOrDefault(x => x.Type == ClaimsType.CompanyId).Value.ToString();
         public string GetCompanyName() => User.Claims.FirstOrDefault(x => x.Type == ClaimsType.CompanyName).Value.ToString();
         public string GetUser() => User.Claims.FirstOrDefault(x => x.Type == ClaimsType.UserId).Value.ToString();

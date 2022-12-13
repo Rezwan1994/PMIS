@@ -8,9 +8,7 @@
 
   <ItemGroup>
     <Compile Remove="Implementation\Security\ReportConfigurationManager.cs" />
-    <Compile Remove="Implementation\Security\RoleManager.cs" />
     <Compile Remove="Interface\Security\IReportConfigurationManager.cs" />
-    <Compile Remove="Interface\Security\IRoleManager.cs" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using PMIS.Domain.ViewModels.Security;
 using PMIS.Repository.Interface;
-using PMIS.Service.Interface.Security.Security;
+using PMIS.Service.Interface.Security;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace PMIS.Service.Implementation.Security
 {
-    public class MenuPermissionManager : IMenuPermissionManager
+    public class MenuPermissionManager : IMenuPermissionService
     {
         private readonly ICommonServices _commonServices;
         private readonly IConfiguration _configuration;

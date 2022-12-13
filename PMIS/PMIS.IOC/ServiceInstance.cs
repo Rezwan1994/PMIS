@@ -6,9 +6,7 @@ using PMIS.Domain.DBContext;
 using PMIS.Repository.Implementation;
 using PMIS.Repository.Interface;
 using PMIS.Service.Implementation.Security;
-using PMIS.Service.Interface.Security.Company;
-using PMIS.Service.Interface.Security.Security;
-using PMIS.Service.Interface.Security.User;
+using PMIS.Service.Interface.Security;
 using PMIS.Utility;
 using System;
 using System.Collections.Generic;
@@ -28,15 +26,15 @@ namespace PMIS.IOC
                 options.UseOracle(connectionString)
             );
 
-            services.AddTransient<ICompanyManager, CompanyManager>();
+            services.AddTransient<ICompanyService, CompanyManager>();
             services.AddTransient<ICommonServices, CommonServices>();
             services.AddTransient<IUserManager, UserManager>();
-            services.AddTransient<IMenuPermissionManager, MenuPermissionManager>();
-            services.AddTransient<IMenuCategoryManager, MenuCategoryManager>();
-            services.AddTransient<IMenuPermissionManager, MenuPermissionManager>();
+            services.AddTransient<IMenuPermissionService, MenuPermissionManager>();
+            services.AddTransient<IMenuCategoryService, MenuCategoryManager>();
+            services.AddTransient<IMenuPermissionService, MenuPermissionManager>();
             services.AddTransient<IUserMenuConfigManager, UserMenuConfigManager>();
             services.AddTransient<IMenuMasterManager, MenuMasterManager>();
-            services.AddTransient<INotificationManager, NotificationManager>();
+            services.AddTransient<INotificationService, NotificationManager>();
             services.AddTransient<IUserLogManager, UserLogManager>();
             services.AddTransient<IEmailService, EmailService>();
             services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();

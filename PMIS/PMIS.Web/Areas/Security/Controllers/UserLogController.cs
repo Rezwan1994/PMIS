@@ -5,9 +5,8 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using PMIS.Domain.Common;
 using PMIS.Repository.Interface;
-using PMIS.Service.Interface.Security.Security;
+using PMIS.Service.Interface.Security;
 using PMIS.Web.Common;
-
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -24,7 +23,7 @@ namespace SalesAndDistributionSystem.Areas.Security.Controllers
         private readonly ILogger<UserLogController> _logger;
 
         private readonly IConfiguration _configuration;
-
+        //private readonly ServiceProvider Provider = new ServiceProvider();
 
         public UserLogController(IUserLogManager _service,
             ILogger<UserLogController> _logger,
@@ -37,12 +36,11 @@ namespace SalesAndDistributionSystem.Areas.Security.Controllers
             this._configuration = _configuration;
         }
 
-     
 
         [HttpGet]
         public Task<string> LoadData()
         {
-            return _service.LoadData( User.GetComapanyId().ToString());
+            return _service.LoadData(User.GetComapanyId().ToString());
         }
 
         [HttpPost]
@@ -55,7 +53,7 @@ namespace SalesAndDistributionSystem.Areas.Security.Controllers
                            .ToList();
                 return JsonConvert.SerializeObject(arr);
             }
-            return await _service.Search( User.GetComapanyId(), model);
+            return await _service.Search(User.GetComapanyId(), model);
         }
 
         [HttpPost]
@@ -64,7 +62,7 @@ namespace SalesAndDistributionSystem.Areas.Security.Controllers
             model.USER_ID = User.GetUserId();
             model.FROM_DATE ??= DateTime.Now.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
             model.TO_DATE ??= DateTime.Now.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
-            return await _service.Search( User.GetComapanyId(), model);
+            return await _service.Search(User.GetComapanyId(), model);
         }
 
         public IActionResult ViewLogs()

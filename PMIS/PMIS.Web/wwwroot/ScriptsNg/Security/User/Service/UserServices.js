@@ -53,6 +53,6 @@
         return $http.post("../User/GetEmployeeWithoutAccount", { COMPANY_ID: comp_id });
     }
     this.GetCompany = function () {
-        return $http.get('/SalesAndDistribution/Market/GetCompany');
+        return $http.get('/security/company/LoadData');
     }
 });

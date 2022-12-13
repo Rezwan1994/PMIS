@@ -1,11 +1,11 @@
 ﻿using Microsoft.Extensions.Configuration;
-using SalesAndDistributionSystem.Domain.Common;
-using SalesAndDistributionSystem.Domain.Models.TableModels.Security;
-using SalesAndDistributionSystem.Domain.Models.ViewModels.Security;
 using PMIS.Domain.Common;
-using SalesAndDistributionSystem.Services.Business.Security;
-using SalesAndDistributionSystem.Services.Business.User;
-using SalesAndDistributionSystem.Services.Common;
+using PMIS.Domain.Entities;
+using PMIS.Domain.ViewModels.Security;
+using PMIS.Repository.Interface;
+using PMIS.Service.Interface.Security;
+using PMIS.Service.Interface.Security;
+using PMIS.Utility.Static;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace PMIS.Service.Implementation.Security
 {
-    public class RoleManager : IRoleManager
+    public class RoleManager : IRoleService
     {
         private readonly ICommonServices _commonServices;
         private readonly IConfiguration _configuration;
@@ -55,9 +55,9 @@ namespace PMIS.Service.Implementation.Security
 
         private string GetNewRole_InfoIdQuery() => "SELECT NVL(MAX(ROLE_ID),0) + 1 ROLE_ID  FROM Role_Info";
 
-        public string LoadData(string db, int companyId) => _commonServices.DataTableToJSON(_commonServices.GetDataTable(_configuration.GetConnectionString(db), loadDataQuery(), _commonServices.AddParameter(new string[] { companyId.ToString() })));
+        public string LoadData(int companyId) => _commonServices.DataTableToJSON(_commonServices.GetDataTable(loadDataQuery(), _commonServices.AddParameter(new string[] { companyId.ToString() })));
 
-        public async Task<string> AddOrUpdate(string db, Role_Info model)
+        public async Task<string> AddOrUpdate(ROLE_INFO model)
         {
             if (model == null)
             {
@@ -70,17 +70,17 @@ namespace PMIS.Service.Implementation.Security
                 {
                     if (model.ROLE_ID == 0)
                     {
-                        model.ROLE_ID = _commonServices.GetMaximumNumber<int>(_configuration.GetConnectionString(db), GetNewRole_InfoIdQuery(), _commonServices.AddParameter(new string[] { }));
+                        model.ROLE_ID = _commonServices.GetMaximumNumber<int>(GetNewRole_InfoIdQuery(), _commonServices.AddParameter(new string[] { }));
                         model.STATUS = Status.Active;
 
-                        listOfQuery.Add(_commonServices.AddQuery(AddOrUpdate_AddQuery(), _commonServices.AddParameter(new string[] { model.ROLE_ID.ToString(), model.ROLE_NAME, model.STATUS, model.ENTERED_TERMINAL, model.ENTERED_DATE, model.ENTERED_BY.ToString(), model.COMPANY_ID.ToString(), model.UNIT_ID.ToString() })));
+                        listOfQuery.Add(_commonServices.AddQuery(AddOrUpdate_AddQuery(), _commonServices.AddParameter(new string[] { model.ROLE_ID.ToString(), model.ROLE_NAME, model.STATUS, model.ENTERED_TERMINAL, model.ENTERED_DATE?.ToString("dd/MM/yyyy hh:mm:ss tt"), model.ENTERED_BY.ToString(), model.COMPANY_ID.ToString(), model.UNIT_ID.ToString() })));
                     }
                     else
                     {
-                        listOfQuery.Add(_commonServices.AddQuery(AddOrUpdate_UpdateQuery(), _commonServices.AddParameter(new string[] { model.ROLE_ID.ToString(), model.ROLE_NAME, model.UPDATED_BY.ToString(), model.UPDATED_DATE, model.UPDATED_TERMINAL })));
+                        listOfQuery.Add(_commonServices.AddQuery(AddOrUpdate_UpdateQuery(), _commonServices.AddParameter(new string[] { model.ROLE_ID.ToString(), model.ROLE_NAME, model.UPDATED_BY.ToString(), model.UPDATED_DATE?.ToString("dd/MM/yyyy hh:mm:ss tt"), model.UPDATED_TERMINAL })));
                     }
 
-                    await _commonServices.SaveChangesAsyn(_configuration.GetConnectionString(db), listOfQuery);
+                    await _commonServices.SaveChangesAsyn(listOfQuery);
                     return "1";
                 }
                 catch (Exception ex)
@@ -90,7 +90,7 @@ namespace PMIS.Service.Implementation.Security
             }
         }
 
-        public async Task<string> ActivateRole(string db, int id)
+        public async Task<string> ActivateRole(int id)
         {
             if (id < 1)
             {
@@ -103,7 +103,7 @@ namespace PMIS.Service.Implementation.Security
                 {
                     listOfQuery.Add(_commonServices.AddQuery(ActivateRoleQuery(), _commonServices.AddParameter(new string[] { id.ToString() })));
 
-                    await _commonServices.SaveChangesAsyn(_configuration.GetConnectionString(db), listOfQuery);
+                    await _commonServices.SaveChangesAsyn(listOfQuery);
                     return "1";
                 }
                 catch (Exception ex)
@@ -113,7 +113,7 @@ namespace PMIS.Service.Implementation.Security
             }
         }
 
-        public async Task<string> DeactivateRole(string db, int id)
+        public async Task<string> DeactivateRole(int id)
         {
             if (id < 1)
             {
@@ -126,7 +126,7 @@ namespace PMIS.Service.Implementation.Security
                 {
                     listOfQuery.Add(_commonServices.AddQuery(DeactivateRoleQuery(), _commonServices.AddParameter(new string[] { id.ToString() })));
 
-                    await _commonServices.SaveChangesAsyn(_configuration.GetConnectionString(db), listOfQuery);
+                    await _commonServices.SaveChangesAsyn(listOfQuery);
                     return "1";
                 }
                 catch (Exception ex)
@@ -163,12 +163,12 @@ namespace PMIS.Service.Implementation.Security
 
         private string GetNewRoleMenuConfigIdQuery() => "SELECT NVL(MAX(ID),0) + 1 ID  FROM ROlE_MENU_CONFIGURATION";
 
-        public async Task<string> GetSearchableRoles(string db, int companyId, string role_name) => _commonServices.DataTableToJSON(await _commonServices.GetDataTableAsyn(_configuration.GetConnectionString(db), GetSearchableRolesQuery(), _commonServices.AddParameter(new string[] { companyId.ToString(), role_name })));
+        public async Task<string> GetSearchableRoles(int companyId, string role_name) => _commonServices.DataTableToJSON(await _commonServices.GetDataTableAsyn(GetSearchableRolesQuery(), _commonServices.AddParameter(new string[] { companyId.ToString(), role_name })));
 
-        public async Task<string> RoleMenuConfigSelectionList(string db, int companyId, int roleId)
+        public async Task<string> RoleMenuConfigSelectionList(int companyId, int roleId)
         {
-            DataTable MenuLoad = await _commonServices.GetDataTableAsyn(_configuration.GetConnectionString(db), RoleMenuQuery(), _commonServices.AddParameter(new string[] { companyId.ToString() }));
-            DataTable ConfigDataLoad = await _commonServices.GetDataTableAsyn(_configuration.GetConnectionString(db), RoleConfigQuery(), _commonServices.AddParameter(new string[] { companyId.ToString(), roleId.ToString() }));
+            DataTable MenuLoad = await _commonServices.GetDataTableAsyn(RoleMenuQuery(), _commonServices.AddParameter(new string[] { companyId.ToString() }));
+            DataTable ConfigDataLoad = await _commonServices.GetDataTableAsyn(RoleConfigQuery(), _commonServices.AddParameter(new string[] { companyId.ToString(), roleId.ToString() }));
             List<RoleMenuConfigView> roleMenuConfigView = new List<RoleMenuConfigView>();
 
             for (int i = 0; i < MenuLoad.Rows.Count; i++)
@@ -214,23 +214,23 @@ namespace PMIS.Service.Implementation.Security
             return JsonSerializer.Serialize(roleMenuConfigView);
         }
 
-        public async Task<string> AddRoleMenuConfiguration(string db, List<Role_Menu_Configuration> roleMenuConfig)
+        public async Task<string> AddRoleMenuConfiguration(List<ROLE_MENU_CONFIGURATION> roleMenuConfig)
         {
             List<QueryPattern> listOfQuery = new List<QueryPattern>();
             try
             {
                 BindRoleMenuConfig(roleMenuConfig);
-                int new_ID = _commonServices.GetMaximumNumber<int>(_configuration.GetConnectionString(db), GetNewRoleMenuConfigIdQuery(), _commonServices.AddParameter(new string[] { }));
+                int new_ID = _commonServices.GetMaximumNumber<int>(GetNewRoleMenuConfigIdQuery(), _commonServices.AddParameter(new string[] { }));
                 foreach (var model in roleMenuConfig)
                 {
-                    if (model.ROLE_CONFIG_ID == 0)
+                    if (model.ID == 0)
                     {
                         model.ID = new_ID;
 
                         listOfQuery.Add(_commonServices.AddQuery(AddRoleMenuConfigQuery(),
                         _commonServices.AddParameter(new string[] { model.ID.ToString(),  model.COMPANY_ID.ToString(), model.ROLE_ID.ToString(), model.MENU_ID.ToString()
                         , model.LIST_VIEW, model.ADD_PERMISSION,model.EDIT_PERMISSION, model.DETAIL_VIEW, model.DELETE_PERMISSION, model.DOWNLOAD_PERMISSION
-                        , model.ENTERED_BY.ToString(), model.ENTERED_DATE, model.ENTERED_TERMINAL, model.CONFIRM_PERMISSION
+                        , model.ENTERED_BY.ToString(), model.ENTERED_DATE?.ToString("dd/MM/yyyy hh:mm:ss tt"), model.ENTERED_TERMINAL, model.CONFIRM_PERMISSION
                          })));
                     }
                     else
@@ -238,13 +238,13 @@ namespace PMIS.Service.Implementation.Security
                         listOfQuery.Add(_commonServices.AddQuery(AccRoleMenuConfigUpdateQuery(),
                          _commonServices.AddParameter(new string[] {  model.LIST_VIEW, model.ADD_PERMISSION,
                              model.EDIT_PERMISSION, model.DETAIL_VIEW, model.DELETE_PERMISSION, model.DOWNLOAD_PERMISSION
-                        , model.UPDATED_BY.ToString(), model.UPDATED_DATE, model.UPDATED_TERMINAL, model.ROLE_CONFIG_ID.ToString(), model.CONFIRM_PERMISSION
+                        , model.UPDATED_BY.ToString(), model.UPDATED_DATE?.ToString("dd/MM/yyyy hh:mm:ss tt"), model.UPDATED_TERMINAL, model.ID.ToString(), model.CONFIRM_PERMISSION
                           })));
                     }
 
                     new_ID++;
                 }
-                await _commonServices.SaveChangesAsyn(_configuration.GetConnectionString(db), listOfQuery);
+                await _commonServices.SaveChangesAsyn(listOfQuery);
 
                 return "1";
             }
@@ -254,7 +254,7 @@ namespace PMIS.Service.Implementation.Security
             }
         }
 
-        public List<Role_Menu_Configuration> BindRoleMenuConfig(List<Role_Menu_Configuration> model)
+        public List<ROLE_MENU_CONFIGURATION> BindRoleMenuConfig(List<ROLE_MENU_CONFIGURATION> model)
         {
             foreach (var item in model)
             {
@@ -287,17 +287,17 @@ namespace PMIS.Service.Implementation.Security
 
         private string AddRoleUserConfigDeleteQuery() => @"DELETE from ROLE_USER_CONFIGURATION Where ID = :param1";
 
-        public async Task<string> RoleUserConfigSelectionList(string db, int companyId, int userId)
+        public async Task<string> RoleUserConfigSelectionList(int companyId, int userId)
         {
-            DataTable MenuLoad = await _commonServices.GetDataTableAsyn(_configuration.GetConnectionString(db), RoleUserConfigSelectionQuery(), _commonServices.AddParameter(new string[] { companyId.ToString() }));
-            DataTable ConfigDataLoad = await _commonServices.GetDataTableAsyn(_configuration.GetConnectionString(db), RoleUserConfigQuery(), _commonServices.AddParameter(new string[] { companyId.ToString(), userId.ToString() }));
-            List<Role_User_Configuration> roleMenuConfigView = new List<Role_User_Configuration>();
+            DataTable MenuLoad = await _commonServices.GetDataTableAsyn(RoleUserConfigSelectionQuery(), _commonServices.AddParameter(new string[] { companyId.ToString() }));
+            DataTable ConfigDataLoad = await _commonServices.GetDataTableAsyn(RoleUserConfigQuery(), _commonServices.AddParameter(new string[] { companyId.ToString(), userId.ToString() }));
+            List<ROLE_USER_CONFIGURATION> roleMenuConfigView = new List<ROLE_USER_CONFIGURATION>();
 
             for (int i = 0; i < MenuLoad.Rows.Count; i++)
             {
-                Role_User_Configuration model = new Role_User_Configuration
+                ROLE_USER_CONFIGURATION model = new ROLE_USER_CONFIGURATION
                 {
-                    ROW_NO = i + 1,
+                    //ROW_NO = i + 1,
 
                     ROLE_ID = Convert.ToInt32(MenuLoad.Rows[i]["ROLE_ID"]),
 
@@ -309,33 +309,33 @@ namespace PMIS.Service.Implementation.Security
 
             for (int i = 0; i < ConfigDataLoad.Rows.Count; i++)
             {
-                Role_User_Configuration configView = roleMenuConfigView.Where(x => x.ROLE_ID == Convert.ToInt32(ConfigDataLoad.Rows[i]["ROLE_ID"])).FirstOrDefault();
+                ROLE_USER_CONFIGURATION configView = roleMenuConfigView.Where(x => x.ROLE_ID == Convert.ToInt32(ConfigDataLoad.Rows[i]["ROLE_ID"])).FirstOrDefault();
 
                 configView.IS_PERMITTED = "Active";
 
                 configView.USER_CONFIG_ID = Convert.ToInt32(ConfigDataLoad.Rows[i]["USER_CONFIG_ID"]);
-                configView.ENTERED_DATE = ConfigDataLoad.Rows[i]["ENTERED_DATE"].ToString();
-                if (ConfigDataLoad.Rows[i]["USER_CONFIG_ID"] != null && ConfigDataLoad.Rows[i]["USER_CONFIG_ID"].ToString() != "")
-                {
-                    configView.UPDATED_DATE = ConfigDataLoad.Rows[i]["USER_CONFIG_ID"].ToString();
-                }
+                //configView.ENTERED_DATE = ConfigDataLoad.Rows[i]["ENTERED_DATE"].ToString();
+                //if (ConfigDataLoad.Rows[i]["USER_CONFIG_ID"] != null && ConfigDataLoad.Rows[i]["USER_CONFIG_ID"].ToString() != "")
+                //{
+                //    configView.UPDATED_DATE = ConfigDataLoad.Rows[i]["USER_CONFIG_ID"].ToString();
+                //}
             }
 
             return JsonSerializer.Serialize(roleMenuConfigView);
         }
 
-        public async Task<string> RoleCentralUserConfigSelectionList(string db, int userId)
+        public async Task<string> RoleCentralUserConfigSelectionList(int userId)
         {
-            int companyId = _userManager.GetCompanyIdByUserId(db, userId);
-            DataTable MenuLoad = await _commonServices.GetDataTableAsyn(_configuration.GetConnectionString(db), RoleUserConfigSelectionQuery(), _commonServices.AddParameter(new string[] { companyId.ToString() }));
-            DataTable ConfigDataLoad = await _commonServices.GetDataTableAsyn(_configuration.GetConnectionString(db), RoleCentralUserConfigQuery(), _commonServices.AddParameter(new string[] { userId.ToString() }));
-            List<Role_User_Configuration> roleMenuConfigView = new List<Role_User_Configuration>();
+            int companyId = _userManager.GetCompanyIdByUserId(userId);
+            DataTable MenuLoad = await _commonServices.GetDataTableAsyn(RoleUserConfigSelectionQuery(), _commonServices.AddParameter(new string[] { companyId.ToString() }));
+            DataTable ConfigDataLoad = await _commonServices.GetDataTableAsyn(RoleCentralUserConfigQuery(), _commonServices.AddParameter(new string[] { userId.ToString() }));
+            List<ROLE_USER_CONFIGURATION> roleMenuConfigView = new List<ROLE_USER_CONFIGURATION>();
 
             for (int i = 0; i < MenuLoad.Rows.Count; i++)
             {
-                Role_User_Configuration model = new Role_User_Configuration
+                ROLE_USER_CONFIGURATION model = new ROLE_USER_CONFIGURATION
                 {
-                    ROW_NO = i + 1,
+                    //ROW_NO = i + 1,
 
                     ROLE_ID = Convert.ToInt32(MenuLoad.Rows[i]["ROLE_ID"]),
 
@@ -347,27 +347,27 @@ namespace PMIS.Service.Implementation.Security
 
             for (int i = 0; i < ConfigDataLoad.Rows.Count; i++)
             {
-                Role_User_Configuration configView = roleMenuConfigView.Where(x => x.ROLE_ID == Convert.ToInt32(ConfigDataLoad.Rows[i]["ROLE_ID"])).FirstOrDefault();
+                ROLE_USER_CONFIGURATION configView = roleMenuConfigView.Where(x => x.ROLE_ID == Convert.ToInt32(ConfigDataLoad.Rows[i]["ROLE_ID"])).FirstOrDefault();
 
                 configView.IS_PERMITTED = "Active";
 
                 configView.USER_CONFIG_ID = Convert.ToInt32(ConfigDataLoad.Rows[i]["USER_CONFIG_ID"]);
-                configView.ENTERED_DATE = ConfigDataLoad.Rows[i]["ENTERED_DATE"].ToString();
-                if (ConfigDataLoad.Rows[i]["USER_CONFIG_ID"] != null && ConfigDataLoad.Rows[i]["USER_CONFIG_ID"].ToString() != "")
-                {
-                    configView.UPDATED_DATE = ConfigDataLoad.Rows[i]["USER_CONFIG_ID"].ToString();
-                }
+                //configView.ENTERED_DATE = ConfigDataLoad.Rows[i]["ENTERED_DATE"].ToString();
+                //if (ConfigDataLoad.Rows[i]["USER_CONFIG_ID"] != null && ConfigDataLoad.Rows[i]["USER_CONFIG_ID"].ToString() != "")
+                //{
+                //    configView.UPDATED_DATE = ConfigDataLoad.Rows[i]["USER_CONFIG_ID"].ToString();
+                //}
             }
 
             return JsonSerializer.Serialize(roleMenuConfigView);
         }
 
-        public async Task<string> AddRoleUserConfiguration(string db, List<Role_User_Configuration> roleUserConfig)
+        public async Task<string> AddRoleUserConfiguration(List<ROLE_USER_CONFIGURATION> roleUserConfig)
         {
             List<QueryPattern> listOfQuery = new List<QueryPattern>();
             try
             {
-                int new_ID = _commonServices.GetMaximumNumber<int>(_configuration.GetConnectionString(db), GetNewRoleUserConfigIdQuery(), _commonServices.AddParameter(new string[] { }));
+                int new_ID = _commonServices.GetMaximumNumber<int>(GetNewRoleUserConfigIdQuery(), _commonServices.AddParameter(new string[] { }));
                 foreach (var model in roleUserConfig)
                 {
                     if (model.USER_CONFIG_ID != 0 && model.IS_PERMITTED != Status.Active)
@@ -381,14 +381,14 @@ namespace PMIS.Service.Implementation.Security
                     {
                         model.ID = new_ID;
                         listOfQuery.Add(_commonServices.AddQuery(AddRoleUserConfigInsertQuery(),
-                        _commonServices.AddParameter(new string[] { model.ID.ToString(), model.ROLE_ID.ToString(), model.USER_ID.ToString(), model.PERMITTED_BY, model.PERMITE_DATE,  model.COMPANY_ID.ToString()
-                        , model.ENTERED_BY.ToString(), model.ENTERED_DATE, model.ENTERED_TERMINAL
+                        _commonServices.AddParameter(new string[] { model.ID.ToString(), model.ROLE_ID.ToString(), model.USER_ID.ToString(), model.PERMITTED_BY, model.PERMITE_DATE?.ToString("dd/MM/yyyy hh:mm:ss tt"),  model.COMPANY_ID.ToString()
+                        , model.ENTERED_BY.ToString(), model.ENTERED_DATE?.ToString("dd/MM/yyyy hh:mm:ss tt"), model.ENTERED_TERMINAL
                          })));
 
                         new_ID++;
                     }
                 }
-                await _commonServices.SaveChangesAsyn(_configuration.GetConnectionString(db), listOfQuery);
+                await _commonServices.SaveChangesAsyn(listOfQuery);
 
                 return "1";
             }

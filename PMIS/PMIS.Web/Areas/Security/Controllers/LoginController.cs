@@ -7,15 +7,13 @@ using PMIS.Domain.Common;
 using PMIS.Domain.Entities;
 using PMIS.Domain.ViewModels.Security;
 using PMIS.Repository.Interface;
-using PMIS.Service.Interface.Security.Company;
-using PMIS.Service.Interface.Security.Security;
-using PMIS.Service.Interface.Security.User;
+using PMIS.Service.Interface.Security;
 using PMIS.Utility.Static;
 
 using System.Security.Claims;
 using System.Text.Json;
 
-namespace SalesAndDistributionSystem.Areas.Security.User.Controllers
+namespace PMIS.Web.Areas.Security.Controllers
 {
     [Area("Security")]
     public class LoginController : Controller
@@ -23,15 +21,15 @@ namespace SalesAndDistributionSystem.Areas.Security.User.Controllers
         private readonly ILogger<LoginController> _logger;
         private readonly IUserManager _accountService;
         private readonly IConfiguration _configuration;
-        private readonly IMenuPermissionManager _menuService;
-        private readonly ICompanyManager _companyService;
+        private readonly IMenuPermissionService _menuService;
+        private readonly ICompanyService _companyService;
         private readonly IWebHostEnvironment _hostingEnvironment;
         private readonly IHttpContextAccessor _Accessor;
 
         //private readonly IReportConfigurationManager _reportManager;
         private readonly ICommonServices _commonServices;
 
-        public LoginController(ILogger<LoginController> logger, IUserManager accountService, IConfiguration configuration, IMenuPermissionManager menuPermission, ICompanyManager companyManager, IWebHostEnvironment hostingEnvironment, IHttpContextAccessor Accessor/*, IReportConfigurationManager reportManager*/, ICommonServices commonServices)
+        public LoginController(ILogger<LoginController> logger, IUserManager accountService, IConfiguration configuration, IMenuPermissionService menuPermission, ICompanyService companyManager, IWebHostEnvironment hostingEnvironment, IHttpContextAccessor Accessor/*, IReportConfigurationManager reportManager*/, ICommonServices commonServices)
         {
             _logger = logger;
             this._accountService = accountService;
