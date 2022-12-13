@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 namespace SalesAndDistributionSystem.Areas.Security.Menu.Controllers
 {
     [Area("Security")]
-    [Authorize]
+    //[Authorize]
     public class MenuCategoryController : Controller
     {
         private readonly IMenuCategoryManager _service;
