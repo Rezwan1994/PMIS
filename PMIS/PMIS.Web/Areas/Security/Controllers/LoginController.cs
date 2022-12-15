@@ -9,7 +9,7 @@ using PMIS.Domain.ViewModels.Security;
 using PMIS.Repository.Interface;
 using PMIS.Service.Interface.Security;
 using PMIS.Utility.Static;
-
+using PMIS.Web.Common;
 using System.Security.Claims;
 using System.Text.Json;
 
@@ -168,78 +168,64 @@ namespace PMIS.Web.Areas.Security.Controllers
             return View(company_Infos);
         }
 
-        //[AuthorizeCheck]
-        //public IActionResult ChangePassword()
-        //{
-        //    _logger.LogInformation("Change Password(Login/ChangePassword) Page Has been accessed By " + User.Claims.FirstOrDefault(x => x.Type == ClaimsType.UserName).Value.ToString() + " ( ID= " + User.Claims.FirstOrDefault(x => x.Type == ClaimsType.UserId).Value.ToString());
-        //    return View();
-        //}
+        [AuthorizeCheck]
+        public IActionResult ChangePassword()
+        {
+            _logger.LogInformation("Change Password(Login/ChangePassword) Page Has been accessed By " + User.Claims.FirstOrDefault(x => x.Type == ClaimsType.UserName).Value.ToString() + " ( ID= " + User.Claims.FirstOrDefault(x => x.Type == ClaimsType.UserId).Value.ToString());
+            return View();
+        }
 
-        //[HttpPost]
-        //public async Task<IActionResult> ChangePassword(PasswordChangeModel changeModel)
-        //{
-        //    if(changeModel!= null)
-        //    {
-        //        changeModel.USER_ID = Convert.ToInt32(User.Claims.FirstOrDefault(x => x.Type == ClaimsType.UserId).Value.ToString());
-        //        changeModel.Email = GetEmailOfCurrentUser();
-        //        changeModel.User_Name = GetUserNameOfCurrentUser();
-        //        changeModel.Path = _hostingEnvironment.WebRootPath + "/Templates/EmailTemplate/AccountVerification_EmailTemplate.cshtml";
-        //        ViewData["ErrMsg"] = await _accountService.UpdateUserPassword(GetDbConnectionString(), changeModel);
-        //    }
-        //    return View();
-        //}
+        [HttpPost]
+        public async Task<IActionResult> ChangePassword(PasswordChangeModel changeModel)
+        {
+            if (changeModel != null)
+            {
+                changeModel.USER_ID = Convert.ToInt32(User.Claims.FirstOrDefault(x => x.Type == ClaimsType.UserId).Value.ToString());
+                changeModel.Email = GetEmailOfCurrentUser();
+                changeModel.User_Name = GetUserNameOfCurrentUser();
+                changeModel.Path = _hostingEnvironment.WebRootPath + "/Templates/EmailTemplate/AccountVerification_EmailTemplate.cshtml";
+                ViewData["ErrMsg"] = await _accountService.UpdateUserPassword(changeModel);
+            }
+            return View();
+        }
 
-        //public async Task<IActionResult> ForgetPassword()
-        //{
-        //    _logger.LogInformation("Forget Password(Login/ForgetPassword) Page Has been accessed");
-        //    List<Company_Info> company_Infos = await _companyService.GetCompanyList(GetDbConnectionString());
+        public async Task<IActionResult> ForgetPassword()
+        {
+            _logger.LogInformation("Forget Password(Login/ForgetPassword) Page Has been accessed");
+            List<COMPANY_INFO> company_Infos = await _companyService.GetCompanyList();
 
-        //    return View(company_Infos);
-        //}
+            return View(company_Infos);
+        }
 
-        //[HttpPost]
-        //public async Task<IActionResult> ForgetPassword( PasswordChangeModel changeModel)
-        //{
-        //    if (changeModel != null && changeModel.Company_Id > 0)
-        //    {
-        //        Auth _auth = _accountService.GetUserByEmail(GetDbConnectionString(changeModel.Company_Id), changeModel.Email);
-        //       if(_auth!=null)
-        //        {
-        //            changeModel.USER_ID = Convert.ToInt32(_auth.UserId);
-        //            changeModel.Email = _auth.Email;
-        //            changeModel.User_Name =_auth.UserName;
-        //            changeModel.Path = _hostingEnvironment.WebRootPath + "/Templates/EmailTemplate/AccountVerification_EmailTemplate.cshtml";
-        //            ViewData["Notify"] = await _accountService.ForgetPasswordVerify(GetDbConnectionString(changeModel.Company_Id), changeModel);
+        [HttpPost]
+        public async Task<IActionResult> ForgetPassword(PasswordChangeModel changeModel)
+        {
+            if (changeModel != null && changeModel.Company_Id > 0)
+            {
+                Auth _auth = _accountService.GetUserByEmail(changeModel.Email);
+                if (_auth != null)
+                {
+                    changeModel.USER_ID = Convert.ToInt32(_auth.UserId);
+                    changeModel.Email = _auth.Email;
+                    changeModel.User_Name = _auth.UserName;
+                    changeModel.Path = _hostingEnvironment.WebRootPath + "/Templates/EmailTemplate/AccountVerification_EmailTemplate.cshtml";
+                    ViewData["Notify"] = await _accountService.ForgetPasswordVerify(changeModel);
 
-        //        }
-        //        else
-        //        {
-        //            ViewData["Notify"] = "Please enter valid Email and Select Your Company";
+                }
+                else
+                {
+                    ViewData["Notify"] = "Please enter valid Email and Select Your Company";
 
-        //        }
-        //    }
-        //    return View();
-        //}
-        //public async Task<IActionResult> LogOut()
-        //{
-        //    await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-        //    _Accessor.HttpContext.Response.Cookies.Delete("MenuHolder");
-        //    return LocalRedirect("/");
-        //}
+                }
+            }
+            return View();
+        }
 
-        //private string GetDbConnectionString(int Company_Id = 1)
-        //{
-        //    ServiceProvider _serve = new ServiceProvider();
-        //    string claim =    _serve.GetConnectionString(Company_Id.ToString(), "Security");
-        //    if (claim!=null)
-        //    {
-        //        return claim;
-        //    }
-        //    else
-        //    {
-        //        return string.Empty;
-        //    }
-
-        //}
+        public async Task<IActionResult> LogOut()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            _Accessor.HttpContext?.Response.Cookies.Delete("MenuHolder");
+            return LocalRedirect("/");
+        }
     }
 }

@@ -19,14 +19,11 @@ namespace PMIS.Web.Areas.Security.Controllers
     {
         private readonly IMenuMasterService _service;
         private readonly ILogger<MenuMasterController> _logger;
-        private readonly IConfiguration _configuration;
-        public MenuMasterController(IMenuMasterService service, ILogger<MenuMasterController> logger, IConfiguration configuration)
+        public MenuMasterController(IMenuMasterService service, ILogger<MenuMasterController> logger)
         {
             _service = service;
             _logger = logger;
-            _configuration = configuration;
         }
-        private string GetDbConnectionString() => User.Claims.FirstOrDefault(x => x.Type == ClaimsType.DbSpecifier).Value.ToString();
         
         //[AuthorizeCheck]
         public IActionResult Index()

@@ -17,4 +17,8 @@
     <ProjectReference Include="..\PMIS.Utility\PMIS.Utility.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Implementation\Security\" />
+  </ItemGroup>
+
 </Project>

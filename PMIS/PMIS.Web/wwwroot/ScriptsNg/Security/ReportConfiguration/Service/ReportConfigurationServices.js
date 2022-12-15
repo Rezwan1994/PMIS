@@ -6,9 +6,7 @@
         return $http.post('../MenuMaster/LoadData', { COMPANY_ID: parseInt(companyId)});
     }
 
-
     this.AddOrUpdate = function (model) {
-        
         var dataType = 'application/json; charset=utf-8';
         return $http({
             type: 'POST',
@@ -64,16 +62,9 @@
         return $http.post("/Security/ReportConfiguration/GetSearchableUsers", { USER_NAME: user_name });
     }
     this.UserReportConfigSelectionList = function (Id) {
-        
         return $http.post("/Security/ReportConfiguration/UserReportConfigSelectionList", { USER_ID: Id });
     }
-    
     this.SaveUserReportConfiguration = function (model) {
-        
-
         return $http.post("/Security/ReportConfiguration/SaveUserReportConfiguration", JSON.stringify(model));
     }
-
-  
-    
 });

@@ -39,6 +39,15 @@ namespace PMIS.Web.Common
                 {
                     Is_Permitted = provider.HasPermission(JsonSerializer.Deserialize<MenuDistribution>(filterContext.HttpContext.Session.GetString("RolePermission")), ControllerName, ActionName);
                 }
+                //else
+                //{
+                //    filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary
+                //    {
+                //        { "Area", "Security" },
+                //        { "controler", "Login" },
+                //        { "action", "Index" }
+                //    });
+                //}
                 if (!Is_Permitted)
                 {
                     filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary

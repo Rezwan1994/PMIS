@@ -15,9 +15,11 @@ using PMIS.Service.Interface.Security;
 using PMIS.Utility.Static;
 using PMIS.Domain.ViewModels.Security;
 using PMIS.Domain.Entities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace PMIS.Web.Areas.Security.Controllers
 {
+    [Authorize]
     [Area("Security")]
     public class MenuPermissionController : Controller
     {
@@ -38,7 +40,7 @@ namespace PMIS.Web.Areas.Security.Controllers
 
         }
         private string GetDbConnectionString() => User.Claims.FirstOrDefault(x => x.Type == ClaimsType.DbSpecifier).Value.ToString();
-        private string GetPermissionString() => HttpContext.Session.GetString(ClaimsType.RolePermission) != null ? HttpContext.Session.GetString(ClaimsType.RolePermission).ToString() : null;
+        private string GetPermissionString() => HttpContext?.Session?.GetString(ClaimsType.RolePermission) != null ? HttpContext?.Session?.GetString(ClaimsType.RolePermission)?.ToString() : null;
 
         //[AuthorizeCheck]
         public IActionResult Index()
@@ -52,23 +54,32 @@ namespace PMIS.Web.Areas.Security.Controllers
 
         public IActionResult GetPermissions([FromBody] UserPermission model)
         {
-           MenuDistribution distribution = JsonSerializer.Deserialize<MenuDistribution>(this.GetPermissionString());
-            if(distribution!=null)
+            if(this.GetPermissionString() != null)
             {
-                PermittedMenu permittedMenu = distribution.PermittedMenus.Where(x => x.ACTION == model.Action_Name && x.CONTROLLER == model.Controller_Name).FirstOrDefault();
-                permittedMenu.USER_TYPE = User.Claims.FirstOrDefault(x => x.Type == ClaimsType.UserType).Value;
-                return Json(permittedMenu);
+               MenuDistribution distribution = JsonSerializer.Deserialize<MenuDistribution>(this.GetPermissionString());
+
+                if (distribution != null)
+                {
+                    PermittedMenu permittedMenu = distribution.PermittedMenus
+                        .Where(x => x.ACTION == model.Action_Name && x.CONTROLLER == model.Controller_Name)
+                        .FirstOrDefault();
+                    if(permittedMenu != null)
+                    {
+                        permittedMenu.USER_TYPE = User.Claims.FirstOrDefault(x => x.Type == ClaimsType.UserType)?.Value;
+                    }
+                    return Json(permittedMenu);
+                }
             }
-            return null;
+
+            return Json("");
         }
 
 
         public async Task<string> UserMenuConfigSelectionList([FromBody] UserMenuConfigView UserMenuConfigView)
         {
-            int comp_id = Convert.ToInt32(User.Claims.FirstOrDefault(x => x.Type == ClaimsType.CompanyId).Value);
+            int comp_id = Convert.ToInt32(User.Claims.FirstOrDefault(x => x.Type == ClaimsType.CompanyId)?.Value);
             string result = await _UserMenuConfigservice.UserMenuConfigSelectionList( comp_id, UserMenuConfigView.USER_ID);
             return result;
-
         }
 
 
@@ -145,7 +156,7 @@ namespace PMIS.Web.Areas.Security.Controllers
         public IActionResult GetUserInfo()
         {
 
-            var claims = User.Claims.FirstOrDefault(x => x.Type == ClaimsType.UserName).Value;
+            var claims = User.Claims.FirstOrDefault(x => x.Type == ClaimsType.UserName)?.Value;
 
 
             return Json(claims);
@@ -153,9 +164,8 @@ namespace PMIS.Web.Areas.Security.Controllers
         [HttpPost]
         public string SearchableMenuLoad([FromBody] string MENU_NAME)
         {
-
-            string user_id = User.Claims.FirstOrDefault(x => x.Type == ClaimsType.UserId).Value;
-            string comp_id = User.Claims.FirstOrDefault(x => x.Type == ClaimsType.CompanyId).Value;
+            string user_id = User.Claims?.FirstOrDefault(x => x.Type == ClaimsType.UserId)?.Value;
+            string comp_id = User.Claims?.FirstOrDefault(x => x.Type == ClaimsType.CompanyId)?.Value;
            return  _service.SearchableMenuLoad(comp_id, user_id, MENU_NAME);
         }
 

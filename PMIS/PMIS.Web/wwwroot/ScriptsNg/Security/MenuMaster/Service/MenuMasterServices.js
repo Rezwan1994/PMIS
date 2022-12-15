@@ -37,6 +37,6 @@
         return $http.get('../Company/LoadData');
     }
     this.GetCompany = function () {
-        return $http.get('/SalesAndDistribution/Market/GetCompany');
+        return $http.get('/Security/Company/GetCompany');
     }
 });

@@ -198,7 +198,7 @@ INNER JOIN Menu_Configuration MC on MC.MENU_ID = RU.MENU_ID
             DataTable MenuCategoryData = _commonServices.GetDataTable(defaultPageQuery(), _commonServices.AddParameter(new string[] { User_Id.ToString() }));
             if (MenuCategoryData != null && MenuCategoryData.Rows.Count > 0)
             {
-                return MenuCategoryData.Rows[0]["HREF"].ToString();
+                return _commonServices.GetMaximumNumber<string>(defaultPageQuery(), _commonServices.AddParameter(new string[] { User_Id.ToString() }));
             }
             else
             {

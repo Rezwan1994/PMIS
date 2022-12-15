@@ -21,7 +21,8 @@ builder.Logging.AddSeq(builder.Configuration.GetSection("Seq"));
 //builder.Logging.AddConfiguration()
 
 
-builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(x => x.LoginPath = "/Security/Login/Index");
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(x => x.LoginPath = "/Security/Login/Index");
 
 builder.Services.AddSession(options =>
 {
