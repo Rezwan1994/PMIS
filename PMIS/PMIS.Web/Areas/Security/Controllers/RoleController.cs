@@ -11,12 +11,12 @@ namespace PMIS.Web.Areas.Security.Controllers
     [Area("Security")]
     public class RoleController : Controller
     {
-        private readonly IRoleManager _service;
+        private readonly IRoleService _service;
         private readonly ILogger<RoleController> _logger;
         private readonly IConfiguration _configuration;
-        private readonly IUserManager _serviceUser;
+        private readonly IUserService _serviceUser;
 
-        public RoleController(IRoleManager service, ILogger<RoleController> logger, IConfiguration configuration, IUserManager serviceUser)
+        public RoleController(IRoleService service, ILogger<RoleController> logger, IConfiguration configuration, IUserService serviceUser)
         {
             _service = service;
             _logger = logger;

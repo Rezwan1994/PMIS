@@ -4,19 +4,18 @@
 @using PMIS.Domain.ViewModels.Security
 
 @{
-
     MenuDistribution Model = new MenuDistribution();
     Model.PermittedMenus = new List<PermittedMenu>();
     Model.PermittedModules = new List<PermittedModule>();
-    //string data = Context.Session.GetString("RolePermission");
-    //if (data != null)
-    //{
-    //    Model = JsonSerializer.Deserialize<MenuDistribution>(data);
-    //}
-    //else
-    //{
-    //    Context.Response.Redirect("Security/Login/Index");
-    //}
+    string data = Context.Session.GetString("RolePermission");
+    if (data != null)
+    {
+        Model = JsonSerializer.Deserialize<MenuDistribution>(data);
+    }
+    else
+    {
+        Context.Response.Redirect("Security/Login/Index");
+    }
 }
 <style>
     /* width */
@@ -114,7 +113,6 @@
                                     if (subMenu_1 == null || subMenu_1.Count < 1)
                                     {
                                         <a class="collapse-item" id="@(submenu.MENU_ID.ToString() + "_"+ submenu.PARENT_MENU_ID.ToString()+ "_"+ item.MODULE_ID.ToString())" href="~/@submenu.AREA/@submenu.CONTROLLER/@submenu.ACTION"><span><img src="/img/icons8-square-spinner.gif" style="height:18px;width:18px;margin-top:-2px;margin-right:10px;right:0;justify-content:right"></span>@submenu.MENU_NAME</a>
-
                                     }
                                     else
                                     {
@@ -126,27 +124,17 @@
                                                 <a class="collapse-item" id="@(submenu_1.MENU_ID.ToString() + "_"+ submenu_1.PARENT_MENU_ID.ToString()+ "_"+ item.MODULE_ID.ToString())" href="~/@submenu_1.AREA/@submenu_1.CONTROLLER/@submenu_1.ACTION" onclick="setCookie(this)"><span><img src="/img/icons8-square-spinner.gif" style="height:18px;width:18px;margin-top:-2px;margin-right:10px;right:0;justify-content:right"></span>@submenu_1.MENU_NAME</a>
 
                                             }
-
                                         </div>
                                     }
-
-
                                 }
-
                             </div>
                         }
                     }
-
-
                 </div>
             </div>
         </li>
-
     }
-
 }
-
-
 
 <script>
     var dropdown = document.getElementsByClassName("dropdown-btn");
@@ -178,7 +166,6 @@
 
                 alert('#' + data);
                 alert($('#' + data).parent());
-
             },
             error: function (data) {
                 getnavselection();
@@ -214,41 +201,30 @@
                 if (data == 1) {
                     $('.nav_side_show').addClass('toggled');
                     $('.body_resize_show').addClass('sidebar-toggled');
-
-
                 } else {
                     $('.nav_side_show').removeClass('toggled');
                     $('.body_resize_show').removeClass('sidebar-toggled');
                 }
-
             },
             error: function (data) {
                 if (data == 1) {
                     $('#accordionSidebar').addClass('toggled');
                     $('#page-top').addClass('sidebar-toggled');
-
-
                 } else {
                     $('#accordionSidebar').removeClass('toggled');
                     $('#page-top').removeClass('sidebar-toggled');
                 }
             }
-
         });
     }
 
 
-
-
-
     $('.navcollapseBootstrapitem').click(function () {
-
         $('#' + this.id.replace('nav', '')).addClass("");
         $('#' + this.id.replace('nav', '')).removeClass("");
         $('#' + this.id.replace('nav', '')).css("display", "")
-
-
     });
+
     $('.collapse-item').click(function () {
         var Value = this.id;
         $.ajax({
@@ -262,10 +238,6 @@
             success: function (data) {
 
             }
-
         });
     });
-
-
-
 </script>
