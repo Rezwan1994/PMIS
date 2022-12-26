@@ -119,7 +119,7 @@ namespace PMIS.Service.Implementation.Security
                         listOfQuery.Add(_commonServices.AddQuery(AddRoleMenuConfigQuery(),
                         _commonServices.AddParameter(new string[] { model.ID.ToString(),  model.COMPANY_ID.ToString(), model.USER_ID.ToString(), model.MENU_ID.ToString()
                         , model.LIST_VIEW, model.ADD_PERMISSION,model.EDIT_PERMISSION, model.DETAIL_VIEW, model.DELETE_PERMISSION, model.DOWNLOAD_PERMISSION
-                        , model.ENTERED_BY.ToString(), model.ENTERED_DATE?.ToString("MM/dd/yyyy"), model.ENTERED_TERMINAL, model.CONFIRM_PERMISSION
+                        , model.ENTERED_BY.ToString(), model.ENTERED_DATE?.ToString("dd/MM/yyyy hh:mm:ss tt"), model.ENTERED_TERMINAL, model.CONFIRM_PERMISSION
                          })));
                     }
                     else
@@ -127,7 +127,7 @@ namespace PMIS.Service.Implementation.Security
                         listOfQuery.Add(_commonServices.AddQuery(AccRoleMenuConfigUpdateQuery(),
                          _commonServices.AddParameter(new string[] {  model.LIST_VIEW, model.ADD_PERMISSION,
                              model.EDIT_PERMISSION, model.DETAIL_VIEW, model.DELETE_PERMISSION, model.DOWNLOAD_PERMISSION
-                        , model.UPDATED_BY.ToString(), model.UPDATED_DATE?.ToString("MM/dd/yyyy"), model.UPDATED_TERMINAL, model.ID.ToString(),
+                        , model.UPDATED_BY.ToString(), model.UPDATED_DATE?.ToString("dd/MM/yyyy hh:mm:ss tt"), model.UPDATED_TERMINAL, model.ID.ToString(),
                              model.CONFIRM_PERMISSION
                           })));
                     }

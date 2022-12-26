@@ -50,6 +50,6 @@
         return $http.post('/Security/Company/GetUnitListByCompanyId', { COMPANY_ID:  parseInt(value) });
     }
     this.GetCompany = function () {
-        return $http.get('/SalesAndDistribution/Market/GetCompany');
+        return $http.get('/Security/Company/GetCompany');
     }
 });

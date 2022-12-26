@@ -9,22 +9,18 @@
   <ItemGroup>
     <Compile Remove="Areas\Security\Views\Notification\**" />
     <Compile Remove="Areas\Security\Views\ReportConfiguration\**" />
-    <Compile Remove="Areas\Security\Views\Role\**" />
     <Compile Remove="Areas\Security\Views\Shared\**" />
     <Compile Remove="Areas\Security\Views\UserLog\**" />
     <Content Remove="Areas\Security\Views\Notification\**" />
     <Content Remove="Areas\Security\Views\ReportConfiguration\**" />
-    <Content Remove="Areas\Security\Views\Role\**" />
     <Content Remove="Areas\Security\Views\Shared\**" />
     <Content Remove="Areas\Security\Views\UserLog\**" />
     <EmbeddedResource Remove="Areas\Security\Views\Notification\**" />
     <EmbeddedResource Remove="Areas\Security\Views\ReportConfiguration\**" />
-    <EmbeddedResource Remove="Areas\Security\Views\Role\**" />
     <EmbeddedResource Remove="Areas\Security\Views\Shared\**" />
     <EmbeddedResource Remove="Areas\Security\Views\UserLog\**" />
     <None Remove="Areas\Security\Views\Notification\**" />
     <None Remove="Areas\Security\Views\ReportConfiguration\**" />
-    <None Remove="Areas\Security\Views\Role\**" />
     <None Remove="Areas\Security\Views\Shared\**" />
     <None Remove="Areas\Security\Views\UserLog\**" />
   </ItemGroup>
@@ -64,6 +60,10 @@
     <None Include="Areas\Security\Views\MenuCategory\Index.cshtml" />
     <None Include="Areas\Security\Views\MenuMaster\Index.cshtml" />
     <None Include="Areas\Security\Views\MenuPermission\Index.cshtml" />
+    <None Include="Areas\Security\Views\Role\CentralRoleUserConfig.cshtml" />
+    <None Include="Areas\Security\Views\Role\Index.cshtml" />
+    <None Include="Areas\Security\Views\Role\RoleMenuConfig.cshtml" />
+    <None Include="Areas\Security\Views\Role\RoleUserConfig.cshtml" />
     <None Include="Areas\Security\Views\User\AccountVerification.cshtml" />
     <None Include="Areas\Security\Views\User\DefaultPage.cshtml" />
     <None Include="Areas\Security\Views\User\Index.cshtml" />

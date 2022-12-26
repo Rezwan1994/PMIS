@@ -26,16 +26,21 @@ namespace PMIS.IOC
                 options.UseOracle(connectionString)
             );
 
-            services.AddTransient<ICompanyService, CompanyService>();
             services.AddTransient<ICommonServices, CommonServices>();
-            services.AddTransient<IUserService, UserService>();
+
+            #region Security
+            services.AddTransient<ICompanyService, CompanyService>();
             services.AddTransient<IMenuPermissionService, MenuPermissionService>();
+            services.AddTransient<IMenuMasterService, MenuMasterService>();
             services.AddTransient<IMenuCategoryService, MenuCategoryService>();
             services.AddTransient<IMenuPermissionService, MenuPermissionService>();
+            services.AddTransient<IRoleService, RoleService>();
+            services.AddTransient<IUserService, UserService>();
             services.AddTransient<IUserMenuConfigService, UserMenuConfigService>();
-            services.AddTransient<IMenuMasterService, MenuMasterService>();
-            services.AddTransient<INotificationService, NotificationService>();
             services.AddTransient<IUserLogService, UserLogService>();
+            #endregion
+
+            services.AddTransient<INotificationService, NotificationService>();
             services.AddTransient<IEmailService, EmailService>();
             services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
         }

@@ -33,11 +33,9 @@
     }
 
     $scope.EditData = function (entity) {
-
         $scope.model.ROLE_ID = entity.ROLE_ID;
         $scope.model.ROLE_NAME = entity.ROLE_NAME;
         $scope.SaveData($scope.model);
-
     }
     $scope.GetPermissionData = function () {
         $scope.showLoader = true;
@@ -47,8 +45,6 @@
             Action_Name: 'Index'
         }
         permissionProvider.GetPermission($scope.permissionReqModel).then(function (data) {
-            
-            
             $scope.getPermissions = data.data;
             $scope.model.ADD_PERMISSION = $scope.getPermissions.adD_PERMISSION;
             $scope.model.EDIT_PERMISSION = $scope.getPermissions.ediT_PERMISSION;

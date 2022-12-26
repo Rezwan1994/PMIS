@@ -13,14 +13,12 @@ namespace PMIS.Web.Areas.Security.Controllers
     {
         private readonly IRoleService _service;
         private readonly ILogger<RoleController> _logger;
-        private readonly IConfiguration _configuration;
         private readonly IUserService _serviceUser;
 
-        public RoleController(IRoleService service, ILogger<RoleController> logger, IConfiguration configuration, IUserService serviceUser)
+        public RoleController(IRoleService service, ILogger<RoleController> logger, IUserService serviceUser)
         {
             _service = service;
             _logger = logger;
-            _configuration = configuration;
             _serviceUser = serviceUser;
         }
 
@@ -58,7 +56,7 @@ namespace PMIS.Web.Areas.Security.Controllers
         [HttpPost]
         public string LoadData([FromBody] COMPANY_INFO company_Info)
         {
-            int comp_id = company_Info == null || company_Info.COMPANY_ID == 0 ? Convert.ToInt32(User.Claims.FirstOrDefault(x => x.Type == ClaimsType.CompanyId).Value) : company_Info.COMPANY_ID;
+            int comp_id = User.GetComapanyId();
             return _service.LoadData(comp_id);
         }
 

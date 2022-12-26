@@ -20,8 +20,12 @@ namespace PMIS.Service.Implementation.Security
         }
 
         private string loadDataQuery() => @"SELECT ROW_NUMBER() OVER(ORDER BY M.MODULE_ID ASC) AS ROW_NO,
-                                  M.MODULE_ID, M.MODULE_NAME, M.STATUS, U.USER_NAME CREATENAME, TO_CHAR(M.ENTERED_DATE, 'YYYY-MM-DD') ENTERED_DATE,
-                                  ORDER_BY_NO FROM MODULE_INFO  M, USER_INFO U WHERE U.USER_ID = M.ENTERED_BY AND M.COMPANY_ID = :param1";
+            M.MODULE_ID, M.MODULE_NAME, M.STATUS, U.USER_NAME CREATENAME, 
+            TO_CHAR(M.ENTERED_DATE, 'YYYY-MM-DD') ENTERED_DATE,
+            ORDER_BY_NO 
+            FROM MODULE_INFO  M
+            LEFT JOIN USER_INFO U ON U.USER_ID = M.ENTERED_BY 
+            AND M.COMPANY_ID = :param1";
 
         private string AddOrUpdate_AddQuery() => @"INSERT INTO Module_Info
                                          (Module_Id, Module_Name, Status, Entered_By, Entered_Date,ENTERED_TERMINAL, Order_By_No, Company_Id )

@@ -28,10 +28,10 @@ namespace PMIS.Service.Implementation.Security
             _userManager = userManager;
         }
 
-        private string loadDataQuery() => @"Select ROW_NUMBER() OVER(ORDER BY R.ROLE_ID ASC) AS ROW_NO,R.ROLE_ID,R.ROLE_NAME,R.STATUS,
-                                 TO_CHAR(R.ENTERED_DATE, 'YYYY-MM-DD') ENTERED_DATE, (Select C.UNIT_NAME From COMPANY_INFO C where C.UNIT_ID  = NVL(R.UNIT_ID,0) AND C.COMPANY_ID = :param1) UNIT_NAME
-                                 from Role_Info R
-                                 Where R.COMPANY_ID = :param1";
+        private string loadDataQuery() => @"Select ROW_NUMBER() OVER(ORDER BY R.ROLE_ID ASC) AS ROW_NO, 
+                    R.ROLE_ID, R.ROLE_NAME, R.STATUS, TO_CHAR(R.ENTERED_DATE, 'YYYY-MM-DD') ENTERED_DATE
+                    from Role_Info R
+                    Where R.COMPANY_ID = :param1";
 
         private string AddOrUpdate_AddQuery() => @"INSERT INTO Role_Info (
                                          ROLE_ID
