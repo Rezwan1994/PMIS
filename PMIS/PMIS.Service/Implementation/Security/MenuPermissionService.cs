@@ -2,14 +2,7 @@
 using PMIS.Domain.ViewModels.Security;
 using PMIS.Repository.Interface;
 using PMIS.Service.Interface.Security;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Security.Claims;
-using System.Text;
-using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace PMIS.Service.Implementation.Security
 {
@@ -17,51 +10,53 @@ namespace PMIS.Service.Implementation.Security
     {
         private readonly ICommonServices _commonServices;
         private readonly IConfiguration _configuration;
+
         public MenuPermissionService(ICommonServices commonServices, IConfiguration configuration)
         {
             _commonServices = commonServices;
             _configuration = configuration;
-
         }
 
-        string MenuCategoryQuery() => "select  MODULE_ID, MODULE_NAME, ORDER_BY_NO from Module_Info";
-        string MenuQuery() => @"Select distinct  MENU_ID, MENU_NAME,ORDER_BY_SLNO, HREF,AREA, CONTROLLER, ACTION, PARENT_MENU_ID ,
+        private string MenuCategoryQuery() => "select  MODULE_ID, MODULE_NAME, ORDER_BY_NO from Module_Info";
+
+        private string MenuQuery() => @"Select distinct  MENU_ID, MENU_NAME,ORDER_BY_SLNO, HREF,AREA, CONTROLLER, ACTION, PARENT_MENU_ID ,
  MODULE_ID , ADD_PERMISSION, LIST_VIEW, EDIT_PERMISSION, DELETE_PERMISSION, DETAIL_VIEW, DOWNLOAD_PERMISSION,MENU_SHOW, CONFIRM_PERMISSION
- from 
+ from
 (
 Select distinct MC.MENU_ID, MC.MENU_NAME,MC.ORDER_BY_SLNO, MC.HREF,MC.AREA, MC.CONTROLLER, MC.ACTION, MC.PARENT_MENU_ID ,
  MC.MODULE_ID , RM.ADD_PERMISSION, RM.LIST_VIEW, RM.EDIT_PERMISSION, RM.DELETE_PERMISSION, RM.DETAIL_VIEW, RM.DOWNLOAD_PERMISSION, RM.CONFIRM_PERMISSION, MC.MENU_SHOW
-from ROLE_INFO R 
+from ROLE_INFO R
 INNER JOIN ROLE_MENU_CONFIGURATION RM on RM.ROLE_ID = R.ROLE_ID
 INNER JOIN ROLE_USER_CONFIGURATION RU on R.ROLE_ID = RU.ROLE_ID
-INNER JOIN Menu_Configuration MC on MC.MENU_ID = RM.MENU_ID 
-Where MC.STATUS ='Active' AND RM.LIST_VIEW = 'Active' AND RU.USER_ID = :param2 AND RU.COMPANY_ID = :param1 
- 
+INNER JOIN Menu_Configuration MC on MC.MENU_ID = RM.MENU_ID
+Where MC.STATUS ='Active' AND RM.LIST_VIEW = 'Active' AND RU.USER_ID = :param2 AND RU.COMPANY_ID = :param1
+
  UNION ALL
- 
+
  Select distinct MC.MENU_ID, MC.MENU_NAME,MC.ORDER_BY_SLNO, MC.HREF,MC.AREA, MC.CONTROLLER, MC.ACTION, MC.PARENT_MENU_ID ,
  MC.MODULE_ID , RU.ADD_PERMISSION, RU.LIST_VIEW, RU.EDIT_PERMISSION, RU.DELETE_PERMISSION, RU.DETAIL_VIEW, RU.DOWNLOAD_PERMISSION, RU.CONFIRM_PERMISSION, MC.MENU_SHOW
 from  MENU_USER_CONFIGURATION RU
-INNER JOIN Menu_Configuration MC on MC.MENU_ID = RU.MENU_ID 
+INNER JOIN Menu_Configuration MC on MC.MENU_ID = RU.MENU_ID
 Where MC.STATUS ='Active' AND RU.LIST_VIEW = 'Active' AND RU.USER_ID = :param2 AND RU.COMPANY_ID = :param1 ) x";
-        string defaultPageQuery() => "Select M.HREF  from USER_DEFAULT_PAGE d Left outer Join Menu_Configuration m on m.Menu_Id = D.MENU_ID Where D.USER_ID = :param1";
 
-        string LoadPermittedMenuQuery() => "select  MENU_ID, MENU_NAME,ORDER_BY_SLNO, HREF,AREA, CONTROLLER, ACTION, PARENT_MENU_ID , MODULE_ID  from Menu_Configuration Where COMPANY_ID = :param1";
+        private string defaultPageQuery() => "Select M.HREF  from USER_DEFAULT_PAGE d Left outer Join Menu_Configuration m on m.Menu_Id = D.MENU_ID Where D.USER_ID = :param1";
 
-        string SearchableMenuLoadQuery() => @"Select distinct  MENU_ID, MENU_NAME,ORDER_BY_SLNO, HREF,AREA, CONTROLLER, ACTION, PARENT_MENU_ID ,
- MODULE_ID , ADD_PERMISSION, LIST_VIEW, EDIT_PERMISSION, DELETE_PERMISSION, DETAIL_VIEW, DOWNLOAD_PERMISSION from 
+        private string LoadPermittedMenuQuery() => "select  MENU_ID, MENU_NAME,ORDER_BY_SLNO, HREF,AREA, CONTROLLER, ACTION, PARENT_MENU_ID , MODULE_ID  from Menu_Configuration Where COMPANY_ID = :param1";
+
+        private string SearchableMenuLoadQuery() => @"Select distinct  MENU_ID, MENU_NAME,ORDER_BY_SLNO, HREF,AREA, CONTROLLER, ACTION, PARENT_MENU_ID ,
+ MODULE_ID , ADD_PERMISSION, LIST_VIEW, EDIT_PERMISSION, DELETE_PERMISSION, DETAIL_VIEW, DOWNLOAD_PERMISSION from
 (Select distinct MC.MENU_ID, MC.MENU_NAME,MC.ORDER_BY_SLNO, MC.HREF,MC.AREA, MC.CONTROLLER, MC.ACTION, MC.PARENT_MENU_ID ,
  MC.MODULE_ID , RM.ADD_PERMISSION, RM.LIST_VIEW, RM.EDIT_PERMISSION, RM.DELETE_PERMISSION, RM.DETAIL_VIEW, RM.DOWNLOAD_PERMISSION
-from ROLE_INFO R 
+from ROLE_INFO R
 INNER JOIN ROLE_MENU_CONFIGURATION RM on RM.ROLE_ID = R.ROLE_ID
 INNER JOIN ROLE_USER_CONFIGURATION RU on R.ROLE_ID = RU.ROLE_ID
-INNER JOIN Menu_Configuration MC on MC.MENU_ID = RM.MENU_ID 
- Where MC.STATUS ='Active' AND RM.LIST_VIEW = 'Active'  AND RU.COMPANY_ID = :param1 AND  upper(MC.MENU_NAME) Like '%' || upper(:param2) || '%' AND MC.MENU_ID NOT IN (Select T.PARENT_MENU_ID From MENU_CONFIGURATION T) AND RU.USER_ID = :param3 
+INNER JOIN Menu_Configuration MC on MC.MENU_ID = RM.MENU_ID
+ Where MC.STATUS ='Active' AND RM.LIST_VIEW = 'Active'  AND RU.COMPANY_ID = :param1 AND  upper(MC.MENU_NAME) Like '%' || upper(:param2) || '%' AND MC.MENU_ID NOT IN (Select T.PARENT_MENU_ID From MENU_CONFIGURATION T) AND RU.USER_ID = :param3
  UNION ALL
  Select distinct MC.MENU_ID, MC.MENU_NAME,MC.ORDER_BY_SLNO, MC.HREF,MC.AREA, MC.CONTROLLER, MC.ACTION, MC.PARENT_MENU_ID ,
  MC.MODULE_ID , RU.ADD_PERMISSION, RU.LIST_VIEW, RU.EDIT_PERMISSION, RU.DELETE_PERMISSION, RU.DETAIL_VIEW, RU.DOWNLOAD_PERMISSION
 from  MENU_USER_CONFIGURATION RU
-INNER JOIN Menu_Configuration MC on MC.MENU_ID = RU.MENU_ID 
+INNER JOIN Menu_Configuration MC on MC.MENU_ID = RU.MENU_ID
  Where MC.STATUS ='Active' AND RU.LIST_VIEW = 'Active' AND RU.COMPANY_ID = :param1 AND  upper(MC.MENU_NAME) Like '%' || upper(:param2) || '%' AND MC.MENU_ID NOT IN (Select T.PARENT_MENU_ID From MENU_CONFIGURATION T) AND RU.USER_ID = :param3 ) x";
 
         public string SearchableMenuLoad(string comp_id, string User_Id, string menu_name)
@@ -118,6 +113,7 @@ INNER JOIN Menu_Configuration MC on MC.MENU_ID = RU.MENU_ID
 
                         MODULE_ID = Convert.ToInt32(MenuData.Rows[i]["MODULE_ID"].ToString())
                     };
+
                     if (MenuData.Rows[i]["PARENT_MENU_ID"] != null && MenuData.Rows[i]["PARENT_MENU_ID"].ToString() != "")
                     {
                         menuMaster.PARENT_MENU_ID = Convert.ToInt32(MenuData.Rows[i]["PARENT_MENU_ID"]);
@@ -125,13 +121,12 @@ INNER JOIN Menu_Configuration MC on MC.MENU_ID = RU.MENU_ID
                         if (haslisted == 0 && menuMaster.PARENT_MENU_ID != 0)
                         {
                             ParentIDs.Add(menuMaster.PARENT_MENU_ID);
-
                         }
                     }
 
-
                     MenuMasters.Add(menuMaster);
                 }
+
                 if (ParentIDs.Count > 0)
                 {
                     foreach (var item in ParentIDs)
@@ -142,7 +137,6 @@ INNER JOIN Menu_Configuration MC on MC.MENU_ID = RU.MENU_ID
                         {
                             MenuMasters.Add(Menues.Where(x => x.MENU_ID == item).FirstOrDefault());
                         }
-
                     }
                 }
 
@@ -152,20 +146,18 @@ INNER JOIN Menu_Configuration MC on MC.MENU_ID = RU.MENU_ID
                     PermittedMenus = MenuMasters
                 };
                 return menuDistribution;
-
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-
         }
+
         public async Task<List<PermittedMenu>> LoadLoadPermittedMenus(int CompanyId)
         {
             DataTable MenuData = await _commonServices.GetDataTableAsyn(LoadPermittedMenuQuery(), _commonServices.AddParameter(new string[] { CompanyId.ToString() }));
 
             List<PermittedMenu> MenuMasters = new List<PermittedMenu>();
-
 
             for (int i = 0; i < MenuData.Rows.Count; i++)
             {
@@ -185,14 +177,13 @@ INNER JOIN Menu_Configuration MC on MC.MENU_ID = RU.MENU_ID
                 if (MenuData.Rows[i]["PARENT_MENU_ID"] != null && MenuData.Rows[i]["PARENT_MENU_ID"].ToString() != "")
                 {
                     menuMaster.PARENT_MENU_ID = Convert.ToInt32(MenuData.Rows[i]["PARENT_MENU_ID"]);
-
                 }
 
                 MenuMasters.Add(menuMaster);
             }
             return MenuMasters;
-
         }
+
         public string LoadUserDefaultPageById(int User_Id)
         {
             DataTable MenuCategoryData = _commonServices.GetDataTable(defaultPageQuery(), _commonServices.AddParameter(new string[] { User_Id.ToString() }));
@@ -204,9 +195,6 @@ INNER JOIN Menu_Configuration MC on MC.MENU_ID = RU.MENU_ID
             {
                 return null;
             }
-
         }
-
-
     }
 }

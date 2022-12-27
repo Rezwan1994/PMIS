@@ -25,5 +25,7 @@ namespace PMIS.Domain.Entities
 
         public virtual MENU_CONFIGURATION? MENU { get; set; }
         public virtual ROLE_INFO? ROLE { get; set; }
+
+        public int ROLE_CONFIG_ID { get; set; }
     }
 }

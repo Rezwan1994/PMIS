@@ -94,7 +94,7 @@ namespace PMIS.Web.Areas.Security.Controllers
                             {
                                new Claim(ClaimTypes.Name, _user.UserName),
                                new Claim(ClaimTypes.Role, "Administrator"),
-                              new Claim(ClaimTypes.NameIdentifier, _user.UserId.ToString()),
+                               new Claim(ClaimTypes.NameIdentifier, _user.UserId.ToString()),
                                new Claim(ClaimsType.UserName, _user.UserName),
                                new Claim(ClaimsType.UserId, _user.UserId.ToString()),
                                new Claim(ClaimsType.Email, _user.Email),
@@ -134,7 +134,7 @@ namespace PMIS.Web.Areas.Security.Controllers
                             {
                                 CookieOptions option = new CookieOptions();
                                 option.Expires = DateTime.Now.AddDays(29);
-                                _Accessor.HttpContext.Response.Cookies.Append("LoginMailHolder", _user.Email, option);
+                                _Accessor.HttpContext?.Response.Cookies.Append("LoginMailHolder", _user.Email, option);
                                 _Accessor.HttpContext.Response.Cookies.Append("LoginPassHolder", _commonServices.Decrypt(_user.Password), option);
                                 _Accessor.HttpContext.Response.Cookies.Append("LoginCompanyHolder", _user.CompanyId.ToString(), option);
                             }

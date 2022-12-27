@@ -142,7 +142,7 @@ namespace PMIS.Web.Areas.Security.Controllers
                 int comp_id = User.GetComapanyId();
                 foreach (var item in model)
                 {
-                    if (item.ID == 0)
+                    if (item.ROLE_CONFIG_ID == 0)
                     {
                         item.ENTERED_BY = User.Claims.FirstOrDefault(c => c.Type == ClaimsType.UserId)?.Value;
                         item.ENTERED_DATE = DateTime.Now;

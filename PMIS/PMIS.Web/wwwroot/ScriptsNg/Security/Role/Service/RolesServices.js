@@ -46,7 +46,6 @@
         return $http.get('../Company/LoadData');
     }
     this.GetUnitList = function (value) {
-        
         return $http.post('/Security/Company/GetUnitListByCompanyId', { COMPANY_ID:  parseInt(value) });
     }
     this.GetCompany = function () {
