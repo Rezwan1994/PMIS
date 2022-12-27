@@ -112,7 +112,7 @@ namespace PMIS.Service.Implementation.Security
                 int new_ID = _commonServices.GetMaximumNumber<int>(GetNewUserMenuConfigIdQuery(), _commonServices.AddParameter(new string[] { }));
                 foreach (var model in roleMenuConfig)
                 {
-                    if (model.ID == 0)
+                    if (model.USER_CONFIG_ID == 0)
                     {
                         model.ID = new_ID;
 
@@ -127,7 +127,7 @@ namespace PMIS.Service.Implementation.Security
                         listOfQuery.Add(_commonServices.AddQuery(AccRoleMenuConfigUpdateQuery(),
                          _commonServices.AddParameter(new string[] {  model.LIST_VIEW, model.ADD_PERMISSION,
                              model.EDIT_PERMISSION, model.DETAIL_VIEW, model.DELETE_PERMISSION, model.DOWNLOAD_PERMISSION
-                        , model.UPDATED_BY.ToString(), model.UPDATED_DATE?.ToString("dd/MM/yyyy hh:mm:ss tt"), model.UPDATED_TERMINAL, model.ID.ToString(),
+                        , model.UPDATED_BY.ToString(), model.UPDATED_DATE?.ToString("dd/MM/yyyy hh:mm:ss tt"), model.UPDATED_TERMINAL, model.USER_CONFIG_ID.ToString(),
                              model.CONFIRM_PERMISSION
                           })));
                     }

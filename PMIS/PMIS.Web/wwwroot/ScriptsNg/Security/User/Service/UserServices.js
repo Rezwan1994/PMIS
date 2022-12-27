@@ -4,7 +4,6 @@
     }
 
     this.AddOrUpdate = function (model) {
-        
         var dataType = 'application/json; charset=utf-8';
         return $http({
             type: 'POST',
@@ -24,7 +23,6 @@
             },
             headers: { 'Content-Type': 'application/json; charset=utf-8' },
         });
-       
     }
 
     this.GetCompanyList = function () {
@@ -32,24 +30,20 @@
     }
 
     this.LoadDefaultPages = function (companyId) {
-        return $http.post('../User/LoadDefaultPages', { COMPANY_ID: parseInt(companyId)});
+        return $http.post('../User/LoadDefaultPages', { COMPANY_ID: parseInt(companyId) });
     }
 
     this.LoadSearchableDefaultPages = function (comp_id, value) {
-        
         return $http.post('../User/GetSearchableDefaultPages', { COMPANY_ID: comp_id, MENU_NAME: value });
     }
     this.AddOrUpdateDefaultPage = function (model) {
-
         return $http.post('../User/AddOrUpdateDefaultPage', { ID: model.ID, COMPANY_ID: parseInt(model.COMPANY_ID), MENU_ID: model.MENU_ID, USER_ID: model.USER_ID });
     }
 
-    this.GetSearchableUsers = function (comp_id,user_name) {
-        
+    this.GetSearchableUsers = function (comp_id, user_name) {
         return $http.post("../MenuPermission/GetSearchableUsers", { COMPANY_ID: comp_id, USER_NAME: user_name });
     }
     this.GetEmployees = function (comp_id) {
-        
         return $http.post("../User/GetEmployeeWithoutAccount", { COMPANY_ID: comp_id });
     }
     this.GetCompany = function () {

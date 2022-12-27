@@ -1,33 +1,26 @@
-﻿ngApp.controller('ngGridCtrl', ['$scope', 'UserServices', 'permissionProvider','CompanyService', 'notificationservice', 'gridregistrationservice', '$http', '$log', '$filter', '$timeout', '$interval', '$q', function ($scope, UserServices, permissionProvider, CompanyService, notificationservice, gridregistrationservice, $http, $log, $filter, $timeout, $interval, $q) {
-
+﻿ngApp.controller('ngGridCtrl', ['$scope', 'UserServices', 'permissionProvider', 'CompanyService', 'notificationservice', 'gridregistrationservice', '$http', '$log', '$filter', '$timeout', '$interval', '$q', function ($scope, UserServices, permissionProvider, CompanyService, notificationservice, gridregistrationservice, $http, $log, $filter, $timeout, $interval, $q) {
     $scope.model = { USER_ID: 0, USER_NAME: '', COMPANY_ID: 0, UNIT_ID: 0 }
     $scope.CompanyData = [];
     $scope.UnitData = [];
     $scope.UserTypeData = [];
     $scope.EmployeeData = [];
 
-
     $scope.gridOptionsList = (gridregistrationservice.GridRegistration("User Ctr"));
     $scope.gridOptionsList.onRegisterApi = function (gridApi) {
         $scope.gridApi = gridApi;
     }
 
-
-  
     $scope.CompanyDataLoad = function () {
-          CompanyService.GetCompanyList().then(function (data) {
-                $scope.CompanyData = data.data;
-            }, function (error) {
-                
-            });
+        CompanyService.GetCompanyList().then(function (data) {
+            $scope.CompanyData = data.data;
+        }, function (error) {
+        });
     }
 
     $scope.CompanyLoad = function () {
         $scope.showLoader = true;
 
         CompanyService.GetCompany().then(function (data) {
-            
-            
             $scope.model.COMPANY_ID = parseInt(data.data);
             $scope.model.COMPANY_SEARCH_ID = parseInt(data.data);
             $interval(function () {
@@ -37,23 +30,18 @@
             $scope.showLoader = false;
         }, function (error) {
             alert(error);
-            
-            $scope.showLoader = false;
 
+            $scope.showLoader = false;
         });
     }
     $scope.UnitDataLoad = function (id) {
         CompanyService.GetUnitList().then(function (data) {
-            
             if (id != 0) {
                 $scope.UnitData = data.data.filter(function (element) { return element.COMPANY_ID == id });
-
             } else {
                 $scope.UnitData = data.data.filter(function (element) { return element.COMPANY_ID == $scope.gridOptionsList.data[0].COMPANY_ID });
-
             }
         }, function (error) {
-            
         });
     }
     $scope.UserTypeDataLoad = function () {
@@ -64,7 +52,6 @@
             Type: 'Admin'
         }
 
-        
         $scope.UserTypeData.push($scope.UserType);
         $scope.UserTypeData.push($scope.UserType1);
         if ($scope.model.UserType == 'SuperAdmin') {
@@ -72,31 +59,24 @@
                 Type: 'SuperAdmin'
             }
             $scope.UserTypeData.push($scope.UserType2);
-
         }
-
     }
-   
+
     $scope.typeaheadSelectedCompany = function (entity) {
-        
         $scope.model.COMPANY_ID = entity.COMPANY_ID;
         $scope.UnitDataLoad($scope.model.COMPANY_ID);
-
     };
     $scope.DataLoad = function () {
         $scope.showLoader = true;
         UserServices.LoadData().then(function (data) {
-            
             $scope.gridOptionsList.data = data.data;
             $scope.ParantData = data.data;
 
             $scope.showLoader = false;
-            
         }, function (error) {
             alert(error);
-            
-            $scope.showLoader = false;
 
+            $scope.showLoader = false;
         });
     }
     $scope.ClearForm = function () {
@@ -107,12 +87,9 @@
         $scope.model.USER_TYPE = '';
         $scope.model.EMPLOYEE_ID = '';
         $scope.model.EMAIL = '';
-
-
     }
 
     $scope.EditData = function (entity) {
-        
         $scope.model.USER_ID = entity.USER_ID;
         $scope.model.USER_PASSWORD = entity.USER_PASSWORD;
         $scope.model.USER_NAME = entity.USER_NAME;
@@ -121,18 +98,15 @@
         $scope.model.USER_TYPE = entity.USER_TYPE;
 
         $scope.SaveData($scope.model);
-
     }
     $scope.GetPermissionData = function () {
         $scope.showLoader = true;
-        
+
         $scope.permissionReqModel = {
             Controller_Name: 'User',
             Action_Name: 'Index'
         }
         permissionProvider.GetPermission($scope.permissionReqModel).then(function (data) {
-            
-            
             $scope.getPermissions = data.data;
             $scope.model.ADD_PERMISSION = $scope.getPermissions.adD_PERMISSION;
             $scope.model.EDIT_PERMISSION = $scope.getPermissions.ediT_PERMISSION;
@@ -145,9 +119,8 @@
             $scope.showLoader = false;
         }, function (error) {
             alert(error);
-            
-            $scope.showLoader = false;
 
+            $scope.showLoader = false;
         });
     }
 
@@ -155,7 +128,6 @@
         UserServices.GetEmployees($scope.model.COMPANY_ID).then(function (data) {
             $scope.EmployeeData = data.data;
         }, function (error) {
-            
         });
     }
     $scope.DataLoad();
@@ -191,26 +163,20 @@
             name: 'EMAIL', field: 'EMAIL', displayName: 'Email', enableFiltering: true, width: '25%', cellTemplate:
                 '<input required="required"  type="text"  ng-model="row.entity.EMAIL"  class="pl-sm" />'
         }
- 
+
         , {
             name: 'Actions', displayName: 'Actions', width: '20%', visible: false, enableFiltering: false, enableColumnMenu: false, cellTemplate:
-               '<div style="margin:1px;">' +
-               '<button style="margin-bottom: 5px;" ng-show="grid.appScope.model.EDIT_PERMISSION == \'Active\'" ng-click="grid.appScope.EditData(row.entity)" type="button" class="btn btn-outline-primary mb-1">Update</button>' +
-             '</div>'
+                '<div style="margin:1px;">' +
+                '<button style="margin-bottom: 5px;" ng-show="grid.appScope.model.EDIT_PERMISSION == \'Active\'" ng-click="grid.appScope.EditData(row.entity)" type="button" class="btn btn-outline-primary mb-1">Update</button>' +
+                '</div>'
         },
 
     ];
 
-   
-
-
     $scope.SaveData = function (model) {
-        
-       
         $scope.showLoader = true;
-        
-        UserServices.AddOrUpdate(model).then(function (data) {
 
+        UserServices.AddOrUpdate(model).then(function (data) {
             notificationservice.Notification(data.data, 1, 'Data Save Successfully !!');
             if (data.data == 1) {
                 $scope.showLoader = false;
@@ -224,19 +190,13 @@
         });
     }
 
-    
-
-
     $scope.ActivateMenu = function (Id) {
-        
         $scope.showLoader = true;
         MenuMasterServices.ActivateMenu(Id).then(function (data) {
-
             notificationservice.Notification(data.data, 1, 'Activated the selected category !!');
             if (data.data == 1) {
                 $scope.showLoader = false;
                 $scope.DataLoad();
-
             }
             else {
                 $scope.showLoader = false;
@@ -245,15 +205,12 @@
     }
 
     $scope.DeactivateMenu = function (Id) {
-        
         $scope.showLoader = true;
         MenuMasterServices.DeactivateMenu(Id).then(function (data) {
-
             notificationservice.Notification(data.data, 1, 'Deactivated the selected category !!');
             if (data.data == 1) {
                 $scope.showLoader = false;
                 $scope.DataLoad();
-
             }
             else {
                 $scope.showLoader = false;
@@ -261,25 +218,18 @@
         });
     }
     $scope.DeleteMenu = function (Id) {
-        
         $scope.showLoader = true;
         if (window.confirm("Are you sure to delete this Menu Category?")) {
             MenuMasterServices.DeleteMenu(Id).then(function (data) {
-
                 notificationservice.Notification(data.data, 1, 'Deleted the selected category !!');
                 if (data.data == 1) {
                     $scope.showLoader = false;
                     $scope.DataLoad();
-
                 }
                 else {
                     $scope.showLoader = false;
                 }
             });
         }
-
-
     }
-
 }]);
-
