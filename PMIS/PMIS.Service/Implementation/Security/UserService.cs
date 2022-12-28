@@ -23,7 +23,7 @@ namespace PMIS.Service.Implementation.Security
             _EmailService = EmailService;
         }
 
-        private string UserQuery() => "Select  u.User_Id Id, u.User_Name Name, u.Unit_ID UnitId, c.Unit_Type UnitType, u.User_Type  UserType, c.Company_Id CompanyId, u.Email, c.Company_Name from User_Info u left outer join Company_Info c on c.Company_Id = u.Company_id Where u.Email = :param1";
+        private string UserQuery() => "Select  u.User_Id Id, u.User_Name Name, u.Unit_ID DepotId, c.Unit_Type UnitType, u.User_Type  UserType, c.Company_Id CompanyId, u.Email, c.Company_Name from User_Info u left outer join Company_Info c on c.Company_Id = u.Company_id Where u.Email = :param1";
 
         private string UserQuery4() => @"Select  u.User_Id Id, u.User_Name Name, u.USER_PASSWORD, u.Depot_ID,
                                  u.User_Type, u.Company_Id,
@@ -112,7 +112,7 @@ namespace PMIS.Service.Implementation.Security
                                          u.USER_TYPE
                                         ,u.USER_NAME
                                         ,u.USER_ID
-                                        ,u.UNIT_ID
+                                        ,u.DEPOT_ID
                                         ,u.ENTERED_DATE
                                         ,u.EMPLOYEE_ID
                                         ,u.EMAIL
@@ -126,7 +126,7 @@ namespace PMIS.Service.Implementation.Security
                                          U.USER_TYPE
                                         ,U.USER_NAME
                                         ,U.USER_ID
-                                        ,U.DEPOT_ID UNIT_ID
+                                        ,U.DEPOT_ID
                                         ,U.ENTERED_DATE
                                         ,U.EMPLOYEE_ID
                                         ,U.EMAIL
@@ -139,13 +139,13 @@ namespace PMIS.Service.Implementation.Security
 
         private string GetEmployeesWithoutAccount() => @"Select EMPLOYEE_ID, EMPLOYEE_CODE, EMPLOYEE_NAME, EMPLOYEE_STATUS, COMPANY_ID from Employee_Info where COMPANY_ID = :param1 AND  EMPLOYEE_ID NOT IN (Select EMPLOYEE_ID from User_info) ";
 
-        private string GetEmployeeByEmployeeId() => @"Select ID, EMPLOYEE_ID, EMPLOYEE_CODE, EMPLOYEE_NAME, EMPLOYEE_STATUS, COMPANY_ID, UNIT_ID from Employee_Info where Employee_Id = :param1 ";
+        private string GetEmployeeByEmployeeId() => @"Select ID, EMPLOYEE_ID, EMPLOYEE_CODE, EMPLOYEE_NAME, EMPLOYEE_STATUS, COMPANY_ID from Employee_Info where Employee_Id = :param1 ";
 
         private string GetUsersByCompany() => @"SELECT  DISTINCT  ROW_NUMBER() OVER(ORDER BY  U.USER_ID ASC) AS ROW_NO,
                                          U.USER_TYPE
                                         ,U.USER_NAME
                                         ,U.USER_ID
-                                        ,U.DEPOT_ID UNIT_ID
+                                        ,U.DEPOT_ID
                                         ,U.ENTERED_DATE
                                         ,U.EMPLOYEE_ID
                                         ,U.EMAIL
@@ -164,7 +164,7 @@ namespace PMIS.Service.Implementation.Security
                           ,USER_TYPE
                           ,USER_PASSWORD
                           ,USER_NAME
-                          ,UNIT_ID
+                          ,DEPOT_ID
                           ,ENTERED_TERMINAL
                           ,ENTERED_DATE
                           ,ENTERED_BY
@@ -175,7 +175,7 @@ namespace PMIS.Service.Implementation.Security
 
         private string AddOrUpdateUpdateQuery() => @"UPDATE USER_INFO SET
                                          USER_TYPE = :param2,
-                                         Updated_By= :param3, Updated_Date= TO_DATE(:param4, 'DD/MM/YYYY HH:MI:SS AM'), Updated_Terminal= :param5 , USER_NAME = :param6,EMAIL = :param7
+                                         Updated_By= :param3, Updated_Date= TO_DATE(:param4, 'DD/MM/YYYY HH:MI:SS AM'), Updated_Terminal= :param5 , USER_NAME = :param6, EMAIL = :param7
                                          WHERE USER_ID = :param1  ";
 
         private string UpdateUniqueKeyByUser() => @"UPDATE USER_INFO SET UNIQUEACCESSKEY = :param1 WHERE USER_ID = :param2";
@@ -230,11 +230,18 @@ namespace PMIS.Service.Implementation.Security
 
                             model.USER_PASSWORD = _commonService.Encrypt(emailConfiguration.EmailBody_Password);
 
-                            listOfQuery.Add(_commonService.AddQuery(AddOrUpdatyeInsertQuery(), _commonService.AddParameter(new string[]
-                         {model.USER_ID.ToString(), model.USER_TYPE, model.USER_PASSWORD.ToString(), model.USER_NAME, model.DEPOT_ID.ToString(), model.ENTERED_TERMINAL, model.ENTERED_DATE?.ToString("dd/MM/yyyy hh:mm:ss tt"), model.ENTERED_BY.ToString(), model.EMPLOYEE_ID.ToString(), model.EMAIL,model.COMPANY_ID.ToString() })));
+                            listOfQuery.Add(_commonService.AddQuery(AddOrUpdatyeInsertQuery(), _commonService.AddParameter(new string[] {
+                                    model.USER_ID.ToString(), model.USER_TYPE, model.USER_PASSWORD.ToString(), 
+                                    model.USER_NAME, model.DEPOT_ID.ToString(), model.ENTERED_TERMINAL,
+                                    model.ENTERED_DATE?.ToString("dd/MM/yyyy hh:mm:ss tt"), 
+                                    model.ENTERED_BY.ToString(), model.EMPLOYEE_ID.ToString(), 
+                                    model.EMAIL, model.COMPANY_ID.ToString() })));
+
                             model.UNIQUEACCESSKEY = generator.RandomPassword(12);
+
                             listOfQuery.Add(_commonService.AddQuery(UpdateUniqueKeyByUser(), _commonService.AddParameter(new string[]
-                        {model.UNIQUEACCESSKEY, model.USER_ID.ToString()})));
+                                    {model.UNIQUEACCESSKEY, model.USER_ID.ToString()})));
+
                             emailConfiguration.Subject = "Email and User Account Verification";
                             emailConfiguration.ToEmail = model.EMAIL;
                             emailConfiguration.Title = "Email Verification";

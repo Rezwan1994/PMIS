@@ -11,15 +11,16 @@
         <h4 class="h3 mb-0 text-gray-600">User</h4>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a class="btn btn-primary mb-1" href="~/Security/User/index">User List</a></li>
-            @*<li class="breadcrumb-item"><button class="btn btn-success mb-1" ng-click="SaveData(model)" ng-disabled="formMenuCategoryAdd.$invalid || model.EMPLOYEE_ID <1" ng-show="model.ADD_PERMISSION == 'Active'">Save</button></li>*@
-            <li class="breadcrumb-item"><button class="btn btn-success mb-1" ng-click="SaveData(model)">Save</button></li>
+            <li class="breadcrumb-item"><button class="btn btn-success mb-1" ng-click="SaveData(model)" ng-disabled="formMenuCategoryAdd.$invalid || model.EMPLOYEE_ID <1" ng-show="model.ADD_PERMISSION == 'Active'">Save</button></li>
         </ol>
     </div>
 
     <div class="card mb-4">
         <div class="card-body">
+
             <fieldset>
                 <legend style="width:140px">User Entry</legend>
+
                 <form name="formMenuCategoryAdd">
                     <div class="row" style="margin:20px">
                         <div class="col-md-3">
@@ -32,7 +33,7 @@
                         <div class="col-md-3" ng-disabled="model.USER_TYPE != 'SuperAdmin'">
                             <div class="form-group">
                                 <label> Company </label>
-                                <select class="select2-single form-control" id="COMPANY_ID" ng-disabled="model.USER_TYPE != 'SuperAdmin'"
+                                <select class="form-control" id="COMPANY_ID" ng-disabled="model.USER_TYPE != 'SuperAdmin'"
                                         name="COMPANY_ID" ng-model="model.COMPANY_ID" style="width:100%" ng-change="typeaheadSelectedCompany(model)">
 
                                     <option ng-repeat="item in CompanyData" ng-selected="item.COMPANY_ID == model.COMPANY_ID" value="{{item.COMPANY_ID}}">{{item.COMPANY_NAME}}</option>
@@ -42,7 +43,7 @@
                         <div class="col-md-3" ng-show="{{model.USER_TYPE == 'SuperAdmin'}}">
                             <div class="form-group">
                                 <label for="UNIT_ID">Unit Id</label>
-                                <select class="select2-single form-control" id="UNIT_ID"
+                                <select class="form-control" id="UNIT_ID"
                                         name="UNIT_ID" ng-model="model.UNIT_ID" style="width:100%">
 
                                     <option ng-repeat="item in UnitData" value="{{item.UNIT_ID}}">{{item.UNIT_NAME}}</option>
@@ -53,7 +54,7 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="USER_TYPE">User Type</label>
-                                <select class="select2-single form-control" id="USER_TYPE"
+                                <select class="form-control" id="USER_TYPE"
                                         name="USER_TYPE" ng-model="model.USER_TYPE" style="width:100%">
                                     <option ng-repeat="item in UserTypeData" value="{{item.Type}}">{{item.Type}}</option>
                                 </select>
@@ -97,6 +98,7 @@
 
     <script src="~/ScriptsNg/Security/User/Controller/UserCtr.js"></script>
     <script src="~/ScriptsNg/Security/User/Service/UserServices.js"></script>
+    <script src="~/ScriptsNg/Security/Company/Service/CompanyService.js"></script>
 
     <script src="~/ScriptsNg/Services/permissionProvider.js"></script>
 

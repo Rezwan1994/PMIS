@@ -51,9 +51,25 @@
         $scope.UserType1 = {
             Type: 'Admin'
         }
-
+        $scope.UserType2 = {
+            Type: 'Distributor'
+        }
+        $scope.UserType3 = {
+            Type: 'DSM'
+        }
+        $scope.UserType4 = {
+            Type: 'SM'
+        }
+        $scope.UserType5 = {
+            Type: 'HOS'
+        }
         $scope.UserTypeData.push($scope.UserType);
         $scope.UserTypeData.push($scope.UserType1);
+        $scope.UserTypeData.push($scope.UserType2);
+        $scope.UserTypeData.push($scope.UserType3);
+        $scope.UserTypeData.push($scope.UserType4);
+        $scope.UserTypeData.push($scope.UserType5);
+
         if ($scope.model.UserType == 'SuperAdmin') {
             $scope.UserType2 = {
                 Type: 'SuperAdmin'

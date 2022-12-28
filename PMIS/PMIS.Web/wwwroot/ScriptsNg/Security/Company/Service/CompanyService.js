@@ -16,7 +16,7 @@
         });
     }
     this.GetUnitList = function () {
-        return $http.get('../Company/LoadUnitData');
+        return $http.get('../Company/LoadDepotData');
     }
 
     this.AddOrUpdateUnit = function (model) {
@@ -30,6 +30,6 @@
         return $http.post("../Company/DeactivateUnit", { DEPOT_ID: parseInt(model) });
     }
     this.GetCompany = function () {
-        return $http.get('/SalesAndDistribution/Market/GetCompany');
+        return $http.get('../Company/GetCompany');
     }
 });
