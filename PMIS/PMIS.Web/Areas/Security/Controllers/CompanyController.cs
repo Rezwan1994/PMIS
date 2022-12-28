@@ -20,8 +20,6 @@ namespace PMIS.Web.Areas.Security.Controllers
             _configuration = configuration;
         }
 
-        private string GetDbConnectionString() => User.Claims.FirstOrDefault(x => x.Type == ClaimsType.DbSpecifier).Value.ToString();
-
         public string GetCompany() => User.Claims.FirstOrDefault(x => x.Type == ClaimsType.CompanyId).Value.ToString();
 
         public string GetCompanyName() => User.Claims.FirstOrDefault(x => x.Type == ClaimsType.CompanyName).Value.ToString();
@@ -41,7 +39,7 @@ namespace PMIS.Web.Areas.Security.Controllers
         }
 
         [AuthorizeCheck]
-        public IActionResult Unit()
+        public IActionResult Depot()
         {
             _logger.LogInformation("Company Unit (Company/Unit) Page Has been accessed By " + User.Claims.FirstOrDefault(x => x.Type == ClaimsType.UserName).Value != null ? User.Claims.FirstOrDefault(x => x.Type == ClaimsType.UserName).Value.ToString() : "Unknown User" + " ( ID= " + User.Claims.FirstOrDefault(x => x.Type == ClaimsType.UserId).Value != null ? User.Claims.FirstOrDefault(x => x.Type == ClaimsType.UserId).Value.ToString() : "");
 
@@ -102,7 +100,6 @@ namespace PMIS.Web.Areas.Security.Controllers
 
         [HttpPost]
         public async Task<JsonResult> AddOrUpdateUnit([FromBody] DEPOT_INFO model)
-
         {
             if (!ModelState.IsValid)
             {

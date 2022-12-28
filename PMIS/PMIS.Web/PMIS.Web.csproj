@@ -45,7 +45,7 @@
 
   <ItemGroup>
     <None Include="Areas\Security\Views\Company\Index.cshtml" />
-    <None Include="Areas\Security\Views\Company\Unit.cshtml" />
+    <None Include="Areas\Security\Views\Company\Depot.cshtml" />
     <None Include="Areas\Security\Views\Login\ChangePassword.cshtml" />
     <None Include="Areas\Security\Views\Login\ForgetPassword.cshtml" />
     <None Include="Areas\Security\Views\Login\Index.cshtml" />
@@ -3881,7 +3881,7 @@
     <None Include="wwwroot\ScriptsNg\Directives\ui-grid-edit-datepicker.js" />
     <None Include="wwwroot\ScriptsNg\Module\app.js" />
     <None Include="wwwroot\ScriptsNg\Security\Company\Controller\CompanyCtr.js" />
-    <None Include="wwwroot\ScriptsNg\Security\Company\Controller\UnitCtr.js" />
+    <None Include="wwwroot\ScriptsNg\Security\Company\Controller\DepotCtr.js" />
     <None Include="wwwroot\ScriptsNg\Security\Company\Service\CompanyService.js" />
     <None Include="wwwroot\ScriptsNg\Security\MenuCategory\Controller\MenuCategoryCtr.js" />
     <None Include="wwwroot\ScriptsNg\Security\MenuCategory\Service\MenuCategoryServices.js" />

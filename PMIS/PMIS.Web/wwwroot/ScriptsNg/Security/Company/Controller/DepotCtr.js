@@ -40,7 +40,7 @@
 
         $scope.permissionReqModel = {
             Controller_Name: 'Company',
-            Action_Name: 'Unit'
+            Action_Name: 'Depot'
         }
         permissionProvider.GetPermission($scope.permissionReqModel).then(function (data) {
             $scope.getPermissions = data.data;
@@ -109,8 +109,6 @@
     }
 
     $scope.SaveData = function (model) {
-        debugger;
-
         $scope.showLoader = true;
 
         CompanyService.AddOrUpdateUnit(model).then(function (data) {
@@ -127,7 +125,6 @@
     }
 
     $scope.ActivateUnit = function (Id) {
-        debugger;
         $scope.showLoader = true;
         CompanyService.ActivateUnit(Id).then(function (data) {
             notificationservice.Notification(data.data, 1, 'Activated the selected Unit !!');
