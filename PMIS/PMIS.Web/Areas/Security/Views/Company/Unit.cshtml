@@ -26,65 +26,36 @@
 
                       <form name="formUnitAdd">
                       <div class="row" style="margin:20px">
-                           <div class="col-md-6" >
-                                 <div class="form-group">
-                                     <label> Company</label>
-                                 <select  class="select2-single form-control" id="COMPANY_ID" required  ng-disabled="model.USER_TYPE != 'SuperAdmin'"
-                                      name="COMPANY_ID" ng-model="model.COMPANY_ID" style="width:100%">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="DEPOT_CODE"> Unit Code</label>
+                                <input id="DEPOT_CODE" type="text" class="form-control" required
+                                       name="DEPOT_CODE" ng-model="model.DEPOT_CODE">
 
-                                      <option ng-repeat="item in CompanyData" ng-selected="item.COMPANY_ID == model.COMPANY_ID" value="{{item.COMPANY_ID}}">{{item.COMPANY_NAME}}</option>
-                                     </select>
-                                     
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="DEPOT_NAME">Unit Name</label>
+                                <input type="text" class="form-control" autocomplete="off" required data-val="true"
+                                       name="DEPOT_NAME" ng-model="model.DEPOT_NAME" placeholder="Enter Unit Name">
+                            </div>
+                        </div>
+                         <div class="col-md-6" >
+                                 <div class="form-group">
+                                <label for="DEPOT_SHORT_NAME"> Short Name</label>
+                                <input id="DEPOT_SHORT_NAME" type="text" class="form-control" required
+                                       name="DEPOT_SHORT_NAME" ng-model="model.DEPOT_SHORT_NAME" placeholder="Enter Unit Short Name">
                                          
-                    
-                    </div>
-                          </div>
-                          <div class="col-md-6" >
-                               <div class="form-group">
-                      <label for="UNIT_NAME">Unit Name</label>
-                      <input type="text" class="form-control" autocomplete="off" required data-val="true"
-                      name="UNIT_NAME" ng-model="model.UNIT_NAME"  placeholder="Enter Unit Name">
-                    </div>
+                                </div>
                           </div>
                            <div class="col-md-6" >
                                  <div class="form-group">
-                                     <label for="UNIT_SHORT_NAME"> Short Name</label>
-                                    <input id="UNIT_SHORT_NAME" type="text" class="form-control"  required
-                                      name="UNIT_SHORT_NAME" ng-model="model.UNIT_SHORT_NAME"  placeholder="Enter Unit Short Name">
-                                         
-                    
-                    </div>
-                          </div>
-                               <div class="col-md-6" >
-                                 <div class="form-group">
-                                     <label> Unit Type</label>
-                                 <select  class="select2-single form-control" id="UNIT_TYPE" required
-                                      name="UNIT_TYPE" ng-model="model.UNIT_TYPE" style="width:100%">
-
-                                      <option ng-repeat="item in UnitData" value="{{item.UNIT_TYPE}}">{{item.UNIT_TYPE}}</option>
-                                     </select>
-                                     
-                                         
-                    
-                    </div>
-                          </div>
-                           <div class="col-md-6" >
-                                 <div class="form-group">
-                                     <label for="UNIT_ADDRESS1">Unit Address 1 </label>
-                                    <input id="UNIT_ADDRESS1" type="text" class="form-control" required
-                                      name="UNIT_ADDRESS1" ng-model="model.UNIT_ADDRESS1"  placeholder="Enter Unit Address 1">
-                                         
-                    
-                    </div>
-                          </div>
-                           <div class="col-md-6" >
-                                 <div class="form-group">
-                                     <label for="UNIT_ADDRESS2">Menu Action</label>
-                                    <input id="UNIT_ADDRESS2" type="text" class="form-control" required
-                                      name="UNIT_ADDRESS2" ng-model="model.UNIT_ADDRESS2"  placeholder="Enter Unit Address 2">
-                                         
-                    
-                    </div>
+                                <label for="DEPOT_ADDRESS">Address</label>
+                                <input id="DEPOT_ADDRESS" type="text" class="form-control" required
+                                       name="DEPOT_ADDRESS" ng-model="model.DEPOT_ADDRESS" placeholder="Enter Unit Address 2">
+                                       
+                                  </div>
                           </div>
                     
                   

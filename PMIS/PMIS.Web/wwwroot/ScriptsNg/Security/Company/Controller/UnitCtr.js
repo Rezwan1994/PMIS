@@ -1,46 +1,12 @@
 ﻿ngApp.controller('ngGridCtrl', ['$scope', 'CompanyService', 'permissionProvider', 'notificationservice', 'gridregistrationservice', '$http', '$log', '$filter', '$timeout', '$interval', '$q', function ($scope, CompanyService, permissionProvider, notificationservice, gridregistrationservice, $http, $log, $filter, $timeout, $interval, $q) {
 
-    $scope.model = { ID: 0, COMPANY_ID: 0, UNIT_ID: 0}
+    $scope.model = { ID: 0, DEPOT_ID: 0, DEPOT_CODE: "", DEPOT_NAME: "", DEPOT_SHORT_NAME: "", DEPOT_ADDRESS: "", STATUS :""}
 
     $scope.gridOptionsList = (gridregistrationservice.GridRegistration("Unit List"));
     $scope.gridOptionsList.onRegisterApi = function (gridApi) {
         $scope.gridApi = gridApi;
     }
-    $scope.UnitData = [];
-    $scope.CompanyData = [];
-    $scope.LoadUnitData = function () {
-        
-        $scope.unidataload = {
-            UNIT_TYPE: "Factory"
-        }
-        $scope.UnitData.push($scope.unidataload);
-        $scope.unidataload1 = {
-            UNIT_TYPE: "Depot"
 
-        }
-         $scope.UnitData.push($scope.unidataload1);
-        $scope.unidataload2 = {
-            UNIT_TYPE: "HeadOffice"
-
-        }
-        $scope.UnitData.push($scope.unidataload2);
-    }
-
-
-    $scope.CompDataLoad = function () {
-        $scope.showLoader = true;
-        CompanyService.GetCompanyList().then(function (data) {
-
-            $scope.CompanyData = data.data;
-            $scope.showLoader = false;
-            
-        }, function (error) {
-            alert(error);
-            
-            $scope.showLoader = false;
-
-        });
-    }
 
     $scope.DataLoad = function () {
         $scope.showLoader = true;
@@ -69,12 +35,12 @@
         });
     }
     $scope.ClearForm = function () {
-        $scope.model.ID = 0;
-        $scope.model.COMPANY_ID = 0;
-        $scope.model.COMPANY_NAME = '';
-        $scope.model.COMPANY_SHORT_NAME = '';
-        $scope.model.COMPANY_ADDRESS1 = '';
-        $scope.model.COMPANY_ADDRESS2 = '';
+        //$scope.model.ID = 0;
+        //$scope.model.COMPANY_ID = 0;
+        //$scope.model.COMPANY_NAME = '';
+        //$scope.model.COMPANY_SHORT_NAME = '';
+        //$scope.model.COMPANY_ADDRESS1 = '';
+        //$scope.model.COMPANY_ADDRESS2 = '';
 
     }
 
@@ -106,88 +72,53 @@
         });
     }
 
-    $scope.CompanyLoad = function () {
-        $scope.showLoader = true;
-
-        CompanyService.GetCompany().then(function (data) {
-            
-            
-            $scope.model.COMPANY_ID = parseInt(data.data);
-            $scope.model.COMPANY_SEARCH_ID = parseInt(data.data);
-            $interval(function () {
-                $('#COMPANY_ID').trigger('change');
-            }, 800, 4);
-
-            $scope.showLoader = false;
-        }, function (error) {
-            alert(error);
-            
-            $scope.showLoader = false;
-
-        });
-    }
-    $scope.CompDataLoad()
-    $scope.CompanyLoad();
-
     $scope.DataLoad();
     $scope.GetPermissionData();
-    $scope.LoadUnitData();
+
 
     $scope.gridOptionsList.columnDefs = [
         { name: 'SL', field: 'ROW_NO', enableFiltering: false, width: 40 }
 
-        , { name: 'COMPANY_ID', field: 'COMPANY_ID', visible: false }
-        , { name: 'ID', field: 'ID', visible: false }
-
-        , { name: 'COMPANY_NAME', field: 'COMPANY_NAME', displayName: 'Company Name', enableFiltering: true, width: '20%', }
-        , { name: 'UNIT_ID', field: 'UNIT_ID', visible: false }
+        , { name: 'DEPOT_ID', field: 'DEPOT_ID', visible: false }
+    
         , {
-            name: 'UNIT_NAME', field: 'UNIT_NAME', displayName: 'Unit Name', enableFiltering: true, width: '20%', cellTemplate:
-                '<input required="required"   ng-model="row.entity.UNIT_NAME"  class="pl-sm" />'
+            name: 'DEPOT_CODE', field: 'DEPOT_CODE', displayName: 'DEPOT CODE', enableFiltering: true, width: '20%', cellTemplate:
+                '<input required="required"   ng-model="row.entity.DEPOT_CODE"  class="pl-sm" />'
         }
         , {
-            name: 'UNIT_SHORT_NAME', field: 'UNIT_SHORT_NAME', displayName: 'Short Name', enableFiltering: true, width: ' 20%', cellTemplate:
-                '<input required="required"  type="text"  ng-model="row.entity.UNIT_SHORT_NAME"  class="pl-sm" />'
+            name: 'DEPOT_NAME', field: 'DEPOT_NAME', displayName: 'Unit Name', enableFiltering: true, width: '20%', cellTemplate:
+                '<input required="required"   ng-model="row.entity.DEPOT_NAME"  class="pl-sm" />'
         }
         , {
-            name: 'UNIT_TYPE', field: 'UNIT_TYPE', displayName: 'Unit Type', enableFiltering: true, width: ' 12%', cellTemplate:
-                '<input required="required"  type="text"  ng-model="row.entity.UNIT_TYPE"  class="pl-sm" />'
-
+            name: 'DEPOT_SHORT_NAME', field: 'DEPOT_SHORT_NAME', displayName: 'Short Name', enableFiltering: true, width: ' 20%', cellTemplate:
+                '<input required="required"  type="text"  ng-model="row.entity.DEPOT_SHORT_NAME"  class="pl-sm" />'
         }
+     
         , { name: 'STATUS', field: 'STATUS', displayName: 'Status', enableFiltering: true, width: ' 8%' }
 
         , {
-            name: 'UNIT_ADDRESS1', field: 'UNIT_ADDRESS1', displayName: 'Unit Address 1', enableFiltering: true, width: ' 24%', cellTemplate:
-                '<input required="required"  type="text"  ng-model="row.entity.UNIT_ADDRESS1"  class="pl-sm" />'
+            name: 'DEPOT_ADDRESS', field: 'DEPOT_ADDRESS', displayName: 'Unit Address 1', enableFiltering: true, width: ' 24%', cellTemplate:
+                '<input required="required"  type="text"  ng-model="row.entity.DEPOT_ADDRESS"  class="pl-sm" />'
         }
-        , {
-            name: 'UNIT_ADDRESS2', field: 'UNIT_ADDRESS2', displayName: 'Unit Address 2', enableFiltering: true, width: ' 24%', cellTemplate:
-                '<input required="required"  type="text"  ng-model="row.entity.UNIT_ADDRESS2"  class="pl-sm" />'
-        }
-
+      
         , {
             name: 'Actions', displayName: 'Actions', enableFiltering: false, enableColumnMenu: false, width: '30%', cellTemplate:
                 '<div style="margin:1px;">' +
                 '<button style="margin-bottom: 5px;" ng-show="grid.appScope.model.EDIT_PERMISSION == \'Active\'" ng-click="grid.appScope.EditUnitData(row.entity)" type="button" class="btn btn-outline-primary mb-1">Update</button>' +
-                '<button style="margin-bottom: 5px;" ng-show="grid.appScope.model.EDIT_PERMISSION == \'Active\'" ng-click="grid.appScope.ActivateUnit(row.entity.ID)" type="button" class="btn btn-outline-success mb-1"  ng-disabled="row.entity.STATUS == \'Active\'">Activate</button>' +
-                '<button style="margin-bottom: 5px;" ng-show="grid.appScope.model.EDIT_PERMISSION == \'Active\'" type="button" class="btn btn-outline-secondary mb-1" ng-disabled="row.entity.STATUS == \'InActive\'" ng-click="grid.appScope.DeactivateUnit(row.entity.ID)">Deactive</button>' +
+                '<button style="margin-bottom: 5px;" ng-show="grid.appScope.model.EDIT_PERMISSION == \'Active\'" ng-click="grid.appScope.ActivateUnit(row.entity.DEPOT_ID)" type="button" class="btn btn-outline-success mb-1"  ng-disabled="row.entity.STATUS == \'Active\'">Activate</button>' +
+                '<button style="margin-bottom: 5px;" ng-show="grid.appScope.model.EDIT_PERMISSION == \'Active\'" type="button" class="btn btn-outline-secondary mb-1" ng-disabled="row.entity.STATUS == \'InActive\'" ng-click="grid.appScope.DeactivateUnit(row.entity.DEPOT_ID)">Deactive</button>' +
                 '</div>'
         },
 
     ];
 
     $scope.EditUnitData = function (entity) {
-        
-        $scope.model.ID = entity.ID;
-        $scope.model.COMPANY_ID = entity.COMPANY_ID;
-        $scope.model.COMPANY_NAME = entity.COMPANY_NAME;
-        $scope.model.UNIT_NAME = entity.UNIT_NAME;
-        $scope.model.UNIT_SHORT_NAME = entity.UNIT_SHORT_NAME;
-        $scope.model.UNIT_TYPE = entity.UNIT_TYPE;
-        $scope.model.UNIT_ADDRESS1 = entity.UNIT_ADDRESS1;
-        $scope.model.UNIT_ADDRESS2 = entity.UNIT_ADDRESS2;
-        $scope.model.COMPANY_ADDRESS2 = entity.COMPANY_ADDRESS2;
-        $scope.model.UNIT_ID = entity.UNIT_ID;
+    
+        $scope.model.DEPOT_ID = entity.DEPOT_ID;
+        $scope.model.DEPOT_CODE = entity.DEPOT_CODE;
+        $scope.model.DEPOT_NAME = entity.DEPOT_NAME;
+        $scope.model.DEPOT_SHORT_NAME = entity.DEPOT_SHORT_NAME;
+        $scope.model.DEPOT_ADDRESS = entity.DEPOT_ADDRESS;
 
         $scope.SaveData($scope.model);
 
@@ -195,7 +126,7 @@
 
 
     $scope.SaveData = function (model) {
-        
+        debugger;
 
         $scope.showLoader = true;
         
@@ -215,7 +146,7 @@
 
 
     $scope.ActivateUnit = function (Id) {
-        
+        debugger;
         $scope.showLoader = true;
         CompanyService.ActivateUnit(Id).then(function (data) {
 
