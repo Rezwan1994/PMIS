@@ -16,7 +16,7 @@ namespace PMIS.Service.Interface.Security
         Task<string> GetCompanyJsonList();
         Task<string> GetUnitJsonList(int companyId);
         Task<string> GetUnitByCompanyId(int Company_Id);
-        Task<string> AddOrUpdateUnit(COMPANY_INFO model);
+        Task<string> AddOrUpdateUnit(DEPOT_INFO model);
         Task<string> ActivateUnit(int id);
         Task<string> DeactivateUnit(int id);
     }
