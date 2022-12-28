@@ -23,16 +23,16 @@
 
     this.AddOrUpdateUnit = function (model) {
         
-        return $http.post("../Company/AddOrUpdateUnit", { ID : parseInt(model.ID), UNIT_ID: parseInt(model.UNIT_ID), COMPANY_ID: parseInt(model.COMPANY_ID), UNIT_NAME: model.UNIT_NAME, UNIT_SHORT_NAME: model.UNIT_SHORT_NAME, UNIT_TYPE: model.UNIT_TYPE, UNIT_ADDRESS1: model.UNIT_ADDRESS1, UNIT_ADDRESS2: model.UNIT_ADDRESS2 });
+        return $http.post("../Company/AddOrUpdateUnit", { DEPOT_ID: parseInt(model.DEPOT_ID), DEPOT_CODE: model.DEPOT_CODE, DEPOT_NAME: model.DEPOT_NAME, DEPOT_SHORT_NAME: model.DEPOT_SHORT_NAME, DEPOT_ADDRESS: model.DEPOT_ADDRESS});
     }
 
     this.ActivateUnit = function (model) {
         
-        return $http.post("../Company/ActivateUnit", { ID: parseInt(model)  });
+        return $http.post("../Company/ActivateUnit", { DEPOT_ID: parseInt(model)  });
     }
     this.DeactivateUnit = function (model) {
         
-        return $http.post("../Company/DeactivateUnit", { ID: parseInt(model) });
+        return $http.post("../Company/DeactivateUnit", { DEPOT_ID: parseInt(model) });
     }
     this.GetCompany = function () {
         return $http.get('/SalesAndDistribution/Market/GetCompany');

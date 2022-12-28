@@ -101,9 +101,13 @@ namespace PMIS.Web.Areas.Security.Controllers
         }
 
         [HttpPost]
-        public async Task<JsonResult> AddOrUpdateUnit([FromBody] COMPANY_INFO model)
+        public async Task<JsonResult> AddOrUpdateUnit([FromBody] DEPOT_INFO model)
 
         {
+            if (!ModelState.IsValid)
+            {
+                var arr = ModelState.Select(x => x.Value.Errors).Where(y => y.Count > 0).ToList();
+            }
             string result;
 
             if (model == null)
@@ -112,8 +116,29 @@ namespace PMIS.Web.Areas.Security.Controllers
             }
             else
             {
+
                 try
                 {
+                    if (model.DEPOT_ID == 0)
+                    {
+
+                        model.ENTERED_BY = User.Claims.FirstOrDefault(c => c.Type == ClaimsType.UserId)?.Value;
+                        //model.REQUISITION_UNIT_ID = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == ClaimsType.UnitId)?.Value);
+
+
+                        model.ENTERED_BY = User.Claims.FirstOrDefault(c => c.Type == ClaimsType.UserId)?.Value;
+                        model.ENTERED_DATE = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss tt"); ;
+                        model.ENTERED_TERMINAL = HttpContext.Connection.RemoteIpAddress.ToString();
+                      
+                    }
+                    else
+                    {
+                        model.UPDATED_BY = User.Claims.FirstOrDefault(c => c.Type == ClaimsType.UserId)?.Value;
+                        model.UPDATED_DATE = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss tt");
+
+                        model.UPDATED_TERMINAL = HttpContext.Connection.RemoteIpAddress.ToString();
+                   
+                    }
                     result = await _service.AddOrUpdateUnit(model);
                 }
                 catch (Exception ex)
@@ -125,20 +150,24 @@ namespace PMIS.Web.Areas.Security.Controllers
             return Json(result);
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> ActivateUnit([FromBody] CompanyInfo company_Info)
-        //{
-        //    string result = await _service.ActivateUnit(GetDbConnectionString(), company_Info.ID);
+        [HttpPost]
+        public async Task<IActionResult> ActivateUnit([FromBody] DEPOT_INFO depot_Info)
+        {
+            if (!ModelState.IsValid)
+            {
+                var arr = ModelState.Select(x => x.Value.Errors).Where(y => y.Count > 0).ToList();
+            }
+            string result = await _service.ActivateUnit( depot_Info.DEPOT_ID);
 
-        //    return Json(result);
-        //}
+            return Json(result);
+        }
 
-        //[HttpPost]
-        //public async Task<IActionResult> DeactivateUnit([FromBody] CompanyInfo company_Info)
-        //{
-        //    string result = await _service.DeactivateUnit(GetDbConnectionString(), company_Info.ID);
+        [HttpPost]
+        public async Task<IActionResult> DeactivateUnit([FromBody] DEPOT_INFO depot_Info)
+        {
+            string result = await _service.DeactivateUnit(depot_Info.DEPOT_ID);
 
-        //    return Json(result);
-        //}
+            return Json(result);
+        }
     }
 }
