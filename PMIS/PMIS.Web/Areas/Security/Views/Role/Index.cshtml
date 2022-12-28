@@ -27,7 +27,7 @@
                                 </div>
                                 <div class="col-md-8">
                                     <select class="select2-single form-control" id="COMPANY_ID" ng-disabled="model.USER_TYPE != 'SuperAdmin'"
-                                            name="COMPANY_ID" ng-model="model.COMPANY_ID" ng-change="DataLoad(model.COMPANY_ID) || UnitsLoad(model.COMPANY_ID)" style="width:100%">
+                                            name="COMPANY_ID" ng-model="model.COMPANY_ID" ng-change="DataLoad(model.COMPANY_ID) || DepotsLoad(model.COMPANY_ID)" style="width:100%">
 
                                         <option ng-repeat="item in Companies" ng-selected="model.COMPANY_ID == item.COMPANY_ID" value="{{item.COMPANY_ID}}">{{item.COMPANY_NAME}}</option>
                                     </select>
@@ -37,13 +37,13 @@
                         <div class="col-md-4 space-bottom">
                             <div class="row">
                                 <div class="col-md-4">
-                                    <label for="UNIT_ID">Unit</label>
+                                    <label for="DEPOT_ID">Depot</label>
                                 </div>
                                 <div class="col-md-8">
-                                    <select class="select2-single form-control" id="UNIT_ID"
-                                            name="UNIT_ID" ng-model="model.UNIT_ID" style="width:100%">
+                                    <select class="select2-single form-control" id="DEPOT_ID"
+                                            name="DEPOT_ID" ng-model="model.DEPOT_ID" style="width:100%">
 
-                                        <option ng-repeat="item in Units" value="{{item.UNIT_ID}}">{{item.UNIT_NAME}}</option>
+                                        <option ng-repeat="item in Depots" value="{{item.DEPOT_ID}}">{{item.DEPOT_NAME}}</option>
                                     </select>
                                 </div>
                             </div>

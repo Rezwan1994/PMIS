@@ -13,7 +13,7 @@
             url: "../Role/AddOrUpdate",
             dataType: 'json',
             contentType: dataType,
-            data: { COMPANY_ID: parseInt(model.COMPANY_ID), ROLE_ID: model.ROLE_ID, ROLE_NAME: model.ROLE_NAME, UNIT_ID: parseInt(model.UNIT_ID) },
+            data: { COMPANY_ID: parseInt(model.COMPANY_ID), ROLE_ID: model.ROLE_ID, ROLE_NAME: model.ROLE_NAME, DEPOT_ID: parseInt(model.DEPOT_ID) },
             headers: { 'Content-Type': 'application/json; charset=utf-8' },
         });
 
@@ -45,8 +45,8 @@
     this.GetCompanyList = function () {
         return $http.get('../Company/LoadData');
     }
-    this.GetUnitList = function (value) {
-        return $http.post('/Security/Company/GetUnitListByCompanyId', { COMPANY_ID:  parseInt(value) });
+    this.GetDepotList = function (value) {
+        return $http.get('/Security/Company/LoadDepotData');
     }
     this.GetCompany = function () {
         return $http.get('/Security/Company/GetCompany');

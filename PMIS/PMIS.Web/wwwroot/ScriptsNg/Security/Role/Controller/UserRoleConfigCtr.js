@@ -81,9 +81,9 @@
     $scope.GetPermissionData();
 
     $scope.gridOptionsList.columnDefs = [
-        { name: 'SL', field: 'ROW_NO', enableFiltering: false, width: '50' }
+        //{ name: 'SL', field: 'ROW_NO', enableFiltering: false, width: '50' }
 
-        , { name: 'USER_ID', field: 'USER_ID', visible: false }
+        { name: 'USER_ID', field: 'USER_ID', visible: false }
         , { name: 'ROLE_ID', field: 'ROLE_ID', visible: false }
         , { name: 'USER_CONFIG_ID', field: 'USER_CONFIG_ID', visible: false }
 
