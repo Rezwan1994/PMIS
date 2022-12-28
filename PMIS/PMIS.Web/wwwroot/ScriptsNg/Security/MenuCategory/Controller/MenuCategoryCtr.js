@@ -1,5 +1,4 @@
 ﻿ngApp.controller('ngGridCtrl', ['$scope', 'MenuCategoryServices', 'permissionProvider', 'notificationservice', 'gridregistrationservice', '$http', '$log', '$filter', '$timeout', '$interval', '$q', function ($scope, MenuCategoryServices, permissionProvider, notificationservice, gridregistrationservice, $http, $log, $filter, $timeout, $interval, $q) {
-
     $scope.model = { COMPANY_ID: 0, MODULE_ID: 0, MODULE_NAME: '', ORDER_BY_NO: 0, COMPANY_SEARCH_ID: 0 }
 
     $scope.getPermissions = [];
@@ -11,7 +10,8 @@
     }
     $scope.gridOptionsList.columnDefs = [
         {
-            name: '#', field: 'ROW_NO', enableFiltering: false, cellClass: 'red' , width: '50'}
+            name: '#', field: 'ROW_NO', enableFiltering: false, cellClass: 'red', width: '50'
+        }
 
         , { name: 'MODULE_ID', field: 'MODULE_ID', visible: false }
         , { name: 'COMPANY_ID', field: 'COMPANY_ID', visible: false }
@@ -20,14 +20,14 @@
 
         //}
         , {
-            name: 'MODULE_NAME', field: 'MODULE_NAME', displayName: 'Name', enableFiltering: true, width: '20%'  ,cellTemplate:
+            name: 'MODULE_NAME', field: 'MODULE_NAME', displayName: 'Name', enableFiltering: true, width: '20%', cellTemplate:
                 '<input required="required"   ng-model="row.entity.MODULE_NAME"  class="pl-sm" />'
         }
         , {
             name: 'ORDER_BY_NO', field: 'ORDER_BY_NO', displayName: 'Order No', enableFiltering: true, width: '12%', cellTemplate:
                 '<input required="required"   ng-model="row.entity.ORDER_BY_NO"  class="pl-sm" />'
         }
-        , { name: 'STATUS', field: 'STATUS', displayName: 'Status', enableFiltering: true, width: '15%'}
+        , { name: 'STATUS', field: 'STATUS', displayName: 'Status', enableFiltering: true, width: '15%' }
         , { name: 'CREATENAME', field: 'CREATENAME', displayName: 'By', enableFiltering: true, width: '15%' }
         , { name: 'ENTERED_DATE', field: 'ENTERED_DATE', displayName: 'Date', enableFiltering: true, width: '15%' },
         {
@@ -43,52 +43,44 @@
     ];
 
     $scope.DataLoad = function (companyId) {
-        
         $scope.showLoader = true;
 
         MenuCategoryServices.GetMenuCetagories(companyId).then(function (data) {
-            
             $scope.gridOptionsList.data = data.data;
             $scope.showLoader = false;
-        } , function (error) {
+        }, function (error) {
             alert(error);
-            
-            $scope.showLoader = false;
 
+            $scope.showLoader = false;
         });
     }
     $scope.CompaniesLoad = function () {
         $scope.showLoader = true;
 
         MenuCategoryServices.GetCompanyList().then(function (data) {
-            
             $scope.Companies = data.data;
             $scope.showLoader = false;
         }, function (error) {
             alert(error);
-            
-            $scope.showLoader = false;
 
+            $scope.showLoader = false;
         });
     }
     $scope.CompanyLoad = function () {
         $scope.showLoader = true;
 
         MenuCategoryServices.GetCompany().then(function (data) {
-            
-            
             $scope.model.COMPANY_ID = parseInt(data.data);
             $scope.model.COMPANY_SEARCH_ID = parseInt(data.data);
             $interval(function () {
                 $('#COMPANY_ID').trigger('change');
             }, 800, 4);
-            
+
             $scope.showLoader = false;
         }, function (error) {
             alert(error);
-            
-            $scope.showLoader = false;
 
+            $scope.showLoader = false;
         });
     }
 
@@ -97,28 +89,23 @@
         $scope.model.MODULE_NAME = "";
         $scope.model.ORDER_BY_NO = '';
         $scope.model.COMPANY_ID = 0;
-
     }
 
     $scope.EditData = function (entity) {
-        
         $scope.model.MODULE_ID = entity.MODULE_ID;
         $scope.model.MODULE_NAME = entity.MODULE_NAME;
         $scope.model.ORDER_BY_NO = entity.ORDER_BY_NO;
-          $scope.SaveData($scope.model);
-        
+        $scope.SaveData($scope.model);
     }
 
     $scope.GetPermissionData = function () {
         $scope.showLoader = true;
-        
+
         $scope.permissionReqModel = {
-            Controller_Name : 'MenuCategory',
-            Action_Name : 'Index'
+            Controller_Name: 'MenuCategory',
+            Action_Name: 'Index'
         }
         permissionProvider.GetPermission($scope.permissionReqModel).then(function (data) {
-            
-            
             $scope.getPermissions = data.data;
             $scope.model.ADD_PERMISSION = $scope.getPermissions.adD_PERMISSION;
             $scope.model.EDIT_PERMISSION = $scope.getPermissions.ediT_PERMISSION;
@@ -132,13 +119,12 @@
             $scope.showLoader = false;
         }, function (error) {
             alert(error);
-            
-            $scope.showLoader = false;
 
+            $scope.showLoader = false;
         });
     }
     //$scope.HideCompanyColumn = function () {
-    //    
+    //
     //    if ($scope.model.USER_TYPE == 'SuperAdmin') {
     //        $scope.gridOptionsList.columnDefs[3].visible = true;
 
@@ -153,15 +139,11 @@
     $scope.GetPermissionData();
     $scope.CompaniesLoad();
     $scope.CompanyLoad();
-   
-   
 
     $scope.SaveData = function (model) {
-        
         $scope.showLoader = true;
-        
+
         MenuCategoryServices.AddOrUpdate(model).then(function (data) {
-            
             notificationservice.Notification(data.data, 1, 'Data Save Successfully !!');
             if (data.data == 1) {
                 $scope.showLoader = false;
@@ -179,17 +161,13 @@
     //    $scope.SaveData(entity)
     //}
 
-
     $scope.ActivateMenuCategory = function (Id) {
-        
         $scope.showLoader = true;
         MenuCategoryServices.ActivateMenuCategory(Id).then(function (data) {
-
             notificationservice.Notification(data.data, 1, 'Activated the selected category !!');
             if (data.data == 1) {
                 $scope.showLoader = false;
                 $scope.DataLoad($scope.model.COMPANY_ID);
-
             }
             else {
                 $scope.showLoader = false;
@@ -198,15 +176,12 @@
     }
 
     $scope.DeactivateMenuCategory = function (Id) {
-        
         $scope.showLoader = true;
         MenuCategoryServices.DeactivateMenuCategory(Id).then(function (data) {
-
             notificationservice.Notification(data.data, 1, 'Deactivated the selected category !!');
             if (data.data == 1) {
                 $scope.showLoader = false;
                 $scope.DataLoad($scope.model.COMPANY_ID);
-
             }
             else {
                 $scope.showLoader = false;
@@ -214,25 +189,18 @@
         });
     }
     $scope.DeleteMenuCategory = function (Id) {
-        
         $scope.showLoader = true;
         if (window.confirm("Are you sure to delete this Menu Category?")) {
             MenuCategoryServices.DeleteMenuCategory(Id).then(function (data) {
-
                 notificationservice.Notification(data.data, 1, 'Deleted the selected category !!');
                 if (data.data == 1) {
                     $scope.showLoader = false;
                     $scope.DataLoad($scope.model.COMPANY_ID);
-
                 }
                 else {
                     $scope.showLoader = false;
                 }
             });
         }
-        
-       
     }
-
 }]);
-

@@ -1,5 +1,4 @@
 ﻿ngApp.controller('ngGridCtrl', ['$scope', 'ActivityLogServices', 'permissionProvider', 'notificationservice', 'gridregistrationservice', '$http', '$log', '$filter', '$timeout', '$interval', '$q', function ($scope, ActivityLogServices, permissionProvider, notificationservice, gridregistrationservice, $http, $log, $filter, $timeout, $interval, $q) {
-
     'use strict'
 
     $scope.model = {
@@ -58,7 +57,6 @@
         })
     }
 
-
     $scope.GetPermissionData = function () {
         $scope.showLoader = true;
         $scope.permissionReqModel = {
@@ -66,7 +64,6 @@
             Action_Name: 'ActivityLog'
         }
         permissionProvider.GetPermission($scope.permissionReqModel).then(function (data) {
-
             $scope.getPermissions = data.data;
             $scope.model.ADD_PERMISSION = $scope.getPermissions.adD_PERMISSION;
             $scope.model.EDIT_PERMISSION = $scope.getPermissions.ediT_PERMISSION;
@@ -81,7 +78,6 @@
             alert(error);
 
             $scope.showLoader = false;
-
         });
     }
 

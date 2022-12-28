@@ -1,5 +1,4 @@
 ﻿ngApp.controller('ngGridCtrl', ['$scope', 'UserLogServices', 'permissionProvider', 'notificationservice', 'gridregistrationservice', '$http', '$log', '$filter', '$timeout', '$interval', '$q', function ($scope, UserLogServices, permissionProvider, notificationservice, gridregistrationservice, $http, $log, $filter, $timeout, $interval, $q) {
-
     'use strict'
 
     $scope.model = {
@@ -28,7 +27,7 @@
             name: 'LOG_DATE', field: 'LOG_DATE', displayName: 'Log Date', enableFiltering: true, width: '8%'
         }
         , {
-            name: 'USER_TERMINAL', field: 'USER_TERMINAL', displayName: 'User Terminal', enableFiltering: true,  width: '8%'
+            name: 'USER_TERMINAL', field: 'USER_TERMINAL', displayName: 'User Terminal', enableFiltering: true, width: '8%'
         }
         , {
             name: 'ACTIVITY_TYPE', field: 'ACTIVITY_TYPE', displayName: 'Activity type', enableFiltering: true, width: '8%'
@@ -57,7 +56,6 @@
     $scope.Users = [];
     $scope.LoadData = () => {
         UserLogServices.GetUsers().then(response => {
-            
             $scope.Users = response.data;
         })
 
@@ -74,7 +72,6 @@
         })
     }
 
-
     $scope.GetPermissionData = function () {
         $scope.showLoader = true;
         $scope.permissionReqModel = {
@@ -82,7 +79,6 @@
             Action_Name: 'ViewLogs'
         }
         permissionProvider.GetPermission($scope.permissionReqModel).then(function (data) {
-            
             $scope.getPermissions = data.data;
             $scope.model.ADD_PERMISSION = $scope.getPermissions.adD_PERMISSION;
             $scope.model.EDIT_PERMISSION = $scope.getPermissions.ediT_PERMISSION;
@@ -95,9 +91,8 @@
             $scope.showLoader = false;
         }, function (error) {
             alert(error);
-            
-            $scope.showLoader = false;
 
+            $scope.showLoader = false;
         });
     }
 

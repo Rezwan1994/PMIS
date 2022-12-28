@@ -1,7 +1,6 @@
 ﻿ngApp.service("LiveNotificationServices", function ($http) {
-    
     this.NotificationLoad = function () {
-        return $http.post('/Security/Notification/NotificationLoad', {  });
+        return $http.post('/Security/Notification/NotificationLoad', {});
     }
 
     this.UpdateNotificationViewStatus = function (NotificationId) {
@@ -13,7 +12,4 @@
 
         return $http.post('/Security/Notification/Notification_Permitted_Users', { NOTIFICATION_POLICY_ID: parseInt(policy_id), COMPANY_ID: parseInt(company_Id), UNIT_ID: parseInt(unit_Id) });
     }
-    
-   
-   
 });

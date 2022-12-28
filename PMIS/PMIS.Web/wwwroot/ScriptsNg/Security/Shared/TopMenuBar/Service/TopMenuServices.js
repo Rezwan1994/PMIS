@@ -2,10 +2,8 @@
     this.GetUserInfo = function () {
         return $http.get('/Security/MenuPermission/GetUserInfo');
     }
-  
-    
-    this.SearcableMenuLoad = function (value) {
 
+    this.SearcableMenuLoad = function (value) {
         var dataType = 'application/json; charset=utf-8';
         return $http({
             type: 'POST',
@@ -16,7 +14,5 @@
             data: { MENU_NAME: value },
             headers: { 'Content-Type': 'application/json; charset=utf-8' },
         });
-
     }
-
 });

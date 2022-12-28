@@ -116,20 +116,16 @@ namespace PMIS.Web.Areas.Security.Controllers
             }
             else
             {
-
                 try
                 {
                     if (model.DEPOT_ID == 0)
                     {
-
                         model.ENTERED_BY = User.Claims.FirstOrDefault(c => c.Type == ClaimsType.UserId)?.Value;
                         //model.REQUISITION_UNIT_ID = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == ClaimsType.UnitId)?.Value);
-
 
                         model.ENTERED_BY = User.Claims.FirstOrDefault(c => c.Type == ClaimsType.UserId)?.Value;
                         model.ENTERED_DATE = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss tt"); ;
                         model.ENTERED_TERMINAL = HttpContext.Connection.RemoteIpAddress.ToString();
-                      
                     }
                     else
                     {
@@ -137,7 +133,6 @@ namespace PMIS.Web.Areas.Security.Controllers
                         model.UPDATED_DATE = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss tt");
 
                         model.UPDATED_TERMINAL = HttpContext.Connection.RemoteIpAddress.ToString();
-                   
                     }
                     result = await _service.AddOrUpdateUnit(model);
                 }
@@ -157,7 +152,7 @@ namespace PMIS.Web.Areas.Security.Controllers
             {
                 var arr = ModelState.Select(x => x.Value.Errors).Where(y => y.Count > 0).ToList();
             }
-            string result = await _service.ActivateUnit( depot_Info.DEPOT_ID);
+            string result = await _service.ActivateUnit(depot_Info.DEPOT_ID);
 
             return Json(result);
         }

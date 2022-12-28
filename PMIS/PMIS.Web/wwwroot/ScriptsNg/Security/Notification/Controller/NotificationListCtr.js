@@ -36,7 +36,7 @@
 
     $scope.gridOptionsList.columnDefs = [
         {
-            name: '#', field: 'ROW_NO', enableFiltering: false, width: '50',cellTemplate: '<div class="ui-grid-cell-contents">{{grid.renderContainers.body.visibleRowCache.indexOf(row)+1}}</div>'
+            name: '#', field: 'ROW_NO', enableFiltering: false, width: '50', cellTemplate: '<div class="ui-grid-cell-contents">{{grid.renderContainers.body.visibleRowCache.indexOf(row)+1}}</div>'
         }, {
             name: 'NOTIFICATION_TITLE', field: 'NOTIFICATION_TITLE', displayName: 'NOTIFICATION TITLE', enableFiltering: true, width: '18%', enableColumnMenu: false,
         }, {
@@ -59,28 +59,20 @@
     $scope.gridOptionsList.enableGridMenu = false;
 
     $scope.DataLoad = function (model) {
-
         $scope.showLoader = true;
 
         NotificationListServices.GetNotificationList(model.DATE_FROM, model.DATE_TO).then(function (data) {
-
             $scope.gridOptionsList.data = data.data;
             $scope.gridOptionsList.paginationPageSizes = [5, 10, 25];
             $scope.gridOptionsList.paginationPageSize = 5;
 
             $scope.showLoader = false;
         }, function (error) {
-
             alert(error);
 
             $scope.showLoader = false;
-
         });
     }
-
-
-
-
 
     $scope.EditData = (entity) => {
         window.location = "/Inventory/DistributionDelivery/Delivery?Id=" + entity.MST_ID_ENCRYPTED;
@@ -90,13 +82,12 @@
 
     $scope.GetPermissionData = function () {
         $scope.showLoader = true;
-        
+
         $scope.permissionReqModel = {
             Controller_Name: 'DistributionDelivery',
             Action_Name: 'DeliveryList'
         }
         permissionProvider.GetPermission($scope.permissionReqModel).then(function (data) {
-            
             $scope.getPermissions = data.data;
             $scope.model.ADD_PERMISSION = $scope.getPermissions.adD_PERMISSION;
             $scope.model.EDIT_PERMISSION = $scope.getPermissions.ediT_PERMISSION;
@@ -109,15 +100,13 @@
             $scope.showLoader = false;
         }, function (error) {
             alert(error);
-            
-            $scope.showLoader = false;
 
+            $scope.showLoader = false;
         });
     }
 
-//    $scope.GetPermissionData();
+    //    $scope.GetPermissionData();
 }])
-
 
 var app = angular.module('app', ['ngTouch', 'ui.grid', 'ui.grid.pagination']);
 

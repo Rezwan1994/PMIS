@@ -1,17 +1,10 @@
-﻿using DocumentFormat.OpenXml.EMMA;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using PMIS.Domain.Common;
 using PMIS.Repository.Interface;
 using PMIS.Service.Interface.Security;
 using PMIS.Web.Common;
-using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace SalesAndDistributionSystem.Areas.Security.Controllers
 {
@@ -36,7 +29,6 @@ namespace SalesAndDistributionSystem.Areas.Security.Controllers
             this._configuration = _configuration;
         }
 
-
         [HttpGet]
         public Task<string> LoadData()
         {
@@ -44,9 +36,9 @@ namespace SalesAndDistributionSystem.Areas.Security.Controllers
         }
 
         [HttpPost]
-        public async Task<string> Search([FromBody]SearchModel model)
+        public async Task<string> Search([FromBody] SearchModel model)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 var arr = ModelState.Select(x => x.Value.Errors)
                            .Where(y => y.Count > 0)

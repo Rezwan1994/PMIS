@@ -1,6 +1,5 @@
 ﻿ngApp.controller('ngGridCtrl', ['$scope', 'MenuMasterServices', 'permissionProvider', 'notificationservice', 'gridregistrationservice', '$http', '$log', '$filter', '$timeout', '$interval', '$q', function ($scope, MenuMasterServices, permissionProvider, notificationservice, gridregistrationservice, $http, $log, $filter, $timeout, $interval, $q) {
-
-    $scope.model = { COMPANY_ID: 0, MENU_ID: 0, MENU_NAME: '', ORDER_BY_SLNO: 0, MODULE_ID: 0, CONTROLLER: '', ACTION: '', HREF: '', STATUS: '', PARENT_MENU_ID: 0, MENU_SHOW: 'Active'}
+    $scope.model = { COMPANY_ID: 0, MENU_ID: 0, MENU_NAME: '', ORDER_BY_SLNO: 0, MODULE_ID: 0, CONTROLLER: '', ACTION: '', HREF: '', STATUS: '', PARENT_MENU_ID: 0, MENU_SHOW: 'Active' }
     $scope.MenuCategories = [];
     $scope.Companies = [];
     $scope.IsReportValues = [];
@@ -11,19 +10,12 @@
         $scope.gridApi = gridApi;
     }
 
-
-  
     $scope.AutoCompleteDataLoadForMenuCategory = function () {
-        
         return MenuMasterServices.GetMenuCetagories($scope.model.COMPANY_ID).then(function (data) {
-            
-                $scope.MenuCategories = data.data;
-            }, function (error) {
-                
-                alert(error);
-                
-            });
-        
+            $scope.MenuCategories = data.data;
+        }, function (error) {
+            alert(error);
+        });
     }
     $scope.Load_IsMenuShow = function () {
         var Active = {
@@ -32,10 +24,9 @@
         var InActive = {
             STATUS: 'InActive'
         }
-        
+
         $scope.IsReportValues.push(Active);
         $scope.IsReportValues.push(InActive);
-
     }
     $scope.Load_IsMenuShow();
     $scope.typeaheadSelectedMenuCategory = function (entity, selectedItem) {
@@ -43,23 +34,18 @@
         $scope.model.MODULE_NAME = selectedItem.MODULE_NAME;
     };
 
-
     $scope.DataLoad = function (companyId) {
         $scope.showLoader = true;
         MenuMasterServices.GetMenu(companyId).then(function (data) {
-            
-            
             $scope.gridOptionsList.data = data.data;
             $scope.ParantData = data.data;
             $scope.model.COMPANY_SEARCH_ID = companyId;
             $scope.AutoCompleteDataLoadForMenuCategory();
             $scope.showLoader = false;
-            
         }, function (error) {
             alert(error);
-            
-            $scope.showLoader = false;
 
+            $scope.showLoader = false;
         });
     }
     $scope.ClearForm = function () {
@@ -80,12 +66,9 @@
         $scope.model.PARENT_MENU_ID = 0;
         $scope.model.PARENT_MENU = '';
         $scope.model.MENU_SHOW = 'Active';
-
     }
 
     $scope.EditData = function (entity) {
-        
-
         $scope.model.MENU_ID = entity.MENU_ID;
         $scope.model.MENU_NAME = entity.MENU_NAME;
         $scope.model.ORDER_BY_SLNO = entity.ORDER_BY_SLNO;
@@ -96,20 +79,17 @@
 
         $scope.model.ACTION = entity.ACTION;
         $scope.model.HREF = entity.HREF;
-        $scope.model.PARENT_MENU_ID = entity.PARENT_MENU_ID!=null? entity.PARENT_MENU_ID : 0;
+        $scope.model.PARENT_MENU_ID = entity.PARENT_MENU_ID != null ? entity.PARENT_MENU_ID : 0;
         $scope.SaveData($scope.model);
-
     }
     $scope.GetPermissionData = function () {
         $scope.showLoader = true;
-        
+
         $scope.permissionReqModel = {
             Controller_Name: 'MenuMaster',
             Action_Name: 'Index'
         }
         permissionProvider.GetPermission($scope.permissionReqModel).then(function (data) {
-            
-            
             $scope.getPermissions = data.data;
             $scope.model.ADD_PERMISSION = $scope.getPermissions.adD_PERMISSION;
             $scope.model.EDIT_PERMISSION = $scope.getPermissions.ediT_PERMISSION;
@@ -122,31 +102,26 @@
             $scope.showLoader = false;
         }, function (error) {
             alert(error);
-            
-            $scope.showLoader = false;
 
+            $scope.showLoader = false;
         });
     }
     $scope.CompaniesLoad = function () {
         $scope.showLoader = true;
 
         MenuMasterServices.GetCompanyList().then(function (data) {
-            
             $scope.Companies = data.data;
             $scope.showLoader = false;
         }, function (error) {
             alert(error);
-            
-            $scope.showLoader = false;
 
+            $scope.showLoader = false;
         });
     }
     $scope.CompanyLoad = function () {
         $scope.showLoader = true;
 
         MenuMasterServices.GetCompany().then(function (data) {
-            
-            
             $scope.model.COMPANY_ID = parseInt(data.data);
             $scope.model.COMPANY_SEARCH_ID = parseInt(data.data);
             $interval(function () {
@@ -156,9 +131,8 @@
             $scope.showLoader = false;
         }, function (error) {
             alert(error);
-            
-            $scope.showLoader = false;
 
+            $scope.showLoader = false;
         });
     }
 
@@ -172,7 +146,6 @@
 
         , { name: 'MENU_ID', field: 'MENU_ID', visible: false }
         , { name: 'COMPANY_ID', field: 'COMPANY_ID', visible: false }
-
 
         , {
             name: 'MENU_NAME', field: 'MENU_NAME', displayName: 'Menu Name', enableFiltering: true, width: '18%', cellTemplate:
@@ -210,28 +183,22 @@
             name: 'MENU_SHOW', field: 'MENU_SHOW', displayName: 'Menu Show', enableFiltering: true, width: '12%', cellTemplate:
                 '<select  class="select2-single form-control pl-sm" id="MENU_SHOW"   ng-model="row.entity.MENU_SHOW" style = "width:100%"> <option ng-repeat="item in grid.appScope.IsReportValues" value="{{item.STATUS}}" ng-selected="item.STATUS == row.entity.MENU_SHOW" >{{item.STATUS}}</option></select > '
         }
-       , {
+        , {
             name: 'Actions', displayName: 'Actions', width: '35%', enableFiltering: false, enableColumnMenu: false, cellTemplate:
-               '<div style="margin:1px;">' +
-               '<button style="margin-bottom: 5px;" ng-show="grid.appScope.model.EDIT_PERMISSION == \'Active\'" ng-click="grid.appScope.EditData(row.entity)" type="button" class="btn btn-outline-primary mb-1">Update</button>' +
-               '<button style="margin-bottom: 5px;" ng-show="grid.appScope.model.EDIT_PERMISSION == \'Active\'" ng-click="grid.appScope.ActivateMenu(row.entity.MENU_ID)" type="button" class="btn btn-outline-success mb-1"  ng-disabled="row.entity.STATUS == \'Active\'">Activate</button>' +
-               '<button style="margin-bottom: 5px;" ng-show="grid.appScope.model.EDIT_PERMISSION == \'Active\'" type="button" class="btn btn-outline-secondary mb-1" ng-disabled="row.entity.STATUS == \'InActive\'" ng-click="grid.appScope.DeactivateMenu(row.entity.MENU_ID)">Deactive</button>' +
-               '<button style="margin-bottom: 5px;" ng-show="grid.appScope.model.DELETE_PERMISSION == \'Active\'" ng-click="grid.appScope.DeleteMenu(row.entity.MENU_ID)" type="button" class="btn btn-outline-danger mb-1">Delete</button>' +
-               '</div>'
+                '<div style="margin:1px;">' +
+                '<button style="margin-bottom: 5px;" ng-show="grid.appScope.model.EDIT_PERMISSION == \'Active\'" ng-click="grid.appScope.EditData(row.entity)" type="button" class="btn btn-outline-primary mb-1">Update</button>' +
+                '<button style="margin-bottom: 5px;" ng-show="grid.appScope.model.EDIT_PERMISSION == \'Active\'" ng-click="grid.appScope.ActivateMenu(row.entity.MENU_ID)" type="button" class="btn btn-outline-success mb-1"  ng-disabled="row.entity.STATUS == \'Active\'">Activate</button>' +
+                '<button style="margin-bottom: 5px;" ng-show="grid.appScope.model.EDIT_PERMISSION == \'Active\'" type="button" class="btn btn-outline-secondary mb-1" ng-disabled="row.entity.STATUS == \'InActive\'" ng-click="grid.appScope.DeactivateMenu(row.entity.MENU_ID)">Deactive</button>' +
+                '<button style="margin-bottom: 5px;" ng-show="grid.appScope.model.DELETE_PERMISSION == \'Active\'" ng-click="grid.appScope.DeleteMenu(row.entity.MENU_ID)" type="button" class="btn btn-outline-danger mb-1">Delete</button>' +
+                '</div>'
         },
 
     ];
 
-   
-
-
     $scope.SaveData = function (model) {
-        
-       
         $scope.showLoader = true;
-        
-        MenuMasterServices.AddOrUpdate(model).then(function (data) {
 
+        MenuMasterServices.AddOrUpdate(model).then(function (data) {
             notificationservice.Notification(data.data, 1, 'Data Save Successfully !!');
             if (data.data == 1) {
                 $scope.showLoader = false;
@@ -245,19 +212,13 @@
         });
     }
 
-    
-
-
     $scope.ActivateMenu = function (Id) {
-        
         $scope.showLoader = true;
         MenuMasterServices.ActivateMenu(Id).then(function (data) {
-
             notificationservice.Notification(data.data, 1, 'Activated the selected category !!');
             if (data.data == 1) {
                 $scope.showLoader = false;
                 $scope.DataLoad($scope.model.COMPANY_ID);
-
             }
             else {
                 $scope.showLoader = false;
@@ -266,15 +227,12 @@
     }
 
     $scope.DeactivateMenu = function (Id) {
-        
         $scope.showLoader = true;
         MenuMasterServices.DeactivateMenu(Id).then(function (data) {
-
             notificationservice.Notification(data.data, 1, 'Deactivated the selected category !!');
             if (data.data == 1) {
                 $scope.showLoader = false;
                 $scope.DataLoad($scope.model.COMPANY_ID);
-
             }
             else {
                 $scope.showLoader = false;
@@ -282,25 +240,18 @@
         });
     }
     $scope.DeleteMenu = function (Id) {
-        
         $scope.showLoader = true;
         if (window.confirm("Are you sure to delete this Menu Category?")) {
             MenuMasterServices.DeleteMenu(Id).then(function (data) {
-
                 notificationservice.Notification(data.data, 1, 'Deleted the selected category !!');
                 if (data.data == 1) {
                     $scope.showLoader = false;
                     $scope.DataLoad($scope.model.COMPANY_ID);
-
                 }
                 else {
                     $scope.showLoader = false;
                 }
             });
         }
-
-
     }
-
 }]);
-
