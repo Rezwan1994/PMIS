@@ -27,26 +27,26 @@
                             <div class="form-group">
                                 <label for="USER_NAME">User Name</label>
                                 <input id="EMAIL" type="text" class="form-control"
-                                       name="EMAIL" ng-model="model.EMAIL" placeholder="Enter User Email">
+                                       name="EMAIL" ng-model="model.EMAIL">
                             </div>
                         </div>
-                        <div class="col-md-3" ng-disabled="model.USER_TYPE != 'SuperAdmin'">
+                        <div class="col-md-3">
                             <div class="form-group">
-                                <label> Company </label>
-                                <select class="form-control" id="COMPANY_ID" ng-disabled="model.USER_TYPE != 'SuperAdmin'"
+                                <label> Company</label>
+                                <select class="form-control" id="COMPANY_ID" disabled
                                         name="COMPANY_ID" ng-model="model.COMPANY_ID" style="width:100%" ng-change="typeaheadSelectedCompany(model)">
 
                                     <option ng-repeat="item in CompanyData" ng-selected="item.COMPANY_ID == model.COMPANY_ID" value="{{item.COMPANY_ID}}">{{item.COMPANY_NAME}}</option>
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-3" ng-show="{{model.USER_TYPE == 'SuperAdmin'}}">
+                        <div class="col-md-3">
                             <div class="form-group">
-                                <label for="UNIT_ID">Unit Id</label>
-                                <select class="form-control" id="UNIT_ID"
-                                        name="UNIT_ID" ng-model="model.UNIT_ID" style="width:100%">
+                                <label for="DEPOT_ID">Depot</label>
+                                <select class="form-control" id="DEPOT_ID" ng-disabled="{{model.USER_TYPE == 'SuperAdmin'}}"
+                                        name="DEPOT_ID" ng-model="model.DEPOT_ID" style="width:100%">
 
-                                    <option ng-repeat="item in UnitData" value="{{item.UNIT_ID}}">{{item.UNIT_NAME}}</option>
+                                    <option ng-repeat="item in DepotData" value="{{item.DEPOT_ID}}">{{item.DEPOT_NAME}}</option>
                                 </select>
                             </div>
                         </div>

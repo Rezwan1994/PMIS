@@ -8,7 +8,7 @@
 
     $scope.DataLoad = function () {
         $scope.showLoader = true;
-        CompanyService.GetUnitList().then(function (data) {
+        CompanyService.GetDepotList().then(function (data) {
             $scope.gridOptionsList.data = [];
             for (var i = 0; i < data.data.length; i++) {
                 if (data.data[i].COMPANY_ID == $scope.model.COMPANY_ID) {

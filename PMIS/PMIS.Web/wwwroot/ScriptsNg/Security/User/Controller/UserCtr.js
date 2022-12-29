@@ -1,7 +1,7 @@
 ﻿ngApp.controller('ngGridCtrl', ['$scope', 'UserServices', 'permissionProvider', 'CompanyService', 'notificationservice', 'gridregistrationservice', '$http', '$log', '$filter', '$timeout', '$interval', '$q', function ($scope, UserServices, permissionProvider, CompanyService, notificationservice, gridregistrationservice, $http, $log, $filter, $timeout, $interval, $q) {
-    $scope.model = { USER_ID: 0, USER_NAME: '', COMPANY_ID: 0, UNIT_ID: 0 }
+    $scope.model = { USER_ID: 0, USER_NAME: '', COMPANY_ID: 0, DEPOT_ID: 0 }
     $scope.CompanyData = [];
-    $scope.UnitData = [];
+    $scope.DepotData = [];
     $scope.UserTypeData = [];
     $scope.EmployeeData = [];
 
@@ -34,13 +34,9 @@
             $scope.showLoader = false;
         });
     }
-    $scope.UnitDataLoad = function (id) {
-        CompanyService.GetUnitList().then(function (data) {
-            if (id != 0) {
-                $scope.UnitData = data.data.filter(function (element) { return element.COMPANY_ID == id });
-            } else {
-                $scope.UnitData = data.data.filter(function (element) { return element.COMPANY_ID == $scope.gridOptionsList.data[0].COMPANY_ID });
-            }
+    $scope.DepotDataLoad = function () {
+        CompanyService.GetDepotList().then(function (data) {
+            $scope.DepotData = data.data;
         }, function (error) {
         });
     }
@@ -80,7 +76,7 @@
 
     $scope.typeaheadSelectedCompany = function (entity) {
         $scope.model.COMPANY_ID = entity.COMPANY_ID;
-        $scope.UnitDataLoad($scope.model.COMPANY_ID);
+        $scope.DepotDataLoad();
     };
     $scope.DataLoad = function () {
         $scope.showLoader = true;
@@ -99,7 +95,7 @@
         $scope.model.USER_ID = 0;
         $scope.model.USER_NAME = "";
         $scope.model.COMPANY_ID = 0;
-        $scope.model.UNIT_ID = 0;
+        $scope.model.DEPOT_ID = 0;
         $scope.model.USER_TYPE = '';
         $scope.model.EMPLOYEE_ID = '';
         $scope.model.EMAIL = '';
@@ -131,7 +127,6 @@
             $scope.model.DETAIL_VIEW = $scope.getPermissions.detaiL_VIEW;
             $scope.model.DOWNLOAD_PERMISSION = $scope.getPermissions.downloaD_PERMISSION;
             $scope.model.USER_TYPE = $scope.getPermissions.useR_TYPE;
-
             $scope.showLoader = false;
         }, function (error) {
             alert(error);
@@ -150,7 +145,7 @@
     $scope.GetPermissionData();
     $scope.UserTypeDataLoad()
     $scope.CompanyDataLoad();
-    $scope.UnitDataLoad(0);
+    $scope.DepotDataLoad(0);
     $scope.GetEmployeeData();
     $scope.CompanyLoad();
 

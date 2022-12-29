@@ -21,8 +21,6 @@ namespace SalesAndDistributionSystem.Areas.Security.User.Controllers
             _hostingEnvironment = hostingEnvironment;
         }
 
-        private string GetPermissionString() => User.Claims.FirstOrDefault(x => x.Type == ClaimsType.RolePermission).Value.ToString();
-
         private string GetUserTypeString() => User.Claims.FirstOrDefault(x => x.Type == ClaimsType.UserType).Value.ToString();
 
         public IActionResult Index()

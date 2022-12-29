@@ -139,7 +139,7 @@ namespace PMIS.Service.Implementation.Security
 
         private string GetEmployeesWithoutAccount() => @"Select EMPLOYEE_ID, EMPLOYEE_CODE, EMPLOYEE_NAME, EMPLOYEE_STATUS, COMPANY_ID from Employee_Info where COMPANY_ID = :param1 AND  EMPLOYEE_ID NOT IN (Select EMPLOYEE_ID from User_info) ";
 
-        private string GetEmployeeByEmployeeId() => @"Select ID, EMPLOYEE_ID, EMPLOYEE_CODE, EMPLOYEE_NAME, EMPLOYEE_STATUS, COMPANY_ID from Employee_Info where Employee_Id = :param1 ";
+        private string GetEmployeeByEmployeeId() => @"Select USER_ID, EMPLOYEE_ID, EMPLOYEE_CODE, EMPLOYEE_NAME, EMPLOYEE_STATUS, COMPANY_ID from Employee_Info where Employee_Id = :param1 ";
 
         private string GetUsersByCompany() => @"SELECT  DISTINCT  ROW_NUMBER() OVER(ORDER BY  U.USER_ID ASC) AS ROW_NO,
                                          U.USER_TYPE

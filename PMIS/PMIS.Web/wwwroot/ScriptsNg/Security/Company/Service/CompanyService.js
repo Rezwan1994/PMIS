@@ -15,7 +15,7 @@
             headers: { 'Content-Type': 'application/json; charset=utf-8' },
         });
     }
-    this.GetUnitList = function () {
+    this.GetDepotList = function () {
         return $http.get('../Company/LoadDepotData');
     }
 
