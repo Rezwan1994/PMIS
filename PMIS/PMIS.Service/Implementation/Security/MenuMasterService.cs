@@ -11,12 +11,10 @@ namespace PMIS.Service.Implementation.Security
     public class MenuMasterService : IMenuMasterService
     {
         private readonly ICommonServices _commonServices;
-        private readonly IConfiguration _configuration;
 
-        public MenuMasterService(ICommonServices commonServices, IConfiguration configuration)
+        public MenuMasterService(ICommonServices commonServices)
         {
             _commonServices = commonServices;
-            _configuration = configuration;
         }
 
         private string loadDataQuery() => @"SELECT ROW_NUMBER() OVER(ORDER BY M.MENU_ID ASC) AS ROW_NO,

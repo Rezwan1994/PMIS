@@ -173,7 +173,7 @@
         }
         , {
             name: 'PARENT_MENU_ID', field: 'PARENT_MENU_ID', displayName: 'Parent', enableFiltering: true, width: '10%', cellTemplate:
-                '<script src="~/Design/vendor/select2/dist/js/select2.min.js"></script><script type="text/javascript">$(document).ready(function () {$(".select2-single").select2({ }); });</script><select  class="select2-single form-control pl-sm" id="PARENT_MENU_ID"   ng-model="row.entity.PARENT_MENU_ID" style = "width:100%"> <option ng-repeat="item in grid.appScope.ParantData" ng-value="{{item.MENU_ID}}" ng-selected="row.entity.PARENT_MENU_ID == item.MENU_ID">{{ item.MENU_NAME }}</option> </select > '
+                '<select  class="select2-single form-control pl-sm" id="PARENT_MENU_ID"   ng-model="row.entity.PARENT_MENU_ID" style = "width:100%"> <option ng-repeat="item in grid.appScope.ParantData" ng-value="{{item.MENU_ID}}" ng-selected="row.entity.PARENT_MENU_ID == item.MENU_ID">{{ item.MENU_NAME }}</option> </select > '
         }
         , {
             name: 'MODULE_ID', field: 'MODULE_ID', displayName: 'Module', enableFiltering: true, width: '12%', cellTemplate:
