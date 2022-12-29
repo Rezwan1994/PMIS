@@ -108,6 +108,7 @@
         $scope.model.EMAIL = entity.EMAIL;
         $scope.model.EMPLOYEE_ID = entity.EMPLOYEE_ID;
         $scope.model.USER_TYPE = entity.USER_TYPE;
+        $scope.model.DEPOT_ID = entity.DEPOT_ID;
 
         $scope.SaveData($scope.model);
     }
@@ -186,8 +187,10 @@
 
     $scope.SaveData = function (model) {
         $scope.showLoader = true;
-
+        debugger
+        model.DEPOT_ID = parseInt(model.DEPOT_ID);
         UserServices.AddOrUpdate(model).then(function (data) {
+            $scope.model.DEPOT_ID = $scope.model.DEPOT_ID.toString();
             notificationservice.Notification(data.data, 1, 'Data Save Successfully !!');
             if (data.data == 1) {
                 $scope.showLoader = false;

@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 
 using PMIS.Domain.Common;
 using PMIS.Domain.Entities;
@@ -12,13 +13,13 @@ namespace PMIS.Service.Implementation.Security
 {
     public class UserService : IUserService
     {
-        private readonly IConfiguration connString;
+        private readonly IHttpContextAccessor _httpAccesson;
         private readonly ICommonServices _commonService;
         private readonly IEmailService _EmailService;
 
-        public UserService(IConfiguration connstring, ICommonServices commonServices, IEmailService EmailService)
+        public UserService(IHttpContextAccessor _httpContext, IConfiguration connstring, ICommonServices commonServices, IEmailService EmailService)
         {
-            connString = connstring;
+            this._httpAccesson = _httpContext;
             _commonService = commonServices;
             _EmailService = EmailService;
         }
@@ -123,23 +124,24 @@ namespace PMIS.Service.Implementation.Security
                                         Where u.Company_ID = :param1";
 
         private string GetUsers_Query() => @"SELECT  DISTINCT  ROW_NUMBER() OVER(ORDER BY  U.USER_ID ASC) AS ROW_NO,
-                                         U.USER_TYPE
-                                        ,U.USER_NAME
-                                        ,U.USER_ID
-                                        ,U.DEPOT_ID
-                                        ,U.ENTERED_DATE
-                                        ,U.EMPLOYEE_ID
-                                        ,U.EMAIL
-                                        ,U.COMPANY_ID
-                                        ,U.USER_PASSWORD
-                                        ,C.COMPANY_NAME
-                                        FROM USER_INFO U
-                                        INNER JOIN COMPANY_INFO C ON C.COMPANY_ID = U.COMPANY_ID 
-                                        INNER JOIN UNIT_INFO UI ON UI.UNIT_ID = U.DEPOT_ID";
+                            U.USER_TYPE
+                            ,U.USER_NAME
+                            ,U.USER_ID
+                            ,U.DEPOT_ID
+                            ,U.ENTERED_DATE
+                            ,U.EMPLOYEE_ID
+                            ,U.EMAIL
+                            ,U.COMPANY_ID
+                            ,U.USER_PASSWORD
+                            ,C.COMPANY_NAME
+                            ,UI.DEPOT_NAME
+                            FROM USER_INFO U
+                            LEFT JOIN COMPANY_INFO C ON C.COMPANY_ID = U.COMPANY_ID 
+                            LEFT JOIN DEPOT_INFO UI ON UI.DEPOT_ID = U.DEPOT_ID";
 
         private string GetEmployeesWithoutAccount() => @"Select EMPLOYEE_ID, EMPLOYEE_CODE, EMPLOYEE_NAME, EMPLOYEE_STATUS, COMPANY_ID from Employee_Info where COMPANY_ID = :param1 AND  EMPLOYEE_ID NOT IN (Select EMPLOYEE_ID from User_info) ";
 
-        private string GetEmployeeByEmployeeId() => @"Select USER_ID, EMPLOYEE_ID, EMPLOYEE_CODE, EMPLOYEE_NAME, EMPLOYEE_STATUS, COMPANY_ID from Employee_Info where Employee_Id = :param1 ";
+        private string GetEmployeeByEmployeeId() => @"Select EMPLOYEE_ID, EMPLOYEE_CODE, EMPLOYEE_NAME, EMPLOYEE_STATUS, COMPANY_ID from Employee_Info where Employee_Id = :param1 ";
 
         private string GetUsersByCompany() => @"SELECT  DISTINCT  ROW_NUMBER() OVER(ORDER BY  U.USER_ID ASC) AS ROW_NO,
                                          U.USER_TYPE
@@ -152,9 +154,10 @@ namespace PMIS.Service.Implementation.Security
                                         ,U.COMPANY_ID
                                         ,U.USER_PASSWORD
                                         ,C.COMPANY_NAME
+                                        ,UI.DEPOT_NAME
                                         FROM USER_INFO U
-                                        INNER JOIN COMPANY_INFO C ON C.COMPANY_ID = U.COMPANY_ID
-                                        INNER JOIN UNIT_INFO UI ON UI.UNIT_ID = U.DEPOT_ID
+                                        LEFT JOIN COMPANY_INFO C ON C.COMPANY_ID = U.COMPANY_ID
+                                        LEFT JOIN DEPOT_INFO UI ON UI.DEPOT_ID = U.DEPOT_ID
                                         WHERE U.COMPANY_ID = :param1";
 
         private string GetNewUSER_IDQuery() => "SELECT NVL(MAX(USER_ID),0) + 1 USER_ID  FROM USER_INFO";
@@ -171,7 +174,7 @@ namespace PMIS.Service.Implementation.Security
                           ,EMPLOYEE_ID
                           ,EMAIL
                           ,COMPANY_ID)
-                          VALUES(:param1 ,:param2  ,:param3  ,:param4,:param5  ,:param6,TO_DATE(:param7, 'DD/MM/YYYY HH:MI:SS AM'),:param8,:param9,:param10,:param11 )";
+                          VALUES(:param1, :param2, :param3, :param4, :param5, :param6, TO_DATE(:param7, 'DD/MM/YYYY HH:MI:SS AM'), :param8, :param9, :param10, :param11)";
 
         private string AddOrUpdateUpdateQuery() => @"UPDATE USER_INFO SET
                                          USER_TYPE = :param2,
@@ -231,11 +234,18 @@ namespace PMIS.Service.Implementation.Security
                             model.USER_PASSWORD = _commonService.Encrypt(emailConfiguration.EmailBody_Password);
 
                             listOfQuery.Add(_commonService.AddQuery(AddOrUpdatyeInsertQuery(), _commonService.AddParameter(new string[] {
-                                    model.USER_ID.ToString(), model.USER_TYPE, model.USER_PASSWORD.ToString(), 
-                                    model.USER_NAME, model.DEPOT_ID.ToString(), model.ENTERED_TERMINAL,
-                                    model.ENTERED_DATE?.ToString("dd/MM/yyyy hh:mm:ss tt"), 
-                                    model.ENTERED_BY.ToString(), model.EMPLOYEE_ID.ToString(), 
-                                    model.EMAIL, model.COMPANY_ID.ToString() })));
+                                model.USER_ID.ToString(),
+                                model.USER_TYPE,
+                                model.USER_PASSWORD.ToString(),
+                                model.USER_NAME,
+                                model.DEPOT_ID.ToString(),
+                                model.ENTERED_TERMINAL,
+                                model.ENTERED_DATE?.ToString("dd/MM/yyyy hh:mm:ss tt"),
+                                model.ENTERED_BY.ToString(),
+                                model.EMPLOYEE_ID.ToString(),
+                                model.EMAIL,
+                                model.COMPANY_ID.ToString() 
+                            })));
 
                             model.UNIQUEACCESSKEY = generator.RandomPassword(12);
 
@@ -247,7 +257,8 @@ namespace PMIS.Service.Implementation.Security
                             emailConfiguration.Title = "Email Verification";
                             emailConfiguration.EmailBody_UserName = model.USER_NAME;
                             emailConfiguration.EmailBody = "A unique link to reset your password has been generated for you. Please Login By Using Following Link ( User Name: " + emailConfiguration.EmailBody_UserName + " and Password: " + emailConfiguration.EmailBody_Password + " (Auto Generated)) and Change your password.";
-                            emailConfiguration.EmailBody_PageLink = "https://localhost:44305/Security/User/AccountVerification?UniqueId=" + model.UNIQUEACCESSKEY;
+
+                            emailConfiguration.EmailBody_PageLink = _httpAccesson.HttpContext.Request.Scheme + "://" + _httpAccesson.HttpContext.Request.Host + "/Security/User/AccountVerification?UniqueId=" + model.UNIQUEACCESSKEY;
                             emailConfiguration.Body = _EmailService.BodyReader(emailConfiguration, Path);
 
                             await _EmailService.SendEmailAsync(emailConfiguration);
@@ -408,7 +419,7 @@ namespace PMIS.Service.Implementation.Security
                     emailConfiguration.Title = "Password Update Credential";
 
                     emailConfiguration.EmailBody_UserName = changeModel.User_Name;
-                    emailConfiguration.EmailBody_PageLink = "https://localhost:44305/Security/Login/Index";
+                    emailConfiguration.EmailBody_PageLink = _httpAccesson.HttpContext.Request.Scheme + "://" + _httpAccesson.HttpContext.Request.Host + "/Security/Login/Index";
                     emailConfiguration.EmailBody_Password = changeModel.Password;
 
                     emailConfiguration.EmailBody = "You have succesfully updated your password. Please Login By Using Following Credential ( User Name: " + emailConfiguration.EmailBody_UserName + " and Password: " + emailConfiguration.EmailBody_Password + ")";
@@ -445,7 +456,7 @@ namespace PMIS.Service.Implementation.Security
                 emailConfiguration.ToEmail = model.Email;
                 emailConfiguration.Title = "Email Verification";
                 emailConfiguration.EmailBody_UserName = model.User_Name;
-                emailConfiguration.EmailBody_PageLink = "https://localhost:44305/Security/User/AccountVerification?UniqueId=" + UniqueKey;
+                emailConfiguration.EmailBody_PageLink = _httpAccesson.HttpContext.Request.Scheme + "://" + _httpAccesson.HttpContext.Request.Host + "/Security/User/AccountVerification?UniqueId=" + UniqueKey;
                 emailConfiguration.EmailBody = "A unique link to reset your password has been generated for you. Please Login By Using Following Link ( User Name: " + emailConfiguration.EmailBody_UserName + " and Password: " + emailConfiguration.EmailBody_Password + " (Auto Generated)) and Change your password.";
 
                 emailConfiguration.Body = _EmailService.BodyReader(emailConfiguration, model.Path);

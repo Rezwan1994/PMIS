@@ -46,20 +46,11 @@
                                 <select class="form-control" id="DEPOT_ID" ng-disabled="{{model.USER_TYPE == 'SuperAdmin'}}"
                                         name="DEPOT_ID" ng-model="model.DEPOT_ID" style="width:100%">
 
-                                    <option ng-repeat="item in DepotData" value="{{item.DEPOT_ID}}">{{item.DEPOT_NAME}}</option>
+                                    <option ng-repeat="item in DepotData" value={{item.DEPOT_ID}}>{{item.DEPOT_NAME}}</option>
                                 </select>
                             </div>
                         </div>
 
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="USER_TYPE">User Type</label>
-                                <select class="form-control" id="USER_TYPE"
-                                        name="USER_TYPE" ng-model="model.USER_TYPE" style="width:100%">
-                                    <option ng-repeat="item in UserTypeData" value="{{item.Type}}">{{item.Type}}</option>
-                                </select>
-                            </div>
-                        </div>
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="USER_TYPE">User Type</label>

@@ -4,6 +4,7 @@
     }
 
     this.AddOrUpdate = function (model) {
+        debugger
         var dataType = 'application/json; charset=utf-8';
         return $http({
             type: 'POST',
@@ -19,7 +20,8 @@
                 USER_PASSWORD: model.USER_PASSWORD,
                 EMPLOYEE_ID: model.EMPLOYEE_ID,
                 UNIT_ID: parseInt(model.UNIT_ID),
-                COMPANY_ID: parseInt(model.COMPANY_ID)
+                COMPANY_ID: parseInt(model.COMPANY_ID),
+                DEPOT_ID: parseInt(model.DEPOT_ID)
             },
             headers: { 'Content-Type': 'application/json; charset=utf-8' },
         });
