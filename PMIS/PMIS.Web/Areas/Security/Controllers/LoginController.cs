@@ -85,7 +85,7 @@ namespace PMIS.Web.Areas.Security.Controllers
                             MenuDistribution menuDistribution = await _menuService.LoadPermittedMenuByUserId(_user.UserId, _user.CompanyId);
                             string menuDis = JsonSerializer.Serialize(menuDistribution);
                             string defaultPage = _menuService.LoadUserDefaultPageById(_user.UserId);
-                            defaultPage = defaultPage == null ? "Security/User/PagePermissionNotice" : defaultPage;
+                            defaultPage = defaultPage == null ? "" : defaultPage;
 
                             //List<ReportPermission> reportPermissions = await _reportManager.LoadReportPermissionData(GetDbConnectionString(model.CompanyId), _user.CompanyId, _user.UserId);
                             //string reportDis = JsonSerializer.Serialize(reportPermissions);
@@ -105,7 +105,7 @@ namespace PMIS.Web.Areas.Security.Controllers
 
                                new Claim(ClaimsType.CompanyName, _user.CompanyName.ToString()),
                                new Claim(ClaimsType.DistributorId, _user.DistributorId.ToString()),
-                               new Claim(ClaimsType.DefaultPage,defaultPage),
+                               new Claim(ClaimsType.DefaultPage, defaultPage),
                                //new Claim(ClaimsType.DbSpecifier, provider.GetConnectionString(_user.CompanyName))
                             };
                             HttpContext.Session.SetString(ClaimsType.RolePermission, menuDis);
