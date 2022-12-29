@@ -3913,6 +3913,8 @@
     <None Include="wwwroot\ScriptsNg\Services\gridRegistrationService.js" />
     <None Include="wwwroot\ScriptsNg\Services\notificationService.js" />
     <None Include="wwwroot\ScriptsNg\Services\permissionProvider.js" />
+    <None Include="wwwroot\Templates\EmailTemplate\AccountVerification_EmailTemplate.cshtml" />
+    <None Include="wwwroot\Templates\ReportTemplate\ReportTemplate.cshtml" />
   </ItemGroup>
 
 </Project>
