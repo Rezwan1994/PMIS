@@ -29,7 +29,7 @@
         return $http.get('../Company/LoadData');
     }
     this.GetCompany = function () {
-        return $http.get('/SalesAndDistribution/Market/GetCompany');
+        return $http.get('/security/company/GetCompany');
     }
 
     this.GetSearchableRoles = function (role_name, companyId) {

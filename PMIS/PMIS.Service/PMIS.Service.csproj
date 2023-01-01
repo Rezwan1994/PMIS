@@ -7,18 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Implementation\Security\ReportConfigurationManager.cs" />
-    <Compile Remove="Interface\Security\IReportConfigurationManager.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\PMIS.Domain\PMIS.Domain.csproj" />
     <ProjectReference Include="..\PMIS.Repository\PMIS.Repository.csproj" />
     <ProjectReference Include="..\PMIS.Utility\PMIS.Utility.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Implementation\Security\" />
   </ItemGroup>
 
 </Project>

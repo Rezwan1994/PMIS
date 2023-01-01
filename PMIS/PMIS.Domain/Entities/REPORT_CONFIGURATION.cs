@@ -5,7 +5,7 @@ namespace PMIS.Domain.Entities
 {
     public partial class REPORT_CONFIGURATION
     {
-        public decimal? REPORT_ID { get; set; }
+        public int REPORT_ID { get; set; }
         public string? REPORT_NAME { get; set; }
         public decimal? MENU_ID { get; set; }
         public decimal? ORDER_BY_SLNO { get; set; }
