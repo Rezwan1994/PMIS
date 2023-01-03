@@ -15,6 +15,8 @@
 
   <ItemGroup>
     <Content Remove="Views\Home\NotFound404.cshtml" />
+    <Content Remove="wwwroot\ScriptsNg\Security\Employee\CompanyCtr.js" />
+    <Content Remove="wwwroot\ScriptsNg\Security\Employee\Service\EmployeeService.js" />
   </ItemGroup>
 
   <ItemGroup>
@@ -3878,6 +3880,8 @@
     <None Include="wwwroot\ScriptsNg\Security\Company\Controller\CompanyCtr.js" />
     <None Include="wwwroot\ScriptsNg\Security\Company\Controller\DepotCtr.js" />
     <None Include="wwwroot\ScriptsNg\Security\Company\Service\CompanyService.js" />
+    <None Include="wwwroot\ScriptsNg\Security\Employee\Controller\EmployeeInfoCtr.js" />
+    <None Include="wwwroot\ScriptsNg\Security\Employee\Service\EmployeeService.js" />
     <None Include="wwwroot\ScriptsNg\Security\MenuCategory\Controller\MenuCategoryCtr.js" />
     <None Include="wwwroot\ScriptsNg\Security\MenuCategory\Service\MenuCategoryServices.js" />
     <None Include="wwwroot\ScriptsNg\Security\MenuMaster\Controller\MenuMasterCtr.js" />

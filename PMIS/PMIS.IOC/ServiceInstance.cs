@@ -39,6 +39,7 @@ namespace PMIS.IOC
             services.AddTransient<IUserMenuConfigService, UserMenuConfigService>();
             services.AddTransient<IUserLogService, UserLogService>();
             services.AddTransient<IReportConfigurationService, ReportConfigurationService>();
+            services.AddTransient<IEmployeeService, EmployeeService>();
             #endregion
 
             services.AddTransient<INotificationService, NotificationService>();

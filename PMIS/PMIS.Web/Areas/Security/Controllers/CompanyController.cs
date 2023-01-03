@@ -11,13 +11,11 @@ namespace PMIS.Web.Areas.Security.Controllers
     {
         private readonly ICompanyService _service;
         private readonly ILogger<CompanyController> _logger;
-        private readonly IConfiguration _configuration;
 
-        public CompanyController(ICompanyService service, ILogger<CompanyController> logger, IConfiguration configuration)
+        public CompanyController(ICompanyService service, ILogger<CompanyController> logger)
         {
             _service = service;
             _logger = logger;
-            _configuration = configuration;
         }
 
         public string GetCompany() => User.Claims.FirstOrDefault(x => x.Type == ClaimsType.CompanyId).Value.ToString();
@@ -31,9 +29,7 @@ namespace PMIS.Web.Areas.Security.Controllers
         //[AuthorizeCheck]
         public IActionResult Index()
         {
-            //_logger.LogInformation("Company Index (Company/Index) Page Has been accessed By " + User.Claims.FirstOrDefault(x => x.Type == ClaimsType.UserName).Value != null ? User.Claims.FirstOrDefault(x => x.Type == ClaimsType.UserName).Value.ToString() : "Unknown User" + " ( ID= " + User.Claims.FirstOrDefault(x => x.Type == ClaimsType.UserId).Value != null ? User.Claims.FirstOrDefault(x => x.Type == ClaimsType.UserId).Value.ToString() : "");
-
-            _logger.LogInformation("Company index");
+            _logger.LogInformation("Company Index (Company/Index) Page Has been accessed By " + User.GetComapanyId() + " (ID= " + User.GetUserId() + ")");
 
             return View();
         }
@@ -41,7 +37,7 @@ namespace PMIS.Web.Areas.Security.Controllers
         [AuthorizeCheck]
         public IActionResult Depot()
         {
-            _logger.LogInformation("Company Unit (Company/Unit) Page Has been accessed By " + User.Claims.FirstOrDefault(x => x.Type == ClaimsType.UserName).Value != null ? User.Claims.FirstOrDefault(x => x.Type == ClaimsType.UserName).Value.ToString() : "Unknown User" + " ( ID= " + User.Claims.FirstOrDefault(x => x.Type == ClaimsType.UserId).Value != null ? User.Claims.FirstOrDefault(x => x.Type == ClaimsType.UserId).Value.ToString() : "");
+            _logger.LogInformation("Company Depot (Company/Unit) Page Has been accessed By " + User.GetComapanyId() + " (ID= " + User.GetUserId() + ")");
 
             return View();
         }

@@ -1,62 +1,40 @@
 ﻿@{
-    ViewData["Title"] = "Company Info";
+    ViewData["Title"] = "Employee Info";
 }
 
 <link href="/css/site.css" rel="stylesheet">
 <link href="/Design/vendor/select2/dist/css/select2.min.css" rel="stylesheet" type="text/css">
 
 
-
 <div class="container-fluid" id="container-wrapper" ng-app="ngApp" ng-controller="ngGridCtrl">
 
     <div class="d-sm-flex align-items-center justify-content-between">
-        <h4 class="h3 mb-0 text-gray-600">Company</h4>
+        <h4 class="h3 mb-0 text-gray-600">Employee</h4>
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a class="btn btn-outline-primary" href="/Security/Company/index">Reset</a></li>
+            <li class="breadcrumb-item"><a class="btn btn-outline-primary" href="/Security/Employee/index">Reset</a></li>
             <li class="breadcrumb-item"><a id="#modalCenter" class="btn  btn-success text-white mb-1" ng-click="SaveData(model)">Save</a></li>
         </ol>
     </div>
 
     <div class="card mb-4">
-
         <div class="card-body">
-
-
             <fieldset>
-                <legend style="width:160px">Company Entry</legend>
+                <legend style="width:160px">Employee Entry</legend>
 
                 <form name="formMenuCategoryAdd">
                     <div class="row" style="margin:20px">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="COMPANY_NAME">Company Name</label>
+                                <label for="EMPLOYEE_NAME">Employee Name</label>
                                 <input type="text" class="form-control" autocomplete="off" data-val="true"
-                                       name="COMPANY_NAME" ng-model="model.COMPANY_NAME" placeholder="Enter Company Name">
+                                       name="EMPLOYEE_NAME" ng-model="model.EMPLOYEE_NAME" />
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="COMPANY_SHORT_NAME">Company Short Name</label>
-                                <input id="COMPANY_SHORT_NAME" type="text" class="form-control"
-                                       name="COMPANY_SHORT_NAME" ng-model="model.COMPANY_SHORT_NAME" placeholder="Enter Company Short Name">
-
-
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="COMPANY_ADDRESS1">Company Address 1 </label>
-                                <input id="COMPANY_ADDRESS1" type="text" class="form-control"
-                                       name="COMPANY_ADDRESS1" ng-model="model.COMPANY_ADDRESS1" placeholder="Enter Company Address 1">
-
-
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="COMPANY_ADDRESS2">Company Address 2</label>
-                                <input id="COMPANY_ADDRESS2" type="text" class="form-control"
-                                       name="COMPANY_ADDRESS2" ng-model="model.COMPANY_ADDRESS2" placeholder="Enter Company Address 2">
+                                <label for="EMPLOYEE_SHORT_NAME">Employee Code</label>
+                                <input id="EMPLOYEE_SHORT_NAME" type="text" class="form-control"
+                                       name="EMPLOYEE_SHORT_NAME" ng-model="model.EMPLOYEE_CODE" />
                             </div>
                         </div>
                     </div>
@@ -70,7 +48,7 @@
         <div class="card-body">
 
             <fieldset>
-                <legend style="width:140px">Company List</legend>
+                <legend style="width:140px">Employee List</legend>
                 <div class="row" style="height: 57vh;">
                     <div class="col-lg-12 mb-4">
                         <div class="card" ng-show="model.LIST_VIEW == 'Active'" style="margin: 10px">
@@ -85,16 +63,10 @@
         </div>
     </div>
 
-
     <partial name="~/Views/Shared/_Loader.cshtml" ng-show="showloader"></partial>
 
-
-
-    <script src="~/ScriptsNg/Security/Company/Controller/CompanyCtr.js"></script>
-    <script src="~/ScriptsNg/Security/Company/Service/CompanyService.js"></script>
+    <script src="~/scriptsng/security/employee/controller/EmployeeInfoCtr.js"></script>
+    <script src="~/ScriptsNg/Security/Employee/Service/EmployeeService.js"></script>
     <script src="~/ScriptsNg/Services/permissionProvider.js"></script>
-
     <script src="~/ScriptsNg/Services/gridRegistrationService.js"></script>
-
-
 </div>

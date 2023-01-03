@@ -12,15 +12,11 @@ namespace PMIS.Service.Implementation.Security
 {
     public class CompanyService : ICompanyService
     {
-        private readonly IConfiguration connString;
         private readonly ICommonServices _commonService;
-        private readonly IConfiguration _configuration;
 
-        public CompanyService(IConfiguration connstring, ICommonServices commonServices, IConfiguration configuration)
+        public CompanyService(ICommonServices commonServices)
         {
-            connString = connstring;
             _commonService = commonServices;
-            _configuration = configuration;
         }
 
         private string GetCompanyListQuery() => "Select distinct  COMPANY_ADDRESS1,COMPANY_ADDRESS2,COMPANY_ID,COMPANY_NAME,COMPANY_SHORT_NAME from COMPANY_INFO";
@@ -39,8 +35,6 @@ namespace PMIS.Service.Implementation.Security
         private string AddOrUpdateCompanyUpdateQuery() => @"Update COMPANY_INFO Set COMPANY_NAME = :param1,COMPANY_SHORT_NAME  =:param2, COMPANY_ADDRESS1 =  :param3, COMPANY_ADDRESS2 = :param4 Where COMPANY_ID = :param5";
 
         private string GetNewCompanyIdQuery() => "SELECT NVL(MAX(COMPANY_ID),0) + 1 COMPANY_ID  FROM COMPANY_INFO";
-
-        private string GetNewIdQuery() => "SELECT NVL(MAX(ID),0) + 1 ID  FROM COMPANY_INFO";
 
         public async Task<DataTable> GetCompanyListDataTable() => await _commonService.GetDataTableAsyn(GetCompanyListQuery(), _commonService.AddParameter(new string[] { }));
 
@@ -102,7 +96,7 @@ namespace PMIS.Service.Implementation.Security
             else
             {
                 List<QueryPattern> listOfQuery = new List<QueryPattern>();
-                try
+                //try
                 {
                     if (model.COMPANY_ID == 0)
                     {
@@ -110,7 +104,6 @@ namespace PMIS.Service.Implementation.Security
                         //model.ID = _commonService.GetMaximumNumber<int>(GetNewIdQuery(), _commonService.AddParameter(new string[] { }));
                         model.COMPANY_ID = _commonService.GetMaximumNumber<int>(GetNewCompanyIdQuery(), _commonService.AddParameter(new string[] { }));
 
-                        //model.UNIT_ID = 0;
 
                         listOfQuery.Add(_commonService.AddQuery(AddOrUpdateCompanyInsertQuery(), _commonService.AddParameter(new string[]
                         {model.COMPANY_ID.ToString(), model.COMPANY_NAME.ToString(), model.COMPANY_SHORT_NAME,
@@ -127,10 +120,10 @@ namespace PMIS.Service.Implementation.Security
                     await _commonService.SaveChangesAsyn(listOfQuery);
                     return "1";
                 }
-                catch (Exception ex)
-                {
-                    return ex.Message;
-                }
+                //catch (Exception ex)
+                //{
+                //    return ex.Message;
+                //}
             }
         }
 
@@ -157,8 +150,6 @@ namespace PMIS.Service.Implementation.Security
                                     
                                        )
                                        VALUES ( :param1, :param2, :param3, :param4, :param5 , :param6, :param7 ,TO_DATE(:param8, 'DD/MM/YYYY HH:MI:SS AM'), :param9 )";
-
-        private string AddOrUpdateUnitUpdateLikeQuery() => @"Update DEPOT_INFO Set DEPOT_CODE = :param2,DEPOT_NAME  =:param3, DEPOT_SHORT_NAME =  :param4, DEPOT_ADDRESS = :param5, STATUS = :param6 Where  DEPOT_ID = :param1";
 
         private string AddOrUpdateUnitUpdateQuery() => @"Update DEPOT_INFO Set DEPOT_CODE = :param2,DEPOT_NAME  =:param3, DEPOT_SHORT_NAME =  :param4, DEPOT_ADDRESS = :param5, STATUS = :param6, ENTERED_BY = :param7, ENTERED_DATE = TO_DATE(:param8, 'DD/MM/YYYY HH:MI:SS AM'), ENTERED_TERMINAL = :param9 Where  DEPOT_ID = :param1";
 

@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using PMIS.Domain.Common;
-using PMIS.Repository.Interface;
 using PMIS.Service.Interface.Security;
 using PMIS.Web.Common;
 using System.Globalization;
@@ -12,21 +11,12 @@ namespace SalesAndDistributionSystem.Areas.Security.Controllers
     public class UserLogController : Controller
     {
         private readonly IUserLogService _service;
-        private readonly ICommonServices _comservice;
-        private readonly ILogger<UserLogController> _logger;
 
-        private readonly IConfiguration _configuration;
         //private readonly ServiceProvider Provider = new ServiceProvider();
 
-        public UserLogController(IUserLogService _service,
-            ILogger<UserLogController> _logger,
-            ICommonServices _comservice,
-            IConfiguration _configuration)
+        public UserLogController(IUserLogService _service)
         {
             this._service = _service;
-            this._comservice = _comservice;
-            this._logger = _logger;
-            this._configuration = _configuration;
         }
 
         [HttpGet]

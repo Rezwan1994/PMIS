@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PMIS.Repository", "..\PMIS.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PMIS.Service", "..\PMIS.Service\PMIS.Service.csproj", "{B473C032-3BBA-4588-AB0A-62F39E664E4F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PMIS.IOC", "..\PMIS.IOC\PMIS.IOC.csproj", "{197AAC08-119B-4404-94CA-B7DE3AC0DA30}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PMIS.IOC", "..\PMIS.IOC\PMIS.IOC.csproj", "{197AAC08-119B-4404-94CA-B7DE3AC0DA30}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

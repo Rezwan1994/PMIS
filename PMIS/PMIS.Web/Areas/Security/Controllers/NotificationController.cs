@@ -11,13 +11,11 @@ namespace SalesAndDistributionSystem.Areas.Security.Company.Controllers
     {
         private readonly INotificationService _service;
         private readonly ILogger<NotificationController> _logger;
-        private readonly IConfiguration _configuration;
 
-        public NotificationController(INotificationService service, ILogger<NotificationController> logger, IConfiguration configuration)
+        public NotificationController(INotificationService service, ILogger<NotificationController> logger)
         {
             _service = service;
             _logger = logger;
-            _configuration = configuration;
         }
 
         public string GetCompany() => User.Claims.FirstOrDefault(x => x.Type == ClaimsType.CompanyId).Value.ToString();

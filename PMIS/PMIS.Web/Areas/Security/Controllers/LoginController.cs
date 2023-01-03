@@ -32,7 +32,7 @@ namespace PMIS.Web.Areas.Security.Controllers
         public LoginController(ILogger<LoginController> logger, IUserService accountService, IConfiguration configuration, IMenuPermissionService menuPermission, ICompanyService companyManager, IWebHostEnvironment hostingEnvironment, IHttpContextAccessor Accessor/*, IReportConfigurationManager reportManager*/, ICommonServices commonServices)
         {
             _logger = logger;
-            this._accountService = accountService;
+            _accountService = accountService;
             _configuration = configuration;
             _menuService = menuPermission;
             _companyService = companyManager;
