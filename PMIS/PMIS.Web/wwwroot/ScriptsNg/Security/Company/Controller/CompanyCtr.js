@@ -66,15 +66,15 @@
                 '<input required="required"   ng-model="row.entity.COMPANY_NAME"  class="pl-sm" />'
         }
         , {
-            name: 'COMPANY_SHORT_NAME', field: 'COMPANY_SHORT_NAME', displayName: 'Short Name', enableFiltering: false, width: ' 20%', cellTemplate:
+            name: 'COMPANY_SHORT_NAME', field: 'COMPANY_SHORT_NAME', displayName: 'Short Name', enableFiltering: false, width: '10%', cellTemplate:
                 '<input required="required"  type="text"  ng-model="row.entity.COMPANY_SHORT_NAME"  class="pl-sm" />'
         }
         , {
-            name: 'COMPANY_ADDRESS1', field: 'COMPANY_ADDRESS1', displayName: 'Address 1', enableFiltering: false, width: ' 24%', cellTemplate:
+            name: 'COMPANY_ADDRESS1', field: 'COMPANY_ADDRESS1', displayName: 'Address 1', enableFiltering: false, width: '28%', cellTemplate:
                 '<input required="required"  type="text"  ng-model="row.entity.COMPANY_ADDRESS1"  class="pl-sm" />'
         }
         , {
-            name: 'COMPANY_ADDRESS2', field: 'COMPANY_ADDRESS2', displayName: 'Address 2', enableFiltering: false, width: ' 24%', cellTemplate:
+            name: 'COMPANY_ADDRESS2', field: 'COMPANY_ADDRESS2', displayName: 'Address 2', enableFiltering: false, width: ' 28%', cellTemplate:
                 '<input required="required"  type="text"  ng-model="row.entity.COMPANY_ADDRESS2"  class="pl-sm" />'
         }
 

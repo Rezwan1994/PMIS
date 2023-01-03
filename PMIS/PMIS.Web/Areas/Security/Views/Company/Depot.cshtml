@@ -7,10 +7,10 @@
 
 <div class="container-fluid" id="container-wrapper" ng-app="ngApp" ng-controller="ngGridCtrl">
 
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <div class="d-sm-flex align-items-center justify-content-between">
         <h4 class="h3 mb-0 text-gray-600">Depot</h4>
         <ol class="breadcrumb">
-            @*<li class="breadcrumb-item"><a class="btn btn-outline-primary mb-1" href="~/Company/Depot">Depot List</a></li>*@
+            <li class="breadcrumb-item"><a class="btn btn-outline-primary" href="~/Security/Company/Depot">Reset</a></li>
             <li class="breadcrumb-item"><a id="#modalCenter" class="btn btn-success text-white mb-1" data-toggle="modal" data-target="#exampleModalCenter" ng-click="SaveData(model)" ng-show="model.ADD_PERMISSION == 'Active'">Save</a></li>
         </ol>
     </div>
@@ -26,7 +26,7 @@
                             <div class="form-group">
                                 <label for="DEPOT_CODE"> Depot Code</label>
                                 <input id="DEPOT_CODE" type="text" class="form-control" required
-                                       name="DEPOT_CODE" ng-model="model.DEPOT_CODE">
+                                       name="DEPOT_CODE" ng-model="model.DEPOT_CODE" />
 
                             </div>
                         </div>
@@ -34,14 +34,14 @@
                             <div class="form-group">
                                 <label for="DEPOT_NAME">Depot Name</label>
                                 <input type="text" class="form-control" autocomplete="off" required data-val="true"
-                                       name="DEPOT_NAME" ng-model="model.DEPOT_NAME" placeholder="Enter Unit Name">
+                                       name="DEPOT_NAME" ng-model="model.DEPOT_NAME" />
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="DEPOT_SHORT_NAME"> Short Name</label>
                                 <input id="DEPOT_SHORT_NAME" type="text" class="form-control" required
-                                       name="DEPOT_SHORT_NAME" ng-model="model.DEPOT_SHORT_NAME" placeholder="Enter Unit Short Name">
+                                       name="DEPOT_SHORT_NAME" ng-model="model.DEPOT_SHORT_NAME" />
 
                             </div>
                         </div>
@@ -49,7 +49,7 @@
                             <div class="form-group">
                                 <label for="DEPOT_ADDRESS">Address</label>
                                 <input id="DEPOT_ADDRESS" type="text" class="form-control" required
-                                       name="DEPOT_ADDRESS" ng-model="model.DEPOT_ADDRESS" placeholder="Enter Unit Address 2">
+                                       name="DEPOT_ADDRESS" ng-model="model.DEPOT_ADDRESS" />
                             </div>
                         </div>
                     </div>

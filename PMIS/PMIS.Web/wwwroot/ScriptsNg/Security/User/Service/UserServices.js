@@ -49,6 +49,6 @@
         return $http.post("../User/GetEmployeeWithoutAccount", { COMPANY_ID: comp_id });
     }
     this.GetCompany = function () {
-        return $http.get('/security/company/LoadData');
+        return $http.get('/security/company/GetCompany');
     }
 });

@@ -68,22 +68,22 @@
         , { name: 'DEPOT_ID', field: 'DEPOT_ID', visible: false }
 
         , {
-            name: 'DEPOT_CODE', field: 'DEPOT_CODE', displayName: 'DEPOT CODE', enableFiltering: true, width: '20%', cellTemplate:
+            name: 'DEPOT_CODE', field: 'DEPOT_CODE', displayName: 'Depot Code', enableFiltering: true, width: '10%', cellTemplate:
                 '<input required="required"   ng-model="row.entity.DEPOT_CODE"  class="pl-sm" />'
         }
         , {
-            name: 'DEPOT_NAME', field: 'DEPOT_NAME', displayName: 'Unit Name', enableFiltering: true, width: '20%', cellTemplate:
+            name: 'DEPOT_NAME', field: 'DEPOT_NAME', displayName: 'Depot Name', enableFiltering: true, width: '20%', cellTemplate:
                 '<input required="required"   ng-model="row.entity.DEPOT_NAME"  class="pl-sm" />'
         }
         , {
-            name: 'DEPOT_SHORT_NAME', field: 'DEPOT_SHORT_NAME', displayName: 'Short Name', enableFiltering: true, width: ' 20%', cellTemplate:
+            name: 'DEPOT_SHORT_NAME', field: 'DEPOT_SHORT_NAME', displayName: 'Short Name', enableFiltering: true, width: '12%', cellTemplate:
                 '<input required="required"  type="text"  ng-model="row.entity.DEPOT_SHORT_NAME"  class="pl-sm" />'
         }
 
-        , { name: 'STATUS', field: 'STATUS', displayName: 'Status', enableFiltering: true, width: ' 8%' }
+        , { name: 'STATUS', field: 'STATUS', displayName: 'Status', enableFiltering: true, width: '10%' }
 
         , {
-            name: 'DEPOT_ADDRESS', field: 'DEPOT_ADDRESS', displayName: 'Unit Address 1', enableFiltering: true, width: ' 24%', cellTemplate:
+            name: 'DEPOT_ADDRESS', field: 'DEPOT_ADDRESS', displayName: 'Address', enableFiltering: true, width: '24%', cellTemplate:
                 '<input required="required"  type="text"  ng-model="row.entity.DEPOT_ADDRESS"  class="pl-sm" />'
         }
 
