@@ -22,25 +22,53 @@
                 <legend style="width:140px">User Entry</legend>
 
                 <form name="formMenuCategoryAdd">
+
+
                     <div class="row" style="margin:20px">
-                        <div class="col-md-3">
+
+
+                        <div class="col-md-8">
+
                             <div class="form-group">
-                                <label for="USER_NAME">User Name</label>
+
+                                <label for="USER_NAME">User Name (Valid Email ID)</label>
                                 <input id="EMAIL" type="text" class="form-control"
                                        name="EMAIL" ng-model="model.EMAIL">
                             </div>
                         </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label> Company</label>
-                                <select class="form-control" id="COMPANY_ID" disabled
-                                        name="COMPANY_ID" ng-model="model.COMPANY_ID" style="width:100%" ng-change="typeaheadSelectedCompany(model)">
 
-                                    <option ng-repeat="item in CompanyData" ng-selected="item.COMPANY_ID == model.COMPANY_ID" value="{{item.COMPANY_ID}}">{{item.COMPANY_NAME}}</option>
+
+
+
+
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="USER_TYPE">User Type</label>
+                                <select class="form-control" id="USER_TYPE"
+                                        name="USER_TYPE" ng-model="model.USER_TYPE" style="width:100%">
+                                    <option ng-repeat="item in UserTypeData" value="{{item.Type}}">{{item.Type}}</option>
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-3">
+
+
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label for="EMPLOYEE_ID">Employee Name</label>
+                                <select class="select2-single form-control" id="EMPLOYEE_ID"
+                                        name="EMPLOYEE_ID" ng-model="model.EMPLOYEE_ID" style="width:100%">
+
+                                    <option ng-repeat="item in EmployeeData" value="{{item.EMPLOYEE_ID}}">{{item.EMPLOYEE_NAME + "(" + item.EMPLOYEE_ID + ")"}}</option>
+                                </select>
+                            </div>
+                        </div>
+
+
+
+
+
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label for="DEPOT_ID">Depot</label>
                                 <select class="form-control" id="DEPOT_ID" ng-disabled="{{model.USER_TYPE == 'SuperAdmin'}}"
@@ -51,27 +79,36 @@
                             </div>
                         </div>
 
-                        <div class="col-md-3">
+
+
+
+
+
+
+                        <div class="col-md-3 " hidden>
                             <div class="form-group">
-                                <label for="USER_TYPE">User Type</label>
-                                <select class="form-control" id="USER_TYPE"
-                                        name="USER_TYPE" ng-model="model.USER_TYPE" style="width:100%">
-                                    <option ng-repeat="item in UserTypeData" value="{{item.Type}}">{{item.Type}}</option>
+                                <label> Company</label>
+                                <select class="form-control" id="COMPANY_ID" disabled
+                                        name="COMPANY_ID" ng-model="model.COMPANY_ID" style="width:100%" ng-change="typeaheadSelectedCompany(model)">
+
+                                    <option ng-repeat="item in CompanyData" ng-selected="item.COMPANY_ID == model.COMPANY_ID" value="{{item.COMPANY_ID}}">{{item.COMPANY_NAME}}</option>
                                 </select>
                             </div>
                         </div>
 
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="EMPLOYEE_ID">Employee Id</label>
-                                <select class="select2-single form-control" id="EMPLOYEE_ID"
-                                        name="EMPLOYEE_ID" ng-model="model.EMPLOYEE_ID" style="width:100%">
 
-                                    <option ng-repeat="item in EmployeeData" value="{{item.EMPLOYEE_ID}}">{{item.EMPLOYEE_NAME + "(" + item.EMPLOYEE_ID + ")"}}</option>
-                                </select>
-                            </div>
-                        </div>
+
+
+
+
+
+
+
+
+
                     </div>
+
+
 
                 </form>
             </fieldset>

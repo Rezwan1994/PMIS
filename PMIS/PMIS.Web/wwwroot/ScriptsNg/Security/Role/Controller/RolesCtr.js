@@ -115,7 +115,7 @@
         }
         , { name: 'DEPOT_NAME', field: 'DEPOT_NAME', displayName: 'Depot Name', enableFiltering: false, width: ' 20%' }
 
-        , { name: 'STATUS', field: 'STATUS', displayName: 'Status', enableFiltering: false, width: ' 20%' }
+        , { name: 'STATUS', field: 'STATUS', displayName: 'Status', enableFiltering: false, width: ' 10%' }
         , { name: 'ENTERED_DATE', field: 'ENTERED_DATE', displayName: 'Date', enableFiltering: false, width: ' 20%' },
         {
             name: 'Action', displayName: 'Action', width: '35%', enableFiltering: false, enableColumnMenu: false, cellTemplate:
