@@ -9,8 +9,10 @@ namespace PMIS.Repository.UnitOfWork
 {
     public interface IUnitOfWork : IDisposable
     {
-        int SaveChangesAsync();
-        ICategoryInfoRepository ICategoryInfoRepository { get; }
+        Task<int> SaveChangesAsync();
+        IRepository<TEntity> Repository<TEntity>() where TEntity : class;
 
+
+        ICategoryInfoRepository ICategoryInfoRepository { get; }
     }
 }

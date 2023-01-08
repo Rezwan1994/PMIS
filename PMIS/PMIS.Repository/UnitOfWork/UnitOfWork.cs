@@ -23,7 +23,7 @@ namespace PMIS.Repository.UnitOfWork
         }
 
         public virtual void Dispose() => _dbContext?.Dispose();
-        public virtual int SaveChangesAsync() => _dbContext.SaveChanges();
+        public virtual Task<int> SaveChangesAsync() => _dbContext.SaveChangesAsync();
         private ICategoryInfoRepository _categoryInfoRepository;
 
         public IRepository<TEntity> Repository<TEntity>() where TEntity : class

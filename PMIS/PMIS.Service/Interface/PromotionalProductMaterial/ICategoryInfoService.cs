@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace PMIS.Service.Interface.PromotionalProductMaterial
 {
-    public interface ICategoryInfoService
+    public interface ICategoryInfoService:IBaseService<PM_CATEGORY_INFO>
     {
-        Task<string> AddOrUpdate(EMPLOYEE_INFO model);
-        Task<string> GetEmployeeList();
+
     }
 }

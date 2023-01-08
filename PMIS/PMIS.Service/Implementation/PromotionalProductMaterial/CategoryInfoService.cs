@@ -4,6 +4,8 @@ using PMIS.Repository.Interface;
 using PMIS.Repository.Interface.PromotionalProductMaterial;
 using PMIS.Repository.UnitOfWork;
 using PMIS.Service.Interface.PromotionalProductMaterial;
+using PMIS.Service.Interface;
+using PMIS.Service.Interface.ProductPromotionalCategory;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,28 +14,14 @@ using System.Threading.Tasks;
 
 namespace PMIS.Service.Implementation.PromotionalProductMaterial
 {
-    public class CategoryInfoService : ICategoryInfoService
+    internal class CategoryInfoService : BaseService<PM_CATEGORY_INFO>, ICategoryInfoService
     {
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly ICategoryInfoRepository _categoryRepository;
-        public CategoryInfoService(IUnitOfWork unitOfWork)
+        //private readonly IUnitOfWork _unitOfWork;
+        //private readonly ICategoryInfoRepository _categoryRepository;
+        public CategoryInfoService(IUnitOfWork unitOfWork): base(unitOfWork)
         {
-            this._unitOfWork = unitOfWork;
-            this._categoryRepository = unitOfWork.ICategoryInfoRepository;
-        }
-        public void AddOrUpdate(PM_CATEGORY_INFO model)
-        {
-            _categoryRepository.Add(model);
-        }
-
-        public Task<string> AddOrUpdate(EMPLOYEE_INFO model)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<string> GetEmployeeList()
-        {
-            throw new NotImplementedException();
+            //this._unitOfWork = unitOfWork;
+            //this._categoryRepository = unitOfWork.ICategoryInfoRepository;
         }
     }
 }
