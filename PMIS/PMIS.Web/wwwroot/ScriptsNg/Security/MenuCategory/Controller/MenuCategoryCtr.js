@@ -20,16 +20,16 @@
 
         //}
         , {
-            name: 'MODULE_NAME', field: 'MODULE_NAME', displayName: 'Name', enableFiltering: true, width: '20%', cellTemplate:
+            name: 'MODULE_NAME', field: 'MODULE_NAME', displayName: 'Module Name', enableFiltering: true, width: '32%', cellTemplate:
                 '<input required="required"   ng-model="row.entity.MODULE_NAME"  class="pl-sm" />'
         }
         , {
-            name: 'ORDER_BY_NO', field: 'ORDER_BY_NO', displayName: 'Order No', enableFiltering: true, width: '12%', cellTemplate:
+            name: 'ORDER_BY_NO', field: 'ORDER_BY_NO', displayName: 'Module Order No', enableFiltering: true, width: '15%', cellTemplate:
                 '<input required="required"   ng-model="row.entity.ORDER_BY_NO"  class="pl-sm" />'
         }
         , { name: 'STATUS', field: 'STATUS', displayName: 'Status', enableFiltering: true, width: '15%' }
-        , { name: 'CREATENAME', field: 'CREATENAME', displayName: 'By', enableFiltering: true, width: '15%' }
-        , { name: 'ENTERED_DATE', field: 'ENTERED_DATE', displayName: 'Date', enableFiltering: true, width: '15%' },
+        , { name: 'CREATENAME', field: 'CREATENAME', displayName: 'Entered By', visible: false ,enableFiltering: true, width: '15%' }
+        , { name: 'ENTERED_DATE', field: 'ENTERED_DATE', displayName: 'Entry Date', enableFiltering: true, width: '15%' },
         {
             name: 'Action', displayName: 'Action', width: '35%', enableFiltering: false, enableColumnMenu: false, cellTemplate:
                 '<div style="margin:1px;">' +

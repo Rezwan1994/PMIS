@@ -151,30 +151,64 @@
     $scope.CompanyLoad();
 
     $scope.gridOptionsList.columnDefs = [
-        { name: 'SL', field: 'ROW_NO', enableFiltering: false, width: 40 }
-
-        , { name: 'USER_ID', field: 'USER_ID', visible: false }
-
-        , { name: 'COMPANY_ID', field: 'COMPANY_ID', visible: false }
-
-        , {
-            name: 'USER_NAME', field: 'USER_NAME', displayName: 'User Name', enableFiltering: true, width: '20%'
-        }
-        , {
-            name: 'EMPLOYEE_ID', field: 'EMPLOYEE_ID', displayName: 'Employee Id', enableFiltering: true, width: ' 16%', cellTemplate:
-                '<input required="required"  type="text"  ng-model="row.entity.EMPLOYEE_ID"  class="pl-sm" />'
-        }
-        , { name: 'COMPANY_NAME', field: 'COMPANY_NAME', displayName: 'Company', enableFiltering: true, width: ' 22%' }
-        , {
-            name: 'USER_TYPE', field: 'USER_TYPE', displayName: 'User Type', enableFiltering: true, visible: false, width: '8%'
-        },
         {
-            name: 'USER_PASSWORD', field: 'USER_PASSWORD', displayName: 'USER_PASSWORD', enableFiltering: true, width: '15%'
+            name: 'SL', field: 'ROW_NO', enableFiltering: false, width: 50
         }
+
         , {
-            name: 'EMAIL', field: 'EMAIL', displayName: 'Email', enableFiltering: true, width: '25%', cellTemplate:
+            name: 'USER_ID', field: 'USER_ID', visible: false
+        }
+
+
+        , {
+            name: 'COMPANY_ID', field: 'COMPANY_ID', visible: false
+        }
+
+
+        , {
+            name: 'EMAIL', field: 'EMAIL', displayName: 'User Name', enableFiltering: true, width: '25%', cellTemplate:
                 '<input required="required"  type="text"  ng-model="row.entity.EMAIL"  class="pl-sm" />'
         }
+
+
+        , {
+            name: 'USER_PASSWORD', field: 'USER_PASSWORD', displayName: 'Password', enableFiltering: true, width: '25%'
+        }
+
+
+
+        , {
+            name: 'USER_NAME', field: 'USER_NAME', displayName: 'Employee Name', enableFiltering: true, width: '30%'
+        }
+
+
+        , {
+            name: 'USER_TYPE', field: 'USER_TYPE', displayName: 'User Type', enableFiltering: true, visible: true, width: '15%'
+        }
+
+
+
+
+
+
+        , {
+            name: 'EMPLOYEE_ID', field: 'EMPLOYEE_ID', displayName: 'Employee Name', visible:false,enableFiltering: true, width: ' 25%', cellTemplate:
+                '<input required="required"  type="text"  ng-model="row.entity.EMPLOYEE_ID"  class="pl-sm" />'
+        }
+
+
+
+
+        , {
+            name: 'COMPANY_NAME', field: 'COMPANY_NAME', displayName: 'Company', enableFiltering: true, visible: false, width: ' 22%'
+        }
+
+
+
+
+
+
+ 
 
         , {
             name: 'Actions', displayName: 'Actions', width: '20%', visible: false, enableFiltering: false, enableColumnMenu: false, cellTemplate:
@@ -191,7 +225,7 @@
         model.DEPOT_ID = parseInt(model.DEPOT_ID);
         UserServices.AddOrUpdate(model).then(function (data) {
             $scope.model.DEPOT_ID = $scope.model.DEPOT_ID.toString();
-            notificationservice.Notification(data.data, 1, 'Data Save Successfully !!');
+            notificationservice.Notification(data.data, 1, 'Temporary password sent to your mail. !!');
             if (data.data == 1) {
                 $scope.showLoader = false;
                 $scope.DataLoad();
