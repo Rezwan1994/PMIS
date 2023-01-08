@@ -1,18 +1,18 @@
 ﻿using PMIS.Domain.Entities;
 using PMIS.Repository;
 using PMIS.Repository.Interface;
-using PMIS.Repository.Interface.ProductPromotionalMaterial;
+using PMIS.Repository.Interface.PromotionalProductMaterial;
 using PMIS.Repository.UnitOfWork;
-using PMIS.Service.Interface.ProductPromotionalCategory;
+using PMIS.Service.Interface.PromotionalProductMaterial;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PMIS.Service.Implementation.ProductPromotionalCategory
+namespace PMIS.Service.Implementation.PromotionalProductMaterial
 {
-    internal class CategoryInfoService : ICategoryInfo
+    public class CategoryInfoService : ICategoryInfoService
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly ICategoryInfoRepository _categoryRepository;

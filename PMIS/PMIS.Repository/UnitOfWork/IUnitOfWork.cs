@@ -1,4 +1,4 @@
-﻿using PMIS.Repository.Interface.ProductPromotionalMaterial;
+﻿using PMIS.Repository.Interface.PromotionalProductMaterial;
 using System;
 using System.Collections.Generic;
 using System.Linq;

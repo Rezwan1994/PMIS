@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PMIS.Service.Interface.ProductPromotionalCategory
+namespace PMIS.Service.Interface.PromotionalProductMaterial
 {
-    public interface ICategoryInfo
+    public interface ICategoryInfoService
     {
         Task<string> AddOrUpdate(EMPLOYEE_INFO model);
         Task<string> GetEmployeeList();

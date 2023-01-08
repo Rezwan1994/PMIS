@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PMIS.Repository.Interface.ProductPromotionalMaterial
+namespace PMIS.Repository.Interface.PromotionalProductMaterial
 {
     public interface ICategoryInfoRepository:IRepository<PM_CATEGORY_INFO>
     {

@@ -5,7 +5,10 @@ using Microsoft.Extensions.DependencyInjection;
 using PMIS.Domain.DBContext;
 using PMIS.Repository.Implementation;
 using PMIS.Repository.Interface;
+using PMIS.Repository.UnitOfWork;
+using PMIS.Service.Implementation.PromotionalProductMaterial;
 using PMIS.Service.Implementation.Security;
+using PMIS.Service.Interface.PromotionalProductMaterial;
 using PMIS.Service.Interface.Security;
 using PMIS.Utility;
 using System;
@@ -27,6 +30,7 @@ namespace PMIS.IOC
             );
 
             services.AddTransient<ICommonServices, CommonServices>();
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
 
             #region Security
             services.AddTransient<ICompanyService, CompanyService>();
@@ -40,6 +44,10 @@ namespace PMIS.IOC
             services.AddTransient<IUserLogService, UserLogService>();
             services.AddTransient<IReportConfigurationService, ReportConfigurationService>();
             services.AddTransient<IEmployeeService, EmployeeService>();
+            #endregion
+
+            #region PromotionalProductMaterial
+            services.AddTransient<ICategoryInfoService, CategoryInfoService>();
             #endregion
 
             services.AddTransient<INotificationService, NotificationService>();

@@ -3919,9 +3919,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\ProductPromotionalMaterial\Data\" />
-    <Folder Include="Areas\ProductPromotionalMaterial\Models\" />
-    <Folder Include="Areas\ProductPromotionalMaterial\Views\" />
+    <Folder Include="Areas\PromotionalProductMaterial\Data\" />
+    <Folder Include="Areas\PromotionalProductMaterial\Models\" />
   </ItemGroup>
 
 </Project>

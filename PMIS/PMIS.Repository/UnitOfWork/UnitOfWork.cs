@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PMIS.Domain.DBContext;
 using PMIS.Repository.Implementation;
-using PMIS.Repository.Implementation.ProductPromotionalMaterial;
-using PMIS.Repository.Interface.ProductPromotionalMaterial;
+using PMIS.Repository.Implementation.PromotionalProductMaterial;
+using PMIS.Repository.Interface.PromotionalProductMaterial;
 using System;
 using System.Collections;
 using System.Collections.Generic;
