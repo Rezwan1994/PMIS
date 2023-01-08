@@ -23,18 +23,28 @@
 
                 <form name="formMenuCategoryAdd">
                     <div class="row" style="margin:20px">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="EMPLOYEE_SHORT_NAME">Employee Code</label>
+                                <input id="EMPLOYEE_SHORT_NAME" type="text" class="form-control"
+                                       name="EMPLOYEE_SHORT_NAME" ng-model="model.EMPLOYEE_CODE" />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label for="EMPLOYEE_NAME">Employee Name</label>
                                 <input type="text" class="form-control" autocomplete="off" data-val="true"
                                        name="EMPLOYEE_NAME" ng-model="model.EMPLOYEE_NAME" />
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="form-group">
-                                <label for="EMPLOYEE_SHORT_NAME">Employee Code</label>
-                                <input id="EMPLOYEE_SHORT_NAME" type="text" class="form-control"
-                                       name="EMPLOYEE_SHORT_NAME" ng-model="model.EMPLOYEE_CODE" />
+                                <label for="EMPLOYEE_STATUS">Status</label>
+                                <select class="form-control" id="EMPLOYEE_STATUS"
+                                        name="EMPLOYEE_STATUS" ng-model="model.EMPLOYEE_STATUS" style="width:100%" >
+
+                                    <option ng-repeat="item in Statuses" ng-selected="item == model.EMPLOYEE_STATUS" value="{{item}}">{{item}}</option>
+                                </select>
                             </div>
                         </div>
                     </div>

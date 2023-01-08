@@ -21,7 +21,7 @@ namespace PMIS.Service.Implementation.Security
             this._commonService = _commonService;
         }
 
-        private string GetEmployeeListQuery() => "Select distinct EMPLOYEE_ID, EMPLOYEE_NAME, EMPLOYEE_CODE from EMPLOYEE_INFO";
+        private string GetEmployeeListQuery() => "Select distinct EMPLOYEE_ID, EMPLOYEE_NAME, EMPLOYEE_CODE, EMPLOYEE_STATUS from EMPLOYEE_INFO where COMPANY_ID = :param1";
 
         private string GetNewEmployeeIdQuery() => "SELECT NVL(MAX(EMPLOYEE_ID),0) + 1 EMPLOYEE_ID  FROM EMPLOYEE_INFO";
 
@@ -36,7 +36,8 @@ namespace PMIS.Service.Implementation.Security
 
         private string AddOrUpdateEmployeeUpdateQuery() => @"Update EMPLOYEE_INFO set
             EMPLOYEE_CODE  =:param2,
-            EMPLOYEE_NAME = :param3
+            EMPLOYEE_NAME = :param3,
+            EMPLOYEE_STATUS = :param4
             WHERE EMPLOYEE_ID = :param1";
 
         public async Task<string> AddOrUpdate(EMPLOYEE_INFO model)
@@ -52,7 +53,7 @@ namespace PMIS.Service.Implementation.Security
                 {
                     if (model.EMPLOYEE_ID == 0)
                     {
-                        model.EMPLOYEE_STATUS = Status.Active;
+                        //model.EMPLOYEE_STATUS = Status.Active;
                         //model.ID = _commonService.GetMaximumNumber<int>(GetNewIdQuery(), _commonService.AddParameter(new string[] { }));
                         model.EMPLOYEE_ID = _commonService.GetMaximumNumber<int>(GetNewEmployeeIdQuery(), _commonService.AddParameter(new string[] { }));
 
@@ -66,7 +67,7 @@ namespace PMIS.Service.Implementation.Security
                     {
                         listOfQuery.Add(_commonService.AddQuery(AddOrUpdateEmployeeUpdateQuery(),
                             _commonService.AddParameter(new string[] { model.EMPLOYEE_ID.ToString(), model.EMPLOYEE_CODE,
-                                model.EMPLOYEE_NAME
+                                model.EMPLOYEE_NAME, model.EMPLOYEE_STATUS
                             })));
                     }
 
@@ -80,10 +81,9 @@ namespace PMIS.Service.Implementation.Security
             }
         }
 
-        public async Task<string> GetEmployeeList()
+        public async Task<string> GetEmployeeList(int companyId)
         {
-            return _commonService.DataTableToJSON(await _commonService.GetDataTableAsyn(GetEmployeeListQuery(), _commonService.AddParameter(new string[] { })));
+            return _commonService.DataTableToJSON(await _commonService.GetDataTableAsyn(GetEmployeeListQuery(), _commonService.AddParameter(new string[] { companyId.ToString() })));
         }
-
     }
 }
