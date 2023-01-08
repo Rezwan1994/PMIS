@@ -24,13 +24,11 @@ namespace PMIS.Repository.Implementation
 
         public virtual void Add(TEntity entity)
         {
-            _dbSet.Add(entity);
+             _dbSet.AddAsync(entity);
         }
-
-        public virtual void Remove(int id)
+        public virtual void AddRange(List<TEntity> entities)
         {
-            var entityToDelete = _dbSet.Find(id);
-            Remove(entityToDelete);
+            _dbSet.AddRange(entities);
         }
 
         public virtual void Remove(TEntity entityToDelete)
@@ -40,6 +38,12 @@ namespace PMIS.Repository.Implementation
                 _dbSet.Attach(entityToDelete);
             }
             _dbSet.Remove(entityToDelete);
+        }
+
+        public virtual void Remove(int id)
+        {
+            var entityToDelete = _dbSet.Find(id);
+            Remove(entityToDelete);
         }
 
         public virtual void Remove(Expression<Func<TEntity, bool>> filter)
@@ -70,7 +74,7 @@ namespace PMIS.Repository.Implementation
             return count;
         }
 
-        public virtual IList<TEntity> Get(Expression<Func<TEntity, bool>> filter, string includeProperties = "")
+        public virtual IQueryable<TEntity> Get(Expression<Func<TEntity, bool>> filter, string includeProperties = "")
         {
             IQueryable<TEntity> query = _dbSet;
 
@@ -85,17 +89,20 @@ namespace PMIS.Repository.Implementation
                 query = query.Include(includeProperty);
             }
 
-            return query.ToList();
+            return query;
         }
 
-        public virtual IList<TEntity> GetAll()
+        public virtual IQueryable<TEntity> Get()
         {
-            return _dbSet.ToList();
+            return _dbSet;
         }
-
-        public virtual TEntity GetById(int id)
+        public virtual IQueryable<TEntity> Get(Expression<Func<TEntity, bool>> filter)
         {
-            return _dbSet.Find(id);
+            return _dbSet.Where(filter).AsQueryable();
+        }
+        public virtual async Task<TEntity?> GetById(int id)
+        {
+            return await _dbSet.FindAsync(id);
         }
 
         public virtual (IList<TEntity> data, int total, int totalDisplay) Get(
@@ -176,7 +183,7 @@ namespace PMIS.Repository.Implementation
         //    }
         //}
 
-        public virtual IList<TEntity> Get(Expression<Func<TEntity, bool>> filter = null,
+        public virtual async Task<IList<TEntity>> Get(Expression<Func<TEntity, bool>> filter = null,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
             string includeProperties = "", bool isTrackingOff = false)
         {
@@ -198,23 +205,24 @@ namespace PMIS.Repository.Implementation
                 var result = orderBy(query);
 
                 if (isTrackingOff)
-                    return result.AsNoTracking().ToList();
+                    return await result.AsNoTracking().ToListAsync();
                 else
-                    return result.ToList();
+                    return await result.ToListAsync();
             }
             else
             {
                 if (isTrackingOff)
-                    return query.AsNoTracking().ToList();
+                    return await query.AsNoTracking().ToListAsync();
                 else
-                    return query.ToList();
+                    return await query.ToListAsync();
             }
         }
 
-        public (IList<TEntity> data, int total, int totalDisplay) GetDynamic(Expression<Func<TEntity, bool>> filter = null, string orderBy = null, string includeProperties = "", int pageIndex = 1, int pageSize = 10, bool isTrackingOff = false)
-        {
-            throw new NotImplementedException();
-        }
+
+        //Task<IQueryable<TEntity>> Get(Expression<Func<TEntity, bool>> filter, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy, string includeProperties, bool isTrackingOff)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         //public virtual IList<TEntity> GetDynamic(Expression<Func<TEntity, bool>> filter = null,
         //    string orderBy = null,

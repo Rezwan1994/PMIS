@@ -12,7 +12,7 @@ namespace PMIS.Repository.Implementation.ProductPromotionalMaterial
 {
     public class CategoryInfoRepository: Repository<PM_CATEGORY_INFO>, ICategoryInfoRepository
     {
-        public CategoryInfoRepository(PMISDbContext context) : base((PMISDbContext)context)
+        public CategoryInfoRepository(PMISDbContext context) : base(context)
         {
         }
     }
