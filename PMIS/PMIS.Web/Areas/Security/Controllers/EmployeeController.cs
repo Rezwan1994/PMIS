@@ -22,7 +22,7 @@ namespace PMIS.Web.Areas.Security.Controllers
         [HttpGet]
         public async Task<string> LoadData()
         {
-            return await _service.GetEmployeeList();
+            return await _service.GetEmployeeList(User.GetComapanyId());
         }
 
         [HttpPost]

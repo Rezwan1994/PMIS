@@ -10,6 +10,6 @@ namespace PMIS.Service.Interface.Security
     public interface IEmployeeService
     {
         Task<string> AddOrUpdate(EMPLOYEE_INFO model);
-        Task<string> GetEmployeeList();
+        Task<string> GetEmployeeList(int companyId);
     }
 }

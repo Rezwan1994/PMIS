@@ -21,12 +21,12 @@
     }
 
     $scope.ClearForm = function () {
-        $scope.model.ID = 0;
         $scope.model.EMPLOYEE_ID = 0;
-        $scope.model.EMPLOYEE_CODE = '';
-        $scope.model.EMPLOYEE_NAME = '';
+        $scope.model.EMPLOYEE_CODE = "";
+        $scope.model.EMPLOYEE_NAME = "";
+        $scope.model.EMPLOYEE_STATUS = "Active";
     }
-
+    $scope.Statuses = ["Active", "Inactive"]
     $scope.GetPermissionData = function () {
         $scope.showLoader = true;
 
@@ -58,13 +58,20 @@
         { name: 'SL', field: 'ROW_NO', enableFiltering: false, width: 50 }
         , { name: 'EMPLOYEE_ID', field: 'EMPLOYEE_ID', visible: false }
         , {
-            name: 'EMPLOYEE_CODE', field: 'EMPLOYEE_CODE', displayName: 'Employee Code', enableFiltering: false, width: '30%', cellTemplate:
+            name: 'EMPLOYEE_CODE', field: 'EMPLOYEE_CODE', displayName: 'Employee Code', enableFiltering: false, width: '20%', cellTemplate:
                 '<input required="required"   ng-model="row.entity.EMPLOYEE_CODE"  class="pl-sm" />'
         }
         , {
-            name: 'EMPLOYEE_NAME', field: 'EMPLOYEE_NAME', displayName: 'Employee Name', enableFiltering: false, width: '40%', cellTemplate:
+            name: 'EMPLOYEE_NAME', field: 'EMPLOYEE_NAME', displayName: 'Employee Name', enableFiltering: false, width: '35%', cellTemplate:
                 '<input required="required"  type="text"  ng-model="row.entity.EMPLOYEE_NAME"  class="pl-sm" />'
-        }
+        }, {
+            name: 'EMPLOYEE_STATUS', field: 'EMPLOYEE_STATUS', displayName: 'Employee Status', enableFiltering: false, width: '30%', cellTemplate:
+                `<select class="pl-sm form-control" id="EMPLOYEE_STATUS"
+                       name="EMPLOYEE_STATUS" ng-model="row.entity.EMPLOYEE_STATUS" >
+
+        <option ng-repeat="item in grid.appScope.Statuses" ng-selected="item == row.entity.EMPLOYEE_STATUS" value="{{item}}">{{ item }}</option>
+                                </select > `
+        },
         , {
             name: 'Actions', displayName: 'Actions', enableFiltering: false, enableColumnMenu: false, width: '10%', cellTemplate:
                 '<div style="margin:1px;">' +
@@ -79,7 +86,7 @@
         $scope.model.EMPLOYEE_ID = entity.EMPLOYEE_ID;
         $scope.model.EMPLOYEE_CODE = entity.EMPLOYEE_CODE;
         $scope.model.EMPLOYEE_NAME = entity.EMPLOYEE_NAME;
-
+        $scope.model.EMPLOYEE_STATUS = entity.EMPLOYEE_STATUS;
         $scope.SaveData($scope.model);
     }
 
@@ -91,8 +98,6 @@
             if (data.data == 1) {
                 $scope.showLoader = false;
                 $scope.DataLoad();
-                $scope.model.Name = "";
-                $scope.model.SerialNo = "";
                 $scope.ClearForm();
             }
             else {

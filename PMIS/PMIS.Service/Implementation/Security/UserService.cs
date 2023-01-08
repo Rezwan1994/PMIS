@@ -139,7 +139,7 @@ namespace PMIS.Service.Implementation.Security
                             LEFT JOIN COMPANY_INFO C ON C.COMPANY_ID = U.COMPANY_ID 
                             LEFT JOIN DEPOT_INFO UI ON UI.DEPOT_ID = U.DEPOT_ID";
 
-        private string GetEmployeesWithoutAccount() => @"Select EMPLOYEE_ID, EMPLOYEE_CODE, EMPLOYEE_NAME, EMPLOYEE_STATUS, COMPANY_ID from Employee_Info where COMPANY_ID = :param1 AND  EMPLOYEE_ID NOT IN (Select EMPLOYEE_ID from User_info) ";
+        private string GetEmployeesWithoutAccount() => @"Select EMPLOYEE_ID, EMPLOYEE_CODE, EMPLOYEE_NAME, EMPLOYEE_STATUS, COMPANY_ID from Employee_Info where COMPANY_ID = :param1 AND EMPLOYEE_STATUS = 'Active' AND  EMPLOYEE_ID NOT IN (Select EMPLOYEE_ID from User_info) ";
 
         private string GetEmployeeByEmployeeId() => @"Select EMPLOYEE_ID, EMPLOYEE_CODE, EMPLOYEE_NAME, EMPLOYEE_STATUS, COMPANY_ID from Employee_Info where Employee_Id = :param1 ";
 
