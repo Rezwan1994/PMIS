@@ -8,18 +8,18 @@ using System.Threading.Tasks;
 
 namespace PMIS.Repository
 {
-    public interface IRepository<TEntity, TKey>
+    public interface IRepository<TEntity>
       where TEntity : class
     {
         void Add(TEntity entity);
-        void Remove(TKey id);
+        void Remove(int id);
         void Remove(TEntity entityToDelete);
         void Remove(Expression<Func<TEntity, bool>> filter);
         void Edit(TEntity entityToUpdate);
         int GetCount(Expression<Func<TEntity, bool>> filter = null);
         IList<TEntity> Get(Expression<Func<TEntity, bool>> filter, string includeProperties = "");
         IList<TEntity> GetAll();
-        TEntity GetById(TKey id);
+        TEntity GetById(int id);
         (IList<TEntity> data, int total, int totalDisplay) Get(
             Expression<Func<TEntity, bool>> filter = null,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,

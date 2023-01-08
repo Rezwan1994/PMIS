@@ -1,0 +1,19 @@
+﻿using Microsoft.EntityFrameworkCore;
+using PMIS.Domain.DBContext;
+using PMIS.Domain.Entities;
+using PMIS.Repository.Interface.ProductPromotionalMaterial;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace PMIS.Repository.Implementation.ProductPromotionalMaterial
+{
+    public class CategoryInfoRepository: Repository<PM_CATEGORY_INFO>, ICategoryInfoRepository
+    {
+        public CategoryInfoRepository(PMISDbContext context) : base((PMISDbContext)context)
+        {
+        }
+    }
+}

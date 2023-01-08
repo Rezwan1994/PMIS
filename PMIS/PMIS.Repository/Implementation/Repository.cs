@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using PMIS.Domain.DBContext;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,14 +9,14 @@ using System.Threading.Tasks;
 
 namespace PMIS.Repository.Implementation
 {
-    public abstract class Repository<TEntity, TKey>
-       : IRepository<TEntity, TKey>
+    public class Repository<TEntity>
+       : IRepository<TEntity>
        where TEntity : class
     {
-        protected DbContext _dbContext;
+        protected PMISDbContext _dbContext;
         protected DbSet<TEntity> _dbSet;
 
-        public Repository(DbContext context)
+        public Repository(PMISDbContext context)
         {
             _dbContext = context;
             _dbSet = _dbContext.Set<TEntity>();
@@ -26,7 +27,7 @@ namespace PMIS.Repository.Implementation
             _dbSet.Add(entity);
         }
 
-        public virtual void Remove(TKey id)
+        public virtual void Remove(int id)
         {
             var entityToDelete = _dbSet.Find(id);
             Remove(entityToDelete);
@@ -92,7 +93,7 @@ namespace PMIS.Repository.Implementation
             return _dbSet.ToList();
         }
 
-        public virtual TEntity GetById(TKey id)
+        public virtual TEntity GetById(int id)
         {
             return _dbSet.Find(id);
         }
