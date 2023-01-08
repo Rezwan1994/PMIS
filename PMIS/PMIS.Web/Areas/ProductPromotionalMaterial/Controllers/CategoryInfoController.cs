@@ -16,7 +16,6 @@ namespace PMIS.Web.Areas.ProductPromotionalMaterial.Controllers
         {
             _service = service;
             _logger = logger;
-            _hostingEnvironment = hostingEnvironment;
         }
 
         public IActionResult Index()
