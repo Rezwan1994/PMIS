@@ -1,6 +1,6 @@
 ﻿ngApp.service("CategoryInfoService", function ($http) {
     this.GetCategoryList = function () {
-        return $http.get('../CategoryInfo/LoadData');
+        return $http.get('../CategoryInfo/Get');
     }
 
     this.AddOrUpdate = function (model) {

@@ -14,7 +14,9 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews()
+    .AddJsonOptions(options => { options.JsonSerializerOptions.PropertyNamingPolicy = null; });
+
 builder.Services.RegisterServiceInstance(builder.Configuration);
 
 builder.Logging.AddSeq(builder.Configuration.GetSection("Seq"));
@@ -23,6 +25,7 @@ builder.Logging.AddSeq(builder.Configuration.GetSection("Seq"));
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(x => x.LoginPath = "/Security/Login/Index");
+
 
 builder.Services.AddSession(options =>
 {
