@@ -7,6 +7,8 @@ using System.Net;
 
 namespace PMIS.Web.Areas.PromotionalProductMaterial.Controllers
 {
+  
+    [Area("PromotionalProductMaterial")]
     public class CategoryInfoController : Controller
     {
         private readonly ICategoryInfoService _service;

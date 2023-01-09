@@ -8,10 +8,6 @@ namespace PMIS.Domain.DBContext
 {
     public partial class PMISDbContext : DbContext
     {
-        public PMISDbContext()
-        {
-        }
-
         public PMISDbContext(DbContextOptions<PMISDbContext> options)
             : base(options)
         {
@@ -2197,9 +2193,9 @@ namespace PMIS.Domain.DBContext
                     .HasConstraintName("FK1_USER_LOG_USER_ID");
             });
 
-            OnModelCreatingPartial(modelBuilder);
+            //OnModelCreatingPartial(modelBuilder);
         }
 
-        partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+        //partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
     }
 }
