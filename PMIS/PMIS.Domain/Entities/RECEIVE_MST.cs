@@ -5,7 +5,7 @@ namespace PMIS.Domain.Entities
 {
     public partial class RECEIVE_MST
     {
-        public decimal? MST_ID { get; set; }
+        public int MST_ID { get; set; }
         public string? RECEIVE_TYPE { get; set; }
         public string? YEAR_CODE { get; set; }
         public string? MONTH_CODE { get; set; }

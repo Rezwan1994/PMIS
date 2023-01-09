@@ -58,8 +58,7 @@ And V.NOTIFICATION_POLICY_ID = :param1 AND V.UNIT_ID = :param2 AND V.COMPANY_ID=
                                        ) 
                                        VALUES ( :param1, :param2, :param3, :param4, TO_DATE( :param5, 'DD/MM/YYYY HH:MI:SS AM') , :param6, :param7, :param8 )";
         string AddOrUpdateNotificationViewInsertQuery() => @"INSERT INTO NOTIFICATION_VIEW (
-                                         ID
-                                        ,NOTIFICATION_ID
+                                        NOTIFICATION_ID
                                         ,USER_ID
                                         ,STATUS
                                         ,COMPANY_ID
@@ -67,7 +66,7 @@ And V.NOTIFICATION_POLICY_ID = :param1 AND V.UNIT_ID = :param2 AND V.COMPANY_ID=
                                         ,VIEW_DATE
                                        ) 
                                        VALUES ( :param1, :param2, :param3, :param4, :param5, :param6, TO_DATE( :param7, 'DD/MM/YYYY HH:MI:SS AM') )";
-        string UpdateNotificationViewStatus_Query() => @"Update NOTIFICATION_VIEW Set STATUS = 'Active' Where ID = :param1";
+        string UpdateNotificationViewStatus_Query() => @"Update NOTIFICATION_VIEW Set STATUS = 'Active' Where NOTIFICATION_ID = :param1";
         string UpdateNotificationViewStatusByUser_Query() => @"Update NOTIFICATION_VIEW Set STATUS = 'Active' Where USER_ID = :param1";
 
         string GetNewNotificationIdQuery() => "SELECT NVL(MAX(NOTIFICATION_ID),0) + 1 NOTIFICATION_ID  FROM NOTIFICATION";
@@ -194,10 +193,9 @@ And V.NOTIFICATION_POLICY_ID = :param1 AND V.UNIT_ID = :param2 AND V.COMPANY_ID=
                             listOfQuery.Add(_commonService.AddQuery(AddOrUpdateNotificationViewInsertQuery(),
                                 _commonService.AddParameter(new string[]
                                 {
-                                             model.ID.ToString(), model.NOTIFICATION_ID.ToString(), item.USER_ID.ToString(), Status.InActive, model.COMPANY_ID.ToString(),
+                                              model.NOTIFICATION_ID.ToString(), item.USER_ID.ToString(), Status.InActive, model.COMPANY_ID.ToString(),
                                             model.UNIT_ID.ToString(), model.NOTIFICATION_DATE?.ToString("dd/MM/yyyy")
                                  })));
-                            model.ID++;
                         }
 
                         await _commonService.SaveChangesAsyn(listOfQuery);

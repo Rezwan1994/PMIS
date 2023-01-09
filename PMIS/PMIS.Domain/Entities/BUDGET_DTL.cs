@@ -5,8 +5,8 @@ namespace PMIS.Domain.Entities
 {
     public partial class BUDGET_DTL
     {
-        public decimal? DTL_ID { get; set; }
-        public decimal? MST_ID { get; set; }
+        public int DTL_ID { get; set; }
+        public int? MST_ID { get; set; }
         public string? SBU { get; set; }
         public string? PM_CATEGORY_CODE { get; set; }
         public string? DEPOT_CODE { get; set; }

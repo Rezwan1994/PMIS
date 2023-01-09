@@ -10,5 +10,6 @@ namespace PMIS.Domain.Entities
         public string? PM_CODE { get; set; }
         public decimal? OPENING_STOCK_QTY { get; set; }
         public decimal? CLOSING_STOCK_QTY { get; set; }
+        public int ID { get; set; }
     }
 }

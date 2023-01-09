@@ -5,8 +5,8 @@ namespace PMIS.Domain.Entities
 {
     public partial class ALLOCATION_DTL
     {
-        public decimal? DTL_ID { get; set; }
-        public decimal? MST_ID { get; set; }
+        public int DTL_ID { get; set; }
+        public int? MST_ID { get; set; }
         public string? PM_CATEGORY_CODE { get; set; }
         public string? PM_CODE { get; set; }
         public decimal? ALLOCATION_QTY { get; set; }

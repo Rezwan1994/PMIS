@@ -5,7 +5,7 @@ namespace PMIS.Domain.Entities
 {
     public partial class BUDGET_MST
     {
-        public decimal? MST_ID { get; set; }
+        public int MST_ID { get; set; }
         public string? BUDGET_NO { get; set; }
         public DateTime? BUDGET_DATE { get; set; }
         public string? YEAR_CODE { get; set; }

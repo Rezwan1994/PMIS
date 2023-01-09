@@ -59,7 +59,7 @@ namespace SalesAndDistributionSystem.Areas.Security.Company.Controllers
         public async Task<string> UpdateNotificationViewStatus(int ID)
         {
             NOTIFICATION model = new NOTIFICATION();
-            model.ID = ID;
+            model.NOTIFICATION_ID = ID;
             return await _service.UpdateNotificationViewStatus(model);
         }
 

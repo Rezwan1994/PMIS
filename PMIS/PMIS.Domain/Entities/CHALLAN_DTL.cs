@@ -5,15 +5,15 @@ namespace PMIS.Domain.Entities
 {
     public partial class CHALLAN_DTL
     {
-        public decimal? DTL_ID { get; set; }
-        public decimal? MST_ID { get; set; }
+        public int DTL_ID { get; set; }
+        public int? MST_ID { get; set; }
         public string? DEPOT_CODE { get; set; }
         public DateTime? CHALLAN_DATE { get; set; }
         public string? PM_CATEGORY_CODE { get; set; }
         public string? PM_CODE { get; set; }
         public decimal? UNIT_PRICE { get; set; }
         public decimal? UNIT_VAT { get; set; }
-        public decimal? BATCH_ID { get; set; }
+        public int? BATCH_ID { get; set; }
         public string? BATCH_NO { get; set; }
         public decimal? ALLOCATION_QTY { get; set; }
         public decimal? CHALLAN_QTY { get; set; }

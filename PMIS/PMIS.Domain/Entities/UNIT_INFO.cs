@@ -5,11 +5,11 @@ namespace PMIS.Domain.Entities
 {
     public partial class UNIT_INFO
     {
-        public decimal UNIT_ID { get; set; }
+        public int UNIT_ID { get; set; }
         public string? UNIT_CODE { get; set; }
         public string? UNIT_NAME { get; set; }
         public string? UNIT_SHORT_NAME { get; set; }
-        public decimal? COMPANY_ID { get; set; }
+        public int? COMPANY_ID { get; set; }
         public string? STATUS { get; set; }
         public string? ENTERED_BY { get; set; }
         public DateTime? ENTERED_DATE { get; set; }

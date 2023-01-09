@@ -5,7 +5,7 @@ namespace PMIS.Domain.Entities
 {
     public partial class CHALLAN_MST
     {
-        public decimal? MST_ID { get; set; }
+        public int MST_ID { get; set; }
         public string? DEPOT_CODE { get; set; }
         public string? YEAR_CODE { get; set; }
         public string? MONTH_CODE { get; set; }

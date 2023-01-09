@@ -11,10 +11,10 @@ namespace PMIS.Domain.Entities
         }
 
         public int MODULE_ID { get; set; }
-        public string? MODULE_NAME { get; set; }
+        public string MODULE_NAME { get; set; } = null!;
         public string? STATUS { get; set; }
-        public decimal? ORDER_BY_NO { get; set; }
-        public decimal? COMPANY_ID { get; set; }
+        public int? ORDER_BY_NO { get; set; }
+        public int? COMPANY_ID { get; set; }
         public string? ENTERED_BY { get; set; }
         public DateTime? ENTERED_DATE { get; set; }
         public string? ENTERED_TERMINAL { get; set; }

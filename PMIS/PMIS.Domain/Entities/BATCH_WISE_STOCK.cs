@@ -12,5 +12,6 @@ namespace PMIS.Domain.Entities
         public decimal? STOCK_QTY { get; set; }
         public decimal? UNIT_PRICE { get; set; }
         public DateTime? EXPIRY_DATE { get; set; }
+        public int ID { get; set; }
     }
 }

@@ -5,7 +5,7 @@ namespace PMIS.Domain.Entities
 {
     public partial class PM_CATEGORY_INFO
     {
-        public decimal? PM_CATEGORY_ID { get; set; }
+        public int PM_CATEGORY_ID { get; set; }
         public string? PM_CATEGORY_CODE { get; set; }
         public string? PM_CATEGORY_NAME { get; set; }
         public string? STATUS { get; set; }

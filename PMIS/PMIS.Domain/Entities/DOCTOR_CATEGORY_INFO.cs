@@ -5,7 +5,7 @@ namespace PMIS.Domain.Entities
 {
     public partial class DOCTOR_CATEGORY_INFO
     {
-        public decimal? DOCTOR_CATEGORY_ID { get; set; }
+        public int DOCTOR_CATEGORY_ID { get; set; }
         public string? DOCTOR_CATEGORY_CODE { get; set; }
         public string? DOCTOR_CATEGORY_NAME { get; set; }
         public string? STATUS { get; set; }

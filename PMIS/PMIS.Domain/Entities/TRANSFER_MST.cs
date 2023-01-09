@@ -5,7 +5,7 @@ namespace PMIS.Domain.Entities
 {
     public partial class TRANSFER_MST
     {
-        public decimal? MST_ID { get; set; }
+        public int MST_ID { get; set; }
         public string? REF_NO { get; set; }
         public DateTime? REF_DATE { get; set; }
         public string? TRANSFER_DEPOT_CODE { get; set; }
