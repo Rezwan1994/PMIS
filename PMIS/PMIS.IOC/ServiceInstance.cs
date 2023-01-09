@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using PMIS.Domain.DBContext;
+using PMIS.Domain.Entities;
 using PMIS.Repository.Implementation;
 using PMIS.Repository.Interface;
 using PMIS.Repository.UnitOfWork;
@@ -25,12 +25,13 @@ namespace PMIS.IOC
             IConfiguration configuration)
         {
             var connectionString = configuration.GetConnectionString(nameof(PMISDbContext));
-            services.AddDbContextPool<PMISDbContext>(options =>
+            services.AddDbContextPool<Domain.Entities.PMISDbContext>(options =>
                 options.UseOracle(connectionString)
             );
 
             services.AddTransient<ICommonServices, CommonServices>();
             services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddTransient<ILogError, LogError>();
 
             #region Security
             services.AddTransient<ICompanyService, CompanyService>();

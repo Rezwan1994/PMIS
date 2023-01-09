@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PMIS.Domain.DBContext;
+using PMIS.Domain.Entities;
 using PMIS.Repository.Implementation;
 using PMIS.Repository.Implementation.PromotionalProductMaterial;
 using PMIS.Repository.Interface.PromotionalProductMaterial;

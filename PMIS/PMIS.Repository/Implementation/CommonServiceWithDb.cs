@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Oracle.ManagedDataAccess.Client;
 using PMIS.Domain.Common;
-using PMIS.Domain.DBContext;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -18,7 +17,7 @@ namespace PMIS.Repository.Implementation
         public CommonServices(IConfiguration connstring)
         {
             connString = connstring;
-            connectionStr = connString.GetConnectionString(nameof(PMISDbContext));
+            connectionStr = connString.GetConnectionString(nameof(Domain.Entities.PMISDbContext));
         }
 
         public Task<T> ProcedureCallAsyn<T>(string query, Dictionary<string, string> param = null)

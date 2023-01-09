@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PMIS.Domain.DBContext;
+using PMIS.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
