@@ -200,7 +200,7 @@ namespace PMIS.Service.Implementation.Security
                             listOfQuery.Add((_commonService.AddQuery(AddOrUpdateUnitInsertQuery(), _commonService.AddParameter(new string[]
                             {
                              model.DEPOT_ID.ToString(),model.DEPOT_CODE,model.DEPOT_NAME.ToString(), model.DEPOT_SHORT_NAME.ToString(), model.DEPOT_ADDRESS,
-                            model.STATUS, model.ENTERED_BY.ToString(), model.ENTERED_DATE.ToString(), model.ENTERED_TERMINAL.ToString()  }))));
+                            model.STATUS, model.ENTERED_BY.ToString(), model.ENTERED_DATE?.ToString("dd/MM/yyyy hh:mm:ss tt"), model.ENTERED_TERMINAL.ToString()  }))));
                       
 
                     }
@@ -208,7 +208,7 @@ namespace PMIS.Service.Implementation.Security
                     {
                         listOfQuery.Add(_commonService.AddQuery(AddOrUpdateUnitUpdateQuery(),
                             _commonService.AddParameter(new string[] {  model.DEPOT_ID.ToString(),model.DEPOT_CODE,model.DEPOT_NAME.ToString(), model.DEPOT_SHORT_NAME.ToString(), model.DEPOT_ADDRESS,
-                            model.STATUS, model.UPDATED_BY.ToString(), model.UPDATED_DATE.ToString(), model.UPDATED_TERMINAL.ToString()
+                            model.STATUS, model.UPDATED_BY.ToString(), model.UPDATED_DATE?.ToString("dd/MM/yyyy hh:mm:ss tt"), model.UPDATED_TERMINAL.ToString()
                             })));
 
                     }

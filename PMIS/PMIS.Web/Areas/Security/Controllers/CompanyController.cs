@@ -117,13 +117,13 @@ namespace PMIS.Web.Areas.Security.Controllers
                         //model.REQUISITION_UNIT_ID = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == ClaimsType.UnitId)?.Value);
 
                         model.ENTERED_BY = User.Claims.FirstOrDefault(c => c.Type == ClaimsType.UserId)?.Value;
-                        model.ENTERED_DATE = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss tt"); ;
+                        model.ENTERED_DATE = DateTime.Now;
                         model.ENTERED_TERMINAL = HttpContext.Connection.RemoteIpAddress.ToString();
                     }
                     else
                     {
                         model.UPDATED_BY = User.Claims.FirstOrDefault(c => c.Type == ClaimsType.UserId)?.Value;
-                        model.UPDATED_DATE = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss tt");
+                        model.UPDATED_DATE = DateTime.Now;
 
                         model.UPDATED_TERMINAL = HttpContext.Connection.RemoteIpAddress.ToString();
                     }
