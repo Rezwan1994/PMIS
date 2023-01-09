@@ -50,7 +50,7 @@ namespace PMIS.Web.Areas.PromotionalProductMaterial.Controllers
         }
 
         [HttpPost]
-        public async Task<Result<PM_CATEGORY_INFO>> Post(PM_CATEGORY_INFO model)
+        public async Task<Result<PM_CATEGORY_INFO>> Post([FromBody]PM_CATEGORY_INFO model)
         {
             var result = new Result<PM_CATEGORY_INFO>();
 

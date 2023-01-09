@@ -68,8 +68,8 @@
                 '<input required="required"  type="text"  ng-model="row.entity.PM_CATEGORY_NAME"  class="pl-sm" />'
         },
         {
-            name: 'REMARK', field: 'REMARK', displayName: 'Remark', enableFiltering: false, width: '35%', cellTemplate:
-                '<input required="required"  type="text"  ng-model="row.entity.REMARK"  class="pl-sm" />'
+            name: 'REMARKS', field: 'REMARKS', displayName: 'Remarks', enableFiltering: false, width: '35%', cellTemplate:
+                '<input required="required"  type="text"  ng-model="row.entity.REMARKS"  class="pl-sm" />'
         },
         {
             name: 'STATUS', field: 'STATUS', displayName: 'Status', enableFiltering: false, width: '35%', cellTemplate:
@@ -97,8 +97,9 @@
         $scope.showLoader = true;
 
         categoryInfoService.AddOrUpdate(model).then(function (data) {
-            notificationservice.Notification(data.data, 1, 'Data Save Successfully !!');
-            if (data.data == 1) {
+            debugger;
+            notificationservice.Notification(data.data.Message, 1, data.data.Message);
+            if (data.data.Success == true) {
                 $scope.showLoader = false;
                 $scope.DataLoad();
                 $scope.ClearForm();

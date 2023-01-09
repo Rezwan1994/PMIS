@@ -8,7 +8,7 @@
         return $http({
             type: 'POST',
             method: 'POST',
-            url: "../CategoryInfo/AddOrUpdate",
+            url: "../CategoryInfo/Post",
             dataType: 'json',
             contentType: dataType,
             data: JSON.stringify(model),
