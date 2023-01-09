@@ -15,7 +15,7 @@ namespace PMIS.Domain.Entities
         public string? PAGE_REF { get; set; }
         public string? LOCATION { get; set; }
         public string? DTL { get; set; }
-        public string? COMPANY_ID { get; set; }
+        public int COMPANY_ID { get; set; }
         public string? ENTERED_BY { get; set; }
         public DateTime? ENTERED_DATE { get; set; }
         public string? ENTERED_TERMINAL { get; set; }

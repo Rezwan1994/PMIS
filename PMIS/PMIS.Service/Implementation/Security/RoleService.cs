@@ -301,7 +301,7 @@ namespace PMIS.Service.Implementation.Security
 
                     ROLE_ID = Convert.ToInt32(MenuLoad.Rows[i]["ROLE_ID"]),
 
-                    ROLE_NAME = MenuLoad.Rows[i]["ROLE_NAME"].ToString()
+                    //ROLE_NAME = MenuLoad.Rows[i]["ROLE_NAME"].ToString()
                 };
 
                 roleMenuConfigView.Add(model);

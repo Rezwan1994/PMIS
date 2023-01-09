@@ -168,7 +168,7 @@ namespace SalesAndDistributionSystem.Areas.Security.User.Controllers
         [HttpPost]
         public string LoadUsersByCompanyId([FromBody] USER_INFO model)
         {
-            int comp_id = model == null || model.COMPANY_ID == 0 ? Convert.ToInt32(User.Claims.FirstOrDefault(x => x.Type == ClaimsType.CompanyId).Value) : model.COMPANY_ID;
+            int comp_id = User.GetComapanyId();
             return _service.GetUsersByCompany(comp_id);
         }
     }

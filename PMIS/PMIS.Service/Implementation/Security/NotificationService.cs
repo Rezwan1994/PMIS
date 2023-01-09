@@ -94,8 +94,8 @@ And V.NOTIFICATION_POLICY_ID = :param1 AND V.UNIT_ID = :param2 AND V.COMPANY_ID=
 
 
 
-        public async Task<string> NotificationLoad(NOTIFICATION model) => _commonService.DataTableToJSON(await NotificationLoad_Datatable( model.USER_ID));
-        public async Task<string> LoadData(NOTIFICATION model) => _commonService.DataTableToJSON(await DataLoad_Datatable( model.USER_ID));
+        public async Task<string> NotificationLoad(NOTIFICATION model) => _commonService.DataTableToJSON(await NotificationLoad_Datatable(model.USER_ID));
+        public async Task<string> LoadData(NOTIFICATION model) => _commonService.DataTableToJSON(await DataLoad_Datatable(model.USER_ID));
 
         public async Task<string> UpdateNotificationViewStatus(NOTIFICATION model)
         {

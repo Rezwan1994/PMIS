@@ -165,7 +165,7 @@ namespace PMIS.Web.Areas.Security.Controllers
 
         public async Task<string> GetSearchableUsers([FromBody] USER_INFO model)
         {
-            int comp_id = model == null || model.COMPANY_ID == 0 ? Convert.ToInt32(User.Claims.FirstOrDefault(x => x.Type == ClaimsType.CompanyId).Value) : model.COMPANY_ID;
+            int comp_id = User.GetComapanyId();
             return await _service.GetSearchableUsers(comp_id, model.USER_NAME);
         }
 
