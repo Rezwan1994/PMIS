@@ -63,12 +63,12 @@
         }
         permissionProvider.GetPermission($scope.permissionReqModel).then(function (data) {
             $scope.getPermissions = data.data;
-            $scope.model.ADD_PERMISSION = $scope.getPermissions.adD_PERMISSION;
-            $scope.model.EDIT_PERMISSION = $scope.getPermissions.ediT_PERMISSION;
-            $scope.model.DELETE_PERMISSION = $scope.getPermissions.deletE_PERMISSION;
-            $scope.model.LIST_VIEW = $scope.getPermissions.lisT_VIEW;
-            $scope.model.DETAIL_VIEW = $scope.getPermissions.detaiL_VIEW;
-            $scope.model.DOWNLOAD_PERMISSION = $scope.getPermissions.downloaD_PERMISSION;
+            $scope.model.ADD_PERMISSION = $scope.getPermissions.ADD_PERMISSION;
+            $scope.model.EDIT_PERMISSION = $scope.getPermissions.EDIT_PERMISSION;
+            $scope.model.DELETE_PERMISSION = $scope.getPermissions.DELETE_PERMISSION;
+            $scope.model.LIST_VIEW = $scope.getPermissions.LIST_VIEW;
+            $scope.model.DETAIL_VIEW = $scope.getPermissions.DETAIL_VIEW;
+            $scope.model.DOWNLOAD_PERMISSION = $scope.getPermissions.DOWNLOAD_PERMISSION;
 
             $scope.showLoader = false;
         }, function (error) {
