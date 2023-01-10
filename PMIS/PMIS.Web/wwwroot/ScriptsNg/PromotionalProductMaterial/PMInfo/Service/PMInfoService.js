@@ -1,16 +1,20 @@
-﻿ngApp.service("CategoryInfoService", function ($http) {
+﻿ngApp.service("PMInfoService", function ($http) {
+    this.GetPMList = function () {
+        return $http.get('../PMInfo/Get');
+    }
     this.GetCategoryList = function () {
         return $http.get('../CategoryInfo/Get');
     }
-    this.DeleteCategoryInfo = function (Id) {
-        return $http.delete("../CategoryInfo/Delete/" + Id);
+    this.DeletePMInfo = function (Id) {
+
+        return $http.delete("../PMInfo/Delete/"+Id);
     }
     this.AddOrUpdate = function (model) {
         var dataType = 'application/json; charset=utf-8';
         return $http({
             type: 'POST',
             method: 'POST',
-            url: "../CategoryInfo/Post",
+            url: "../PMInfo/Post",
             dataType: 'json',
             contentType: dataType,
             data: JSON.stringify(model),

@@ -1422,9 +1422,7 @@ namespace PMIS.Domain.Entities
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.YYYYMM)
-                    .HasMaxLength(6)
-                    .IsUnicode(false);
+        
             });
 
             modelBuilder.Entity<RECEIVE_DTL>(entity =>

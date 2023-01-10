@@ -26,7 +26,8 @@ namespace PMIS.IOC
         {
             var connectionString = configuration.GetConnectionString(nameof(PMISDbContext));
             services.AddDbContextPool<Domain.Entities.PMISDbContext>(options =>
-                options.UseOracle(connectionString)
+                options.UseOracle(connectionString, options => options
+                    .UseOracleSQLCompatibility("11"))
             );
 
             services.AddTransient<ICommonServices, CommonServices>();
@@ -49,6 +50,7 @@ namespace PMIS.IOC
 
             #region PromotionalProductMaterial
             services.AddTransient<ICategoryInfoService, CategoryInfoService>();
+            services.AddTransient<IPMInfoService, PMInfoService>();
             #endregion
 
             services.AddTransient<INotificationService, NotificationService>();

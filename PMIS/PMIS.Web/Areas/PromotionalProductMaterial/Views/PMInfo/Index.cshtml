@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Employee Info";
+    ViewData["Title"] = "PM Info";
     Layout = "_Layout";
 }
 
@@ -10,7 +10,7 @@
 <div class="container-fluid" id="container-wrapper" ng-app="ngApp" ng-controller="ngGridCtrl">
 
     <div class="d-sm-flex align-items-center justify-content-between">
-        <h4 class="h3 mb-0 text-gray-600">Promotional Material Category Info</h4>
+        <h4 class="h3 mb-0 text-gray-600">Promotional Material Info</h4>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a class="btn btn-outline-primary" href="/Security/Employee/EmployeeInfo">Reset</a></li>
             <li class="breadcrumb-item"><a id="#modalCenter" class="btn  btn-success text-white mb-1" ng-click="SaveData(model)">Save</a></li>
@@ -20,29 +20,40 @@
     <div class="card mb-4">
         <div class="card-body">
             <fieldset>
-                <legend style="width:160px">Category Entry</legend>
+                <legend style="width:160px">PM Entry</legend>
 
                 <form name="formMenuCategoryAdd">
                     <div class="row" style="margin:20px">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="PM_CATEGORY_CODE">PM Category Code</label>
-                                <input id="PM_CATEGORY_CODE" type="text" class="form-control"
-                                       name="PM_CATEGORY_CODE" ng-model="model.PM_CATEGORY_CODE" />
+                                <label for="PM_CODE">PM Code</label>
+                                <input id="PM_CODE" type="text" class="form-control"
+                                       name="PM_CODE" ng-model="model.PM_CODE" />
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="PM_CATEGORY_NAME">Category Name</label>
+                                <label for="PM_NAME">PM Name</label>
                                 <input type="text" class="form-control" autocomplete="off" data-val="true"
-                                       name="PM_CATEGORY_NAME" ng-model="model.PM_CATEGORY_NAME" />
+                                       name="PM_NAME" ng-model="model.PM_NAME" />
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="REMARKS">Remarks</label>
+                                <label for="PACK_SIZE">Pack Size</label>
                                 <input type="text" class="form-control" autocomplete="off" data-val="true"
-                                       name="REMARKS" ng-model="model.REMARKS" />
+                                       name="PACK_SIZE" ng-model="model.PACK_SIZE" />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="PM_CATEGORY_CODE">PM Category Name</label>
+
+                                <select class="form-control" id="PM_CATEGORY_CODE"
+                                        name="PM_CATEGORY_CODE" ng-model="model.PM_CATEGORY_CODE" style="width:100%">
+
+                                    <option ng-repeat="item in CategoryList" ng-selected="item.PM_CATEGORY_CODE == model.PM_CATEGORY_CODE" value="{{item.PM_CATEGORY_CODE}}">{{item.PM_CATEGORY_NAME}}</option>
+                                </select>
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -53,12 +64,12 @@
 
                                     <option ng-repeat="item in Statuses" ng-selected="item == model.STATUS" value="{{item}}">{{item}}</option>
                                 </select>
-                                
+
                             </div>
                         </div>
-                    
-                      
-                  
+
+
+
                     </div>
                 </form>
             </fieldset>
@@ -70,7 +81,7 @@
         <div class="card-body">
 
             <fieldset>
-                <legend style="width:250px">Category Display</legend>
+                <legend style="width:250px">PM Display</legend>
                 <div class="row" style="height: 57vh;">
                     <div class="col-lg-12 mb-4">
                         <div class="card" ng-show="model.LIST_VIEW == 'Active'" style="margin: 10px">
@@ -85,9 +96,9 @@
         </div>
 
 
-    <partial name="~/Views/Shared/_Loader.cshtml" ng-show="showloader"></partial>
-    <script src="~/scriptsng/PromotionalProductMaterial/categoryinfo/controller/categoryinfoctr.js"></script>
-    <script src="~/ScriptsNg/PromotionalProductMaterial/categoryinfo/Service/CategoryInfoService.js"></script>
-    <script src="~/ScriptsNg/Services/permissionProvider.js"></script>
-    <script src="~/ScriptsNg/Services/gridRegistrationService.js"></script>
-</div>
+        <partial name="~/Views/Shared/_Loader.cshtml" ng-show="showloader"></partial>
+        <script src="~/scriptsng/PromotionalProductMaterial/PMInfo/controller/PMInfoCtr.js"></script>
+        <script src="~/ScriptsNg/PromotionalProductMaterial/PMInfo/Service/PMInfoService.js"></script>
+        <script src="~/ScriptsNg/Services/permissionProvider.js"></script>
+        <script src="~/ScriptsNg/Services/gridRegistrationService.js"></script>
+    </div>
