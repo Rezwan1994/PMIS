@@ -63,9 +63,19 @@ namespace PMIS.Web.Areas.PromotionalProductMaterial.Controllers
 
             try
             {
-                await _service.InsertAsync(model);
+                if(model.PM_CATEGORY_ID > 0)
+                {
+                    await _service.UpdateAsync(model);
+                    result.Message = ResponseMessage.SUCCESSFULLY_UPDATED;
+                }
+                else
+                {
+                    await _service.InsertAsync(model);
+                    result.Message = ResponseMessage.SUCCESSFULLY_CREATED;
+                }
+           
                 result.Data = model;
-                result.Message = ResponseMessage.SUCCESSFULLY_CREATED;
+         
                 return result;
             }
             catch (Exception exp)
@@ -79,11 +89,11 @@ namespace PMIS.Web.Areas.PromotionalProductMaterial.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<Result<PM_CATEGORY_INFO>> Put(int id, PM_CATEGORY_INFO model)
+        public async Task<Result<PM_CATEGORY_INFO>> Put(PM_CATEGORY_INFO model)
         {
             var result = new Result<PM_CATEGORY_INFO>();
 
-            if (id != model.PM_CATEGORY_ID || !ModelState.IsValid)
+            if (model.PM_CATEGORY_ID < 0|| !ModelState.IsValid)
             {
                 result.Success = false;
                 result.Message = ResponseMessage.BAD_REQUEST;

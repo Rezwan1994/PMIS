@@ -58,7 +58,7 @@
 
     $scope.gridOptionsList.columnDefs = [
         { name: 'SL', field: 'ROW_NO', enableFiltering: false, width: 50 }
-        , { name: 'EMPLOYEE_ID', field: 'EMPLOYEE_ID', visible: false }
+        , { name: 'PM_CATEGORY_ID', field: 'PM_CATEGORY_ID', visible: false }
         , {
             name: 'PM_CATEGORY_CODE', field: 'PM_CATEGORY_CODE', displayName: 'Category Code', enableFiltering: false, width: '20%', cellTemplate:
                 '<input required="required"   ng-model="row.entity.PM_CATEGORY_CODE"  class="pl-sm" />'
@@ -85,12 +85,12 @@
     ];
 
     $scope.EditData = function (entity) {
-        $scope.model.ID = entity.ID;
-        $scope.model.EMPLOYEE_ID = entity.EMPLOYEE_ID;
-        $scope.model.EMPLOYEE_CODE = entity.EMPLOYEE_CODE;
-        $scope.model.EMPLOYEE_NAME = entity.EMPLOYEE_NAME;
-        $scope.model.EMPLOYEE_STATUS = entity.EMPLOYEE_STATUS;
-        $scope.SaveData($scope.model);
+        $scope.model.PM_CATEGORY_ID = entity.PM_CATEGORY_ID;
+        $scope.model.PM_CATEGORY_CODE = entity.PM_CATEGORY_CODE;
+        $scope.model.PM_CATEGORY_NAME = entity.PM_CATEGORY_NAME;
+        $scope.model.REMARKS = entity.REMARKS;
+        $scope.model.STATUS = entity.STATUS;
+        //$scope.SaveData($scope.model);
     }
 
     $scope.SaveData = function (model) {
