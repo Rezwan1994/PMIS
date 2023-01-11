@@ -7,9 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Areas\PromotionalProductMaterial\Data\**" />
+    <Compile Remove="Areas\PromotionalProductMaterial\Models\**" />
     <Compile Remove="Areas\Security\Views\Shared\**" />
+    <Content Remove="Areas\PromotionalProductMaterial\Data\**" />
+    <Content Remove="Areas\PromotionalProductMaterial\Models\**" />
     <Content Remove="Areas\Security\Views\Shared\**" />
+    <EmbeddedResource Remove="Areas\PromotionalProductMaterial\Data\**" />
+    <EmbeddedResource Remove="Areas\PromotionalProductMaterial\Models\**" />
     <EmbeddedResource Remove="Areas\Security\Views\Shared\**" />
+    <None Remove="Areas\PromotionalProductMaterial\Data\**" />
+    <None Remove="Areas\PromotionalProductMaterial\Models\**" />
     <None Remove="Areas\Security\Views\Shared\**" />
   </ItemGroup>
 
@@ -3920,11 +3928,6 @@
     <None Include="wwwroot\ScriptsNg\Services\permissionProvider.js" />
     <None Include="wwwroot\Templates\EmailTemplate\AccountVerification_EmailTemplate.cshtml" />
     <None Include="wwwroot\Templates\ReportTemplate\ReportTemplate.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Areas\PromotionalProductMaterial\Data\" />
-    <Folder Include="Areas\PromotionalProductMaterial\Models\" />
   </ItemGroup>
 
 </Project>

@@ -54,7 +54,7 @@ namespace PMIS.Domain.Common
 
         public const string Report_Secret_Key = "STLSDSREPORTING";
   
-        public const string Report_URL = "https://localhost:44387/";
+        public const string Report_URL = "https://localhost:44348/";
         public const string Report_URL_RELEASE = "http://172.16.242.31:84/";
         public const string State_ReadOnly_Key = "dtlxqt";
         public const string State_Editable_Key = "edtxqt";

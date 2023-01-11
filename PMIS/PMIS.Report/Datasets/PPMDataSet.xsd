@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="PPMDataSet" targetNamespace="http://tempuri.org/PPMDataSet.xsd" xmlns:mstns="http://tempuri.org/PPMDataSet.xsd" xmlns="http://tempuri.org/PPMDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="PPMDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_UserDSName="PPMDataSet" msprop:Generator_DataSetName="PPMDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="PromotionalMaterial" msprop:Generator_RowEvHandlerName="PromotionalMaterialRowChangeEventHandler" msprop:Generator_RowDeletedName="PromotionalMaterialRowDeleted" msprop:Generator_RowDeletingName="PromotionalMaterialRowDeleting" msprop:Generator_RowEvArgName="PromotionalMaterialRowChangeEvent" msprop:Generator_TablePropName="PromotionalMaterial" msprop:Generator_RowChangedName="PromotionalMaterialRowChanged" msprop:Generator_RowChangingName="PromotionalMaterialRowChanging" msprop:Generator_TableClassName="PromotionalMaterialDataTable" msprop:Generator_RowClassName="PromotionalMaterialRow" msprop:Generator_TableVarName="tablePromotionalMaterial" msprop:Generator_UserTableName="PromotionalMaterial">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="PM_ID" msprop:Generator_ColumnPropNameInRow="PM_ID" msprop:Generator_ColumnPropNameInTable="PM_IDColumn" msprop:Generator_ColumnVarNameInTable="columnPM_ID" msprop:Generator_UserColumnName="PM_ID" type="xs:string" minOccurs="0" />
+              <xs:element name="PM_CODE" msprop:Generator_ColumnPropNameInRow="PM_CODE" msprop:Generator_ColumnPropNameInTable="PM_CODEColumn" msprop:Generator_ColumnVarNameInTable="columnPM_CODE" msprop:Generator_UserColumnName="PM_CODE" type="xs:string" minOccurs="0" />
+              <xs:element name="PM_NAME" msprop:Generator_ColumnPropNameInRow="PM_NAME" msprop:Generator_ColumnPropNameInTable="PM_NAMEColumn" msprop:Generator_ColumnVarNameInTable="columnPM_NAME" msprop:Generator_UserColumnName="PM_NAME" type="xs:string" minOccurs="0" />
+              <xs:element name="PACK_SIZE" msprop:Generator_ColumnPropNameInRow="PACK_SIZE" msprop:Generator_ColumnPropNameInTable="PACK_SIZEColumn" msprop:Generator_ColumnVarNameInTable="columnPACK_SIZE" msprop:Generator_UserColumnName="PACK_SIZE" type="xs:string" minOccurs="0" />
+              <xs:element name="PM_CATEGORY_CODE" msprop:Generator_ColumnPropNameInRow="PM_CATEGORY_CODE" msprop:Generator_ColumnPropNameInTable="PM_CATEGORY_CODEColumn" msprop:Generator_ColumnVarNameInTable="columnPM_CATEGORY_CODE" msprop:Generator_UserColumnName="PM_CATEGORY_CODE" type="xs:string" minOccurs="0" />
+              <xs:element name="STATUS" msprop:Generator_ColumnPropNameInRow="STATUS" msprop:Generator_ColumnPropNameInTable="STATUSColumn" msprop:Generator_ColumnVarNameInTable="columnSTATUS" msprop:Generator_UserColumnName="STATUS" type="xs:string" minOccurs="0" />
+              <xs:element name="PM_CATEGORY_NAME" msprop:Generator_ColumnPropNameInRow="PM_CATEGORY_NAME" msprop:Generator_ColumnPropNameInTable="PM_CATEGORY_NAMEColumn" msprop:Generator_ColumnVarNameInTable="columnPM_CATEGORY_NAME" msprop:Generator_UserColumnName="PM_CATEGORY_NAME" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

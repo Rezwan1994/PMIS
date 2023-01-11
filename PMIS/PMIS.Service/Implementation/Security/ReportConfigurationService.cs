@@ -388,27 +388,62 @@ namespace PMIS.Service.Implementation.Security
 
         //Report Permission --------------------------------------------------------------
         private string LoadProductReportData_Query() =>
-            @"Select distinct  REPORT_ID, REPORT_NAME,ORDER_BY_SLNO, REPORT_TITLE,MENU_ID ,
-             PDF_PERMISSION, PREVIEW_PERMISSION, CSV_PERMISSION ,MENU_NAME,MENU_ACTION from
-            (Select distinct MC.REPORT_ID, MC.REPORT_NAME,MC.ORDER_BY_SLNO, MC.REPORT_TITLE, MC.MENU_ID , CONCAT(MCD.AREA, MCD.CONTROLLER) MENU_NAME,MCD.ACTION MENU_ACTION,
-            RM.PDF_PERMISSION, RM.PREVIEW_PERMISSION, RM.CSV_PERMISSION
-            from ROLE_INFO R
-            INNER JOIN ROLE_REPORT_CONFIGURATION RM on RM.ROLE_ID = R.ROLE_ID
-            INNER JOIN ROLE_USER_CONFIGURATION RU on R.ROLE_ID = RU.ROLE_ID
-            INNER JOIN REPORT_Configuration MC on MC.REPORT_ID = RM.REPORT_ID
-            INNER JOIN MENU_CONFIGURATION MCD on MCD.MENU_ID = MC.MENU_ID
-
-             Where MC.STATUS ='Active' AND RU.COMPANY_ID = :param1 AND  RU.USER_ID = :param2
-             UNION ALL
-             Select distinct MC.REPORT_ID, MC.REPORT_NAME,MC.ORDER_BY_SLNO, MC.REPORT_TITLE, MC.MENU_ID ,CONCAT(MCD.AREA, MCD.CONTROLLER)  MENU_NAME ,MCD.ACTION MENU_ACTION,
-             RU.PDF_PERMISSION, RU.PREVIEW_PERMISSION, RU.CSV_PERMISSION
-            from  REPORT_USER_CONFIGURATION RU
-            INNER JOIN REPORT_Configuration MC on MC.REPORT_ID = RU.REPORT_ID
-             INNER JOIN MENU_CONFIGURATION MCD on MCD.MENU_ID = MC.MENU_ID
-             Where MC.STATUS ='Active'  AND RU.COMPANY_ID = :param1 AND  RU.USER_ID = :param2 AND RU.REPORT_ID  Not In (Select RRC.REPORT_ID From ROLE_REPORT_CONFIGURATION RRC
-             INNER JOIN ROLE_USER_CONFIGURATION RUC on RRC.ROLE_ID = RUC.ROLE_ID
-
-             where USER_ID = :param2 ) ) x";
+            @"SELECT DISTINCT REPORT_ID,
+                        REPORT_NAME,
+                        ORDER_BY_SLNO,
+                        REPORT_TITLE,
+                        MENU_ID,
+                        PDF_PERMISSION,
+                        PREVIEW_PERMISSION,
+                        CSV_PERMISSION,
+                        MENU_NAME,
+                        MENU_ACTION
+            FROM (SELECT DISTINCT MC.REPORT_ID,
+                                MC.REPORT_NAME,
+                                MC.ORDER_BY_SLNO,
+                                MC.REPORT_TITLE,
+                                MC.MENU_ID,
+                                MCD.AREA || '-' || MCD.CONTROLLER MENU_NAME,
+                                MCD.ACTION MENU_ACTION,
+                                RM.PDF_PERMISSION,
+                                RM.PREVIEW_PERMISSION,
+                                RM.CSV_PERMISSION
+                    FROM ROLE_INFO R
+                        INNER JOIN ROLE_REPORT_CONFIGURATION RM
+                            ON RM.ROLE_ID = R.ROLE_ID
+                        INNER JOIN ROLE_USER_CONFIGURATION RU
+                            ON R.ROLE_ID = RU.ROLE_ID
+                        INNER JOIN REPORT_Configuration MC
+                            ON MC.REPORT_ID = RM.REPORT_ID
+                        INNER JOIN MENU_CONFIGURATION MCD ON MCD.MENU_ID = MC.MENU_ID
+                    WHERE     MC.STATUS = 'Active'
+                        AND RU.COMPANY_ID = :param1
+                        AND RU.USER_ID = :param2
+                UNION ALL
+                SELECT DISTINCT MC.REPORT_ID,
+                                MC.REPORT_NAME,
+                                MC.ORDER_BY_SLNO,
+                                MC.REPORT_TITLE,
+                                MC.MENU_ID,
+                                CONCAT (MCD.AREA, MCD.CONTROLLER) MENU_NAME,
+                                MCD.ACTION MENU_ACTION,
+                                RU.PDF_PERMISSION,
+                                RU.PREVIEW_PERMISSION,
+                                RU.CSV_PERMISSION
+                    FROM REPORT_USER_CONFIGURATION RU
+                        INNER JOIN REPORT_Configuration MC
+                            ON MC.REPORT_ID = RU.REPORT_ID
+                        INNER JOIN MENU_CONFIGURATION MCD ON MCD.MENU_ID = MC.MENU_ID
+                    WHERE     MC.STATUS = 'Active'
+                        AND RU.COMPANY_ID = :param1
+                        AND RU.USER_ID = :param2
+                        AND RU.REPORT_ID NOT IN (SELECT RRC.REPORT_ID
+                            FROM ROLE_REPORT_CONFIGURATION RRC
+                                INNER JOIN
+                                ROLE_USER_CONFIGURATION RUC
+                                    ON RRC.ROLE_ID =
+                                        RUC.ROLE_ID
+                            WHERE USER_ID = :param2)) x";
 
         public async Task<DataTable> LoadReportPermissionDatatable(int Company_Id, int User_Id) => await _commonServices.GetDataTableAsyn(LoadProductReportData_Query(), _commonServices.AddParameter(new string[] { Company_Id.ToString(), User_Id.ToString() }));
 

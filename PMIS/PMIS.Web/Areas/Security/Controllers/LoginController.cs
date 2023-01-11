@@ -25,11 +25,12 @@ namespace PMIS.Web.Areas.Security.Controllers
         private readonly ICompanyService _companyService;
         private readonly IWebHostEnvironment _hostingEnvironment;
         private readonly IHttpContextAccessor _Accessor;
+        private readonly IReportConfigurationService _reportConfigurationService;
 
         //private readonly IReportConfigurationManager _reportManager;
         private readonly ICommonServices _commonServices;
 
-        public LoginController(ILogger<LoginController> logger, IUserService accountService, IConfiguration configuration, IMenuPermissionService menuPermission, ICompanyService companyManager, IWebHostEnvironment hostingEnvironment, IHttpContextAccessor Accessor/*, IReportConfigurationManager reportManager*/, ICommonServices commonServices)
+        public LoginController(ILogger<LoginController> logger, IUserService accountService, IConfiguration configuration, IMenuPermissionService menuPermission, ICompanyService companyManager, IWebHostEnvironment hostingEnvironment, IHttpContextAccessor Accessor, IReportConfigurationService reportConfigurationService, ICommonServices commonServices)
         {
             _logger = logger;
             _accountService = accountService;
@@ -38,7 +39,7 @@ namespace PMIS.Web.Areas.Security.Controllers
             _companyService = companyManager;
             _hostingEnvironment = hostingEnvironment;
             _Accessor = Accessor;
-            //_reportManager = reportManager;
+            _reportConfigurationService = reportConfigurationService;
             _commonServices = commonServices;
         }
 
@@ -87,8 +88,8 @@ namespace PMIS.Web.Areas.Security.Controllers
                             string defaultPage = _menuService.LoadUserDefaultPageById(_user.UserId);
                             defaultPage = defaultPage == null ? "" : defaultPage;
 
-                            //List<ReportPermission> reportPermissions = await _reportManager.LoadReportPermissionData(GetDbConnectionString(model.CompanyId), _user.CompanyId, _user.UserId);
-                            //string reportDis = JsonSerializer.Serialize(reportPermissions);
+                            List<ReportPermission> reportPermissions = await _reportConfigurationService.LoadReportPermissionData(_user.CompanyId, _user.UserId);
+                            string reportDis = JsonSerializer.Serialize(reportPermissions);
 
                             var claims = new List<Claim>()
                             {
@@ -109,7 +110,7 @@ namespace PMIS.Web.Areas.Security.Controllers
                                //new Claim(ClaimsType.DbSpecifier, provider.GetConnectionString(_user.CompanyName))
                             };
                             HttpContext.Session.SetString(ClaimsType.RolePermission, menuDis);
-                            //HttpContext.Session.SetString(ClaimsType.ReportPermission, reportDis);
+                            HttpContext.Session.SetString(ClaimsType.ReportPermission, reportDis);
 
                             HttpContext.Session.SetString("DefaultPage", defaultPage);
 
