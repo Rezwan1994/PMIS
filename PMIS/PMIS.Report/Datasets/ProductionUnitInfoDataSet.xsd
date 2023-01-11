@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="ProductionUnitInfoDataSet" targetNamespace="http://tempuri.org/ProductionUnitInfoDataSet.xsd" xmlns:mstns="http://tempuri.org/ProductionUnitInfoDataSet.xsd" xmlns="http://tempuri.org/ProductionUnitInfoDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="ProductionUnitInfoDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_UserDSName="ProductionUnitInfoDataSet" msprop:Generator_DataSetName="ProductionUnitInfoDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="ProductionUnitInfo" msprop:Generator_RowEvHandlerName="ProductionUnitInfoRowChangeEventHandler" msprop:Generator_RowDeletedName="ProductionUnitInfoRowDeleted" msprop:Generator_RowDeletingName="ProductionUnitInfoRowDeleting" msprop:Generator_RowEvArgName="ProductionUnitInfoRowChangeEvent" msprop:Generator_TablePropName="ProductionUnitInfo" msprop:Generator_RowChangedName="ProductionUnitInfoRowChanged" msprop:Generator_RowChangingName="ProductionUnitInfoRowChanging" msprop:Generator_TableClassName="ProductionUnitInfoDataTable" msprop:Generator_RowClassName="ProductionUnitInfoRow" msprop:Generator_TableVarName="tableProductionUnitInfo" msprop:Generator_UserTableName="ProductionUnitInfo">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="PRODUCTION_UNIT_ID" msprop:Generator_ColumnPropNameInRow="PRODUCTION_UNIT_ID" msprop:Generator_ColumnPropNameInTable="PRODUCTION_UNIT_IDColumn" msprop:Generator_ColumnVarNameInTable="columnPRODUCTION_UNIT_ID" msprop:Generator_UserColumnName="PRODUCTION_UNIT_ID" type="xs:string" minOccurs="0" />
+              <xs:element name="PRODUCTION_UNIT_CODE" msprop:Generator_ColumnPropNameInRow="PRODUCTION_UNIT_CODE" msprop:Generator_ColumnPropNameInTable="PRODUCTION_UNIT_CODEColumn" msprop:Generator_ColumnVarNameInTable="columnPRODUCTION_UNIT_CODE" msprop:Generator_UserColumnName="PRODUCTION_UNIT_CODE" type="xs:string" minOccurs="0" />
+              <xs:element name="PRODUCTION_UNIT_NAME" msprop:Generator_ColumnPropNameInRow="PRODUCTION_UNIT_NAME" msprop:Generator_ColumnPropNameInTable="PRODUCTION_UNIT_NAMEColumn" msprop:Generator_ColumnVarNameInTable="columnPRODUCTION_UNIT_NAME" msprop:Generator_UserColumnName="PRODUCTION_UNIT_NAME" type="xs:string" minOccurs="0" />
+              <xs:element name="UNIT_ID" msprop:Generator_ColumnPropNameInRow="UNIT_ID" msprop:Generator_ColumnPropNameInTable="UNIT_IDColumn" msprop:Generator_ColumnVarNameInTable="columnUNIT_ID" msprop:Generator_UserColumnName="UNIT_ID" type="xs:string" minOccurs="0" />
+              <xs:element name="STATUS" msprop:Generator_ColumnPropNameInRow="STATUS" msprop:Generator_ColumnPropNameInTable="STATUSColumn" msprop:Generator_ColumnVarNameInTable="columnSTATUS" msprop:Generator_UserColumnName="STATUS" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
