@@ -30,7 +30,7 @@
                                     <label for="PM_CODE">PM Code</label>
                                 </div>
                                 <div class="col-md-9">
-                                    <input id="PM_CODE" type="text" class="form-control"
+                                    <input id="PM_CODE" type="text" ng-disabled="model.PM_CATEGORY_CODE !='PMC001'?true:false" class="form-control"
                                            name="PM_CODE" ng-model="model.PM_CODE" />
                                 </div>
 

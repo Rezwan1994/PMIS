@@ -73,23 +73,23 @@
         { name: 'SL', field: 'ROW_NO', enableFiltering: false, width: 50 }
         , { name: 'PM_ID', field: 'PM_ID', visible: false }
         , {
-            name: 'PM_CODE', field: 'PM_CODE', displayName: 'PM Code', enableFiltering: false, width: '20%', cellTemplate:
-                '<input disabled  ng-model="row.entity.PM_CODE"  class="pl-sm" />'
+            name: 'PM_CODE', field: 'PM_CODE', displayName: 'PM Code', enableFiltering: false, width: '20%'
+              
         }
         , {
-            name: 'PM_NAME', field: 'PM_NAME', displayName: 'PM Name', enableFiltering: false, width: '15%', cellTemplate:
-                '<input disabled  type="text"  ng-model="row.entity.PM_NAME"  class="pl-sm" />'
+            name: 'PM_NAME', field: 'PM_NAME', displayName: 'PM Name', enableFiltering: false, width: '35%'
+               
         },
         {
-            name: 'PM_CATEGORY_CODE', field: 'PM_CATEGORY_CODE', displayName: 'Category Code', enableFiltering: false, width: '15%', cellTemplate:
-                '<input disabled  type="text"  ng-model="row.entity.PM_CATEGORY_CODE"  class="pl-sm" />'
+            name: 'PM_CATEGORY_CODE', field: 'PM_CATEGORY_CODE', displayName: 'Category Code', enableFiltering: false, width: '15%'
+        
         }, {
-            name: 'PACK_SIZE', field: 'PACK_SIZE', displayName: 'Pack Size', enableFiltering: false, width: '15%', cellTemplate:
-                '<input disabled  type="text"  ng-model="row.entity.PACK_SIZE"  class="pl-sm" />'
+            name: 'PACK_SIZE', field: 'PACK_SIZE', displayName: 'Pack Size', enableFiltering: false, width: '15%'
+       
         },
         {
-            name: 'STATUS', field: 'STATUS', displayName: 'Status', enableFiltering: false, width: '10%', cellTemplate:
-                '<input disabled  type="text"  ng-model="row.entity.STATUS"  class="pl-sm" />'
+            name: 'STATUS', field: 'STATUS', displayName: 'Status', enableFiltering: false, width: '10%'
+               
         }
 
     ];
