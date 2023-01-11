@@ -34,10 +34,6 @@ namespace PMIS.Service.Implementation
             return await _repository.GetById(id);
         }
 
-        public virtual IQueryable<TEntity> Get()
-        {
-            return _repository.Get();
-        }
 
         public async Task<IEnumerable<TEntity>> GetAsync(Expression<Func<TEntity, bool>> filter)
         {

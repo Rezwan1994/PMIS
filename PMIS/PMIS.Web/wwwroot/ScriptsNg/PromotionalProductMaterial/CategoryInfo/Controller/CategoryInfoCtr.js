@@ -63,25 +63,25 @@
         , { name: 'PM_CATEGORY_ID', field: 'PM_CATEGORY_ID', visible: false }
         , {
             name: 'PM_CATEGORY_CODE', field: 'PM_CATEGORY_CODE', displayName: 'Category Code', enableFiltering: false, width: '20%', cellTemplate:
-                '<input required="required"   ng-model="row.entity.PM_CATEGORY_CODE"  class="pl-sm" />'
+                '<input  disabled ng-model="row.entity.PM_CATEGORY_CODE"  class="pl-sm" />'
         }
         , {
             name: 'PM_CATEGORY_NAME', field: 'PM_CATEGORY_NAME', displayName: 'Category Name', enableFiltering: false, width: '25%', cellTemplate:
-                '<input required="required"  type="text"  ng-model="row.entity.PM_CATEGORY_NAME"  class="pl-sm" />'
+                '<input  disabled  type="text"  ng-model="row.entity.PM_CATEGORY_NAME"  class="pl-sm" />'
         },
         {
-            name: 'REMARKS', field: 'REMARKS', displayName: 'Remarks', enableFiltering: false, width: '25%', cellTemplate:
-                '<input required="required"  type="text"  ng-model="row.entity.REMARKS"  class="pl-sm" />'
+            name: 'REMARKS', field: 'REMARKS', displayName: 'Remarks', enableFiltering: false, width: '15%', cellTemplate:
+                '<input  disabled type="text"  ng-model="row.entity.REMARKS"  class="pl-sm" />'
         },
         {
             name: 'STATUS', field: 'STATUS', displayName: 'Status', enableFiltering: false, width: '15%', cellTemplate:
-                '<input required="required"  type="text"  ng-model="row.entity.STATUS"  class="pl-sm" />'
+                '<input  disabled type="text"  ng-model="row.entity.STATUS"  class="pl-sm" />'
         },
         , {
             name: 'Actions', displayName: 'Actions', enableFiltering: false, enableColumnMenu: false, width: '20%', cellTemplate:
                 '<div style="margin:1px;">' +
                 '<button style="margin-bottom: 5px;" ng-show="grid.appScope.model.EDIT_PERMISSION == \'Active\'" ng-click="grid.appScope.EditData(row.entity)" type="button" class="btn btn-outline-primary mb-1">Update</button>' +
-                '<button style="margin-bottom: 5px;"  ng-show="grid.appScope.model.DELETE_PERMISSION == \'Active\'"  ng-click="grid.appScope.DeleteCategorytInfo(row.entity.PM_CATEGORY_ID)" type="button" class="btn btn-outline-danger mb-1">Delete</button>' +
+                '<button style="margin-bottom: 5px; margin-left:5px;"  ng-show="grid.appScope.model.DELETE_PERMISSION == \'Active\'"  ng-click="grid.appScope.DeleteCategorytInfo(row.entity.PM_CATEGORY_ID)" type="button" class="btn btn-outline-danger mb-1">Delete</button>' +
                 '</div>'
         },
 

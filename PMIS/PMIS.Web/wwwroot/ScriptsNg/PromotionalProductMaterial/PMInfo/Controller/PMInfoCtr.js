@@ -74,32 +74,26 @@
         , { name: 'PM_ID', field: 'PM_ID', visible: false }
         , {
             name: 'PM_CODE', field: 'PM_CODE', displayName: 'PM Code', enableFiltering: false, width: '20%', cellTemplate:
-                '<input required="required"   ng-model="row.entity.PM_CODE"  class="pl-sm" />'
+                '<input disabled  ng-model="row.entity.PM_CODE"  class="pl-sm" />'
         }
         , {
             name: 'PM_NAME', field: 'PM_NAME', displayName: 'PM Name', enableFiltering: false, width: '15%', cellTemplate:
-                '<input required="required"  type="text"  ng-model="row.entity.PM_NAME"  class="pl-sm" />'
+                '<input disabled  type="text"  ng-model="row.entity.PM_NAME"  class="pl-sm" />'
         },
         {
-            name: 'PM_CATEGORY_CODE', field: 'PM_CATEGORY_CODE', displayName: 'Category Code', enableFiltering: false, width: '35%', cellTemplate:
-                '<input required="required"  type="text"  ng-model="row.entity.PM_CATEGORY_CODE"  class="pl-sm" />'
+            name: 'PM_CATEGORY_CODE', field: 'PM_CATEGORY_CODE', displayName: 'Category Code', enableFiltering: false, width: '15%', cellTemplate:
+                '<input disabled  type="text"  ng-model="row.entity.PM_CATEGORY_CODE"  class="pl-sm" />'
         }, {
-            name: 'PACK_SIZE', field: 'PACK_SIZE', displayName: 'Pack Size', enableFiltering: false, width: '35%', cellTemplate:
-                '<input required="required"  type="text"  ng-model="row.entity.PACK_SIZE"  class="pl-sm" />'
+            name: 'PACK_SIZE', field: 'PACK_SIZE', displayName: 'Pack Size', enableFiltering: false, width: '15%', cellTemplate:
+                '<input disabled  type="text"  ng-model="row.entity.PACK_SIZE"  class="pl-sm" />'
         },
         {
             name: 'STATUS', field: 'STATUS', displayName: 'Status', enableFiltering: false, width: '10%', cellTemplate:
-                '<input required="required"  type="text"  ng-model="row.entity.STATUS"  class="pl-sm" />'
-        },
-        , {
-            name: 'Actions', displayName: 'Actions', enableFiltering: false, enableColumnMenu: false, width: '20%', cellTemplate:
-                '<div style="margin:1px;">' +
-                '<button style="margin-bottom: 5px;" ng-show="grid.appScope.model.EDIT_PERMISSION == \'Active\'" ng-click="grid.appScope.EditData(row.entity)" type="button" class="btn btn-outline-primary mb-1">Update</button>' +
-                '<button style="margin-bottom: 5px;" ng-show="grid.appScope.model.DELETE_PERMISSION == \'Active\'"   ng-click="grid.appScope.DeletePMtInfo(row.entity.PM_ID)" type="button" class="btn btn-outline-danger mb-1">Delete</button>' +
-                '</div>'
-        },
+                '<input disabled  type="text"  ng-model="row.entity.STATUS"  class="pl-sm" />'
+        }
 
     ];
+    $scope.gridOptionsList.rowTemplate = "<div ng-dblclick=\"grid.appScope.EditData(row.entity)\" title=\"Please double click to edit. \" ng-repeat=\"(colRenderIndex, col) in colContainer.renderedColumns track by col.colDef.name\" class=\"ui-grid-cell\" ng-class=\"{ 'ui-grid-row-header-cell': col.isRowHeader }\" ui-grid-cell></div>"
     $scope.Statuses = ["Active", "Inactive"]
     $scope.EditData = function (entity) {
         debugger;

@@ -16,5 +16,6 @@ namespace PMIS.Service.Implementation.PromotionalProductMaterial
             //this._unitOfWork = unitOfWork;
             //this._categoryRepository = unitOfWork.ICategoryInfoRepository;
         }
+
     }
 }

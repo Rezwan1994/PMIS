@@ -24,51 +24,79 @@
 
                 <form name="formMenuCategoryAdd">
                     <div class="row" style="margin:20px">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="PM_CODE">PM Code</label>
-                                <input id="PM_CODE" type="text" class="form-control"
-                                       name="PM_CODE" ng-model="model.PM_CODE" />
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="PM_NAME">PM Name</label>
-                                <input type="text" class="form-control" autocomplete="off" data-val="true"
-                                       name="PM_NAME" ng-model="model.PM_NAME" />
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="PACK_SIZE">Pack Size</label>
-                                <input type="text" class="form-control" autocomplete="off" data-val="true"
-                                       name="PACK_SIZE" ng-model="model.PACK_SIZE" />
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="PM_CATEGORY_CODE">PM Category Name</label>
+                        <div class="col-md-6 space-bottom">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label for="PM_CODE">PM Code</label>
+                                </div>
+                                <div class="col-md-9">
+                                    <input id="PM_CODE" type="text" class="form-control"
+                                           name="PM_CODE" ng-model="model.PM_CODE" />
+                                </div>
 
-                                <select class="form-control" id="PM_CATEGORY_CODE"
+                            </div>
+
+                        </div>
+                        <div class="col-md-6 space-bottom">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label for="STATUS">Status</label>
+                                </div>
+                                <div class="col-md-9">
+                                    <select class="form-control" id="STATUS"
+                                            name="STATUS" ng-model="model.STATUS" style="width:100%">
+                                        <option ng-repeat="item in Statuses" ng-selected="item == model.STATUS" value="{{item}}">{{item}}</option>
+                                    </select>
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div class="col-md-12 space-bottom">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="PM_NAME">PM Name</label>
+                                </div>
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control" autocomplete="off" data-val="true"
+                                           name="PM_NAME" ng-model="model.PM_NAME" />
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-6 space-bottom">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label for="PACK_SIZE">Pack Size</label>
+                                </div>
+                                <div class="col-md-9">
+                                    <input type="text" class="form-control" autocomplete="off" data-val="true"
+                                           name="PACK_SIZE" ng-model="model.PACK_SIZE" />
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-6 space-bottom">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label for="PM_CATEGORY_CODE">Category Name</label>
+                                </div>
+                                <div class="col-md-9">
+                                    <select class="form-control" id="PM_CATEGORY_CODE"
                                         name="PM_CATEGORY_CODE" ng-model="model.PM_CATEGORY_CODE" style="width:100%">
-
-                                    <option ng-repeat="item in CategoryList" ng-selected="item.PM_CATEGORY_CODE == model.PM_CATEGORY_CODE" value="{{item.PM_CATEGORY_CODE}}">{{item.PM_CATEGORY_NAME}}</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="STATUS">Status</label>
-                                <select class="form-control" id="STATUS"
-                                        name="STATUS" ng-model="model.STATUS" style="width:100%">
-
-                                    <option ng-repeat="item in Statuses" ng-selected="item == model.STATUS" value="{{item}}">{{item}}</option>
-                                </select>
+                                        <option ng-repeat="item in CategoryList" ng-selected="item.PM_CATEGORY_CODE == model.PM_CATEGORY_CODE" value="{{item.PM_CATEGORY_CODE}}">{{item.PM_CATEGORY_NAME}}</option>
+                                    </select>
+                                </div>
 
                             </div>
+
                         </div>
 
-
+              
 
                     </div>
                 </form>

@@ -4,6 +4,7 @@ using PMIS.Utility.Static;
 using PMIS.Utility;
 using System.Net;
 using PMIS.Service.Interface.PromotionalProductMaterial;
+using Microsoft.EntityFrameworkCore;
 
 namespace PMIS.Web.Areas.PromotionalProductMaterial.Controllers
 {

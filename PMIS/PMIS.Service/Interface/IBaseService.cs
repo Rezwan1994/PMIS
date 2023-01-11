@@ -10,6 +10,7 @@ namespace PMIS.Service.Interface
 {
     public interface IBaseService<TEntity>
     {
+     
         Task<IEnumerable<TEntity>> GetAsync();
         //Task<Pagination<TEntity>> GetAsync(int pageNumber, int pageSize);
         Task<IEnumerable<TEntity>> GetAsync(Expression<Func<TEntity, bool>> filter);
@@ -21,6 +22,6 @@ namespace PMIS.Service.Interface
         Task DeleteAsync(int id);
         Task DeleteAsync(TEntity entity);
         //Task AddOrUpdate(TEntity entity);
-        IQueryable<TEntity> Get();
+
     }
 }
