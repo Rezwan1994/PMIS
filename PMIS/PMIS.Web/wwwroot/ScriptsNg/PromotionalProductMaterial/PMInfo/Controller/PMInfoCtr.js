@@ -73,23 +73,28 @@
         { name: 'SL', field: 'ROW_NO', enableFiltering: false, width: 50 }
         , { name: 'PM_ID', field: 'PM_ID', visible: false }
         , {
-            name: 'PM_CODE', field: 'PM_CODE', displayName: 'PM Code', enableFiltering: false, width: '20%', cellTemplate:
-                '<input disabled  ng-model="row.entity.PM_CODE"  class="pl-sm" />'
+            name: 'PM_CODE', field: 'PM_CODE', displayName: 'PM Code', enableFiltering: false, width: '20%'
+              
         }
         , {
-            name: 'PM_NAME', field: 'PM_NAME', displayName: 'PM Name', enableFiltering: false, width: '15%', cellTemplate:
-                '<input disabled  type="text"  ng-model="row.entity.PM_NAME"  class="pl-sm" />'
+            name: 'PM_NAME', field: 'PM_NAME', displayName: 'PM Name', enableFiltering: false, width: '20%'
+               
         },
         {
-            name: 'PM_CATEGORY_CODE', field: 'PM_CATEGORY_CODE', displayName: 'Category Code', enableFiltering: false, width: '15%', cellTemplate:
-                '<input disabled  type="text"  ng-model="row.entity.PM_CATEGORY_CODE"  class="pl-sm" />'
+            name: 'PM_CATEGORY_CODE', field: 'PM_CATEGORY_CODE', displayName: 'Category Code', enableFiltering: false, width: '15%'
+        
+        }
+        ,
+        {
+            name: 'PM_CATEGORY_NAME', field: 'PM_CATEGORY_NAME', displayName: 'Category Name', enableFiltering: false, width: '15%'
+
         }, {
-            name: 'PACK_SIZE', field: 'PACK_SIZE', displayName: 'Pack Size', enableFiltering: false, width: '15%', cellTemplate:
-                '<input disabled  type="text"  ng-model="row.entity.PACK_SIZE"  class="pl-sm" />'
+            name: 'PACK_SIZE', field: 'PACK_SIZE', displayName: 'Pack Size', enableFiltering: false, width: '15%'
+       
         },
         {
-            name: 'STATUS', field: 'STATUS', displayName: 'Status', enableFiltering: false, width: '10%', cellTemplate:
-                '<input disabled  type="text"  ng-model="row.entity.STATUS"  class="pl-sm" />'
+            name: 'STATUS', field: 'STATUS', displayName: 'Status', enableFiltering: false, width: '10%'
+               
         }
 
     ];
@@ -102,11 +107,13 @@
         $scope.model.PM_ID = entity.PM_ID;
         $scope.model.PM_CODE = entity.PM_CODE;
         $scope.model.PM_NAME = entity.PM_NAME;
+        $scope.model.PM_CATEGORY_NAME = entity.PM_CATEGORY_NAME;
         $scope.model.PM_CATEGORY_CODE = entity.PM_CATEGORY_CODE;
         $scope.model.PACK_SIZE = entity.PACK_SIZE;
         $scope.model.STATUS = entity.STATUS;
         //$scope.SaveData($scope.model);
     }
+
     $scope.DeletePMtInfo = function (Id) {
         $scope.showLoader = true;
         if (window.confirm("Are you sure to delete this promotional material?")) {
@@ -125,7 +132,11 @@
     }
     $scope.SaveData = function (model) {
         $scope.showLoader = true;
-
+        for (var i = 0; i < $scope.CategoryList.length; i++) {
+            if ($scope.CategoryList[i].PM_CATEGORY_CODE == model.PM_CATEGORY_CODE) {
+                model.PM_CATEGORY_NAME = $scope.CategoryList[i].PM_CATEGORY_NAME;
+            }
+        }
         pmInfoService.AddOrUpdate(model).then(function (data) {
             
             notificationservice.Notification(data.data.Success, true, data.data.Message);

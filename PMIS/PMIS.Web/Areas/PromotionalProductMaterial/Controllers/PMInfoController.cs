@@ -69,6 +69,10 @@ namespace PMIS.Web.Areas.PromotionalProductMaterial.Controllers
                 }
                 else
                 {
+                    if(model.PM_CATEGORY_CODE != "PMC001")
+                    {
+                        model.PM_CODE = await _service.GetPMCode();
+                    }
                     await _service.InsertAsync(model);
                     result.Message = ResponseMessage.SUCCESSFULLY_CREATED;
                 }

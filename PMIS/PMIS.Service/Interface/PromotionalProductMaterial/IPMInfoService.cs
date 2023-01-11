@@ -9,6 +9,6 @@ namespace PMIS.Service.Interface.PromotionalProductMaterial
 {
     public interface IPMInfoService : IBaseService<PROMOTIONAL_MATERIAL_INFO>
     {
-  
+        Task<string> GetPMCode();
     }
 }
