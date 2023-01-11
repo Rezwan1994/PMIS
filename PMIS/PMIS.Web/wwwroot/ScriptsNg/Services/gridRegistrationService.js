@@ -17,7 +17,7 @@
             exporterPdfTableHeaderStyle: { fontSize: 8, bold: true, italics: false, color: 'black' },
             exporterPdfHeader: { text: reportHeader, style: 'headerStyle', fontSize: 14, bold: true },
             exporterPdfFooter: function (currentPage, pageCount) {
-                return { text:'Powered By: Square Informatix Ltd.     '+ currentPage.toString() + ' of ' + pageCount.toString(), style: 'footerStyle' };
+                return { text:'Powered By: Square Informatix Ltd. '+ currentPage.toString() + ' of ' + pageCount.toString(), style: 'footerStyle' };
             },
             exporterPdfCustomFormatter: function (docDefinition) {
                 docDefinition.styles.headerStyle = { margin: [10, 10, 10, 10], alignment: 'center' };

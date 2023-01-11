@@ -11,7 +11,7 @@
     $scope.DataLoad = function () {
         $scope.showLoader = true;
         categoryInfoService.GetCategoryList().then(function (data) {
-            debugger;
+            
             $scope.gridOptionsList.data = data.data.Data;
             for (var i = 0; i < $scope.gridOptionsList.data.length; i++) {
                 $scope.gridOptionsList.data[i].ROW_NO = i + 1;
@@ -140,7 +140,7 @@
         $scope.showLoader = true;
 
         categoryInfoService.AddOrUpdate(model).then(function (data) {
-            debugger;
+            
             notificationservice.Notification(data.data.Success, true, data.data.Message);
             if (data.data.Success == true) {
                 $scope.showLoader = false;

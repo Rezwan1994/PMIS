@@ -31,6 +31,8 @@ namespace PMIS.Report.Areas.PPM.Data
                 query += ids.Substring(0, ids.Length - 1) + ") ";
             }
 
+            query += " ORDER BY B.PM_CATEGORY_NAME";
+
             var dt = _commonServices.GetDataTable(connStr, query, _commonServices.AddParameter(new string[] { }));
 
             return dt;

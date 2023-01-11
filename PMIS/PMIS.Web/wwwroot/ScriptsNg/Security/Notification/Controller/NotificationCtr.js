@@ -10,7 +10,6 @@
     //    }).build();
     //connection.start();
     //connection.on("ReceiveNotificationHandler", function (message) {
-    //    debugger
     //    var msg = message.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
     //    $scope.NotificationLoad();
     //    notificationservice.Notification(1, 1, msg);
