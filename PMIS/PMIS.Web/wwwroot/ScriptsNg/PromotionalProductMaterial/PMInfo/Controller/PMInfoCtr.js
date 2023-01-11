@@ -93,7 +93,9 @@
         }
 
     ];
+
     $scope.gridOptionsList.rowTemplate = "<div ng-dblclick=\"grid.appScope.EditData(row.entity)\" title=\"Please double click to edit. \" ng-repeat=\"(colRenderIndex, col) in colContainer.renderedColumns track by col.colDef.name\" class=\"ui-grid-cell\" ng-class=\"{ 'ui-grid-row-header-cell': col.isRowHeader }\" ui-grid-cell></div>"
+
     $scope.Statuses = ["Active", "Inactive"]
     $scope.EditData = function (entity) {
         debugger;
