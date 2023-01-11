@@ -173,9 +173,16 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\PPM\Controllers\PPMReportController.cs" />
     <Compile Include="Areas\PPM\Controllers\SampleController.cs" />
+    <Compile Include="Areas\PPM\Data\PPMReportData.cs" />
     <Compile Include="Areas\PPM\Data\SampleData.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Datasets\PPMDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PPMDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Datasets\ProductionUnitInfoDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -214,6 +221,17 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Datasets\ProductionUnitInfoDataSet.xsc">
       <DependentUpon>ProductionUnitInfoDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="Datasets\PPMDataSet.xsc">
+      <DependentUpon>PPMDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="Datasets\PPMDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>PPMDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Datasets\PPMDataSet.xss">
+      <DependentUpon>PPMDataSet.xsd</DependentUpon>
     </Content>
     <None Include="Datasets\ProductionUnitInfoDataSet.xsd">
       <SubType>Designer</SubType>
@@ -275,6 +293,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\PPM\Views\PPMReport\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -290,6 +309,7 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Areas\PPM\Reports\PPMReport.rdlc" />
     <EmbeddedResource Include="Areas\PPM\Reports\SampleReport.rdlc" />
   </ItemGroup>
   <PropertyGroup>
