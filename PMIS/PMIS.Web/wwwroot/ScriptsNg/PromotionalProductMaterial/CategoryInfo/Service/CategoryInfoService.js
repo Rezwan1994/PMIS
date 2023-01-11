@@ -1,10 +1,16 @@
 ﻿ngApp.service("CategoryInfoService", function ($http) {
+
+
     this.GetCategoryList = function () {
         return $http.get('../CategoryInfo/Get');
     }
+
+
     this.DeleteCategoryInfo = function (Id) {
         return $http.delete("../CategoryInfo/Delete/" + Id);
     }
+
+
     this.AddOrUpdate = function (model) {
         var dataType = 'application/json; charset=utf-8';
         return $http({
