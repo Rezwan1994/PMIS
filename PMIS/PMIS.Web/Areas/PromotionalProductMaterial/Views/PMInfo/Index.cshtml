@@ -26,10 +26,10 @@
                     <div class="row" style="margin:20px">
                         <div class="col-md-6 space-bottom">
                             <div class="row">
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     <label for="PM_CODE">PM Code</label>
                                 </div>
-                                <div class="col-md-9">
+                                <div class="col-md-8">
                                     <input id="PM_CODE" type="text" ng-disabled="model.PM_CATEGORY_CODE !='PMC001'?true:false" class="form-control"
                                            name="PM_CODE" ng-model="model.PM_CODE" />
                                 </div>
@@ -39,10 +39,10 @@
                         </div>
                         <div class="col-md-6 space-bottom">
                             <div class="row">
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     <label for="STATUS">Status</label>
                                 </div>
-                                <div class="col-md-9">
+                                <div class="col-md-8">
                                     <select class="form-control" id="STATUS"
                                             name="STATUS" ng-model="model.STATUS" style="width:100%">
                                         <option ng-repeat="item in Statuses" ng-selected="item == model.STATUS" value="{{item}}">{{item}}</option>
@@ -68,10 +68,10 @@
 
                         <div class="col-md-6 space-bottom">
                             <div class="row">
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     <label for="PACK_SIZE">Pack Size</label>
                                 </div>
-                                <div class="col-md-9">
+                                <div class="col-md-8">
                                     <input type="text" class="form-control" autocomplete="off" data-val="true"
                                            name="PACK_SIZE" ng-model="model.PACK_SIZE" />
                                 </div>
@@ -82,10 +82,10 @@
 
                         <div class="col-md-6 space-bottom">
                             <div class="row">
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     <label for="PM_CATEGORY_CODE">Category Name</label>
                                 </div>
-                                <div class="col-md-9">
+                                <div class="col-md-8">
                                     <select class="form-control" id="PM_CATEGORY_CODE"
                                         name="PM_CATEGORY_CODE" ng-model="model.PM_CATEGORY_CODE" style="width:100%">
                                         <option ng-repeat="item in CategoryList" ng-selected="item.PM_CATEGORY_CODE == model.PM_CATEGORY_CODE" value="{{item.PM_CATEGORY_CODE}}">{{item.PM_CATEGORY_NAME}}</option>

@@ -77,12 +77,17 @@
               
         }
         , {
-            name: 'PM_NAME', field: 'PM_NAME', displayName: 'PM Name', enableFiltering: false, width: '35%'
+            name: 'PM_NAME', field: 'PM_NAME', displayName: 'PM Name', enableFiltering: false, width: '20%'
                
         },
         {
             name: 'PM_CATEGORY_CODE', field: 'PM_CATEGORY_CODE', displayName: 'Category Code', enableFiltering: false, width: '15%'
         
+        }
+        ,
+        {
+            name: 'PM_CATEGORY_NAME', field: 'PM_CATEGORY_NAME', displayName: 'Category Name', enableFiltering: false, width: '15%'
+
         }, {
             name: 'PACK_SIZE', field: 'PACK_SIZE', displayName: 'Pack Size', enableFiltering: false, width: '15%'
        
@@ -102,11 +107,13 @@
         $scope.model.PM_ID = entity.PM_ID;
         $scope.model.PM_CODE = entity.PM_CODE;
         $scope.model.PM_NAME = entity.PM_NAME;
+        $scope.model.PM_CATEGORY_NAME = entity.PM_CATEGORY_NAME;
         $scope.model.PM_CATEGORY_CODE = entity.PM_CATEGORY_CODE;
         $scope.model.PACK_SIZE = entity.PACK_SIZE;
         $scope.model.STATUS = entity.STATUS;
         //$scope.SaveData($scope.model);
     }
+
     $scope.DeletePMtInfo = function (Id) {
         $scope.showLoader = true;
         if (window.confirm("Are you sure to delete this promotional material?")) {
@@ -125,7 +132,11 @@
     }
     $scope.SaveData = function (model) {
         $scope.showLoader = true;
-
+        for (var i = 0; i < $scope.CategoryList.length; i++) {
+            if ($scope.CategoryList[i].PM_CATEGORY_CODE == model.PM_CATEGORY_CODE) {
+                model.PM_CATEGORY_NAME = $scope.CategoryList[i].PM_CATEGORY_NAME;
+            }
+        }
         pmInfoService.AddOrUpdate(model).then(function (data) {
             debugger;
             notificationservice.Notification(data.data.Success, true, data.data.Message);
