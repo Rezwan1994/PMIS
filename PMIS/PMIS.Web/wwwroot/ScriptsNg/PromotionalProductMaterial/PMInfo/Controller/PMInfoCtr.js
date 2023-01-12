@@ -48,6 +48,8 @@
         $scope.model.PM_ID = 0;
         $scope.model.PM_CODE = "";
         $scope.model.PACK_SIZE = "";
+        $scope.model.PM_CATEGORY_ID = "";
+        $scope.model.SBU_CODE = "";
         $scope.model.STATUS = "Active";
         $scope.model.PM_NAME = "";
         $scope.model.REMARKS = "";
