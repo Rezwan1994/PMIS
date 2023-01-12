@@ -11,7 +11,7 @@
         <h4 class="h3 mb-0 text-gray-600">Production Section Info</h4>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a class="btn btn-outline-primary" ng-click=Reset()>Reset</a></li>
-            <li class="breadcrumb-item"><a id="#modalCenter" class="btn  btn-success text-white mb-1" ng-click="SaveData(model)">Save</a></li>
+            <li class="breadcrumb-item"><a id="#modalCenter" class="btn  btn-success text-white mb-1" ng-click="SaveData(model)">{{model.SECTION_ID == 0?"Save":"Update"}}</a></li>
         </ol>
     </div>
 
