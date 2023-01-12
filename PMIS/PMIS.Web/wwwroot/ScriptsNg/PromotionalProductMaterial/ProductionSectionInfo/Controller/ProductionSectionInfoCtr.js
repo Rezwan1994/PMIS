@@ -29,18 +29,18 @@
     }
 
 
-    //$scope.GetUnitList = function () {
-    //    $scope.showLoader = true;
-    //    ProductionSectionInfoService.GetUnitList().then(function (data) {
+    $scope.GetUnitList = function () {
+        $scope.showLoader = true;
+        ProductionSectionInfoService.GetUnitList().then(function (data) {
 
-    //        $scope.UnitList = data.data.Data;
+            $scope.UnitList = data.data.Data;
 
-    //    }, function (error) {
-    //        alert(error);
-    //        $scope.showLoader = false;
-    //    });
-    //}
-
+        }, function (error) {
+            alert(error);
+            $scope.showLoader = false;
+        });
+    }
+    
 
     $scope.ClearForm = function () {
         $scope.model.SECTION_ID = 0;
@@ -78,7 +78,7 @@
     }
 
     $scope.DataLoad();
-    //$scope.GetuNITList();
+    $scope.GetUnitList();
     $scope.GetPermissionData();
 
     $scope.gridOptionsList.columnDefs = [
@@ -130,27 +130,27 @@
     }
 
 
-    //$scope.SaveData = function (model) {
+    $scope.SaveData = function (model) {
 
-    //    $scope.showLoader = true;
-    //    for (var i = 0; i < $scope.UnitList.length; i++) {
-    //        if ($scope.CategoryList[i].UNIT_ID == model.UNIT_ID) {
-    //            model.UNIT_NAME = $scope.UnitList[i].UNIT_NAME;
-    //        }
-    //    }
-    //    ProductionSectionInfoService.AddOrUpdate(model).then(function (data) {
+        $scope.showLoader = true;
+        for (var i = 0; i < $scope.UnitList.length; i++) {
+            if ($scope.CategoryList[i].UNIT_ID == model.UNIT_ID) {
+                model.UNIT_NAME = $scope.UnitList[i].UNIT_NAME;
+            }
+        }
+        ProductionSectionInfoService.AddOrUpdate(model).then(function (data) {
 
-    //        notificationservice.Notification(data.data.Success, true, data.data.Message);
-    //        if (data.data.Success == true) {
-    //            $scope.showLoader = false;
-    //            $scope.DataLoad();
-    //            $scope.ClearForm();
-    //        }
-    //        else {
-    //            $scope.showLoader = false;
-    //        }
-    //    });
-    //}
+            notificationservice.Notification(data.data.Success, true, data.data.Message);
+            if (data.data.Success == true) {
+                $scope.showLoader = false;
+                $scope.DataLoad();
+                $scope.ClearForm();
+            }
+            else {
+                $scope.showLoader = false;
+            }
+        });
+    }
 
 
 

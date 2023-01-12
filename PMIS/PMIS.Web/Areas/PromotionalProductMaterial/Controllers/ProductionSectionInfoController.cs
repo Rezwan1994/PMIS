@@ -5,6 +5,7 @@ using PMIS.Utility;
 using System.Net;
 using Microsoft.EntityFrameworkCore;
 using PMIS.Service.Interface.PromotionalProductMaterial;
+using PMIS.Service.Implementation.PromotionalProductMaterial;
 
 namespace PMIS.Web.Areas.PromotionalProductMaterial.Controllers
 {
@@ -13,11 +14,13 @@ namespace PMIS.Web.Areas.PromotionalProductMaterial.Controllers
     {
 
         private readonly IProductionSectionInfoService _service;
+        private readonly IUnitInfoService _unitService;
         private readonly ILogError _logger;
-        public ProductionSectionInfoController(IProductionSectionInfoService service, ILogError logger, IWebHostEnvironment hostingEnvironment)
+        public ProductionSectionInfoController(IProductionSectionInfoService service, IUnitInfoService unitService, ILogError logger, IWebHostEnvironment hostingEnvironment)
         {
             _service = service;
             _logger = logger;
+            _unitService = unitService;
         }
         public IActionResult frmProductionSectionInfo()
         {
@@ -32,6 +35,15 @@ namespace PMIS.Web.Areas.PromotionalProductMaterial.Controllers
             var result = new ListResult<PRODUCTION_SECTION_INFO>()
             {
                 Data = await _service.GetAsync()
+            };
+            return result;
+        }
+        [HttpGet]
+        public async Task<ListResult<UNIT_INFO>> GetUnitList()
+        {
+            var result = new ListResult<UNIT_INFO>()
+            {
+                Data = await _unitService.GetAsync()
             };
             return result;
         }
