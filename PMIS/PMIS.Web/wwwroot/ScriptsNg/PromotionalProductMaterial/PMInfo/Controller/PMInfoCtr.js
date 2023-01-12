@@ -5,6 +5,7 @@
         $scope.gridApi = gridApi;
     }
     $scope.CategoryList = [];
+    $scope.SBUList = [];
     $scope.DataLoad = function () {
         $scope.showLoader = true;
         pmInfoService.GetPMList().then(function (data) {
@@ -26,6 +27,17 @@
         pmInfoService.GetCategoryList().then(function (data) {
             
             $scope.CategoryList = data.data.Data;
+
+        }, function (error) {
+            alert(error);
+            $scope.showLoader = false;
+        });
+    }
+    $scope.GetSBUList = function () {
+        $scope.showLoader = true;
+        pmInfoService.GetSBUList().then(function (data) {
+            debugger;
+            $scope.SBUList = data.data.Data;
 
         }, function (error) {
             alert(error);
@@ -67,6 +79,7 @@
 
     $scope.DataLoad();
     $scope.GetCategoryList();
+    $scope.GetSBUList();
     $scope.GetPermissionData();
 
     $scope.gridOptionsList.columnDefs = [
@@ -79,16 +92,17 @@
         , {
             name: 'PM_NAME', field: 'PM_NAME', displayName: 'PM Name', enableFiltering: false, width: '20%'
                
-        },
-        {
-            name: 'PM_CATEGORY_CODE', field: 'PM_CATEGORY_CODE', displayName: 'Category Code', enableFiltering: false, width: '15%'
-        
         }
         ,
         {
-            name: 'PM_CATEGORY_NAME', field: 'PM_CATEGORY_NAME', displayName: 'Category Name', enableFiltering: false, width: '15%'
+            name: 'PM_CATEGORY_NAME', field: 'PM_CATEGORY_NAME', displayName: 'Category Name', enableFiltering: false, width: '25%'
 
-        }, {
+        },
+        {
+            name: 'SBU_CODE', field: 'SBU_CODE', displayName: 'Sbu', enableFiltering: false, width: '15%'
+
+        },
+        {
             name: 'PACK_SIZE', field: 'PACK_SIZE', displayName: 'Pack Size', enableFiltering: false, width: '15%'
        
         },
@@ -106,9 +120,10 @@
         
         $scope.model.PM_ID = entity.PM_ID;
         $scope.model.PM_CODE = entity.PM_CODE;
+        $scope.model.SBU_CODE = entity.SBU_CODE;
         $scope.model.PM_NAME = entity.PM_NAME;
         $scope.model.PM_CATEGORY_NAME = entity.PM_CATEGORY_NAME;
-        $scope.model.PM_CATEGORY_CODE = entity.PM_CATEGORY_CODE;
+        $scope.model.PM_CATEGORY_ID = entity.PM_CATEGORY_ID;
         $scope.model.PACK_SIZE = entity.PACK_SIZE;
         $scope.model.STATUS = entity.STATUS;
         //$scope.SaveData($scope.model);
@@ -133,7 +148,7 @@
     $scope.SaveData = function (model) {
         $scope.showLoader = true;
         for (var i = 0; i < $scope.CategoryList.length; i++) {
-            if ($scope.CategoryList[i].PM_CATEGORY_CODE == model.PM_CATEGORY_CODE) {
+            if ($scope.CategoryList[i].PM_CATEGORY_ID == model.PM_CATEGORY_ID) {
                 model.PM_CATEGORY_NAME = $scope.CategoryList[i].PM_CATEGORY_NAME;
             }
         }

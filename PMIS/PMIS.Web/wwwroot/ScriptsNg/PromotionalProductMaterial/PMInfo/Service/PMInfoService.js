@@ -5,6 +5,9 @@
     this.GetCategoryList = function () {
         return $http.get('../CategoryInfo/Get');
     }
+    this.GetSBUList = function () {
+        return $http.get('../PMInfo/GetSbu');
+    }
     this.DeletePMInfo = function (Id) {
 
         return $http.delete("../PMInfo/Delete/"+Id);

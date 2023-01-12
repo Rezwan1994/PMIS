@@ -5,6 +5,7 @@ using PMIS.Utility;
 using System.Net;
 using PMIS.Service.Interface.PromotionalProductMaterial;
 using Microsoft.EntityFrameworkCore;
+using PMIS.Service.Implementation.PromotionalProductMaterial;
 
 namespace PMIS.Web.Areas.PromotionalProductMaterial.Controllers
 {
@@ -13,11 +14,13 @@ namespace PMIS.Web.Areas.PromotionalProductMaterial.Controllers
     public class PMInfoController : Controller
     {
         private readonly IPMInfoService _service;
+        private readonly ISbuService _sbuService;
         private readonly ILogError _logger;
 
-        public PMInfoController(IPMInfoService service, ILogError logger, IWebHostEnvironment hostingEnvironment)
+        public PMInfoController(IPMInfoService service, ISbuService sbuService ,ILogError logger, IWebHostEnvironment hostingEnvironment)
         {
             _service = service;
+            _sbuService = sbuService;
             _logger = logger;
         }
         public IActionResult Index()
@@ -33,7 +36,15 @@ namespace PMIS.Web.Areas.PromotionalProductMaterial.Controllers
             };
             return result;
         }
-
+        [HttpGet]
+        public async Task<ListResult<SBU_INFO>> GetSbu()
+        {
+            var result = new ListResult<SBU_INFO>()
+            {
+                Data = await _sbuService.GetAsync()
+            };
+            return result;
+        }
         [HttpGet("{id}")]
         public async Task<Result<PROMOTIONAL_MATERIAL_INFO>> Get(int id)
         {
@@ -69,7 +80,7 @@ namespace PMIS.Web.Areas.PromotionalProductMaterial.Controllers
                 }
                 else
                 {
-                    if(model.PM_CATEGORY_CODE != "PMC001")
+                    if(model.PM_CATEGORY_NAME != "Sample")
                     {
                         model.PM_CODE = await _service.GetPMCode();
                     }
