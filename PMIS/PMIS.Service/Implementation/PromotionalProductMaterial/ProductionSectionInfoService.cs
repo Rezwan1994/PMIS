@@ -18,14 +18,13 @@ namespace PMIS.Service.Implementation.PromotionalProductMaterial
 
         public ProductionSectionInfoService(IUnitOfWork unitOfWork, ICommonServices commonService) : base(unitOfWork)
         {
-
             _commonService = commonService;
         }
 
 
-        public async Task<string> GetProductionSectionCode()
+        public Task<string> GetProductionSectionCode()
         {
-            return _commonService.GetMaximumNumber<string>("select FN_GENERATE_SECTION_CODE from dual", _commonService.AddParameter(new string[] { }));
+            return Task.FromResult(_commonService.GetMaximumNumber<string>("select FN_GENERATE_SECTION_CODE from dual", _commonService.AddParameter(new string[] { })));
         }
 
     }

@@ -6,9 +6,7 @@
 <link href="/css/site.css" rel="stylesheet">
 <link href="/Design/vendor/select2/dist/css/select2.min.css" rel="stylesheet" type="text/css">
 
-
 <div class="container-fluid" id="container-wrapper" ng-app="ngApp" ng-controller="ngGridCtrl">
-
     <div class="d-sm-flex align-items-center justify-content-between">
         <h4 class="h3 mb-0 text-gray-600">Production Section Info</h4>
         <ol class="breadcrumb">
@@ -37,10 +35,6 @@
                                 </div>
                             </div>
                         </div>
-
-
-
-
                         <div class="col-md-6 space-bottom">
                             <div class="row">
                                 <div class="col-md-4">
@@ -55,9 +49,6 @@
                             </div>
                         </div>
 
-
-
-
                         <div class="col-md-12 space-bottom">
                             <div class="row">
                                 <div class="col-md-2">
@@ -70,7 +61,6 @@
                             </div>
                         </div>
 
-
                         <div class="col-md-6 space-bottom">
                             <div class="row">
                                 <div class="col-md-4">
@@ -82,23 +72,15 @@
                                         <option ng-repeat="item in UnitList" ng-selected="item.UNIT_ID == model.UNIT_ID" value="{{item.UNIT_ID}}">{{item.UNIT_NAME}}</option>
                                     </select>
                                 </div>
-
                             </div>
-
                         </div>
-
-
-
                     </div>
                 </form>
             </fieldset>
         </div>
-
     </div>
     <div class="card mb-4">
-
         <div class="card-body">
-
             <fieldset>
                 <legend style="width:350px">Production Section Display</legend>
                 <div class="row" style="height: 35vh;">
@@ -111,9 +93,7 @@
                     </div>
                 </div>
             </fieldset>
-
         </div>
-
 
         <partial name="~/Views/Shared/_Loader.cshtml" ng-show="showloader"></partial>
         <script src="~/scriptsng/PromotionalProductMaterial/ProductionSectionInfo/controller/ProductionSectionInfoCtr.js"></script>
@@ -121,3 +101,4 @@
         <script src="~/ScriptsNg/Services/permissionProvider.js"></script>
         <script src="~/ScriptsNg/Services/gridRegistrationService.js"></script>
     </div>
+</div>

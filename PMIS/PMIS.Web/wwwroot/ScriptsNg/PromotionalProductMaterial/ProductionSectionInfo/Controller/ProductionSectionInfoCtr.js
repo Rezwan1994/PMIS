@@ -11,7 +11,6 @@
     $scope.UnitList = [];
 
     $scope.DataLoad = function () {
-        debugger;
         $scope.showLoader = true;
         ProductionSectionInfoService.GetSectionList().then(function (data) {
 
@@ -19,28 +18,22 @@
             for (var i = 0; i < $scope.gridOptionsList.data.length; i++) {
                 $scope.gridOptionsList.data[i].ROW_NO = i + 1;
             }
-            console.log($scope.gridOptionsList.data);
             $scope.showLoader = false;
         }, function (error) {
             alert(error);
-
             $scope.showLoader = false;
         });
     }
-
 
     $scope.GetUnitList = function () {
         $scope.showLoader = true;
         ProductionSectionInfoService.GetUnitList().then(function (data) {
-
             $scope.UnitList = data.data.Data;
-
         }, function (error) {
             alert(error);
             $scope.showLoader = false;
         });
     }
-    
 
     $scope.ClearForm = function () {
         $scope.model.SECTION_ID = 0;
@@ -82,36 +75,22 @@
     $scope.GetPermissionData();
 
     $scope.gridOptionsList.columnDefs = [
-
-        { name: 'Sl.No.', field: 'ROW_NO', enableFiltering: false, width: 70 }
-
-        ,
-
+        { name: 'Sl.No.', field: 'ROW_NO', enableFiltering: false, width: 70 },
         {
             name: 'SECTION_ID', field: 'SECTION_ID', visible: false
         },
-
         {
-            name: 'SECTION_CODE', field: 'PSECTION_CODE', displayName: 'Section Code', enableFiltering: false, width: '20%', visible: true 
-
+            name: 'SECTION_CODE', field: 'SECTION_CODE', displayName: 'Section Code', enableFiltering: false, width: '20%', visible: true 
         },
-
         {
             name: 'SECTION_NAME', field: 'SECTION_NAME', displayName: 'Section Name', enableFiltering: false, width: '30%'
-
         },
-
-     
         {
             name: 'UNIT_NAME', field: 'UNIT_NAME', displayName: 'Unit Name', enableFiltering: false, width: '28%'
-
         },
-
         {
             name: 'STATUS', field: 'STATUS', displayName: 'Status', enableFiltering: false, width: '15%'
-
         }
-
     ];
 
     $scope.gridOptionsList.rowTemplate = "<div ng-dblclick=\"grid.appScope.EditData(row.entity)\" title=\"Please double click to edit. \" ng-repeat=\"(colRenderIndex, col) in colContainer.renderedColumns track by col.colDef.name\" class=\"ui-grid-cell\" ng-class=\"{ 'ui-grid-row-header-cell': col.isRowHeader }\" ui-grid-cell></div>"
@@ -120,7 +99,6 @@
 
 
     $scope.EditData = function (entity) {
-
         $scope.model.SECTION_ID = entity.SECTION_ID;
         $scope.model.SECTION_CODE = entity.SECTION_CODE;
         $scope.model.SECTION_NAME = entity.SECTION_NAME;
@@ -131,16 +109,13 @@
 
 
     $scope.SaveData = function (model) {
-
         $scope.showLoader = true;
-        for (var i = 0; i < $scope.UnitList.length; i++) {
-            if ($scope.CategoryList[i].UNIT_ID == model.UNIT_ID) {
-                model.UNIT_NAME = $scope.UnitList[i].UNIT_NAME;
-            }
-        }
+
+        model.UNIT_NAME = $scope.UnitList.find(e => e.UNIT_ID == model.UNIT_ID)?.UNIT_NAME;
+
         ProductionSectionInfoService.AddOrUpdate(model).then(function (data) {
 
-            notificationservice.Notification(data.data.Success, true, data.data.Message);
+            notificationservice.Notification(data.data.Message, data.data.Success, data.data.Message);
             if (data.data.Success == true) {
                 $scope.showLoader = false;
                 $scope.DataLoad();
@@ -151,7 +126,5 @@
             }
         });
     }
-
-
 
 }]);

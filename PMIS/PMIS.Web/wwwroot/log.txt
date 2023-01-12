@@ -275,3 +275,18 @@ ORA-06512: at line 3
    at Oracle.EntityFrameworkCore.Storage.Internal.OracleRelationalCommandBuilderFactory.OracleRelationalCommandBuilder.OracleRelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
 
+12-Jan-23 3:42:43 PM
+:0
+Message: Unable to cast object of type 'System.Int32' to type 'System.Decimal'.
+Inner Exception: 
+
+12-Jan-23 3:42:54 PM
+:0
+Message: Unable to cast object of type 'System.Int32' to type 'System.Decimal'.
+Inner Exception: 
+
+12-Jan-23 3:46:23 PM
+:0
+Message: Unable to cast object of type 'System.Int32' to type 'System.Decimal'.
+Inner Exception: 
+
