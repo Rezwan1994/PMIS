@@ -3,12 +3,13 @@ using System.Collections.Generic;
 
 namespace PMIS.Domain.Entities
 {
-    public partial class PRODUCTION_UNIT_INFO
+    public partial class PRODUCTION_SECTION_INFO
     {
-        public decimal? PRODUCTION_UNIT_ID { get; set; }
-        public string? PRODUCTION_UNIT_CODE { get; set; }
-        public string? PRODUCTION_UNIT_NAME { get; set; }
-        public string? UNIT_CODE { get; set; }
+        public int SECTION_ID { get; set; }
+        public string? SECTION_CODE { get; set; }
+        public string? SECTION_NAME { get; set; }
+        public int? UNIT_ID { get; set; }
+        public string? UNIT_NAME { get; set; }
         public string? STATUS { get; set; }
         public string? ENTERED_BY { get; set; }
         public DateTime? ENTERED_DATE { get; set; }

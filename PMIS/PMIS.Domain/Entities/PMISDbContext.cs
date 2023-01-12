@@ -38,7 +38,7 @@ namespace PMIS.Domain.Entities
         public virtual DbSet<NOTIFICATION_VIEW> NOTIFICATION_VIEWs { get; set; } = null!;
         public virtual DbSet<NOTIFICATION_VIEW_POLICY> NOTIFICATION_VIEW_POLICies { get; set; } = null!;
         public virtual DbSet<PM_CATEGORY_INFO> PM_CATEGORY_INFOs { get; set; } = null!;
-        public virtual DbSet<PRODUCTION_UNIT_INFO> PRODUCTION_UNIT_INFOs { get; set; } = null!;
+        public virtual DbSet<PRODUCTION_SECTION_INFO> PRODUCTION_UNIT_INFOs { get; set; } = null!;
         public virtual DbSet<PROMOTIONAL_MATERIAL_INFO> PROMOTIONAL_MATERIAL_INFOs { get; set; } = null!;
         public virtual DbSet<RECEIVE_DTL> RECEIVE_DTLs { get; set; } = null!;
         public virtual DbSet<RECEIVE_MST> RECEIVE_MSTs { get; set; } = null!;
@@ -1320,11 +1320,45 @@ namespace PMIS.Domain.Entities
                     .IsUnicode(false);
             });
 
-            modelBuilder.Entity<PRODUCTION_UNIT_INFO>(entity =>
-            {
-                entity.HasNoKey();
 
-                entity.ToTable("PRODUCTION_UNIT_INFO");
+
+
+
+
+
+            modelBuilder.Entity<PRODUCTION_SECTION_INFO>(entity =>
+            {
+
+                entity.ToTable("PRODUCTION_SECTION_INFO");
+
+
+                entity.HasKey(e => e.SECTION_ID)
+                    .HasName("PK_PRODUCTION_SECTION_INFO");
+
+               
+
+                entity.HasIndex(e => e.SECTION_CODE, "UK2_PRODUCTION_SECTION_INFO")
+                        .IsUnique();
+
+
+                entity.HasIndex(e => e.SECTION_NAME, "UK1_PRODUCTION_SECTION_INFO")
+                       .IsUnique();
+
+
+                entity.Property(e => e.UNIT_ID).HasColumnType("NUMBER");
+
+
+
+
+                entity.Property(e => e.SECTION_NAME)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+
+                entity.Property(e => e.STATUS)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
 
                 entity.Property(e => e.ENTERED_BY)
                     .HasMaxLength(20)
@@ -1336,23 +1370,6 @@ namespace PMIS.Domain.Entities
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.PRODUCTION_UNIT_CODE)
-                    .HasMaxLength(30)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.PRODUCTION_UNIT_ID).HasColumnType("NUMBER");
-
-                entity.Property(e => e.PRODUCTION_UNIT_NAME)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.STATUS)
-                    .HasMaxLength(10)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.UNIT_CODE)
-                    .HasMaxLength(20)
-                    .IsUnicode(false);
 
                 entity.Property(e => e.UPDATED_BY)
                     .HasMaxLength(20)
@@ -1364,6 +1381,11 @@ namespace PMIS.Domain.Entities
                     .HasMaxLength(50)
                     .IsUnicode(false);
             });
+
+
+
+
+
 
             modelBuilder.Entity<PROMOTIONAL_MATERIAL_INFO>(entity =>
             {

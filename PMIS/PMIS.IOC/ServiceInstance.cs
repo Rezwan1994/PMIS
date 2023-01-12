@@ -51,6 +51,7 @@ namespace PMIS.IOC
             #region PromotionalProductMaterial
             services.AddTransient<ICategoryInfoService, CategoryInfoService>();
             services.AddTransient<IPMInfoService, PMInfoService>();
+            services.AddTransient<IProductionSectionInfoService, ProductionSectionInfoService>();
             #endregion
 
             services.AddTransient<INotificationService, NotificationService>();
