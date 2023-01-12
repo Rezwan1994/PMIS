@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Doctor Category Info";
+    ViewData["Title"] = "Return Cause Info";
     Layout = "_Layout";
 }
 
@@ -9,28 +9,28 @@
 <div class="container-fluid" id="container-wrapper" ng-app="ngApp" ng-controller="ngGridCtrl">
 
     <div class="d-sm-flex align-items-center justify-content-between">
-        <h4 class="h3 mb-0 text-gray-600">Doctor Category Info</h4>
+        <h4 class="h3 mb-0 text-gray-600">Return Cause Info</h4>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a class="btn btn-outline-primary" href="/PromotionalProductMaterial/DoctorCategory/Index">Reset</a></li>
-            <li class="breadcrumb-item"><a id="#modalCenter" class="btn  btn-success text-white mb-1" ng-click="SaveData(model)">{{model.DOCTOR_CATEGORY_ID == 0?"Save":"Update"}}</a></li>
+            <li class="breadcrumb-item"><a id="#modalCenter" class="btn  btn-success text-white mb-1" ng-click="SaveData(model)">{{model.RETURN_CAUSE_ID == 0?"Save":"Update"}}</a></li>
         </ol>
     </div>
 
     <div class="card mb-4">
         <div class="card-body">
             <fieldset>
-                <legend style="width:350px">Doctor Category Entry</legend>
+                <legend style="width:350px">Return Cause Entry</legend>
 
                 <form name="formMenuCategoryAdd">
                     <div class="row" style="margin:20px">
                         <div class="col-md-6 space-bottom">
                             <div class="row">
                                 <div class="col-md-4">
-                                    <label for="DOCTOR_CATEGORY_CODE">Doctor Category Code</label>
+                                    <label for="RETURN_CAUSE_CODE">Doctor Category Code</label>
                                 </div>
                                 <div class="col-md-8">
-                                    <input id="DOCTOR_CATEGORY_CODE" type="text" class="form-control" disabled
-                                           name="DOCTOR_CATEGORY_CODE" ng-model="model.DOCTOR_CATEGORY_CODE" />
+                                    <input id="RETURN_CAUSE_CODE" type="text" class="form-control" disabled
+                                           name="RETURN_CAUSE_CODE" ng-model="model.RETURN_CAUSE_CODE" />
                                 </div>
                             </div>
                         </div>
@@ -55,11 +55,11 @@
                         <div class="col-md-12 space-bottom">
                             <div class="row">
                                 <div class="col-md-2">
-                                    <label for="DOCTOR_CATEGORY_NAME">Doctor Category Name</label>
+                                    <label for="RETURN_CAUSE_NAME">Doctor Category Name</label>
                                 </div>
                                 <div class="col-md-10">
                                     <input type="text" class="form-control" autocomplete="off" data-val="true"
-                                           name="DOCTOR_CATEGORY_NAME" ng-model="model.DOCTOR_CATEGORY_NAME" />
+                                           name="RETURN_CAUSE_NAME" ng-model="model.RETURN_CAUSE_NAME" />
                                 </div>
 
                             </div>
@@ -74,7 +74,7 @@
     <div class="card mb-4">
         <div class="card-body">
             <fieldset>
-                <legend style="width:350px">Doctor Category Display</legend>
+                <legend style="width:350px">Return Cause Display</legend>
 
                 <div class="row" style="height: 40vh;">
                     <div class="col-lg-12 mb-4">
@@ -90,8 +90,8 @@
 
 
         <partial name="~/Views/Shared/_Loader.cshtml" ng-show="showloader"></partial>
-        <script src="~/scriptsng/promotionalproductmaterial/doctorcategoryinfo/controller/doctorcategoryinfoCtr.js"></script>
-        <script src="~/scriptsng/promotionalproductmaterial/doctorcategoryinfo/service/doctorcategoryservice.js"></script>
+        <script src="~/scriptsng/promotionalproductmaterial/returncauseinfo/controller/returncausectr.js"></script>
+        <script src="~/scriptsng/promotionalproductmaterial/returncauseinfo/service/returncauseservice.js"></script>
         <script src="~/ScriptsNg/Services/permissionProvider.js"></script>
         <script src="~/ScriptsNg/Services/gridRegistrationService.js"></script>
     </div>

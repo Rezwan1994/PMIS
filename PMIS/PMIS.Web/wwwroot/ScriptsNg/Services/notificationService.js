@@ -1,30 +1,30 @@
 ﻿ngApp.service("notificationservice", function ($http) {
     //Function to call return notification
 
-    this.Notification =  (data, matchData, message) => {
-        if (data == matchData) {
-             new PNotify({
+    this.Notification = (data, matchData, message) => {
+        if (matchData) {
+            new PNotify({
                 title: 'Notification',
-                 text: message,
+                text: message,
                 type: 'custom',
                 addclass: 'alert-success',
-                 icon: 'fa fa-check',
-                 buttons: {
-                     closer: true
-                 }
+                icon: 'fa fa-check',
+                buttons: {
+                    closer: true
+                }
             });
         }
         else {
-           new PNotify({
+            new PNotify({
                 title: 'Notification',
                 text: '!! Failure : ' + data,
                 type: 'custom',
                 addclass: 'alert-danger',
-               icon: 'fa fa-exclamation-triangle',
-               buttons: {
-                   closer: true
-               }
-		   });
+                icon: 'fa fa-exclamation-triangle',
+                buttons: {
+                    closer: true
+                }
+            });
         }
     }
 });

@@ -59,6 +59,8 @@ namespace PMIS.IOC
 
             services.AddTransient<IDoctorCategoryService, DoctorCategoryService>();
 
+            services.AddTransient<IReturnCauseService, ReturnCauseService>();
+
             #endregion
 
             services.AddTransient<INotificationService, NotificationService>();
