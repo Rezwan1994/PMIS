@@ -12,8 +12,8 @@
     <div class="d-sm-flex align-items-center justify-content-between">
         <h4 class="h3 mb-0 text-gray-600">Promotional Material Info</h4>
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a class="btn btn-outline-primary" href="/Security/Employee/EmployeeInfo">Reset</a></li>
-            <li class="breadcrumb-item"><a id="#modalCenter" class="btn  btn-success text-white mb-1" ng-disabled="model.PM_CODE.length !=10" ng-click="SaveData(model)">Save</a></li>
+            <li class="breadcrumb-item"><a class="btn btn-outline-primary" href="/PromotionalProductMaterial/PMInfo/Index">Reset</a></li>
+            <li class="breadcrumb-item"><a id="#modalCenter" class="btn  btn-success text-white mb-1" ng-disabled="model.PM_CODE.length !=10" ng-click="SaveData(model)">{{model.PM_ID == 0?"Save":"Update"}}</a></li>
         </ol>
     </div>
 

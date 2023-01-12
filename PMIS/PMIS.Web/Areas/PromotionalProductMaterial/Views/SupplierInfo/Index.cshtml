@@ -11,8 +11,8 @@
     <div class="d-sm-flex align-items-center justify-content-between">
         <h4 class="h3 mb-0 text-gray-600">Supplier Info</h4>
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a class="btn btn-outline-primary" href="/PromotionalProductMaterial/CategoryInfo/Index">Reset</a></li>
-            <li class="breadcrumb-item"><a id="#modalCenter" class="btn  btn-success text-white mb-1" ng-click="SaveData(model)">{{model.PM_CATEGORY_ID ==0?"Save":"Update"}}</a></li>
+            <li class="breadcrumb-item"><a class="btn btn-outline-primary" href="/PromotionalProductMaterial/SupplierInfo/Index">Reset</a></li>
+            <li class="breadcrumb-item"><a id="#modalCenter" class="btn  btn-success text-white mb-1" ng-click="SaveData(model)">{{model.SUPPLIER_ID ==0?"Save":"Update"}}</a></li>
 
         </ol>
     </div>
@@ -118,8 +118,8 @@
 
 
         <partial name="~/Views/Shared/_Loader.cshtml" ng-show="showloader"></partial>
-        <script src="~/scriptsng/PromotionalProductMaterial/categoryinfo/controller/categoryinfoctr.js"></script>
-        <script src="~/ScriptsNg/PromotionalProductMaterial/categoryinfo/Service/CategoryInfoService.js"></script>
+        <script src="~/scriptsng/PromotionalProductMaterial/SupplierInfo/controller/SupplierInfoCtr.js"></script>
+        <script src="~/ScriptsNg/PromotionalProductMaterial/SupplierInfo/Service/SupplierInfoService.js"></script>
         <script src="~/ScriptsNg/Services/permissionProvider.js"></script>
         <script src="~/ScriptsNg/Services/gridRegistrationService.js"></script>
     </div>
