@@ -221,7 +221,7 @@
 
     $scope.SaveData = function (model) {
         $scope.showLoader = true;
-        debugger
+        
         model.DEPOT_ID = parseInt(model.DEPOT_ID);
         UserServices.AddOrUpdate(model).then(function (data) {
             $scope.model.DEPOT_ID = $scope.model.DEPOT_ID.toString();

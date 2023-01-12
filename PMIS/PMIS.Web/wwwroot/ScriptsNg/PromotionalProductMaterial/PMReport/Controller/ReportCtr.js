@@ -17,7 +17,6 @@
 
     $scope.LoadReportParamters = function (reportId, id_serial) {
         $scope.model.REPORT_ID = reportId;
-        debugger
         $scope.showLoader = true;
         ReportService.IsReportPermitted(reportId).then(function (data) {
             $scope.model.CSV_PERMISSION = data.data.CSV_PERMISSION;

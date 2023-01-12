@@ -11,7 +11,7 @@ namespace PMIS.Service.Implementation
         private readonly IUnitOfWork _unitOfWork;
         private readonly IRepository<TEntity> _repository;
 
-        protected BaseService(IUnitOfWork unitOfWork)
+        public BaseService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
             _repository = unitOfWork.Repository<TEntity>();

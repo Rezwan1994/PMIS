@@ -4,7 +4,7 @@
     }
 
     this.AddOrUpdate = function (model) {
-        debugger
+        
         var dataType = 'application/json; charset=utf-8';
         return $http({
             type: 'POST',

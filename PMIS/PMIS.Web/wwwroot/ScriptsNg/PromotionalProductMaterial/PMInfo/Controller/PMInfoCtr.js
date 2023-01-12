@@ -9,7 +9,7 @@
     $scope.DataLoad = function () {
         $scope.showLoader = true;
         pmInfoService.GetPMList().then(function (data) {
-            debugger;
+            
             $scope.gridOptionsList.data = data.data.Data;
             for (var i = 0; i < $scope.gridOptionsList.data.length; i++) {
                 $scope.gridOptionsList.data[i].ROW_NO = i + 1;
@@ -25,7 +25,7 @@
     $scope.GetCategoryList = function () {
         $scope.showLoader = true;
         pmInfoService.GetCategoryList().then(function (data) {
-            debugger;
+            
             $scope.CategoryList = data.data.Data;
 
         }, function (error) {
@@ -117,7 +117,7 @@
 
     $scope.Statuses = ["Active", "Inactive"]
     $scope.EditData = function (entity) {
-        debugger;
+        
         $scope.model.PM_ID = entity.PM_ID;
         $scope.model.PM_CODE = entity.PM_CODE;
         $scope.model.SBU_CODE = entity.SBU_CODE;
@@ -132,7 +132,7 @@
     $scope.DeletePMtInfo = function (Id) {
         $scope.showLoader = true;
         if (window.confirm("Are you sure to delete this promotional material?")) {
-            debugger;
+            
             pmInfoService.DeletePMInfo(Id).then(function (data) {
                 notificationservice.Notification(data.data.Success, true, 'Deleted the selected material !!');
                 if (data.data.Success == true) {
@@ -153,7 +153,7 @@
             }
         }
         pmInfoService.AddOrUpdate(model).then(function (data) {
-            debugger;
+            
             notificationservice.Notification(data.data.Success, true, data.data.Message);
             if (data.data.Success == true) {
                 $scope.showLoader = false;
