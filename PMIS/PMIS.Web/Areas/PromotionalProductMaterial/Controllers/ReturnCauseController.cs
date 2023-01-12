@@ -7,12 +7,11 @@ using PMIS.Utility.Static;
 namespace PMIS.Web.Areas.PromotionalProductMaterial.Controllers
 {
     [Area("PromotionalProductMaterial")]
-    public class DoctorCategoryController : Controller
+    public class ReturnCauseController : Controller
     {
-        private readonly IDoctorCategoryService _service;
+        private readonly IReturnCauseService _service;
         private readonly ILogError _logger;
-
-        public DoctorCategoryController(IDoctorCategoryService service, ILogError logger)
+        public ReturnCauseController(IReturnCauseService service, ILogError logger)
         {
             _service = service;
             _logger = logger;
@@ -23,20 +22,21 @@ namespace PMIS.Web.Areas.PromotionalProductMaterial.Controllers
             return View();
         }
 
+
         [HttpGet]
-        public async Task<ListResult<DOCTOR_CATEGORY_INFO>> Get()
+        public async Task<ListResult<RETURN_CAUSE_INFO>> Get()
         {
-            var result = new ListResult<DOCTOR_CATEGORY_INFO>()
+            var result = new ListResult<RETURN_CAUSE_INFO>()
             {
-                Data = (await _service.GetAsync()).OrderBy(e => e.DOCTOR_CATEGORY_CODE).ToList()
+                Data = (await _service.GetAsync()).OrderBy(e => e.RETURN_CAUSE_CODE).ToList()
             };
             return result;
         }
 
         [HttpPost]
-        public async Task<Result<DOCTOR_CATEGORY_INFO>> Post([FromBody] DOCTOR_CATEGORY_INFO model)
+        public async Task<Result<RETURN_CAUSE_INFO>> Post([FromBody] RETURN_CAUSE_INFO model)
         {
-            var result = new Result<DOCTOR_CATEGORY_INFO>();
+            var result = new Result<RETURN_CAUSE_INFO>();
 
             if (!ModelState.IsValid)
             {
@@ -47,14 +47,14 @@ namespace PMIS.Web.Areas.PromotionalProductMaterial.Controllers
 
             try
             {
-                if (model.DOCTOR_CATEGORY_ID > 0)
+                if (model.RETURN_CAUSE_ID > 0)
                 {
                     await _service.UpdateAsync(model);
                     result.Message = ResponseMessage.SUCCESSFULLY_UPDATED;
                 }
                 else
                 {
-                    model.DOCTOR_CATEGORY_CODE = await _service.GetCatCode();
+                    model.RETURN_CAUSE_CODE = await _service.GetCode();
                     await _service.InsertAsync(model);
                     result.Message = ResponseMessage.SUCCESSFULLY_CREATED;
                 }
