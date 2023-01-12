@@ -57,6 +57,7 @@ namespace PMIS.Domain.Entities
         public virtual DbSet<USER_DEFAULT_PAGE> USER_DEFAULT_PAGEs { get; set; } = null!;
         public virtual DbSet<USER_INFO> USER_INFOs { get; set; } = null!;
         public virtual DbSet<USER_LOG> USER_LOGs { get; set; } = null!;
+        public virtual DbSet<SBU_INFO> SBU_INFOs { get; set; } = null!;
 
 //        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 //        {
@@ -1396,7 +1397,7 @@ namespace PMIS.Domain.Entities
                     .HasMaxLength(20)
                     .IsUnicode(false);
 
-                entity.Property(e => e.PM_CATEGORY_CODE)
+                entity.Property(e => e.PM_CATEGORY_ID)
                     .HasMaxLength(10)
                     .IsUnicode(false);
 
@@ -2395,6 +2396,19 @@ namespace PMIS.Domain.Entities
                 entity.Property(e => e.USER_TERMINAL)
                     .HasMaxLength(100)
                     .IsUnicode(false);
+            });
+            modelBuilder.Entity<SBU_INFO>(entity =>
+            {
+                entity.HasKey(e => e.SBU_ID)
+                    .HasName("PK_SBU_INFO_SBU_ID");
+
+                entity.ToTable("SBU_INFO");
+
+                entity.Property(e => e.SBU_ID)
+                    .HasPrecision(9)
+                    .ValueGeneratedNever();
+
+               
             });
 
             OnModelCreatingPartial(modelBuilder);
