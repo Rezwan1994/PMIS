@@ -49,6 +49,7 @@ namespace PMIS.Domain.Entities
         public virtual DbSet<ROLE_MENU_CONFIGURATION> ROLE_MENU_CONFIGURATIONs { get; set; } = null!;
         public virtual DbSet<ROLE_REPORT_CONFIGURATION> ROLE_REPORT_CONFIGURATIONs { get; set; } = null!;
         public virtual DbSet<ROLE_USER_CONFIGURATION> ROLE_USER_CONFIGURATIONs { get; set; } = null!;
+        public virtual DbSet<SUPPLIER_INFO> SUPPLIER_INFOs { get; set; } = null!;
         public virtual DbSet<TRANSFER_DTL> TRANSFER_DTLs { get; set; } = null!;
         public virtual DbSet<TRANSFER_MST> TRANSFER_MSTs { get; set; } = null!;
         public virtual DbSet<TRANSFER_RECEIVE_DTL> TRANSFER_RECEIVE_DTLs { get; set; } = null!;
@@ -1943,6 +1944,19 @@ namespace PMIS.Domain.Entities
                     .HasForeignKey(d => d.ROLE_ID)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK1_ROLE_USER_CONFIGURATION");
+            });
+
+            modelBuilder.Entity<SUPPLIER_INFO>(entity =>
+            {
+                entity.ToTable("SUPPLIER_INFO");
+
+                entity.HasKey(e => e.SUPPLIER_ID);
+
+                entity.HasIndex(e => e.SUPPLIER_CODE)
+                    .IsUnique();
+
+                entity.Property(e => e.SUPPLIER_ID)
+                    .HasPrecision(9);
             });
 
             modelBuilder.Entity<TRANSFER_DTL>(entity =>
