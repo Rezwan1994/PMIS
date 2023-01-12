@@ -49,6 +49,7 @@ namespace PMIS.Domain.Entities
         public virtual DbSet<ROLE_MENU_CONFIGURATION> ROLE_MENU_CONFIGURATIONs { get; set; } = null!;
         public virtual DbSet<ROLE_REPORT_CONFIGURATION> ROLE_REPORT_CONFIGURATIONs { get; set; } = null!;
         public virtual DbSet<ROLE_USER_CONFIGURATION> ROLE_USER_CONFIGURATIONs { get; set; } = null!;
+        public virtual DbSet<SUPPLIER_INFO> SUPPLIER_INFOs { get; set; } = null!;
         public virtual DbSet<TRANSFER_DTL> TRANSFER_DTLs { get; set; } = null!;
         public virtual DbSet<TRANSFER_MST> TRANSFER_MSTs { get; set; } = null!;
         public virtual DbSet<TRANSFER_RECEIVE_DTL> TRANSFER_RECEIVE_DTLs { get; set; } = null!;
@@ -57,6 +58,7 @@ namespace PMIS.Domain.Entities
         public virtual DbSet<USER_DEFAULT_PAGE> USER_DEFAULT_PAGEs { get; set; } = null!;
         public virtual DbSet<USER_INFO> USER_INFOs { get; set; } = null!;
         public virtual DbSet<USER_LOG> USER_LOGs { get; set; } = null!;
+        public virtual DbSet<SBU_INFO> SBU_INFOs { get; set; } = null!;
 
 //        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 //        {
@@ -1418,7 +1420,7 @@ namespace PMIS.Domain.Entities
                     .HasMaxLength(20)
                     .IsUnicode(false);
 
-                entity.Property(e => e.PM_CATEGORY_CODE)
+                entity.Property(e => e.PM_CATEGORY_ID)
                     .HasMaxLength(10)
                     .IsUnicode(false);
 
@@ -1967,6 +1969,19 @@ namespace PMIS.Domain.Entities
                     .HasConstraintName("FK1_ROLE_USER_CONFIGURATION");
             });
 
+            modelBuilder.Entity<SUPPLIER_INFO>(entity =>
+            {
+                entity.ToTable("SUPPLIER_INFO");
+
+                entity.HasKey(e => e.SUPPLIER_ID);
+
+                entity.HasIndex(e => e.SUPPLIER_CODE)
+                    .IsUnique();
+
+                entity.Property(e => e.SUPPLIER_ID)
+                    .HasPrecision(9);
+            });
+
             modelBuilder.Entity<TRANSFER_DTL>(entity =>
             {
                 entity.HasKey(e => e.DTL_ID)
@@ -2417,6 +2432,19 @@ namespace PMIS.Domain.Entities
                 entity.Property(e => e.USER_TERMINAL)
                     .HasMaxLength(100)
                     .IsUnicode(false);
+            });
+            modelBuilder.Entity<SBU_INFO>(entity =>
+            {
+                entity.HasKey(e => e.SBU_ID)
+                    .HasName("PK_SBU_INFO_SBU_ID");
+
+                entity.ToTable("SBU_INFO");
+
+                entity.Property(e => e.SBU_ID)
+                    .HasPrecision(9)
+                    .ValueGeneratedNever();
+
+               
             });
 
             OnModelCreatingPartial(modelBuilder);

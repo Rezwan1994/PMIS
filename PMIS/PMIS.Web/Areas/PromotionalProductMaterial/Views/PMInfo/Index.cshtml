@@ -13,7 +13,7 @@
         <h4 class="h3 mb-0 text-gray-600">Promotional Material Info</h4>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a class="btn btn-outline-primary" href="/Security/Employee/EmployeeInfo">Reset</a></li>
-            <li class="breadcrumb-item"><a id="#modalCenter" class="btn  btn-success text-white mb-1" ng-click="SaveData(model)">Save</a></li>
+            <li class="breadcrumb-item"><a id="#modalCenter" class="btn  btn-success text-white mb-1" ng-disabled="model.PM_CODE.length !=10" ng-click="SaveData(model)">Save</a></li>
         </ol>
     </div>
 
@@ -30,12 +30,10 @@
                                     <label for="PM_CODE">PM Code</label>
                                 </div>
                                 <div class="col-md-8">
-                                    <input id="PM_CODE" type="text" ng-disabled="model.PM_CATEGORY_CODE !='PMC001'?true:false" class="form-control"
+                                    <input id="PM_CODE" type="text" ng-disabled="model.PM_CATEGORY_ID != 1?true:false" class="form-control"
                                            name="PM_CODE" ng-model="model.PM_CODE" />
                                 </div>
-
                             </div>
-
                         </div>
                         <div class="col-md-6 space-bottom">
                             <div class="row">
@@ -48,24 +46,35 @@
                                         <option ng-repeat="item in Statuses" ng-selected="item == model.STATUS" value="{{item}}">{{item}}</option>
                                     </select>
                                 </div>
-
                             </div>
-
                         </div>
-                        <div class="col-md-12 space-bottom">
+                        <div class="col-md-6 space-bottom">
                             <div class="row">
-                                <div class="col-md-2">
+                                <div class="col-md-4">
                                     <label for="PM_NAME">PM Name</label>
                                 </div>
-                                <div class="col-md-10">
+                                <div class="col-md-8">
                                     <input type="text" class="form-control" autocomplete="off" data-val="true"
                                            name="PM_NAME" ng-model="model.PM_NAME" />
                                 </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-6 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="PM_NAME">SBU</label>
+                                </div>
+                                <div class="col-md-8">
+                                      <select class="form-control" id="STATUS"
+                                            name="SBU_CODE" ng-model="model.SBU_CODE" style="width:100%">
+                                        <option ng-repeat="item in SBUList" ng-selected="item == model.SBU_CODE" value="{{item.SBU_CODE}}">{{item.SBU_CODE}}</option>
+                                    </select>
+                                </div>
 
                             </div>
 
                         </div>
-
                         <div class="col-md-6 space-bottom">
                             <div class="row">
                                 <div class="col-md-4">
@@ -83,21 +92,18 @@
                         <div class="col-md-6 space-bottom">
                             <div class="row">
                                 <div class="col-md-4">
-                                    <label for="PM_CATEGORY_CODE">Category Name</label>
+                                    <label for="PM_CATEGORY_ID">Category Name</label>
                                 </div>
                                 <div class="col-md-8">
-                                    <select class="form-control" id="PM_CATEGORY_CODE"
-                                        name="PM_CATEGORY_CODE" ng-model="model.PM_CATEGORY_CODE" style="width:100%">
-                                        <option ng-repeat="item in CategoryList" ng-selected="item.PM_CATEGORY_CODE == model.PM_CATEGORY_CODE" value="{{item.PM_CATEGORY_CODE}}">{{item.PM_CATEGORY_NAME}}</option>
+                                    <select class="form-control" id="PM_CATEGORY_ID"
+                                            name="PM_CATEGORY_ID" ng-model="model.PM_CATEGORY_ID" style="width:100%">
+                                        <option ng-repeat="item in CategoryList" ng-selected="item.PM_CATEGORY_ID == model.PM_CATEGORY_ID" value="{{item.PM_CATEGORY_ID}}">{{item.PM_CATEGORY_NAME}}</option>
                                     </select>
                                 </div>
 
                             </div>
 
                         </div>
-
-              
-
                     </div>
                 </form>
             </fieldset>

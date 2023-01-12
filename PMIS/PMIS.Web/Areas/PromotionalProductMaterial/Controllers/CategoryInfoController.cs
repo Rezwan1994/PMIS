@@ -14,7 +14,7 @@ namespace PMIS.Web.Areas.PromotionalProductMaterial.Controllers
         private readonly ICategoryInfoService _service;
         private readonly ILogError _logger;
 
-        public CategoryInfoController(ICategoryInfoService service, ILogError logger, IWebHostEnvironment hostingEnvironment)
+        public CategoryInfoController(ICategoryInfoService service, ILogError logger)
         {
             _service = service;
             _logger = logger;

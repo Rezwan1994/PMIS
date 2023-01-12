@@ -15,5 +15,7 @@ namespace PMIS.Domain.Entities
         public string? IS_PERMITTED { get; set; }
         [NotMapped]
         public int USER_CONFIG_ID { get; set; }
+        [NotMapped]
+        public int ROW_NO { get; set; }
     }
 }

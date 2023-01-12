@@ -20,9 +20,9 @@ namespace PMIS.Service.Implementation.PromotionalProductMaterial
             _commonService = commonService;
         }
 
-        public async Task<string> GetPMCode()
+        public Task<string> GetPMCode()
         {
-            return _commonService.GetMaximumNumber<string>("select FN_GENERATE_PM_CODE from dual", _commonService.AddParameter(new string[] { }));
+            return Task.FromResult(_commonService.GetMaximumNumber<string>("select FN_GENERATE_PM_CODE from dual", _commonService.AddParameter(new string[] { })));
         }
     }
 }

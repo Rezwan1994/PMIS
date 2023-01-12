@@ -297,11 +297,11 @@ namespace PMIS.Service.Implementation.Security
             {
                 ROLE_USER_CONFIGURATION model = new ROLE_USER_CONFIGURATION
                 {
-                    //ROW_NO = i + 1,
+                    ROW_NO = i + 1,
 
                     ROLE_ID = Convert.ToInt32(MenuLoad.Rows[i]["ROLE_ID"]),
 
-                    //ROLE_NAME = MenuLoad.Rows[i]["ROLE_NAME"].ToString()
+                    ROLE_NAME = MenuLoad.Rows[i]["ROLE_NAME"].ToString()
                 };
 
                 roleMenuConfigView.Add(model);
