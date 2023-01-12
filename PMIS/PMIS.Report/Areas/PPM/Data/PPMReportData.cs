@@ -13,10 +13,14 @@ namespace PMIS.Report.Areas.PPM.Data
     {
         public DataTable GetProductInfo(ReportParams reportParams)
         {
-            var query = @"SELECT A.PM_ID, A.PM_CODE, A.PM_NAME, A.PACK_SIZE,
-                A.PM_CATEGORY_CODE, B.PM_CATEGORY_NAME, A.STATUS
-                FROM PROMOTIONAL_MATERIAL_INFO A, PM_CATEGORY_INFO B
-                WHERE A.PM_CATEGORY_CODE = B.PM_CATEGORY_CODE";
+            var query = @"SELECT PM_ID,
+                PM_CODE,
+                PM_NAME,
+                PACK_SIZE,
+                PM_CATEGORY_CODE,
+                PM_CATEGORY_NAME,
+                STATUS
+            FROM PROMOTIONAL_MATERIAL_INFO";
 
             if (!string.IsNullOrWhiteSpace(reportParams.PM_CATEGORY_CODE)
                 && reportParams.PM_CATEGORY_CODE != "undefined")

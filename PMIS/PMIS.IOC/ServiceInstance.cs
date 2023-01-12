@@ -6,8 +6,10 @@ using PMIS.Domain.Entities;
 using PMIS.Repository.Implementation;
 using PMIS.Repository.Interface;
 using PMIS.Repository.UnitOfWork;
+using PMIS.Service.Implementation;
 using PMIS.Service.Implementation.PromotionalProductMaterial;
 using PMIS.Service.Implementation.Security;
+using PMIS.Service.Interface;
 using PMIS.Service.Interface.PromotionalProductMaterial;
 using PMIS.Service.Interface.Security;
 using PMIS.Utility;
@@ -25,13 +27,14 @@ namespace PMIS.IOC
             IConfiguration configuration)
         {
             var connectionString = configuration.GetConnectionString(nameof(PMISDbContext));
-            services.AddDbContextPool<Domain.Entities.PMISDbContext>(options =>
+            services.AddDbContextPool<PMISDbContext>(options =>
                 options.UseOracle(connectionString, options => options
                     .UseOracleSQLCompatibility("11"))
             );
 
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped(typeof(IBaseService<>), typeof(BaseService<>));
             services.AddTransient<ICommonServices, CommonServices>();
-            services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddTransient<ILogError, LogError>();
 
             #region Security
@@ -51,6 +54,7 @@ namespace PMIS.IOC
             #region PromotionalProductMaterial
             services.AddTransient<ICategoryInfoService, CategoryInfoService>();
             services.AddTransient<IPMInfoService, PMInfoService>();
+            services.AddTransient<IDoctorCategoryService, DoctorCategoryService>();
             #endregion
 
             services.AddTransient<INotificationService, NotificationService>();

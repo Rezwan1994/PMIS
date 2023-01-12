@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PMIS.Domain.Entities;
+using PMIS.Service.Interface;
 using PMIS.Service.Interface.PromotionalProductMaterial;
 using PMIS.Utility;
 using PMIS.Utility.Static;
@@ -7,38 +8,37 @@ using System.Net;
 
 namespace PMIS.Web.Areas.PromotionalProductMaterial.Controllers
 {
-  
     [Area("PromotionalProductMaterial")]
-    public class CategoryInfoController : Controller
+    public class DoctorCategoryController : Controller
     {
-        private readonly ICategoryInfoService _service;
+        private readonly IDoctorCategoryService _service;
         private readonly ILogError _logger;
 
-        public CategoryInfoController(ICategoryInfoService service, ILogError logger)
+        public DoctorCategoryController(IDoctorCategoryService service, ILogError logger)
         {
             _service = service;
             _logger = logger;
         }
-
+    
         public IActionResult Index()
         {
             return View();
         }
 
         [HttpGet]
-        public async Task<ListResult<PM_CATEGORY_INFO>> Get()
+        public async Task<ListResult<DOCTOR_CATEGORY_INFO>> Get()
         {
-            var result = new ListResult<PM_CATEGORY_INFO>()
+            var result = new ListResult<DOCTOR_CATEGORY_INFO>()
             {
-                Data = await _service.GetAsync()
+                Data = (await _service.GetAsync()).OrderBy(e => e.DOCTOR_CATEGORY_CODE).ToList()
             };
             return result;
         }
 
         [HttpGet("{id}")]
-        public async Task<Result<PM_CATEGORY_INFO>> Get(int id)
+        public async Task<Result<DOCTOR_CATEGORY_INFO>> Get(int id)
         {
-            var result = new Result<PM_CATEGORY_INFO>();
+            var result = new Result<DOCTOR_CATEGORY_INFO>();
             var item = await _service.FindAsync(id);
             if (item == null)
             {
@@ -50,9 +50,9 @@ namespace PMIS.Web.Areas.PromotionalProductMaterial.Controllers
         }
 
         [HttpPost]
-        public async Task<Result<PM_CATEGORY_INFO>> Post([FromBody]PM_CATEGORY_INFO model)
+        public async Task<Result<DOCTOR_CATEGORY_INFO>> Post([FromBody] DOCTOR_CATEGORY_INFO model)
         {
-            var result = new Result<PM_CATEGORY_INFO>();
+            var result = new Result<DOCTOR_CATEGORY_INFO>();
 
             if (!ModelState.IsValid)
             {
@@ -63,19 +63,20 @@ namespace PMIS.Web.Areas.PromotionalProductMaterial.Controllers
 
             try
             {
-                if(model.PM_CATEGORY_ID > 0)
+                if (model.DOCTOR_CATEGORY_ID > 0)
                 {
                     await _service.UpdateAsync(model);
                     result.Message = ResponseMessage.SUCCESSFULLY_UPDATED;
                 }
                 else
                 {
+                    model.DOCTOR_CATEGORY_CODE = await _service.GetCatCode();
                     await _service.InsertAsync(model);
                     result.Message = ResponseMessage.SUCCESSFULLY_CREATED;
                 }
-           
+
                 result.Data = model;
-         
+
                 return result;
             }
             catch (Exception exp)
@@ -88,37 +89,8 @@ namespace PMIS.Web.Areas.PromotionalProductMaterial.Controllers
             }
         }
 
-        [HttpPut("{id}")]
-        public async Task<Result<PM_CATEGORY_INFO>> Put(PM_CATEGORY_INFO model)
-        {
-            var result = new Result<PM_CATEGORY_INFO>();
-
-            if (model.PM_CATEGORY_ID < 0|| !ModelState.IsValid)
-            {
-                result.Success = false;
-                result.Message = ResponseMessage.BAD_REQUEST;
-                return result;
-            }
-            try
-            {
-                await _service.UpdateAsync(model);
-                result.Data = model;
-                result.Message = ResponseMessage.SUCCESSFULLY_UPDATED;
-                return result;
-            }
-            catch (Exception exp)
-            {
-                // keep log
-                _logger.Error(exp);
-                result.Message = ResponseMessage.Get(exp);
-                result.Success = false;
-
-                return result;
-            }
-        }
-
         [HttpDelete("{id}")]
-        [Route("/PromotionalProductMaterial/CategoryInfo/Delete/{id}")]
+        [Route("/PromotionalProductMaterial/DoctorCategory/Delete/{id}")]
         public async Task<Result> Delete(int id)
         {
             var result = new Result();
@@ -147,5 +119,6 @@ namespace PMIS.Web.Areas.PromotionalProductMaterial.Controllers
                 return result;
             }
         }
+
     }
 }
