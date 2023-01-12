@@ -54,13 +54,18 @@ namespace PMIS.IOC
             #region PromotionalProductMaterial
             services.AddTransient<ICategoryInfoService, CategoryInfoService>();
             services.AddTransient<IPMInfoService, PMInfoService>();
+            services.AddTransient<IProductionSectionInfoService, ProductionSectionInfoService>();
 
             services.AddTransient<ISbuService, SbuService>();
 
             services.AddTransient<IDoctorCategoryService, DoctorCategoryService>();
 
             services.AddTransient<IReturnCauseService, ReturnCauseService>();
+
             services.AddTransient<ISupplierInfoService, SupplierInfoService>();
+
+            services.AddTransient<IUnitInfoService, UnitInfoService>();
+
 
             #endregion
 

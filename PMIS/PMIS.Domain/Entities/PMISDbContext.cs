@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace PMIS.Domain.Entities
 {
     public partial class PMISDbContext : DbContext
     {
-
         public PMISDbContext(DbContextOptions<PMISDbContext> options)
             : base(options)
         {
@@ -38,7 +34,7 @@ namespace PMIS.Domain.Entities
         public virtual DbSet<NOTIFICATION_VIEW> NOTIFICATION_VIEWs { get; set; } = null!;
         public virtual DbSet<NOTIFICATION_VIEW_POLICY> NOTIFICATION_VIEW_POLICies { get; set; } = null!;
         public virtual DbSet<PM_CATEGORY_INFO> PM_CATEGORY_INFOs { get; set; } = null!;
-        public virtual DbSet<PRODUCTION_UNIT_INFO> PRODUCTION_UNIT_INFOs { get; set; } = null!;
+        public virtual DbSet<PRODUCTION_SECTION_INFO> PRODUCTION_UNIT_INFOs { get; set; } = null!;
         public virtual DbSet<PROMOTIONAL_MATERIAL_INFO> PROMOTIONAL_MATERIAL_INFOs { get; set; } = null!;
         public virtual DbSet<RECEIVE_DTL> RECEIVE_DTLs { get; set; } = null!;
         public virtual DbSet<RECEIVE_MST> RECEIVE_MSTs { get; set; } = null!;
@@ -60,14 +56,14 @@ namespace PMIS.Domain.Entities
         public virtual DbSet<USER_LOG> USER_LOGs { get; set; } = null!;
         public virtual DbSet<SBU_INFO> SBU_INFOs { get; set; } = null!;
 
-//        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-//        {
-//            if (!optionsBuilder.IsConfigured)
-//            {
-//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-//                optionsBuilder.UseOracle("Data Source=(DESCRIPTION =(ADDRESS_LIST =(ADDRESS = (PROTOCOL = TCP)(HOST = 172.16.243.234)(PORT = 1521)))(CONNECT_DATA =(SERVICE_NAME=silsqadb1.squaregroup.com)(SERVER = DEDICATED)));User Id=SPL_PPM;Password=SPLPPM");
-//            }
-//        }
+        //        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //        {
+        //            if (!optionsBuilder.IsConfigured)
+        //            {
+        //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+        //                optionsBuilder.UseOracle("Data Source=(DESCRIPTION =(ADDRESS_LIST =(ADDRESS = (PROTOCOL = TCP)(HOST = 172.16.243.234)(PORT = 1521)))(CONNECT_DATA =(SERVICE_NAME=silsqadb1.squaregroup.com)(SERVER = DEDICATED)));User Id=SPL_PPM;Password=SPLPPM");
+        //            }
+        //        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -1322,11 +1318,36 @@ namespace PMIS.Domain.Entities
                     .IsUnicode(false);
             });
 
-            modelBuilder.Entity<PRODUCTION_UNIT_INFO>(entity =>
+            modelBuilder.Entity<PRODUCTION_SECTION_INFO>(entity =>
             {
-                entity.HasNoKey();
+                entity.ToTable("PRODUCTION_SECTION_INFO");
 
-                entity.ToTable("PRODUCTION_UNIT_INFO");
+                entity.HasKey(e => e.SECTION_ID)
+                    .HasName("PK_PRODUCTION_SECTION_INFO");
+
+                entity.HasIndex(e => e.SECTION_CODE, "UK2_PRODUCTION_SECTION_INFO")
+                        .IsUnique();
+
+                entity.HasIndex(e => e.SECTION_NAME, "UK1_PRODUCTION_SECTION_INFO")
+                       .IsUnique();
+
+                entity.Property(e => e.UNIT_ID).HasColumnType("NUMBER");
+
+                entity.Property(e => e.SECTION_ID)
+                    .HasPrecision(9)
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.UNIT_ID)
+                    .HasPrecision(9)
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.SECTION_NAME)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.STATUS)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.ENTERED_BY)
                     .HasMaxLength(20)
@@ -1336,24 +1357,6 @@ namespace PMIS.Domain.Entities
 
                 entity.Property(e => e.ENTERED_TERMINAL)
                     .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.PRODUCTION_UNIT_CODE)
-                    .HasMaxLength(30)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.PRODUCTION_UNIT_ID).HasColumnType("NUMBER");
-
-                entity.Property(e => e.PRODUCTION_UNIT_NAME)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.STATUS)
-                    .HasMaxLength(10)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.UNIT_CODE)
-                    .HasMaxLength(20)
                     .IsUnicode(false);
 
                 entity.Property(e => e.UPDATED_BY)
@@ -1423,8 +1426,6 @@ namespace PMIS.Domain.Entities
                 entity.Property(e => e.UPDATED_TERMINAL)
                     .HasMaxLength(50)
                     .IsUnicode(false);
-
-        
             });
 
             modelBuilder.Entity<RECEIVE_DTL>(entity =>
@@ -2421,8 +2422,6 @@ namespace PMIS.Domain.Entities
                 entity.Property(e => e.SBU_ID)
                     .HasPrecision(9)
                     .ValueGeneratedNever();
-
-               
             });
 
             OnModelCreatingPartial(modelBuilder);
